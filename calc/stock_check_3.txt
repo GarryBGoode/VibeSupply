@@ -1,0 +1,106 @@
+== SER2918H-682 : 1 shown
+   C3911802  SER2918H-682KL               SMD,27.9x19.8mm    stock=33      $6.1525   2.86mΩ 25A 45.9A 6.8uH AEC-Q200 Magnetic Shielded Inductor ±10% SMD,27.9x19.8mm Power Inductors
+== FC-SE2918-6R8 : 1 shown
+   C53426467 FC-SE2918-6R8M               SMD-3P,28x19.7mm   stock=265     $1.9669   SMD-3P,28x19.7mm Power Inductors ROHS
+== YSFP2918S-6R8 : 0 shown
+== 2918 6.8uH : 3 shown
+   C5361028  MTP2918S-6R8M                SMD,28x27mm        stock=427     $2.6887   
+   C53426467 FC-SE2918-6R8M               SMD-3P,28x19.7mm   stock=265     $1.9669   SMD-3P,28x19.7mm Power Inductors ROHS
+   C53202464 HCZC-2918HT-6R8-M            SMD-3P,28x27.9mm   stock=98      $2.7856   2.45mΩ 28A 45A 6.8uH ±20% SMD-3P,28x27.9mm Power Inductors ROHS
+== SRP2313AA-6R8 : 0 shown
+== SRP1770C-6R8 : 0 shown
+== MHCC1707-6R8 : 0 shown
+== 7443631000 : 0 shown
+== AGP4233-682 : 0 shown
+== CSBX1707-6R8 : 0 shown
+== FP1507R1-R : 0 shown
+== SRP1770TA-4R7M : 1 shown
+   C2045586  SRP1770TA-4R7M               SMD,17.8x16.9mm    stock=5       $1.3845   25A 4.7uH 5.5mΩ 50A ±20% SMD,17.8x16.9mm Power Inductors ROHS
+== YSPI1770-6R8 : 1 shown
+   C50086741 YSPI1770S-6R8M               SMD,17.2x17.2mm    stock=190     $2.1284   17A 22A 6.8uH 7.5mΩ Molded Inductor ±20% SMD,17.2x17.2mm Power Inductors ROHS
+== 58V fuse : 3 shown
+   C148235   SMAJ58CA                     DO-214AC(SMA)      stock=19943   $0.1045   -65℃~+150℃ 1uA 4.3A@10/1000us 400W@10/1000us 58V 71.2V 93.6V Bidirectional IEC 61000-4-2、IEC 61
+   C151246   SMAJ58A                      DO-214AC(SMA)      stock=18836   $0.1391   -65℃~+150℃ 1uA 4.3A@10/1000us 400W@10/1000us 58V 71.2V 93.6V IEC 61000-4-2、IEC 61000-4-4 TVS Un
+   C2901312  P0640SC                      SMB                stock=13948   $0.1121   -40℃~+150℃ 100A 120mA 2.2A 4V 58V 5uA 77V 95pF SMB Semiconductor Discharge Tubes (TSS) ROHS
+== fuse 58V 30A : 3 shown
+   C207030   0997030.WXN                  -                  stock=7904    $0.532    -40℃~+125℃ 1.85mΩ 1130 1kA@58V 30A 58V 87mV Blade Fuse - Automotive Fuses ROHS
+   C410972   0891030.NXS                  -                  stock=876     $0.199    -40℃~+125℃ 1110 1kA@58V 2.06mΩ 30A 58V Blade Fuse - Automotive Fuses ROHS
+   C3661745  142.5631.5302                -                  stock=53      $3.4525   1kA 2.7mΩ 30A 5100 58V - Automotive Fuses ROHS
+== 0287030 : 0 shown
+== 0997030 : 0 shown
+== MIDI 58V : 0 shown
+== 4.7uF 100V 1210 ['100V', '1210']: 5 shown
+   C2840282  1210B475K101NT               1210               stock=63873   $0.5158   100V 4.7uF X7R ±10% 1210 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+   C697607   HMK325C7475KN-TE             1210               stock=51852   $0.4578   100V 4.7uF X7S ±10% 1210 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+   C2979983  1210X475K101NT               1210               stock=31104   $0.2014   100V 4.7uF X5R ±10% 1210 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+   C381466   FS32X475K101EGG              1210               stock=29075   $0.2032   100V 4.7uF X7R ±10% 1210 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+   C913445   GCM32DC72A475KE02L           1210               stock=24600   $0.5696   100V 4.7uF X7S ±10% 1210 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+== 100uF 100V electrolytic ['100V', '100uF']: 5 shown
+   C443137   LKME1252A101MF               插件,D10xL12.5mm     stock=43064   $0.1579   10000hrs@105℃ 100V 100uF 10mm 12.5mm 5mm ±20% 插件,D10xL12.5mm Aluminum Electrolytic Capacitors -
+   C106679   ERS1KM101G16OT               插件,D10xL16mm       stock=38793   $0.0978   100V 100uF 10mm 16mm 5mm 7000hrs@105℃ ±20% 插件,D10xL16mm Aluminum Electrolytic Capacitors - Lead
+   C443138   LKME1402A101MF               插件,D10xL14mm       stock=25299   $0.1736   1.04A@100kHz 10000hrs@105℃ 100V 100uF 10mm 14mm 5mm ±20% 插件,D10xL14mm Aluminum Electrolytic Cap
+   C106570   ERJ1KM101G16OT               插件,D10xL16mm       stock=23243   $0.1084   10000hrs@105℃ 100V 100uF 10mm 16mm 5mm ±20% 插件,D10xL16mm Aluminum Electrolytic Capacitors - Lea
+   C88775    100PX100MEFC10X16            插件,D10xL16mm       stock=20820   $0.2576   -25℃~+105℃ 100V 100uF 10mm 16mm 2000hrs@105℃ 400mA@100kHz 5mm ±20% 插件,D10xL16mm Aluminum Electr
+== 100uF 63V polymer ['63V', '100uF']: 5 shown
+   C2691842  SPZ1JM101G12O00RAXXX         插件,D10xL12mm       stock=12557   $0.3298   -55℃~+105℃ 100uF 10mm 12mm 2000hrs@105℃ 63V Polymer ±20% 插件,D10xL12mm Polymer Aluminum Capacito
+   C2887235  1010631012R00                插件,D10xL12mm       stock=10487   $0.3054   -55℃~+105℃ 100uF 10mm 12mm 5mm 63V ±20% 插件,D10xL12mm Polymer Aluminum Capacitors ROHS
+   C19270694 JBLH2101M063D120RLM 100UF 63 插件,D8xL12mm        stock=1266    $0.2678   
+   C48970443 RYHG63V100UF8*16             插件,D8xL16mm        stock=1080    $0.3389   
+   C5154285  PCR1J101MCL1GS               SMD,D10xL12.7mm    stock=1012    $2.2899   -55℃~+125℃ 100uF 10mm 12.7mm 24mΩ 3A@100kHz 4000hrs@125℃ 63V Polymer ±20% SMD,D10xL12.7mm Polym
+== 100uF 63V ['63V', '100uF']: 5 shown
+   C2990945  ERS1JM101F12OTG              插件,D8xL12mm        stock=93268   $0.0457   -40℃~+105℃ 100uF 12mm 3.5mm 63V 8mm ±20% 插件,D8xL12mm Aluminum Electrolytic Capacitors - Leaded 
+   C88747    63ZLH100MEFC8X16             插件,D8xL16mm        stock=38249   $0.1422   -40℃~+105℃ 100uF 16mm 3.5mm 63V 8000hrs@105℃ 8mm ±20% 插件,D8xL16mm Aluminum Electrolytic Capacit
+   C106565   ERJ1JM101F12OT               插件,D8xL12mm        stock=29483   $0.0576   10000hrs@105℃ 100uF 12mm 3.5mm 63V 8mm ±20% 插件,D8xL12mm Aluminum Electrolytic Capacitors - Lead
+   C106531   ERF1JM101F12OT               插件,D8xL12mm        stock=18554   $0.0611   100uF 12mm 3.5mm 4000hrs@105℃ 63V 8mm ±20% 插件,D8xL12mm Aluminum Electrolytic Capacitors - Leade
+   C51953411 RVT63V100M10X10              SMD,D10xL10.5mm    stock=18196   $0.1604   -40℃~+105℃ 10.5mm 100uF 10mm 2000hrs@105℃ 200mA@120Hz 63V ±20% SMD,D10xL10.5mm Aluminum Electro
+== 5.6mR 2512 : 3 shown
+   C2985709  HoLLR2512-3W-6mR-1%          2512               stock=62956   $0.0753   3W 6mΩ 77.5A Current Sense Resistor SMD ±1% ±50ppm/℃ 2512 Current Sense Resistors / Shunt Resis
+   C2903463  HoJLR2512-2W-6mR-1%          2512               stock=10850   $0.1017   2W 6mΩ Current Sense Resistor SMD ±1% 2512 Current Sense Resistors / Shunt Resistors ROHS
+   C2994631  HoLLR2512-2W-36mR-1%         2512               stock=8831    $0.0653   2W 36mΩ 77.5A Current Sense Resistor SMD ±1% ±50ppm/℃ 2512 Current Sense Resistors / Shunt Resi
+== 5.6mΩ 2512 : 3 shown
+   C2985709  HoLLR2512-3W-6mR-1%          2512               stock=62956   $0.0753   3W 6mΩ 77.5A Current Sense Resistor SMD ±1% ±50ppm/℃ 2512 Current Sense Resistors / Shunt Resis
+   C5832378  FTC322512SR22MBCA            1210               stock=50628   $0.11     11.5A 220nH 6.6mΩ 9.2A ±20% 1210 Power Inductors ROHS
+   C46634449 JER2512F3R006                2512               stock=31496   $0.0692   
+== 1mΩ 2512 4-terminal : 0 shown
+== 1mR 2512 : 3 shown
+   C2903470  HoJLR2512-3W-1mR-1%          2512               stock=225982  $0.0895   1mΩ 3W Current Sense Resistor SMD ±1% 2512 Current Sense Resistors / Shunt Resistors ROHS
+   C5375452  HoYLR2512E-3W-1mR-1%         2512               stock=115272  $0.0609   
+   C2994638  HoLLR2512-3W-1mR-1%          2512               stock=38362   $0.0792   1mΩ 3W 77.5A Current Sense Resistor SMD ±1% ±50ppm/℃ 2512 Current Sense Resistors / Shunt Resis
+== LTO100F3R300 : 0 shown
+== 3.3Ω TO-247 : 3 shown
+   C5205149  BC817-40-QR                  SOT-23             stock=599735  $0.059    -65℃~+150℃ 1 NPN 100MHz 100nA 250 345mW 45V 500mA 5V 700mV NPN SOT-23 Bipolar (BJT) ROHS
+   C49247665 HNTC0603-103F3450FA          0603               stock=401183  $0.0451   -40℃~+125℃ 0.3mm 0.8mm 0.8mm 1.6mm 100mW 10kΩ 1mW/℃ 310uA 3450K 5s ±1% ±1% 0603 NTC Thermistors
+   C49247666 HNTC0603-103F3950FB          0603               stock=210115  $0.0449   -40℃~+125℃ 0.3mm 0.8mm 0.8mm 1.6mm 100mW 10kΩ 1mW/℃ 310uA 3950K 5s ±1% ±1% 0603 NTC Thermistors
+== PWR263S-35-3R30 : 0 shown
+== SMCJ54A : 2 shown
+   C438116   SMCJ54A                      SMC                stock=6017    $0.098    -55℃~+150℃ 1.5kW@10/1000us 17.3A@10/1000us 1uA 54V 66.3V 87.1V TVS SMC ESD and Surge Protection
+   C48678037 SMCJ54A                      SMC(DO-214AB)      stock=4155    $0.1053   
+== SMDJ54A : 2 shown
+   C5295063  5.0SMDJ54A                   SMCG               stock=2967    $0.5232   -55℃~+150℃ 54V 57.4A 5kW 5uA 60V 87.1V TVS SMCG ESD and Surge Protection (TVS/ESD) ROHS
+   C2990374  5.0SMDJ54A                   SMC                stock=2444    $0.3824   
+== SMBJ54A : 2 shown
+   C49066951 SMBJ54A                      SMB(DO-214AA)      stock=15471   $0.0533   
+   C2891330  SMBJ54A                      DO-214AA(SMB)      stock=9952    $0.0428   -55℃~+150℃ 54V 5uA 6.9A 600W 60V 87.1V TVS Unidirectional DO-214AA(SMB) ESD and Surge Protectio
+== XT60PW-M : 2 shown
+   C98732    XT60PW-M                     -                  stock=54445   $0.6004   -、Horizontal plug Male Yellow - Power connector / plug connector ROHS
+   C428722   XT60PW-F                     -                  stock=1926    $0.641    Horizontal plug Yellow - Power connector / plug connector
+== XT60 : 3 shown
+   C5334533  XT60H-M                      -                  stock=166678  $0.3795   Model aircraft plug Yellow - Power connector / plug connector ROHS
+   C98732    XT60PW-M                     -                  stock=54445   $0.6004   -、Horizontal plug Male Yellow - Power connector / plug connector ROHS
+   C98733    XT60-M.                      -                  stock=15162   $0.397    -、Banana Connector 3.5mm Male Yellow - Power connector / plug connector
+== TYPE-C 24P 5A : 3 shown
+   C40960    RClAMP0524PATCT              DFN-10(1x2.5)      stock=176597  $0.0663   -55℃~+125℃ 0.3pF 150W 15V 1uA 5A@8/20us 5V 6V ESD Four channels IEC 61000-4-2、IEC 61000-4-5、IEC
+   C907837   RCLAMP0524P                  DFN2510-10         stock=91069   $0.0376   -55℃~+125℃ 0.35pF、0.8pF 17V 4.5A 5V 6.8V 80nA ESD Four channels IEC 61000-4-2 Unidirectional DF
+   C293965   RCLAMP0524P                  DFN2510-10L        stock=82670   $0.0297   0.2pF 15V 1uA 5.6V 5A@8/20us 5V 60W@8/20us ESD Four channels IEC 61000-4-2、IEC 61000-4-5 Unidir
+== USB-C 16P : 3 shown
+   C2765186  TYPE-C 16PIN 2MD(073)        SMD                stock=1171811 $0.0742   -25℃~+85℃ 1 16P 3A 5,000 times 5V Black Female Surface Mount, Right Angle Type-C SMD USB Connec
+   C393939   TYPE-C16PIN                  SMD                stock=499288  $0.0687   -40℃~+85℃ 1 10,000 Cycles 16P 30V 3A Black Female Surface Mount, Right Angle Type-C SMD USB Con
+   C709357   KH-TYPE-C-16P                SMD                stock=306224  $0.0773   -40℃~+85℃ 1 10,000 cycles 16P 30V 3A 7.81mm Female Surface Mount, Right Angle Type-C SMD USB Co
+== EC11E : 3 shown
+   C370970   EC11E15244G1                 插件                 stock=5515    $2.263    插件 Rotary Encoders ROHS
+   C361165   EC11E1834403                 插件                 stock=3764    $2.0564   -40℃~+85℃ 10mA 5V Non-resettable Straight Support Two-phase output 插件 Rotary Encoders ROHS
+   C470754   EC11E15244B2                 插件                 stock=3576    $2.0109   插件 Rotary Encoders ROHS
+== ST7789 2.0 : 3 shown
+   C5329582  HS20HS072RX                  -                  stock=2738    $3.7723   -20℃~+70℃ 1.65V~3.3V、2.4V~3.3V 2 30.6x40.8mm 320x240 Full angle SPI ST7789 - LCD Screen ROHS
+   C5329584  HS280S030RX                  SMD                stock=459     $5.2563   -20℃~+70℃ 1.65V~3.3V、2.4V~3.3V 12 o'clock 2.8 320x240 43.2x57.6mm SPI ST7789 - LCD Screen ROHS
+   C2890618  N114-2413THBIG01-H13         -                  stock=421     $2.5363   -20℃~+70℃ 1.14 2.4V~3.3V 240x135 400cd/m2 Full angle SPI ST7789V - LCD Screen ROHS

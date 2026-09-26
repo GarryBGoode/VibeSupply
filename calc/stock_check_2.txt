@@ -1,0 +1,76 @@
+== Si8752 : 1 shown
+   C22411559 Si8752AB-IS                  SOIC-8             stock=1       $4.8187   SOIC-8 Isolators - Gate Drivers ROHS
+== SI8751AB : 0 shown
+== Si8751AB-IS : 0 shown
+== TLP3906 : 3 shown
+   C146278   TLP3906(TPL,E                SOP-4-175mil       stock=9000    $1.0982   -40℃~+125℃ 1 1.65V 12mA 12uA 3.75kV 3V DC Photodiode SOP-4-175mil Transistor, Photovoltaic
+   C6333153  TLP3906(E                    SOIC-4-175mil      stock=195     $1.5325   -25℃~+100℃ 1 1.65V 10V 12mA 200us 3.75kV 300us 30uA 3V DC Photodiode SOIC-4-175mil Transis
+   C7528661  TLP3906(C20TL,E              SOP-4              stock=5       $1.6084   
+== TLP3910 : 1 shown
+   C7124375  TLP3910(TP,E                 SO-6               stock=7       $4.2615   -40℃~+125℃ 100us 10V 12mA 2 3.3V 300us 5kV DC Photodiode SO-6 Transistor, Photovoltaic Out
+== APV1122 : 1 shown
+   C42444429 APV1122S                     SOP-4-175mil-2.54m stock=1089    $0.5943   SOP-4-175mil-2.54mm Solid State Relays (MOS Output) ROHS
+== VOM1271 : 1 shown
+   C146286   VOM1271T                     SOP-4-2.54mm       stock=12232   $1.6546   -40℃~+100℃ 1.4V 24us 4.5kV 50mA 53us SOP-4-2.54mm Solid State Relays (MOS Output) ROHS
+== IPT015N10N5 : 3 shown
+   C108964   IPT015N10N5                  HSOF-8             stock=64856   $1.3438   -55℃~+175℃ 1 N-channel 100V 140pF 16nF 2.3nF 211nC@10V 2mΩ@6V 3.8V 300A 375W N-Channel HSO
+   C19626223 IPT015N10N5(TOKMAS)          HSOF-8             stock=2091    $1.195    
+   C49108770 IPT015N10N5(ES)              TOLL-8L            stock=2000    $1.4259   
+== IPT020N10N3 : 2 shown
+   C22395925 IPT020N10N3-VB               TOLL-8L            stock=3       $2.2931   
+   C6062371  IPT020N10N3ATMA1             HSOF-8             stock=1       $13.4402  
+== IAUT300N10S5N015 : 3 shown
+   C5151439  IAUT300N10S5N015             HSOF-8             stock=982     $2.9406   -55℃~+175℃ 1 N-channel 1.5mΩ@10V 100V 126pF 16.011nF 216nC@10V 300A 375W 3V HSOF-8 MOSFETs
+   C47993918 IAUT300N10S5N015-VB          TOLL-8             stock=29      $1.8619   
+   C21547644 IAUT300N10S5N015(TOKMAS)     TOLL-8L            stock=24      $1.6326   1 N-channel 100V 167nC@10V 2.5mΩ@6V 4V 500A 533W N-Channel TOLL-8L MOSFETs ROHS
+== IPTC015N10NM5 : 1 shown
+   C3278524  IPTC015N10NM5ATMA1           HDSOP-16           stock=2       $8.3083   -55℃~+175℃ 1 N-channel 100V 140pF 16nF 2.1mΩ@6V 2.3nF 208nC@10V 3.8V 354A 375W N-Channel H
+== ISC015N10NM6 : 0 shown
+== IPB020N10N5 : 3 shown
+   C536484   IPB020N10N5LF                TO-263-3           stock=467     $5.7429   -55℃~+150℃ 1 N-channel 100V 120A 195nC 25pF 2mΩ@10V 313W 4.1V 840pF TO-263-3 MOSFETs ROHS
+   C21264523 IPB020N10N5LF-VB             TO-263(D2PAK)      stock=5       $2.7904   -55℃~+175℃ 1 N-channel 100V 150W 180A 21pF 246pF 2mΩ@10V 4.5V 8.6nF 90nC@10V N-Channel TO-
+   C3009984  IPB020N10N5                  TO-263-3           stock=1       $7.2974   -55℃~+175℃ 1 N-channel 1.7mΩ@10V 1.81nF 100V 12nF 168nC@10V 176A 375W 3V 80pF N-Channel TO
+== NCEP01T13 : 0 shown
+== 6.8uH inductor ['A']: 8 shown
+   C2894721  SMMS0650-680M                SMD,7.1x6.6mm      stock=201885  $0.1862   1.5A 2A 442mΩ 68uH Molded Inductor ±20% SMD,7.1x6.6mm Power Inductors ROHS
+   C2885840  MLI1005F-1R8KT               0402               stock=153752  $0.0081   1.45Ω 1.8uH 15mA 20@10MHz 30MHz ±10% 0402 Inductors (SMD) ROHS
+   C177249   FXL0530-6R8-M                SMD,5.4x5.2mm      stock=111284  $0.1465   3.5A 4A 6.8uH 90mΩ Molded Inductor ±20% SMD,5.4x5.2mm Power Inductors ROHS
+   C177241   FXL0420-6R8-M                SMD,4.4x4.2mm      stock=102272  $0.1235   175mΩ 2.4A 2.5A 6.8uH Molded Inductor ±20% SMD,4.4x4.2mm Power Inductors ROHS
+   C2983094  PSPMAA0605H-680M-IGF         SMD,7.1x6.6mm      stock=100174  $0.1896   1.5A 256mΩ 2A 68uH ±20% SMD,7.1x6.6mm Power Inductors ROHS
+   C168091   FNR6045S680MT                SMD,6x6mm          stock=80763   $0.0695   1.1A 1.3A 376mΩ 68uH Magnetic Shielded Inductor ±20% SMD,6x6mm Power Inductors ROHS
+   C167221   FXL0630-6R8-M                SMD,7x6.6mm        stock=75006   $0.1027   48mΩ 5A 6.8uH 6A Molded Inductor ±20% SMD,7x6.6mm Power Inductors ROHS
+   C5832375  FTC252012S6R8MBCA            1008               stock=46143   $0.049    1.6A 245mΩ 2A 6.8uH ±20% 1008 Power Inductors ROHS
+== SRP1770TA-6R8M : 0 shown
+== 7443640680 : 0 shown
+== CPEX2918 : 0 shown
+== HCM1A1707V2-6R8 : 0 shown
+== SPM1004 : 3 shown
+   C2914004  SPM10040T-100M-HZR           SMD,10.7x10mm      stock=1962    $0.5825   10uH 32.3mΩ 6.5A 7.1A ±20% SMD,10.7x10mm Power Inductors ROHS
+   C138682   SPM10040T-6R8M               SMD,10.7x10mm      stock=714     $0.4426   23.3mΩ 6.8uH 6.9A 7.1A ±20% SMD,10.7x10mm Power Inductors ROHS
+   C404834   SPM10040T-220M-HZ            SMD,10.7x10mm      stock=585     $0.6785   22uH 3.4A 4.6A 71.8mΩ AEC-Q200 ±20% SMD,10.7x10mm Power Inductors ROHS
+== ETQP4M6R8 : 2 shown
+   C542335   ETQP4M6R8KVK                 SMD,8.5x8mm        stock=143     $0.9648   11A 25.85mΩ 6.8uH 6.9A AEC-Q200 Molded Inductor ±20% SMD,8.5x8mm Power Inductors ROHS
+   C542336   ETQP4M6R8YFN                 SMD,6.5x6mm        stock=2       $0.8753   10A 43.2mΩ 5.2A 6.8uH AEC-Q200 Molded Inductor ±20% SMD,6.5x6mm Power Inductors ROHS
+== XAL1510-682 : 1 shown
+   C3911560  XAL1510-682MED               SMD,15.2x16.2mm    stock=259     $7.538    26A 36A 4.6mΩ 6.8uH AEC-Q200 Magnetic Shielded Inductor ±20% SMD,15.2x16.2mm Power Inducto
+== SRP1770TA : 3 shown
+   C2041951  SRP1770TA-2R2M               SMD,16.9x17.8mm    stock=50      $5.45     2.2uH 2.7mΩ 43.5A 62A ±20% SMD,16.9x17.8mm Power Inductors ROHS
+   C2041354  SRP1770TA-1R0M               SMD,17.8x16.9mm    stock=48      $5.6241   1uH 2mΩ 52A 70A ±20% SMD,17.8x16.9mm Power Inductors ROHS
+   C2045587  SRP1770TA-101M               SMD,17.8x16.9mm    stock=46      $4.4869   100uH 118mΩ 12A 5.3A ±20% SMD,17.8x16.9mm Power Inductors ROHS
+== 6R8 30A : 3 shown
+   C2998760  CY0630AT125DS-6R8MC          SMD,7x6.6mm        stock=2802    $0.6944   3.4A 47mΩ 6.2A 6.8uH AEC-Q200 ±20% SMD,7x6.6mm Power Inductors ROHS
+   C497869   YSPI0630A-6R8M               SMD,7.1x6.6mm      stock=2599    $0.1255   4.5A 40mΩ 6.8uH 7A Molded Inductor ±20% SMD,7.1x6.6mm Power Inductors ROHS
+   C5378487  FEXL0430A-6R8M               SMD,4.1x4.1mm      stock=1059    $0.7073   
+== 0.47uH 30A : 4 shown
+   C47117684 SMMS0630A-470M               SMD,7.1x6.6mm      stock=980     $0.1762   
+   C5298178  FAUL1040-R47MT               SMD,11x10mm        stock=523     $0.5071   1.7mΩ 30A 40A 470nH AEC-Q200 ±20% SMD,11x10mm Power Inductors ROHS
+   C20613216 YSFP2918S-470M               SMD,28x18.5mm      stock=244     $2.3544   2.5mΩ 30A 47uH 6.5A Flat-wire wound inductor ±20% SMD,28x18.5mm Power Inductors ROHS
+   C2962791  FC-SE2918-470M               SMD                stock=109     $1.9911   2.6mΩ 30A 47uH 8.5A Flat-wire wound inductor ±20% SMD Power Inductors ROHS
+== SRP1770TA-R47 : 0 shown
+== 7443630047 : 0 shown
+== R47 inductor 40A : 4 shown
+   C41415640 ZEMS1040-R47M                SMD,11.5x10mm      stock=652     $0.2571   2.2mΩ 30A 40A 470nH Molded Inductor、Battery ±20% SMD,11.5x10mm Power Inductors ROHS
+   C50086678 YSPI1040S-R47M               SMD,11.5x10mm      stock=600     $0.4861   1.7mΩ 30A 40A 470nH Molded Inductor ±20% SMD,11.5x10mm Power Inductors ROHS
+   C5298178  FAUL1040-R47MT               SMD,11x10mm        stock=523     $0.5071   1.7mΩ 30A 40A 470nH AEC-Q200 ±20% SMD,11x10mm Power Inductors ROHS
+   C475921   FXL1040-R47-M                SMD,11.5x10mm      stock=192     $0.2815   1.7mΩ 30A 40A 470nH Molded Inductor ±20% SMD,11.5x10mm Power Inductors ROHS
+== HCM1A1707V2-R47 : 0 shown

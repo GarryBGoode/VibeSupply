@@ -1,0 +1,75 @@
+== 5mR 2512 : 3 shown
+   C5375461  HoYLR2512-3W-5mR-1%          2512               stock=90699   $0.0524   
+   C2903482  HoJLR2512-3W-5mR-1%          2512               stock=83189   $0.1012   3W 5mΩ Current Sense Resistor SMD ±1% 2512 Current Sense Resistors / Shunt Resistors ROHS
+   C2985715  HoLLR2512-3W-15mR-1%         2512               stock=74954   $0.0772   15mΩ 3W 77.5A Current Sense Resistor SMD ±1% ±50ppm/℃ 2512 Current Sense Resistors / Shunt Resi
+== HoLLR2512-3W-5mR : 3 shown
+   C2985715  HoLLR2512-3W-15mR-1%         2512               stock=74954   $0.0772   15mΩ 3W 77.5A Current Sense Resistor SMD ±1% ±50ppm/℃ 2512 Current Sense Resistors / Shunt Resi
+   C2994639  HoLLR2512-3W-1.5mR-1%        2512               stock=20819   $0.0726   1.5mΩ 3W 77.5A Current Sense Resistor SMD ±1% ±50ppm/℃ 2512 Current Sense Resistors / Shunt Res
+   C2985719  HoLLR2512-3W-25mR-1%         2512               stock=11400   $0.0658   25mΩ 3W 77.5A Current Sense Resistor SMD ±1% ±50ppm/℃ 2512 Current Sense Resistors / Shunt Resi
+== 2512 5mΩ 3W : 3 shown
+   C710260   RLM25FEGMR50M                2512               stock=108961  $0.0707   0.5mΩ 3W Current Sense Resistor SMD ±1% ±75ppm/℃ 2512 Current Sense Resistors / Shunt Resistors
+   C5375461  HoYLR2512-3W-5mR-1%          2512               stock=90699   $0.0524   
+   C393074   RLP25FEGMR005                2512               stock=86463   $0.0661   3W 5mΩ Current Sense Resistor SMD ±1% ±50ppm/℃ 2512 Current Sense Resistors / Shunt Resistors R
+== LTO100F : 4 shown
+   C1365613  LTO100F100R0JTE3             TO-247             stock=25      $8.4939   -55℃~+175℃ 100W 100Ω Thick Film Resistor ±200ppm/℃ ±5% TO-247 Through Hole Resistors ROHS
+   C3546229  LTO100F2R000JTE3             TO-247-2           stock=23      $12.4147  -55℃~+175℃ 100W 2Ω Thick Film Resistor ±350ppm/℃ ±5% TO-247-2 Through Hole Resistors ROHS
+   C1369041  LTO100F10R00JTE3             TO-247             stock=17      $8.9673   -55℃~+175℃ 100W 10Ω Thick Film Resistor ±350ppm/℃ ±5% TO-247 Through Hole Resistors ROHS
+   C1525779  LTO100F15R00JTE3             TO-247             stock=4       $9.156    -55℃~+175℃ 100W 15Ω Thick Film Resistor ±350ppm/℃ ±5% TO-247 Through Hole Resistors ROHS
+== LTO50 : 0 shown
+== LTO30 : 0 shown
+== MP930 : 0 shown
+== TO-220 resistor : 4 shown
+   C2907005  FRC0603F2201TS               0603               stock=5575872 $0.0024   -55℃~+155℃ 100mW 2.2kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount
+   C2907129  FRC0603J220 TS               0603               stock=4309380 $0.0022   -55℃~+155℃ 100mW 22Ω 75V Thick Film Resistor ±100ppm/℃ ±5% 0603 Chip Resistor - Surface Mount R
+   C2907127  FRC0603J221 TS               0603               stock=2966833 $0.0021   -55℃~+155℃ 100mW 220Ω 75V Thick Film Resistor ±100ppm/℃ ±5% 0603 Chip Resistor - Surface Mount 
+   C23345    0603WAF220JT5E               0603               stock=2657294 $0.0017   -55℃~+155℃ 100mW 22Ω 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount R
+== TO-247 resistor : 4 shown
+   C22356163 RCA0247RJLF                  0402               stock=135767  $0.0005   -55℃~+155℃ 47Ω 50V 62.5mW Thick Film Resistor ±200ppm/℃ ±5% 0402 Chip Resistor - Surface Mount 
+   C22369466 RCA02470RFLF                 0402               stock=122829  $0.0007   -55℃~+155℃ 470Ω 50V 62.5mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount
+   C22356233 RCA0247KJLF                  0402               stock=112531  $0.0005   -55℃~+155℃ 47kΩ 50V 62.5mW Thick Film Resistor ±200ppm/℃ ±5% 0402 Chip Resistor - Surface Mount
+   C22369547 RCA02470KFLF                 0402               stock=18613   $0.0007   -55℃~+155℃ 470kΩ 50V 62.5mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Moun
+== thick film power resistor TO-220 : 4 shown
+   C2907005  FRC0603F2201TS               0603               stock=5575872 $0.0024   -55℃~+155℃ 100mW 2.2kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount
+   C2907129  FRC0603J220 TS               0603               stock=4309380 $0.0022   -55℃~+155℃ 100mW 22Ω 75V Thick Film Resistor ±100ppm/℃ ±5% 0603 Chip Resistor - Surface Mount R
+   C2907127  FRC0603J221 TS               0603               stock=2966833 $0.0021   -55℃~+155℃ 100mW 220Ω 75V Thick Film Resistor ±100ppm/℃ ±5% 0603 Chip Resistor - Surface Mount 
+   C23345    0603WAF220JT5E               0603               stock=2657294 $0.0017   -55℃~+155℃ 100mW 22Ω 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount R
+== PWR263S : 4 shown
+   C3014353  PWR263S-35-27R0F             D2PAK              stock=221     $4.5716   -55℃~+155℃ 27Ω 35W Thick Film Resistor ±1% ±100ppm/℃ D2PAK Chip Resistor - Surface Mount ROHS
+   C1356504  PWR263S-35-1001F             D2PAK              stock=202     $3.8134   -55℃~+155℃ 1kΩ 35W Thick Film Resistor ±1% ±100ppm/℃ D2PAK Chip Resistor - Surface Mount ROHS
+   C1356480  PWR263S-35-50R0F             D2PAK              stock=72      $5.7201   -55℃~+155℃ 35W 50Ω Thick Film Resistor ±1% ±100ppm/℃ D2PAK Chip Resistor - Surface Mount ROHS
+   C3938269  PWR263S-35-2002F             D2PAK              stock=60      $5.9732   -55℃~+155℃ 20kΩ 35W Thick Film Resistor ±1% ±100ppm/℃ D2PAK Chip Resistor - Surface Mount ROHS
+== PWR220T : 4 shown
+   C3398599  PWR220T-20-R100F             TO-220-2           stock=176     $8.2098   -55℃~+155℃ 100mΩ 20W Thick Film Resistor ±1% ±100ppm/℃ TO-220-2 Through Hole Resistors ROHS
+   C1364558  PWR220T-20-2R00F             TO-220-2           stock=157     $5.8974   -55℃~+155℃ 20W 2Ω Thick Film Resistor ±1% ±100ppm/℃ TO-220-2 Through Hole Resistors ROHS
+   C3416365  PWR220T-20-R500F             TO-220-2           stock=36      $3.4848   -55℃~+155℃ 20W 500mΩ Thick Film Resistor ±1% ±100ppm/℃ TO-220-2 Through Hole Resistors ROHS
+   C1366526  PWR220T-35-25R0J             TO-220-2           stock=23      $4.4121   -55℃~+155℃ 25Ω 35W Thick Film Resistor ±100ppm/℃ ±5% TO-220-2 Through Hole Resistors ROHS
+== TYPE-C 24P : 3 shown
+   C552545   PESD4V0Y1BSFYL               DSN0603-2          stock=460326  $0.042    -40℃~+125℃ 0.24pF 1 3.7V 4.2V 4V 50nA Bidirectional ESD IEC 61000-4-2 DSN0603-2 ESD and Surge P
+   C2835428  ULC0524P                     DFN2510-10         stock=390462  $0.0298   -55℃~+125℃ 0.3pF 10nA 13V 5V 7.5V 70W@8/20us ESD Four channels IEC 61000-4-2、IEC 61000-4-5、IEC 
+   C552535   PESD3V3Y1BSFYL               DSN0603-2          stock=348960  $0.0391   -40℃~+125℃ 0.24pF 1 1nA 3.3V 3.7V 4.2V Bidirectional ESD IEC 61000-4-2 DSN0603-2 ESD and Surge 
+== USB4105 : 3 shown
+   C3020560  USB4105-GF-A                 SMD                stock=11505   $1.0319   -40℃~+85℃ 1 12P 48V 5A Black Female Surface Mount, Right Angle Type-C USB 2.0 SMD USB Connector
+   C5184243  USB4105-GF-A-120             SMD                stock=4592    $0.9802   -40℃~+85℃ 1 16P 48V 5A Black Female Type-C USB 2.0 SMD USB Connectors ROHS
+   C3025063  USB4105-GF-A-060             SMD                stock=2379    $1.0691   -40℃~+85℃ 1 12P 48V 5A Black Female Surface Mount, Right Angle Type-C USB 2.0 SMD USB Connector
+== USB4125 : 2 shown
+   C5246813  USB4125-GF-A-0190            SMD                stock=3670    $0.8462   -30℃~+85℃ 1 20,000 cycles 3A 48V 6P Black Female Surface Mount, Right Angle Type-C SMD USB Conn
+   C3151650  USB4125-GF-A                 SMD                stock=1118    $0.9625   -30℃~+85℃ 1 3A 48V 6P Black Female Surface Mount, Right Angle Type-C SMD USB Connectors ROHS
+== TYPE-C-31-M-12 : 3 shown
+   C7496818  F.0603.00025/P2-0603G1TS2-06 0603               stock=1959040 $0.0042   -40℃~+85℃ 120° 2.6V~2.9V 230mcd 30mA 517nm 520nm~525nm 90mW Discrete Diode Emerald Green 0603 L
+   C965793   XL-1005UGC                   0402               stock=1385317 $0.0081   -40℃~+85℃ 120° 249mcd 25mA 3V 516nm~531nm 531nm 80mW Discrete Diode Emerald Green Top-mount Wat
+   C2907321  FRC0805J331 TS               0805               stock=1098866 $0.0035   -55℃~+155℃ 125mW 150V 330Ω Thick Film Resistor ±100ppm/℃ ±5% 0805 Chip Resistor - Surface Mount
+== TYPE-C-31-M-17 : 3 shown
+   C7496818  F.0603.00025/P2-0603G1TS2-06 0603               stock=1959040 $0.0042   -40℃~+85℃ 120° 2.6V~2.9V 230mcd 30mA 517nm 520nm~525nm 90mW Discrete Diode Emerald Green 0603 L
+   C2827694  PESD5V0S1BA                  SOD-323            stock=1066182 $0.0357   -55℃~+125℃ 1 100nA 20A 300W 5V 7V 9V Bidirectional ESD IEC 61000-4-2 SOD-323 ESD and Surge Prot
+   C34499    KT-0805W                     0805               stock=883724  $0.0202   -30℃~+85℃ 120° 13172K~100000K 2.6V~3.2V 25mA 350mcd 80mW Discrete Diode Top-mount White Yellow 
+== 12401548E4 : 0 shown
+== UJ31-CH-G2 : 1 shown
+   C5154024  UJ31-CH-G2-SMT-TR            SMD                stock=35      $4.5344   -25℃~+80℃ 1 20V 24P 250mA、1.25A、5A、6.25A Female Type-C USB 3.2 SMD USB Connectors ROHS
+== VOM1271T : 1 shown
+   C146286   VOM1271T                     SOP-4-2.54mm       stock=12232   $1.6546   -40℃~+100℃ 1.4V 24us 4.5kV 50mA 53us SOP-4-2.54mm Solid State Relays (MOS Output) ROHS
+== FDA217 : 2 shown
+   C17552966 FDA217                       DIP-8              stock=104     $5.7827   -40℃~+85℃ 1.26V 10.5V~15.3V 15.3V 2 3.75kV 500mW 50mA 5V 5mA DC DIP-8 Logic Output Optoisolator
+   C22406942 FDA217S                      SMD-8P             stock=83      $3.4961   SMD-8P Gate Drive Optocoupler ROHS
+== TLP3906 : 2 shown
+   C146278   TLP3906(TPL,E                SOP-4-175mil       stock=9000    $1.0982   -40℃~+125℃ 1 1.65V 12mA 12uA 3.75kV 3V DC Photodiode SOP-4-175mil Transistor, Photovoltaic Outp
+   C6333153  TLP3906(E                    SOIC-4-175mil      stock=195     $1.5325   -25℃~+100℃ 1 1.65V 10V 12mA 200us 3.75kV 300us 30uA 3V DC Photodiode SOIC-4-175mil Transistor, 

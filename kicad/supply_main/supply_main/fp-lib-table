@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "supply1")(type "KiCad")(uri "${KIPRJMOD}/../../../footprints/supply1.pretty")(options "")(descr "USB-C PD supply project footprints"))
+)

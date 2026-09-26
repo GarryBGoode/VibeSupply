@@ -1,0 +1,13 @@
+WARNING: KICAD6_SYMBOL_DIR environment variable is missing, so the default KiCad symbol libraries won't be searched. @ [C:\Users\Greg\Documents\projects\electrocode\supply1\<frozen importlib._bootstrap_external>:759=>C:\Users\Greg\Documents\projects\electrocode\supply1\<frozen importlib._bootstrap>:491]
+WARNING: KICAD7_SYMBOL_DIR environment variable is missing, so the default KiCad symbol libraries won't be searched. @ [C:\Users\Greg\Documents\projects\electrocode\supply1\<frozen importlib._bootstrap_external>:759=>C:\Users\Greg\Documents\projects\electrocode\supply1\<frozen importlib._bootstrap>:491]
+WARNING: KICAD8_SYMBOL_DIR environment variable is missing, so the default KiCad symbol libraries won't be searched. @ [C:\Users\Greg\Documents\projects\electrocode\supply1\<frozen importlib._bootstrap_external>:759=>C:\Users\Greg\Documents\projects\electrocode\supply1\<frozen importlib._bootstrap>:491]
+WARNING: KICAD9_SYMBOL_DIR environment variable is missing, so the default KiCad symbol libraries won't be searched. @ [C:\Users\Greg\Documents\projects\electrocode\supply1\<frozen importlib._bootstrap_external>:759=>C:\Users\Greg\Documents\projects\electrocode\supply1\<frozen importlib._bootstrap>:491]
+WARNING: fp-lib-table file was not found. Component footprints are not available.
+WARNING: fp-lib-table file was not found. Component footprints are not available.
+WARNING: fp-lib-table file was not found. Component footprints are not available.
+WARNING: fp-lib-table file was not found. Component footprints are not available.
+WARNING: fp-lib-table file was not found. Component footprints are not available.
+WARNING: Missing tag on  instantiated at C:\Users\Greg\Documents\projects\electrocode\supply1\<frozen importlib._bootstrap>:491.
+INFO: 6 warnings found while generating netlist.
+INFO: 0 errors found while generating netlist.
+

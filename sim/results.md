@@ -1,76 +1,88 @@
-# LTspice verification — results
+# LTspice verification — results (140 W / 10 A design, LTC7803)
 
-Simulations by `sim/buck_sim.py`. Re-run everything with `.venv/Scripts/python sim/buck_sim.py`. Tests run in parallel, about 8 min in total.
-Pass test names to run a subset, or `--no-sim` to re-plot existing results. Netlists, raw data and logs are in `sim/out/`; plots are in `sim/plots/`.
+Simulations by `sim/buck_sim.py`. Re-run everything with `.venv/Scripts/python sim/buck_sim.py`; the tests run in parallel
+(~30 min on this machine). Pass test names to run a subset, or `--no-sim` to re-plot existing results.
+Netlists, raw data and logs: `sim/out/`; plots: `sim/plots/`. Raw console output of the last full run: `sim/out/run_all.txt`.
 
-Run on LTspice 26.1.1, 2026-09-26. Last full run uses the LCSC-stocked parts: Coilcraft SER2918H-682, 2.5 mΩ sense resistor, FXL1040-R47 post filter, 24 mΩ polymer output cap, 2 Ω clamp.
+Run on LTspice 26.1.1, 2026-09-27. The pre-pivot LTC7801 / 20 A results are in git (`d8d0a65`).
 
 ## What is simulated
 
-- **Controller:** ADI's LTC7801 model from the LTspice library (encrypted, pin-accurate). ISC030N10NM6 MOSFETs are modelled as an approximate VDMOS built from the datasheet values.
-- **Power stage:** Coilcraft SER2918H-682 6.8 µH (2.86 mΩ), 2.5 mΩ sense resistor (2× 5 mΩ).
-- **Output filter:** C1 is 11 µF of ceramics plus a 100 µF / 0.1 Ω damper. The post-filter inductor is **0.47 µH** (1.7 mΩ). C2 is 11 µF of ceramics plus a 100 µF / 24 mΩ polymer. The output shunt is 1 mΩ.
-- **Input:** a source with 0.5 µH / 20 mΩ of cable, 100 µF bulk, and 20 µF of ceramics.
-- **Control scheme as planned:**
-  - VFB held at 0.695 V from INTVCC (61.9 k / 10 k).
-  - Two ADA4522 op-amps (CV and CC) pull ITH down through BAT54 diodes.
-  - Anti-windup: each op-amp's compensation network returns to ITH, not to its own output.
-  - CC loop senses inductor current with an INA240A2 (behavioural model) across the 2.5 mΩ resistor.
-  - **Fast current clamp:** a PNP from ITH to GND, with its base driven by a third DAC channel. It limits ITH, and so the cycle-by-cycle peak current, to Iset + 3 A.
-  - Regen clamp: a hysteretic switch with 2 Ω. It turns on at Vset + 1.3 V and off at Vset + 0.7 V.
-  - Pulse-skip mode; charge pump enabled; REGSD defeated with 330 k from INTVCC to SS.
-- **Firmware sequence modelled:** RUN at t = 0 (the controller is ready at about 0.65 ms). The current setpoint ramps over 0.5–0.8 ms, and the voltage setpoint over 0.8–1.3 ms.
+- **Controller:** ADI's LTC7803 model from the LTspice library (encrypted, pin-accurate). RFREQ 124 k → **300 kHz**,
+  MODE 100 k to INTVCC (pulse-skip), TRACK/SS 10 nF, **EXTVCC 12 V**, external boost diode INTVCC → BOOST, 0.1 µF boost cap.
+- **FETs:** 2× CSD18531Q5A, modelled as an approximate VDMOS from the datasheet (Rds(on) 4.4 mΩ @4.5 V, Ciss 3.2 nF,
+  Coss 380 pF, Crss 11 pF, Qrr via TT = 12 ns).
+- **Power stage:** SER2918H-103 10 µH (2.86 mΩ), **2.0 mΩ** sense resistor.
+- **Output filter:** C1 = 12 µF ceramics + 100 µF / 0.1 Ω damper, **0.47 µH** post filter (1.7 mΩ), C2 = 12 µF ceramics + 100 µF / 24 mΩ polymer, 1 mΩ output shunt.
+- **Input:** source with 0.5 µH / 20 mΩ of cable, 100 µF bulk, 18 µF ceramics.
+- **Control scheme (unchanged from the 20 A design):**
+  - VFB held at 0.695 V from INTVCC (61.9 k / 10 k) — above the 0.56 V foldback threshold, below the 0.88 V FB-OVP.
+  - CV and CC ADA4522 op-amps pull ITH down through BAT54 diodes; compensation networks return to ITH (anti-windup).
+  - CC loop senses the inductor current: INA240A3 (gain 100, behavioural) across the 2.0 mΩ resistor → 0.2 V/A.
+  - Fast ITH clamp: PNP from ITH to GND, base from a 3rd DAC channel, set to Iset + 3 A using the ITH map below.
+  - Regen clamp: 2 Ω, on at Vset + 1.3 V (or 32.7 V absolute), hysteretic.
+- **Firmware sequence modelled:** RUN at t = 0; current setpoint ramps over 0.5–0.8 ms, voltage setpoint over 0.8–1.3 ms.
 
 ### Component values used
 
 | Block | Values |
 |---|---|
-| CV amp | divider 95.3 k / 5 k (÷20.06); Rz 35.7 k, Cf 1.8 nF, Cp 100 pF; networks return to ITH |
-| CC amp | Rin 10 k; Rz 2.5 k, Cf 25.4 nF, Cp 1.27 nF; networks return to ITH |
+| CV amp | divider 91.9 k / 10 k (÷10.19); Rz 47.5 k, Cf 1.3 nF, Cp 68 pF |
+| CC amp | Rin 10 k; Rz 2.4 k, Cf 27 nF, Cp 1.3 nF |
 | ITH | 100 pF to GND; PNP clamp (2N3906 in the sim, BC857 class for real) |
-| LTC7801 | RFREQ 71.5 k (≈300 kHz), SS 10 nF + 330 k to INTVCC, MODE 100 k/100 k (pulse-skip), DRVSET = DRVUV = CPUMP_EN = INTVCC, EXTVCC 12 V |
-
-The frequency-domain model (calc §9) suggests Cf ≈ 1.4 nF for exactly 10 kHz. With 1.8 nF the crossover is about 8 kHz. Either is fine; the final value can be tuned on hardware.
 
 ## Results
 
 | Test | What | Result |
 |---|---|---|
-| t1 | CV 24 V, load step 1 ↔ 10 A (1 µs edges) | Dip **0.63 V** (23.37 V), overshoot on release **0.60 V**, recovery ≈ 150 µs, no ringing. Steady ripple at 10 A: 9 mV pp |
-| t2 | CV 24 V, PWM load 0.5 ↔ 8 A at 20 kHz and 2 kHz | 20 kHz: 23.74–24.26 V (±0.26 V), loop stays well-behaved. 2 kHz: each edge behaves like t1 (22.85–24.51 V). No sustained oscillation |
-| t3 | CC 5 A, 10 mΩ short, then released | The controller stops within ~10 µs (ITH clamp). Output-cap discharge spike, then **≈19 A decaying to 5 A over ~0.5 ms** (stored energy, see below). CC→CV on release: overshoot 0.85 V |
-| t4 | Regen: 3.5 A pushed back for 1 ms at 24 V | Buck stops (pulse-skip, no reverse current), **no current back to the input**. The clamp chops at ~25 V (12.6 A peaks with 2 Ω, ≈30 % duty) |
-| t5 | 46 V / 20 A from 48 V, load release | Steady 45.96–45.99 V (37 mV pp) at 20 A. 0→20 A step: −2 V dip; the ITH clamp holds IL ≤ ~26 A. Release: +1.3 V |
-| t6 | 1 V / 10 A from 48 V (below the min-on-time limit) | Regulates at 0.98–1.00 V, 17 mV pp — pulse-skipping is benign |
+| t0 | ITH forced 0.5 … 1.0 V (probe) | I_L = 23.2 A/V × (ITH − 0.40 V) at low duty (2.0 mΩ). With 2.5 mΩ it was 17.8 A/V, matching the calc's 17.5 A/V assumption |
+| t0 50/75/88 | ITH map at D ≈ 0.5 / 0.75 / 0.88 (CV, load steps 2–10 A) | 25.0 A/V, offset 0.46 V / 25.0 A/V, 0.44 V / **15.1 A/V, offset 0.80 V** — near D = 0.9 slope compensation shifts and flattens the map |
+| t1 | CV 24 V from 30 V, load step 1 ↔ 10 A (1 µs edges) | Dip **1.0 V** (23.0 V), overshoot on release 0.67 V, no ringing. Steady ripple at 10 A: **6 mV pp** |
+| t2 | CV 24 V, PWM load 0.5 ↔ 8 A at 20 kHz and 2 kHz | 20 kHz: 23.55–24.62 V; 2 kHz: 22.3–24.75 V (each edge like t1). Loop stays well-behaved |
+| t3 | CC 5 A, 10 mΩ short, then released | Output-cap dump spike (ideal wiring), main inductor ≤ 23.5 A for one cycle (< 32 A Isat), then 5 A. Release: CC-limited ramp back to 24 V, 0.8 V overshoot |
+| t4 | Regen: 3.5 A pushed back for 1 ms at 24 V (28 V PD in) | Buck stops (pulse-skip), clamp chops at ~25 V (12.6 A peaks). Input current ≥ −0.1 A (no real backfeed) |
+| t5 | **26.5 V / 10 A from 30 V** (D ≈ 0.88), then release | Holds **26.47–26.51 V at 10.0 A**, but ITH sits at its 1.40 V maximum: this is the edge. Release: +1.3 V, clamp catches it |
+| t6 | 1 V / 10 A from 31 V (min on-time region) | 0.990 V, flat — fine |
+| t7 | Dropout: 28 V set from 28 V PD at ~4.3 A, then 26.5 V | Does **not** reach 100 % duty under load: output 26.3–26.6 V with ITH at its maximum (the same slope-compensation limit as t5). 26.5 V at 4.3 A regulates. **Practical ceiling from USB-C ≈ 26.5 V at ≈ 4.3 A** |
+| t8 | Long idle: output held 0.8 V above Vset for 3 ms, then a 5 A step | Resumes cleanly (dip 1.4 V); the charge pump keeps the boost cap up while idle |
 
-Plots: `sim/plots/t1_cv_step.png` … `t6_1v_10a.png`; zooms `zoom_t3_short.png`, `zoom_t2_glitch.png`.
+Plots: `sim/plots/t*.png`, zoom of the 200 kHz sub-harmonic oscillation: `zoom_highduty.png`.
 
 ## Design changes that came out of the simulation
 
-1. **Anti-windup = compensation networks return to ITH.** The first try, a PNP clamp from the amp output to its summing node, conducted through its collector-base junction whenever the setpoint was above ITH, so it clamped the loop. It was removed.
-2. **CV loop bandwidth 5 → ~10 kHz** by changing the output filter:
-   - post-filter inductor 1 µH → 0.47 µH;
-   - C1 damper 47 µF / 0.33 Ω → 100 µF / 0.1 Ω;
-   - low-ESR (≈50 mΩ) output capacitor.
-
-   The load-step dip halved (1.4 V → 0.65 V for 9 A). Ripple estimate is 10 mV pp.
-   Sensing the voltage at C1, before the post filter, was also tried and is worse: the post-filter anti-resonance pushes the crossover to 70–90 kHz.
-3. **Fast ITH clamp (new, needs a 3rd DAC channel).** Without it, a short made the CV loop demand maximum current, and the inductor reached the controller's ~42 A limit within ~5 µs. With it, the controller stops at Iset + 3 A.
-4. **Inductor → Coilcraft SER2918H-682** (Würth not stocked at LCSC). Its 45.9 A Isat keeps the 2.5 mΩ sense resistor (max limit 33.6 A) safely below saturation. The Würth part would have needed 2.8 mΩ.
-5. **REGSD must be defeated** (330 k from INTVCC to SS). Otherwise the LTC7801 shuts itself down whenever EXTVCC isn't switched over, for example when running from a low DC input with no 12 V aux rail.
+1. **fsw 200 → 300 kHz.** At 200 kHz the LTC7803 showed period doubling (sub-harmonic oscillation) at D ≥ 0.8: its internal
+   slope-compensation ramp is a fixed voltage per cycle, so a lower frequency gives a slower ramp against the same inductor down-slope.
+   300 kHz and 400 kHz were clean. Cost: ~0.8 W more loss than 200 kHz.
+2. **R_SENSE 2.5 → 2.0 mΩ.** Slope compensation also lowers the available peak current at high duty. With 2.5 mΩ, ITH at its maximum gave
+   only ~9.4 A at 27 V from 30 V. 2.0 mΩ gives 10 A at 26.5 V (t5); 1.5 mΩ held 27 V beyond 11.5 A but its low-duty hard limit (up to
+   37 A) would exceed the inductor's 32 A Isat. **Spec consequence: 10 A up to ≈ Vin − 3.5 V** (from USB-C the 140 W budget limits first anyway).
+3. **EXTVCC from ≥ 7 V (use the 12 V aux rail), not 5 V.** With EXTVCC = 5 V the EXTVCC LDO is in dropout (INTVCC ≈ 4.9 V), the boost
+   supply sits at ~4.3 V and sags to ~3.3 V after a high-duty start. After an idle period (start-up overshoot) the controller then refused to
+   switch for > 1 ms while the output collapsed, and restarted with a 33 A inductor peak. With EXTVCC = 7 V or 12 V: INTVCC = 5.15 V, clean restart.
+4. **External boost diode** INTVCC → BOOST (the LTC7803 has none inside; a low-leakage Schottky, ADI uses a CMDSH-4E).
+5. **ITH clamp must be duty-aware.** The ITH ↔ current map is ~25 A/V with ~0.45 V offset up to D ≈ 0.75, but ~15 A/V with 0.8 V offset
+   near D ≈ 0.9. Firmware knows Vin and Vset, so it computes the clamp from the duty, and should calibrate at run time
+   (read ITH and the INA240 output with the ADC).
 
 ## Things the simulation shows that firmware or hardware must handle
 
-- **Short-circuit energy:** the output capacitors (≈ 220 µF) dump into a short. In the sim that's ~1.8 kA for a few µs through 11 mΩ; real wiring limits it. The energy in the inductors then decays slowly, because the shorted output leaves almost no voltage across them: ~18 A → Iset over ~0.5 ms.
-  This is physics, not a control problem. Every switching bench supply with output caps does it. Mitigations are less C (worse transients) or a faster output switch to disconnect.
-- **Start-up ramp:** a linear 0.5 ms ramp overshoots ~1 V at its end. Firmware should round off the end of the ramp (S-curve), or ramp more slowly.
-- **ITH-clamp calibration:** ITH ↔ current mapping is ITH ≈ 0.358 V + I / 26.2 A/V at 2.5 mΩ (from the model). The clamp level varies with duty cycle (slope compensation) and part tolerance. Firmware should calibrate it at run time (read ITH and the INA240 output with the MCU ADC) and keep a generous margin.
-- **Small reverse current at light load:** the inductor current undershoots below zero before the bottom FET turns off. That's −0.65 A at 24 V and −2.9 A at 46 V, consistent with a few hundred ns of reverse-comparator delay. The energy is tiny and goes to the input caps; the LM74800 blocks it from the charger.
-- **Simulation glitch (resolved as a timestep artifact):** the t2 run at 50 ns max timestep shows one ~4 µs event where the bottom FET stays on at light load (−10 A), and it reproduces at that exact timing. Re-running the same circuit with a 20 ns max timestep (`out/t2_glitch_diag.cir`, gate signals saved) shows no event: min IL −0.66 A, the normal light-load undershoot. Variants t2b/t2c/t2d didn't show it either. Treat it as numerical, not circuit behaviour.
+- **Output envelope near dropout (LTspice):** 30 V DC → 10 A up to 26.5 V; 28 V PD → ≈ 26.5 V max at ≈ 4.3 A (the 140 W budget
+  would allow ~4.9 A there). A lower R_SENSE would buy a bit more, at the cost of the low-duty hard limit exceeding the inductor Isat.
+- **High duty = no headroom.** At 26.5 V / 10 A from 30 V ITH is already at its maximum. Firmware should limit Iset to what the
+  duty allows (≈ 10 A up to Vin − 3.5 V, tapering above), otherwise the output sags instead of the CC loop taking over cleanly.
+- **Sense signal is small** (ΔIL·R_SENSE ≈ 5 mV vs LTC's recommended 10–20 mV): Kelvin-route the sense lines and fit the RC filter at
+  the SENSE pins. The sim is noise-free, so noise pick-up is a layout item.
+- **Short-circuit energy:** as before, the output caps dump into a short; the ITH clamp stops the controller within a cycle.
+- **Start-up ramp:** the linear 0.5 ms ramp overshoots ~0.8 V at its end (and the overshoot is what triggered the idle stall with EXTVCC = 5 V).
+  Firmware should round off the end of the ramp or ramp more slowly.
+- **Light-load reverse current:** −0.35 A inductor undershoot at light load in pulse-skip; brief negative source current (≤ 1 A, cable/input-cap
+  ringing) after load release and shorts. The LM74800 ideal diodes block it from the charger.
+- **Clamp margin vs transients:** the ITH clamp at Iset + 3 A also limits how hard the loop can recover from a load step close to Iset
+  (t1: Iset 11 A, 10 A step → clamp active during recovery). A larger margin trades short-circuit peak for faster recovery.
 
 ## Not yet simulated
 
-- Real INA240 and op-amp input limits. ADA4522 input CM goes to V+ − 1.5 V = 3.5 V on 5 V, which is fine for DAC ≤ 2.9 V. The final op-amp choice is still open.
-- The output switch (Si8751 + back-to-back FETs) and its turn-off during a fault.
-- PD source behaviour (voltage transitions during operation, 5 A current limit).
-- Loss/thermal verification with Infineon's own MOSFET model (to confirm K_QRR).
+- Real INA240 and op-amp input limits (ADA4522 input CM to V+ − 1.5 V = 3.5 V on 5 V — DAC ≤ 2.9 V is fine; a setpoint above ~3.4 V
+  made the CC amp misbehave in a test, so keep all DAC setpoints ≤ 2.9 V).
+- Output switch (VOM1271 + back-to-back FETs) turn-off during a fault; PD source behaviour (voltage transitions, 5 A limit).
+- FET losses/thermal with TI's own MOSFET models (to confirm K_QRR and the VDMOS approximation).

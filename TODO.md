@@ -5,18 +5,39 @@ Running list for the USB-C PD bench supply. Plan: [PLAN.md](PLAN.md). Numbers: [
 
 Legend: **[you]** needs your decision or a download · **[me]** I'll do it · ☐ open · ☑ done
 
-## Decisions needed
-- (none open)
+## Decisions needed (pivot 2026-09-26: 140 W USB / 10 A — see PLAN §1a)
+- ☑ Q1 DC input: **≤ 30 V**, 10 A, OV lockout ~31–32 V, survives ≥ 60 V → output 0–27 V, 60 V class parts (2026-09-26)
+- ☑ Q2 Cooling: **fanless**, aluminium extrusion as the heatsink, unpopulated fan header as a fallback (2026-09-26)
+- ☑ Q3 **Re-shop both** the PD sink chip and the buck controller (2026-09-26)
+
+## Pivot rework
+- ☑ IC re-shop → [calc/ic_reshop.md](calc/ic_reshop.md): **AP33772S** (PD sink) + **LTC7803** (buck controller) chosen 2026-09-26; LM5148 runner-up
+- ☐ **[you]** Buy early: AP33772S (LCSC ~140 pcs) and LTC7803 (LCSC 38 pcs MSOP) — or Mouser/Digi-Key
+- ☐ **[me]** LTC7803 protection: VIN-pin RC + TVS, bus TVS, SW snubber footprint, regen clamp also triggered by VIN_BUS > ~33 V
+- ☐ **[me]** USB path: LM74800 EN from MCU after AP33772S reports a contract; decide whether AP33772S PWR_EN drives an extra series FET
+- ☐ **[me]** OV lockout at ~31 V on **both** inputs (LM74800 OV pin) — the LTC7803 depends on it
+- ☑ `calc/buck_calc.py` redone for 140 W / 10 A (2026-09-27): **CSD18531Q5A ×2, 300 kHz, SER2918H-103KL 10 µH, 2.0 mΩ sense, INA240A3**,
+  4+4× 4.7 µF 100 V output MLCCs, fanless thermal model (worst ~8 W → extrusion ≈ 45 °C) → [calc/results.md](calc/results.md)
+- ☑ LTspice port to the LTC7803 (t0–t8) → [sim/results.md](sim/results.md). Changes from it: 300 kHz (200 kHz → sub-harmonic), 2.0 mΩ,
+  **EXTVCC from the 12 V aux rail** (5 V stalls the controller), external boost diode, duty-aware ITH clamp
+- ☑ Output envelope accepted (2026-09-27): 10 A up to ≈ Vin − 3.5 V; from 28 V USB-C ≈ 26.5 V max at ≈ 4.3 A. Full power is occasional use; thermal throttling in firmware is fine
+- ☐ **[me]** Pick LCSC parts: 4 mΩ 2512 sense resistors (2×), CMDSH-4E-class low-leakage boost Schottky, 15 A 58 V blade fuse + holder,
+  5 V LDO for the analog rail (from 12 V), SMBJ33A bus TVS, ~36 V zener for the LTC7803 VIN pin
+- ☐ **[me]** Firmware notes: duty-aware ITH clamp (map ~25 A/V + 0.45 V up to D 0.75, ~15 A/V + 0.8 V near D 0.9; calibrate at run time),
+  Iset limited near dropout, S-curve end of the start-up ramp, clamp average derated from the enclosure NTC, all DAC setpoints ≤ 2.9 V
+- ☐ **[me]** AP33772S PD policy (firmware): read SRCPDO, request the lowest PDO/AVS/PPS that covers Vset + headroom and the power need; EPR 28 V needs an EPR cable
+- ☐ **[me]** Update the skidl modules, ERC, netlists/BOMs, `calc/parts_shortlist.md` (LCSC stock)
+- ☐ **[me]** Update PLAN §2–§4 once the picks settle
 
 ## Datasheets / parts to confirm
 Shortlist with LCSC numbers: [calc/parts_shortlist.md](calc/parts_shortlist.md)
 - ☑ LCSC/JLC stock check (2026-09-26): everything found or substituted (Coilcraft inductor, VOM1271 driver, IPT015N10N5 switch FETs, 2 Ω clamp resistor, 58 V fuse)
 - ☐ **[me]** VOM1271: Isc 15 µA @10 mA / ~30 µA @20 mA → ~14 ms turn-on at 20 mA LED drive (datasheet). Turn-off is only specified at 200 pF → verify on the bench / in the schematic stage.
 - ☑ TPS26750 strap: SafeMode, ADCIN1 = ADCIN2 = GND → I2C 0x21 (Table 7-6)
-- ☐ **[me]** Rds(on)-vs-temperature curve for ISC030N10NM6 (×1.45 at 100 °C assumed); K_QRR = 0.5 (dead-time effect) to confirm with Infineon's SPICE model if obtainable.
-- ☐ **[me]** Inductor core loss at 300 kHz (Coilcraft calculator); 1 W assumed.
-- ☐ **[me]** 100 V 1210 MLCC DC-bias derating (4.7 µF X7S: ~40 % left at 46–48 V assumed); ripple current per cap.
-- ☐ **[me]** Pick: PCB blade-fuse holder, 4 mm binding posts, fan + header, heatsink (depends on enclosure extrusion).
+- ☐ **[me]** CSD18531Q5A: Rds(on)-vs-temperature (×1.45 at 100 °C assumed), plateau voltage and K_QRR = 0.5 to confirm (TI PSpice model; the sim uses a VDMOS approximation).
+- ☐ **[me]** SER2918H-103 core loss at 300 kHz / 2.6 A pp (Coilcraft calculator); 0.3 W assumed.
+- ☐ **[me]** 100 V 1210 MLCC DC-bias derating (4.7 µF X7S: ~3 µF left at 27–30 V assumed); ripple current per cap.
+- ☐ **[me]** Pick: PCB blade-fuse holder, 4 mm binding posts, gap pad + mounting to the extrusion (depends on the extrusion).
 - ☐ **[me]** TPS26750 config for the web GUI (firmware-side, not needed for the PCB): settings list for "sink-only, EPR + AVS, host-controlled"
 
 ## Simulation (LTspice, LTC7801 model) — see sim/results.md
@@ -47,8 +68,8 @@ Shortlist with LCSC numbers: [calc/parts_shortlist.md](calc/parts_shortlist.md)
 
 ## Known limitations (accepted, documented)
 - Below ~1.15 V out from a 48 V input the controller pulse-skips (80 ns min on-time at 300 kHz): higher ripple, still regulates. From PD, the MCU can pick a lower input voltage when power allows.
-- Full 240 W from USB-C needs the 48 V PDO (5 A PD limit), so AVS only helps efficiency at part load.
-- Top FET runs ~7.5–8 W at 20 A / high duty → the heatsink + fan are mandatory, not optional.
+- ~~Full 240 W from USB-C needs the 48 V PDO~~ → now: full 140 W needs the 28 V EPR PDO **and** an EPR (240 W e-marked) cable; AVS only helps efficiency at part load.
+- ~~Top FET runs ~7.5–8 W at 20 A → fan mandatory~~ (pre-pivot; at 10 A the top FET is ~1.5–5 W, see PLAN §1).
 
 ## Done
 - ☑ Enclosure: aluminium extrusion, probably 3D-printed front/back panels (2026-09-26)

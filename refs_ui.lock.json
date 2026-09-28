@@ -1,0 +1,830 @@
+{
+ "parts": [
+  {
+   "ref": "BZ1",
+   "block": "ui",
+   "prefix": "BZ",
+   "part": "Buzzer",
+   "value": "magnetic 3V",
+   "nets": {
+    "1": "+3V3",
+    "2": "BUZZER_K"
+   }
+  },
+  {
+   "ref": "C1",
+   "block": "ui",
+   "prefix": "C",
+   "part": "C",
+   "value": "10u",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C2",
+   "block": "ui",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C3",
+   "block": "ui",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "ENC1_A",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C4",
+   "block": "ui",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "ENC1_B",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C5",
+   "block": "ui",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "ENC1_SW",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C6",
+   "block": "ui",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "ENC2_A",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C7",
+   "block": "ui",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "ENC2_B",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C8",
+   "block": "ui",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "ENC2_SW",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C9",
+   "block": "ui",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C10",
+   "block": "ui",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "OE_BTN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C11",
+   "block": "ui",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "PWR_BTN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "D1",
+   "block": "ui",
+   "prefix": "D",
+   "part": "LED",
+   "value": "red",
+   "nets": {
+    "1": "LED_OE_R_K",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "D2",
+   "block": "ui",
+   "prefix": "D",
+   "part": "LED",
+   "value": "green",
+   "nets": {
+    "1": "LED_OE_G_K",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "D3",
+   "block": "ui",
+   "prefix": "D",
+   "part": "LED",
+   "value": "red",
+   "nets": {
+    "1": "LED_CC_K",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "D4",
+   "block": "ui",
+   "prefix": "D",
+   "part": "LED",
+   "value": "green",
+   "nets": {
+    "1": "LED_CV_K",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "D5",
+   "block": "ui",
+   "prefix": "D",
+   "part": "LED",
+   "value": "yellow",
+   "nets": {
+    "1": "LED_FAULT_K",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "D6",
+   "block": "ui",
+   "prefix": "D",
+   "part": "D_Schottky",
+   "value": "SS14",
+   "nets": {
+    "1": "+3V3",
+    "2": "BUZZER_K"
+   }
+  },
+  {
+   "ref": "H1",
+   "block": "ui",
+   "prefix": "H",
+   "part": "MountingHole",
+   "value": "M3",
+   "nets": {}
+  },
+  {
+   "ref": "H2",
+   "block": "ui",
+   "prefix": "H",
+   "part": "MountingHole",
+   "value": "M3",
+   "nets": {}
+  },
+  {
+   "ref": "H3",
+   "block": "ui",
+   "prefix": "H",
+   "part": "MountingHole",
+   "value": "M3",
+   "nets": {}
+  },
+  {
+   "ref": "H4",
+   "block": "ui",
+   "prefix": "H",
+   "part": "MountingHole",
+   "value": "M3",
+   "nets": {}
+  },
+  {
+   "ref": "J1",
+   "block": "ui",
+   "prefix": "J",
+   "part": "Conn_02x13_Odd_Even",
+   "value": "to main board",
+   "nets": {
+    "1": "+3V3",
+    "2": "+3V3",
+    "3": "GND",
+    "4": "LCD_SCK",
+    "5": "GND",
+    "6": "LCD_MOSI",
+    "7": "LCD_CS",
+    "8": "LCD_DC",
+    "9": "LCD_RST",
+    "10": "LCD_BL",
+    "11": "GND",
+    "12": "I2C2_SDA",
+    "13": "I2C2_SCL",
+    "14": "UI_INT",
+    "15": "ENC1_A",
+    "16": "ENC1_B",
+    "17": "ENC1_SW",
+    "18": "GND",
+    "19": "ENC2_A",
+    "20": "ENC2_B",
+    "21": "ENC2_SW",
+    "22": "OE_BTN",
+    "23": "PWR_BTN",
+    "24": "BUZZER",
+    "25": "GND",
+    "26": "GND"
+   }
+  },
+  {
+   "ref": "J3",
+   "block": "ui",
+   "prefix": "J",
+   "part": "Conn_01x08",
+   "value": "ST7789 2.0in module",
+   "nets": {
+    "1": "GND",
+    "2": "+3V3",
+    "3": "LCD_SCK",
+    "4": "LCD_MOSI",
+    "5": "LCD_RST",
+    "6": "LCD_DC",
+    "7": "LCD_CS",
+    "8": "LCD_BL"
+   }
+  },
+  {
+   "ref": "J4",
+   "block": "ui",
+   "prefix": "J",
+   "part": "Conn_01x05",
+   "value": "OE panel button",
+   "nets": {
+    "1": "OE_BTN_RAW",
+    "2": "GND",
+    "3": "LED_OE_R_K",
+    "4": "LED_OE_G_K",
+    "5": "~"
+   }
+  },
+  {
+   "ref": "J5",
+   "block": "ui",
+   "prefix": "J",
+   "part": "Conn_01x02",
+   "value": "POWER panel button",
+   "nets": {
+    "1": "PWR_BTN_RAW",
+    "2": "+3V3"
+   }
+  },
+  {
+   "ref": "Q1",
+   "block": "ui",
+   "prefix": "Q",
+   "part": "2N7002",
+   "value": "2N7002",
+   "nets": {
+    "1": "BUZZER",
+    "2": "GND",
+    "3": "BUZZER_K"
+   }
+  },
+  {
+   "ref": "R1",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "ENC1_A_RAW"
+   }
+  },
+  {
+   "ref": "R2",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "ENC1_A_RAW",
+    "2": "ENC1_A"
+   }
+  },
+  {
+   "ref": "R3",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "ENC1_B_RAW"
+   }
+  },
+  {
+   "ref": "R4",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "ENC1_B_RAW",
+    "2": "ENC1_B"
+   }
+  },
+  {
+   "ref": "R5",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "ENC1_SW_RAW"
+   }
+  },
+  {
+   "ref": "R6",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "ENC1_SW_RAW",
+    "2": "ENC1_SW"
+   }
+  },
+  {
+   "ref": "R7",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "ENC2_A_RAW"
+   }
+  },
+  {
+   "ref": "R8",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "ENC2_A_RAW",
+    "2": "ENC2_A"
+   }
+  },
+  {
+   "ref": "R9",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "ENC2_B_RAW"
+   }
+  },
+  {
+   "ref": "R10",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "ENC2_B_RAW",
+    "2": "ENC2_B"
+   }
+  },
+  {
+   "ref": "R11",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "ENC2_SW_RAW"
+   }
+  },
+  {
+   "ref": "R12",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "ENC2_SW_RAW",
+    "2": "ENC2_SW"
+   }
+  },
+  {
+   "ref": "R13",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "BTN_UP"
+   }
+  },
+  {
+   "ref": "R14",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "BTN_DOWN"
+   }
+  },
+  {
+   "ref": "R15",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "BTN_LEFT"
+   }
+  },
+  {
+   "ref": "R16",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "BTN_RIGHT"
+   }
+  },
+  {
+   "ref": "R17",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "BTN_ENTER"
+   }
+  },
+  {
+   "ref": "R18",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "330",
+   "nets": {
+    "1": "+3V3",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R19",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "330",
+   "nets": {
+    "1": "+3V3",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R20",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "330",
+   "nets": {
+    "1": "+3V3",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R21",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "330",
+   "nets": {
+    "1": "+3V3",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R22",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "330",
+   "nets": {
+    "1": "+3V3",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R23",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "OE_BTN_RAW"
+   }
+  },
+  {
+   "ref": "R24",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "OE_BTN_RAW",
+    "2": "OE_BTN"
+   }
+  },
+  {
+   "ref": "R25",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "GND",
+    "2": "PWR_BTN_RAW"
+   }
+  },
+  {
+   "ref": "R26",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "PWR_BTN_RAW",
+    "2": "PWR_BTN"
+   }
+  },
+  {
+   "ref": "R27",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "330",
+   "nets": {
+    "1": "+3V3",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R28",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "BUZZER",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "SW1",
+   "block": "ui",
+   "prefix": "SW",
+   "part": "RotaryEncoder_Switch",
+   "value": "EC11E15244G1",
+   "nets": {
+    "A": "ENC1_A_RAW",
+    "B": "ENC1_B_RAW",
+    "C": "GND",
+    "S1": "ENC1_SW_RAW",
+    "S2": "GND"
+   }
+  },
+  {
+   "ref": "SW2",
+   "block": "ui",
+   "prefix": "SW",
+   "part": "RotaryEncoder_Switch",
+   "value": "EC11E15244G1",
+   "nets": {
+    "A": "ENC2_A_RAW",
+    "B": "ENC2_B_RAW",
+    "C": "GND",
+    "S1": "ENC2_SW_RAW",
+    "S2": "GND"
+   }
+  },
+  {
+   "ref": "SW3",
+   "block": "ui",
+   "prefix": "SW",
+   "part": "SW_Push",
+   "value": "UP",
+   "nets": {
+    "1": "BTN_UP",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "SW4",
+   "block": "ui",
+   "prefix": "SW",
+   "part": "SW_Push",
+   "value": "DOWN",
+   "nets": {
+    "1": "BTN_DOWN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "SW5",
+   "block": "ui",
+   "prefix": "SW",
+   "part": "SW_Push",
+   "value": "LEFT",
+   "nets": {
+    "1": "BTN_LEFT",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "SW6",
+   "block": "ui",
+   "prefix": "SW",
+   "part": "SW_Push",
+   "value": "RIGHT",
+   "nets": {
+    "1": "BTN_RIGHT",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "SW7",
+   "block": "ui",
+   "prefix": "SW",
+   "part": "SW_Push",
+   "value": "ENTER",
+   "nets": {
+    "1": "BTN_ENTER",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "SW8",
+   "block": "ui",
+   "prefix": "SW",
+   "part": "SW_Push",
+   "value": "OUTPUT",
+   "nets": {
+    "1": "OE_BTN_RAW",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "SW9",
+   "block": "ui",
+   "prefix": "SW",
+   "part": "SW_Push",
+   "value": "POWER",
+   "nets": {
+    "1": "PWR_BTN_RAW",
+    "2": "+3V3"
+   }
+  },
+  {
+   "ref": "TP1",
+   "block": "ui",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "~"
+   }
+  },
+  {
+   "ref": "TP2",
+   "block": "ui",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "~"
+   }
+  },
+  {
+   "ref": "TP3",
+   "block": "ui",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "~"
+   }
+  },
+  {
+   "ref": "TP4",
+   "block": "ui",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "~"
+   }
+  },
+  {
+   "ref": "TP5",
+   "block": "ui",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "~"
+   }
+  },
+  {
+   "ref": "TP6",
+   "block": "ui",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "~"
+   }
+  },
+  {
+   "ref": "U1",
+   "block": "ui",
+   "prefix": "U",
+   "part": "TCA9535PWR",
+   "value": "TCA9535PWR",
+   "nets": {
+    "1": "UI_INT",
+    "2": "GND",
+    "3": "GND",
+    "4": "BTN_UP",
+    "5": "BTN_DOWN",
+    "6": "BTN_LEFT",
+    "7": "BTN_RIGHT",
+    "8": "BTN_ENTER",
+    "9": "~",
+    "10": "~",
+    "11": "~",
+    "12": "GND",
+    "13": "LED_OE_R_K",
+    "14": "LED_OE_G_K",
+    "15": "LED_CC_K",
+    "16": "LED_CV_K",
+    "17": "LED_FAULT_K",
+    "18": "~",
+    "19": "~",
+    "20": "~",
+    "21": "GND",
+    "22": "I2C2_SCL",
+    "23": "I2C2_SDA",
+    "24": "+3V3"
+   }
+  }
+ ],
+ "retired": []
+}

@@ -13,21 +13,23 @@ Legend: **[you]** needs your decision or a download · **[me]** I'll do it · �
 ## Pivot rework
 - ☑ IC re-shop → [calc/ic_reshop.md](calc/ic_reshop.md): **AP33772S** (PD sink) + **LTC7803** (buck controller) chosen 2026-09-26; LM5148 runner-up
 - ☐ **[you]** Buy early: AP33772S (LCSC ~140 pcs) and LTC7803 (LCSC 38 pcs MSOP) — or Mouser/Digi-Key
-- ☐ **[me]** LTC7803 protection: VIN-pin RC + TVS, bus TVS, SW snubber footprint, regen clamp also triggered by VIN_BUS > ~33 V
-- ☐ **[me]** USB path: LM74800 EN from MCU after AP33772S reports a contract; decide whether AP33772S PWR_EN drives an extra series FET
-- ☐ **[me]** OV lockout at ~31 V on **both** inputs (LM74800 OV pin) — the LTC7803 depends on it
+- ☑ LTC7803 protection in the schematic: VIN-pin 10 Ω + 1 µF + 36 V zener, SMBJ33A bus TVS, SW snubber footprint, regen clamp also triggered by VIN_PWR > ~33 V
+- ☑ USB path: LM74800 EN = MCU PB3 (PD_SINK_EN, default off) after the AP33772S reports a contract; AP33772S PWR_EN unused (test point)
+- ☑ OV lockout ~31.1 V (243 k / 10 k) on **both** LM74800 inputs
 - ☑ `calc/buck_calc.py` redone for 140 W / 10 A (2026-09-27): **CSD18531Q5A ×2, 300 kHz, SER2918H-103KL 10 µH, 2.0 mΩ sense, INA240A3**,
   4+4× 4.7 µF 100 V output MLCCs, fanless thermal model (worst ~8 W → extrusion ≈ 45 °C) → [calc/results.md](calc/results.md)
 - ☑ LTspice port to the LTC7803 (t0–t8) → [sim/results.md](sim/results.md). Changes from it: 300 kHz (200 kHz → sub-harmonic), 2.0 mΩ,
   **EXTVCC from the 12 V aux rail** (5 V stalls the controller), external boost diode, duty-aware ITH clamp
 - ☑ Output envelope accepted (2026-09-27): 10 A up to ≈ Vin − 3.5 V; from 28 V USB-C ≈ 26.5 V max at ≈ 4.3 A. Full power is occasional use; thermal throttling in firmware is fine
-- ☐ **[me]** Pick LCSC parts: 4 mΩ 2512 sense resistors (2×), CMDSH-4E-class low-leakage boost Schottky, 15 A 58 V blade fuse + holder,
-  5 V LDO for the analog rail (from 12 V), SMBJ33A bus TVS, ~36 V zener for the LTC7803 VIN pin
+- ☑ LCSC picks: 4 mΩ 2512 (C2904236), CMDSH-4E (C5240486), SMBJ30A (C113998), SMBJ33A (C173526), BZT52C36 (C19077420), LP2985-50 (C74511)
+- ☐ **[me]** Still without LCSC number: 15 A MINI blade fuse, and the older small parts (2N7002, BAT54W/S, SS110/SS14, LMV331, UCC27511, USBLC6, NTCs, LEDs, ferrite, inductors 22/68 µH, connectors, switches)
 - ☐ **[me]** Firmware notes: duty-aware ITH clamp (map ~25 A/V + 0.45 V up to D 0.75, ~15 A/V + 0.8 V near D 0.9; calibrate at run time),
   Iset limited near dropout, S-curve end of the start-up ramp, clamp average derated from the enclosure NTC, all DAC setpoints ≤ 2.9 V
 - ☐ **[me]** AP33772S PD policy (firmware): read SRCPDO, request the lowest PDO/AVS/PPS that covers Vset + headroom and the power need; EPR 28 V needs an EPR cable
-- ☐ **[me]** Update the skidl modules, ERC, netlists/BOMs, `calc/parts_shortlist.md` (LCSC stock)
-- ☐ **[me]** Update PLAN §2–§4 once the picks settle
+- ☑ skidl modules updated (2026-09-27): main board 303 parts, ERC 0 errors / 2 benign warnings, 54 footprints resolve; UI board unchanged.
+  PLAN §2–§7 rewritten for the new design
+- ☐ **[you]** Review the netlists / BOMs (`out/`)
+- ☐ **[me]** Refresh `calc/parts_shortlist.md` for the new parts (stock in `calc/stock_check_5.txt`)
 
 ## Datasheets / parts to confirm
 Shortlist with LCSC numbers: [calc/parts_shortlist.md](calc/parts_shortlist.md)

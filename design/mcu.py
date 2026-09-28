@@ -6,7 +6,7 @@ Pin map (alternate functions verified against the KiCad symbol's alternate list)
   PA0  OVP_FLT (COMP1_OUT)          PB0  IL_SNS (ADC1_IN15 / COMP4_INP)   PC0  ENC2_A (TIM1_CH1)
   PA1  VOUT_SNS (ADC1_IN2/COMP1_INP) PB1  OCP_FLT (COMP4_OUT)             PC1  ENC2_B (TIM1_CH2)
   PA2  VTERM_SNS (ADC1_IN3)         PB2  NTC_OUTSW (ADC2_IN12)            PC2  ITH_MON (ADC1_IN8)
-  PA3  VIN_SNS (ADC1_IN4)           PB3  SWO                              PC3  NTC_FET (ADC1_IN9)
+  PA3  VIN_SNS (ADC1_IN4)           PB3  PD_SINK_EN                             PC3  NTC_FET (ADC1_IN9)
   PA4  DAC_V (DAC1_OUT1)            PB4  LCD_BL (TIM16_CH1)               PC4  NTC_IND (ADC2_IN5)
   PA5  DAC_I (DAC1_OUT2)            PB5  OUT_EN                           PC5  NTC_CLAMP (ADC2_IN11)
   PA6  DAC_ICL (DAC2_OUT1)          PB6  CLAMP_DIS                        PC6  ENC1_A (TIM3_CH1)
@@ -33,7 +33,7 @@ PIN_MAP = {
     "PA0": OVP_FLT, "PA1": VOUT_SNS, "PA2": VTERM_SNS, "PA3": VIN_SNS, "PA4": DAC_V, "PA5": DAC_I,
     "PA6": DAC_ICL, "PA7": BUZZER, "PA8": I2C2_SDA, "PA9": I2C2_SCL, "PA10": UI_INT, "PA11": USB_DM,
     "PA12": USB_DP, "PA15": I2C1_SCL,
-    "PB0": IL_SNS, "PB1": OCP_FLT, "PB2": NTC_OUTSW, "PB4": LCD_BL, "PB5": OUT_EN, "PB6": CLAMP_DIS,
+    "PB0": IL_SNS, "PB3": PD_SINK_EN, "PB1": OCP_FLT, "PB2": NTC_OUTSW, "PB4": LCD_BL, "PB5": OUT_EN, "PB6": CLAMP_DIS,
     "PB7": I2C1_SDA, "PB9": PD_IRQ, "PB10": FAN_PWM, "PB11": FAN_TACH, "PB12": BUCK_RUN, "PB13": LCD_SCK,
     "PB14": BUCK_PSKIP, "PB15": LCD_MOSI,
     "PC0": ENC2_A, "PC1": ENC2_B, "PC2": ITH_MON, "PC3": NTC_FET, "PC4": NTC_IND, "PC5": NTC_CLAMP,
@@ -96,7 +96,7 @@ def mcu():
     swd[2] += u["PA13"]
     swd[3, 5, 9] += GND, GND, GND
     swd[4] += u["PA14"]
-    swd[6] += u["PB3"]
+    swd[6] += NC                        # SWO pin reused for PD_SINK_EN
     swd[7, 8] += NC, NC
     swd[10] += nrst
 

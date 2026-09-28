@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "ui_design.py")
-    (date "09/28/2026 03:18 PM")
+    (date "09/27/2026 01:53 AM")
     (tool "SKiDL (2.3.0)")
     (sheet
       (number 1)
@@ -57,7 +57,7 @@
         (field
           (name "SKiDL Tag") "BZ1")
         (field
-          (name "SKiDL Line") "ui_design.py:120"))
+          (name "SKiDL Line") "ui_design.py:119"))
       (libsource
         (lib "Device")
         (part "Buzzer"))
@@ -489,7 +489,7 @@
         (field
           (name "SKiDL Tag") "H1")
         (field
-          (name "SKiDL Line") "ui_design.py:132"))
+          (name "SKiDL Line") "ui_design.py:131"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -513,7 +513,7 @@
         (field
           (name "SKiDL Tag") "H2")
         (field
-          (name "SKiDL Line") "ui_design.py:132"))
+          (name "SKiDL Line") "ui_design.py:131"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -537,7 +537,7 @@
         (field
           (name "SKiDL Tag") "H3")
         (field
-          (name "SKiDL Line") "ui_design.py:132"))
+          (name "SKiDL Line") "ui_design.py:131"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -561,7 +561,7 @@
         (field
           (name "SKiDL Tag") "H4")
         (field
-          (name "SKiDL Line") "ui_design.py:132"))
+          (name "SKiDL Line") "ui_design.py:131"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -585,7 +585,7 @@
         (field
           (name "SKiDL Tag") "J1")
         (field
-          (name "SKiDL Line") "ui_design.py:38"))
+          (name "SKiDL Line") "ui_design.py:37"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_02x13_Odd_Even"))
@@ -609,7 +609,7 @@
         (field
           (name "SKiDL Tag") "J3")
         (field
-          (name "SKiDL Line") "ui_design.py:47"))
+          (name "SKiDL Line") "ui_design.py:46"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x08"))
@@ -633,7 +633,7 @@
         (field
           (name "SKiDL Tag") "J4")
         (field
-          (name "SKiDL Line") "ui_design.py:109"))
+          (name "SKiDL Line") "ui_design.py:108"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x05"))
@@ -657,7 +657,7 @@
         (field
           (name "SKiDL Tag") "J5")
         (field
-          (name "SKiDL Line") "ui_design.py:115"))
+          (name "SKiDL Line") "ui_design.py:114"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x02"))
@@ -1379,7 +1379,7 @@
         (field
           (name "SKiDL Tag") "SW1")
         (field
-          (name "SKiDL Line") "ui_design.py:54"))
+          (name "SKiDL Line") "ui_design.py:53"))
       (libsource
         (lib "Device")
         (part "RotaryEncoder_Switch"))
@@ -1405,7 +1405,7 @@
         (field
           (name "SKiDL Tag") "SW2")
         (field
-          (name "SKiDL Line") "ui_design.py:54"))
+          (name "SKiDL Line") "ui_design.py:53"))
       (libsource
         (lib "Device")
         (part "RotaryEncoder_Switch"))
@@ -1429,7 +1429,7 @@
         (field
           (name "SKiDL Tag") "SW3")
         (field
-          (name "SKiDL Line") "ui_design.py:80"))
+          (name "SKiDL Line") "ui_design.py:79"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1453,7 +1453,7 @@
         (field
           (name "SKiDL Tag") "SW4")
         (field
-          (name "SKiDL Line") "ui_design.py:80"))
+          (name "SKiDL Line") "ui_design.py:79"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1477,7 +1477,7 @@
         (field
           (name "SKiDL Tag") "SW5")
         (field
-          (name "SKiDL Line") "ui_design.py:80"))
+          (name "SKiDL Line") "ui_design.py:79"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1501,7 +1501,7 @@
         (field
           (name "SKiDL Tag") "SW6")
         (field
-          (name "SKiDL Line") "ui_design.py:80"))
+          (name "SKiDL Line") "ui_design.py:79"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1525,7 +1525,7 @@
         (field
           (name "SKiDL Tag") "SW7")
         (field
-          (name "SKiDL Line") "ui_design.py:80"))
+          (name "SKiDL Line") "ui_design.py:79"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1549,7 +1549,7 @@
         (field
           (name "SKiDL Tag") "SW8")
         (field
-          (name "SKiDL Line") "ui_design.py:104"))
+          (name "SKiDL Line") "ui_design.py:103"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1573,7 +1573,7 @@
         (field
           (name "SKiDL Tag") "SW9")
         (field
-          (name "SKiDL Line") "ui_design.py:104"))
+          (name "SKiDL Line") "ui_design.py:103"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1757,7 +1757,7 @@
         (field
           (name "SKiDL Tag") "U1")
         (field
-          (name "SKiDL Line") "ui_design.py:65"))
+          (name "SKiDL Line") "ui_design.py:64"))
       (libsource
         (lib "Interface_Expansion")
         (part "TCA9535PWR"))

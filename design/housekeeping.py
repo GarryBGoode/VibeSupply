@@ -2,11 +2,12 @@
 Housekeeping supplies and fan.
 
 - LOGIC_IN: diode-OR of raw VBUS, raw DC input and the isolated USB 5 V -> the MCU boots from any source,
-  before the PD sink path is enabled (TPS26750 SafeMode).
+  before the PD sink path is enabled (the MCU enables it after the AP33772S reports a contract).
 - +3V3: LMR38010 (4.2-80 V), 400 kHz, 22 uH.
-- +12V_AUX: LM5164 (6-100 V) from VIN_PWR, 300 kHz COT with type-3 ripple injection, 68 uH. EXTVCC, fan,
-  clamp gate driver, +5VA LDO. Enabled above ~8.3 V.
-- +5VA: LP2985-5.0 from +12V_AUX (op-amps, INA240, comparators).
+- +12V_AUX: LM5164 (6-100 V) from VIN_PWR, 300 kHz COT with type-3 ripple injection, 68 uH. LTC7803 EXTVCC
+  (needs >= 7 V: at a 9 V input the rail sags to ~8.5 V, still fine), clamp gate driver, +5VA LDO, fan (DNP).
+  Enabled above ~8.3 V. Below ~9 V input the output stays off (firmware, VIN_SNS).
+- +5VA: LP2985-5.0 from +12V_AUX (op-amps, INA240, comparators, AP33772S V5V backup).
 - +3V3A: ferrite-filtered +3V3 for the MCU VDDA and NTC pull-ups.
 """
 
@@ -99,7 +100,7 @@ def aux_supply():
     testpoint("+12V_AUX")[1] += P12V
 
     # +5VA
-    ldo = Part("Regulator_Linear", "LP2985-5.0")
+    ldo = _fields(Part("Regulator_Linear", "LP2985-5.0"), "C74511")
     ldo["VIN"] += P12V
     ldo["ON/~{OFF}"] += P12V
     ldo["GND"] += GND
@@ -115,8 +116,10 @@ def aux_supply():
 
 @subcircuit
 def fan():
+    """Fallback only: the design is fanless (extrusion as heatsink). Header + driver fitted as DNP."""
     j = Part("Connector_Generic", "Conn_01x04", value="FAN 4-pin",
              footprint="Connector:FanPinHeader_1x04_P2.54mm_Vertical")
+    j.fields["DNP"] = "yes"
     j[1] += GND
     j[2] += P12V
     tach, pwm = Net("FAN_TACH_PIN"), Net("FAN_PWM_PIN")

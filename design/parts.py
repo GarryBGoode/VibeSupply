@@ -106,16 +106,19 @@ def testpoint(name):
     return tp
 
 
-def power_fet(model="ISC030N10NM6"):
-    """100 V power MOSFETs.
-    ISC030N10NM6 / BSC040N10NS5: SuperSO8 5x6 (pads 1-3 S, 4 G, 5-8 + tab D). KiCad symbol BSC040N10NS5 has the same pinout.
-    IPT015N10N5: TOLL (HSOF-8)."""
+def power_fet(model="CSD18531Q5A"):
+    """Power MOSFETs, all SON 5x6 with pins 1-3 S, 4 G, 5-8 + tab D.
+    CSD18531Q5A (60 V logic-level, buck), CSD18540Q5B (60 V, USB sink path; KiCad has no symbol of its own, the
+    CSD18532Q5B one has the same package/pinout), BSC040N10NS5 / ISC030N10NM6 (100 V: DC input, output switch, clamp)."""
+    if model == "CSD18531Q5A":
+        return _fields(Part("Transistor_FET", "CSD18531Q5A", footprint="Package_TO_SOT_SMD:TDSON-8-1"), "C2876524")
+    if model == "CSD18540Q5B":
+        return _fields(Part("Transistor_FET", "CSD18532Q5B", value="CSD18540Q5B",
+                            footprint="Package_TO_SOT_SMD:TDSON-8-1"), "C86513")
     if model in ("ISC030N10NM6", "BSC040N10NS5"):
         p = Part("Transistor_FET", "BSC040N10NS5", value=model,
                  footprint="Package_SON:Infineon_PG-TDSON-8_6.15x5.15mm")
         return _fields(p, {"ISC030N10NM6": "C3278643", "BSC040N10NS5": "C534334"}[model])
-    if model == "IPT015N10N5":
-        return _fields(Part("Transistor_FET", "IPT015N10N5", footprint="Package_TO_SOT_SMD:Infineon_PG-HSOF-8-1"), "C108964")
     raise ValueError(model)
 
 
@@ -139,37 +142,23 @@ def _custom(name, ref_prefix, footprint, pins, lcsc=None, desc=""):
     return make
 
 
-# TI TPS26750 (SLVSH67, Table 4-1), VQFN-32 RSM 4x4 mm, 0.4 mm pitch
-TPS26750 = _custom("TPS26750", "U", "Package_DFN_QFN:VQFN-32-1EP_4x4mm_P0.4mm_EP2.8x2.8mm_ThermalVias", [
-    (1, "LDO_3V3", T.PWROUT), (2, "ADCIN1", T.INPUT), (3, "ADCIN2", T.INPUT), (4, "LDO_1V5", T.PWROUT),
-    (5, "GPIO0", T.BIDIR), (6, "GPIO1", T.BIDIR), (7, "GPIO2", T.BIDIR), (8, "I2Ct_SDA", T.BIDIR),
-    (9, "I2Ct_SCL", T.INPUT), (10, "I2Ct_IRQ", T.OPENCOLL), (11, "GND", T.PWRIN), (12, "GND", T.PWRIN),
-    (13, "GPIO11", T.OUTPUT), (14, "GND", T.PWRIN), (15, "I2Cc_SDA", T.BIDIR), (16, "I2Cc_SCL", T.OUTPUT),
-    (17, "I2Cc_IRQ", T.INPUT), (18, "GPIO3", T.BIDIR), (19, "VSYS", T.PWRIN), (20, "POWER_PATH_EN", T.OUTPUT),
-    (21, "NC", T.NOCONNECT), (22, "GPIO4", T.BIDIR), (23, "GPIO5", T.BIDIR), (24, "CC1", T.BIDIR),
-    (25, "CC2", T.BIDIR), (26, "VBUS", T.PWRIN), (27, "VBUS", T.PWRIN), (28, "PP5V", T.PWRIN),
-    (29, "PP5V", T.PWRIN), (30, "GPIO7", T.BIDIR), (31, "GPIO6", T.BIDIR), (32, "VIN_3V3", T.PWRIN),
-    (33, "EP", T.PWRIN)], lcsc="C42166327", desc="USB PD 3.1 EPR controller")
+# Diodes AP33772S (DS46176 Rev. 10, table 1), W-QFN4040-24 (Type A1): EP 2.7 x 2.7 mm, 0.5 mm pitch
+AP33772S = _custom("AP33772S", "U", "Package_DFN_QFN:QFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias", [
+    (1, "ISENP", T.INPUT), (2, "NC", T.NOCONNECT), (3, "GND", T.PWRIN), (4, "SDA", T.BIDIR),
+    (5, "SCL", T.INPUT), (6, "FLIP", T.OUTPUT), (7, "GPIO", T.BIDIR), (8, "LED", T.OUTPUT),
+    (9, "INT", T.OUTPUT), (10, "NC", T.NOCONNECT), (11, "VSEL", T.PASSIVE), (12, "V18", T.PWROUT),
+    (13, "OTP", T.PASSIVE), (14, "NC", T.NOCONNECT), (15, "IFB", T.PASSIVE), (16, "CC2", T.BIDIR),
+    (17, "CC1", T.BIDIR), (18, "DN", T.BIDIR), (19, "DP", T.BIDIR), (20, "V5V", T.PWROUT),
+    (21, "NC", T.NOCONNECT), (22, "VOUT", T.INPUT), (23, "PWR_EN", T.OUTPUT), (24, "VCC", T.PWRIN),
+    (25, "EP", T.PWRIN)], lcsc="C50341643", desc="USB PD 3.1 EPR (28 V) sink controller, I2C host control")
 
-# TI TPD4S480 (datasheet Table 4-1), WQFN-20 RUK 3x3 mm, 0.4 mm pitch
-TPD4S480 = _custom("TPD4S480", "U", "Package_DFN_QFN:Texas_RUK0020B_WQFN-20-1EP_3x3mm_P0.4mm_EP1.7x1.7mm", [
-    (1, "C_SBU1", T.BIDIR), (2, "C_SBU2", T.BIDIR), (3, "VBIAS", T.PASSIVE), (4, "C_CC1", T.BIDIR),
-    (5, "C_CC2", T.BIDIR), (6, "RPD_G2", T.PASSIVE), (7, "RPD_G1", T.PASSIVE), (8, "GND", T.PWRIN),
-    (9, "FLT", T.OPENCOLL), (10, "VPWR", T.PWRIN), (11, "CC2", T.BIDIR), (12, "CC1", T.BIDIR),
-    (13, "GND", T.PWRIN), (14, "SBU2", T.BIDIR), (15, "SBU1", T.BIDIR), (16, "EPR_EN", T.INPUT),
-    (17, "EPR_BLK_G", T.OUTPUT), (18, "GND", T.PWRIN), (19, "VBUS_LV", T.PWROUT), (20, "VBUS", T.PWRIN),
-    (21, "EP", T.PWRIN)], lcsc="C43131250", desc="48 V EPR port protector")
-
-# ADI LTC7801 FE (TSSOP-24 with exposed pad), pin numbers from the datasheet pin functions (QFN/TSSOP)
-LTC7801 = _custom("LTC7801", "U",
-                  "Package_SO:HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.4x7.8mm_Mask2.4x2.98mm_ThermalVias", [
-    (1, "SENSE-", T.INPUT), (2, "SS", T.PASSIVE), (3, "VFB", T.INPUT), (4, "ITH", T.PASSIVE),
-    (5, "MODE", T.INPUT), (6, "GND", T.PWRIN), (7, "CPUMP_EN", T.INPUT), (8, "PLLIN", T.INPUT),
-    (9, "PGOOD", T.OPENCOLL), (10, "FREQ", T.PASSIVE), (11, "DRVSET", T.INPUT), (12, "DRVUV", T.INPUT),
-    (13, "TG", T.OUTPUT), (14, "SW", T.PASSIVE), (15, "BOOST", T.PASSIVE), (16, "BG", T.OUTPUT),
-    (17, "DRVCC", T.PWROUT), (18, "NDRV", T.PASSIVE), (19, "VIN", T.PWRIN), (20, "EXTVCC", T.PWRIN),
-    (21, "RUN", T.INPUT), (22, "INTVCC", T.PWROUT), (23, "OVLO", T.INPUT), (24, "SENSE+", T.INPUT),
-    (25, "EP", T.PWRIN)], lcsc="C690198", desc="150 V synchronous buck controller")
+# ADI LTC7803 MSE (MSOP-16 with exposed pad), pin numbers from the datasheet pin configuration (MSE package)
+LTC7803 = _custom("LTC7803", "U", "Package_SO:MSOP-16-1EP_3x4.039mm_P0.5mm_EP1.651x2.845mm_ThermalVias", [
+    (1, "TRACK/SS", T.PASSIVE), (2, "SENSE+", T.INPUT), (3, "SENSE-", T.INPUT), (4, "VFB", T.INPUT),
+    (5, "ITH", T.PASSIVE), (6, "RUN", T.INPUT), (7, "FREQ", T.PASSIVE), (8, "PLLIN/SPREAD", T.INPUT),
+    (9, "MODE", T.INPUT), (10, "INTVCC", T.PWROUT), (11, "EXTVCC", T.PWRIN), (12, "VIN", T.PWRIN),
+    (13, "BG", T.OUTPUT), (14, "BOOST", T.PASSIVE), (15, "TG", T.OUTPUT), (16, "SW", T.PASSIVE),
+    (17, "GND", T.PWRIN)], lcsc="C1016554", desc="40 V synchronous buck controller, 100 % duty")
 
 # TI LM74800-Q1 (SNOSD95C Table 6-1), WSON-12 DRR 3x3. Exposed pad = RTN: leave FLOATING (datasheet).
 LM74800 = _custom("LM74800", "U", "Package_SON:WSON-12-1EP_3x3mm_P0.5mm_EP1.5x2.5mm", [
@@ -194,10 +183,10 @@ B0505S = _custom("B0505S-1WR3", "PS", "Connector_PinHeader_2.54mm:PinHeader_1x04
     (1, "GND_IN", T.PWRIN), (2, "VIN", T.PWRIN), (3, "0V_OUT", T.PWROUT), (4, "VOUT", T.PWROUT)],
     lcsc="C7465178", desc="1 W isolated DC-DC 5 V -> 5 V")
 
-# Main inductor: Coilcraft SER2918H-682KL, pads 1/2 electrical, 3 mounting only (project footprint)
+# Main inductor: Coilcraft SER2918H-103KL (same body as the -682), pads 1/2 electrical, 3 mounting only (project footprint)
 def main_inductor():
-    p = Part("Device", "L", value="6.8uH SER2918H-682KL", footprint=f"{PROJ_FP}:L_Coilcraft_SER2918H")
-    return _fields(p, "C3911802", "Isat 45.9 A, DCR 2.86 mOhm. Pad 3 (mounting) must connect to nothing / isolated copper")
+    p = Part("Device", "L", value="10uH SER2918H-103KL", footprint=f"{PROJ_FP}:L_Coilcraft_SER2918H")
+    return _fields(p, "C3911665", "Isat 32.1 A, DCR 2.86 mOhm. Pad 3 (mounting) must connect to nothing / isolated copper")
 
 
 # (re)generate symbols/supply1.kicad_sym from CUSTOM_DEFS so the library always matches the pin tables

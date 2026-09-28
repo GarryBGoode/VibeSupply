@@ -1,0 +1,3612 @@
+{
+ "parts": [
+  {
+   "ref": "C101",
+   "block": "usb_pd_input",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VBUS_RAW",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C102",
+   "block": "usb_pd_input",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "VBUS_RAW",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C103",
+   "block": "usb_pd_input",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VBUS_S",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C104",
+   "block": "usb_pd_input",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "PD_V5V",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C105",
+   "block": "usb_pd_input",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C106",
+   "block": "usb_pd_input",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C107",
+   "block": "usb_pd_input",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "USBIN_MID",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C108",
+   "block": "usb_pd_input",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "~",
+    "2": "USBIN_MID"
+   }
+  },
+  {
+   "ref": "C161",
+   "block": "dc_input",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "DCIN_RAW",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C162",
+   "block": "dc_input",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "DCIN_MID",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C163",
+   "block": "dc_input",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "~",
+    "2": "DCIN_MID"
+   }
+  },
+  {
+   "ref": "C181",
+   "block": "input_sense",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C182",
+   "block": "input_sense",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "VIN_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C201",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "BUCK_VINC",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C202",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "+12V_AUX",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C203",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "BUCK_INTVCC",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C204",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "BUCK_VFB",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C205",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "100p",
+   "nets": {
+    "1": "ITH",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C206",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "BUCK_SS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C207",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "BUCK_BOOST",
+    "2": "SW"
+   }
+  },
+  {
+   "ref": "C208",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C209",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C210",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C211",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C212",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C213",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C214",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C215",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C216",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C217",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C_Polarized",
+   "value": "100u 100V",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C218",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "BUCK_SENSE_P",
+    "2": "BUCK_SENSE_N"
+   }
+  },
+  {
+   "ref": "C219",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VC1",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C220",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VC1",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C221",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VC1",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C222",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VC1",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C223",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C_Polarized",
+   "value": "100u 63V",
+   "nets": {
+    "1": "VC1_DAMP",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C224",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VOUT_INT",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C225",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VOUT_INT",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C226",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VOUT_INT",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C227",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VOUT_INT",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C228",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C_Polarized",
+   "value": "100u 63V",
+   "nets": {
+    "1": "VOUT_INT",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C229",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+5VA",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C230",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "IL_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C231",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "NTC_FET",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C232",
+   "block": "buck",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "NTC_IND",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C301",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "DACV_F",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C302",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "DACI_F",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C303",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "DACICL_F",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C304",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+5VA",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C305",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "+5VA",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C306",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "1.3n",
+   "nets": {
+    "1": "CV_Z",
+    "2": "ITH"
+   }
+  },
+  {
+   "ref": "C307",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "68p",
+   "nets": {
+    "1": "CV_M",
+    "2": "ITH"
+   }
+  },
+  {
+   "ref": "C308",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "27n",
+   "nets": {
+    "1": "CC_Z",
+    "2": "ITH"
+   }
+  },
+  {
+   "ref": "C309",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "1.3n",
+   "nets": {
+    "1": "CC_M",
+    "2": "ITH"
+   }
+  },
+  {
+   "ref": "C310",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "ITH_MON",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C311",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "VOUT_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C312",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "VTERM_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C313",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "HW_OVP_REF",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C314",
+   "block": "control",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+5VA",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C401",
+   "block": "output_stage",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C402",
+   "block": "output_stage",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "CLAMP_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C403",
+   "block": "output_stage",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+5VA",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C404",
+   "block": "output_stage",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "CLAMP_BUS_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C405",
+   "block": "output_stage",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+5VA",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C406",
+   "block": "output_stage",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "+12V_AUX",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C407",
+   "block": "output_stage",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "OUT+",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C408",
+   "block": "output_stage",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "NTC_CLAMP",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C409",
+   "block": "output_stage",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "NTC_OUTSW",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C501",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "2.2u",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C502",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "2.2u",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C503",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C504",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "LOG_BOOT",
+    "2": "LOG_SW"
+   }
+  },
+  {
+   "ref": "C505",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "22u",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C506",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "22u",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C507",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "+3V3A",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C508",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3A",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C541",
+   "block": "aux_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "2.2u",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C542",
+   "block": "aux_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C543",
+   "block": "aux_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "2.2n",
+   "nets": {
+    "1": "AUX_BST",
+    "2": "AUX_SW"
+   }
+  },
+  {
+   "ref": "C544",
+   "block": "aux_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "3.3n",
+   "nets": {
+    "1": "AUX_RA",
+    "2": "+12V_AUX"
+   }
+  },
+  {
+   "ref": "C545",
+   "block": "aux_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "AUX_RA",
+    "2": "AUX_FB"
+   }
+  },
+  {
+   "ref": "C546",
+   "block": "aux_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "10u",
+   "nets": {
+    "1": "+12V_AUX",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C547",
+   "block": "aux_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "10u",
+   "nets": {
+    "1": "+12V_AUX",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C548",
+   "block": "aux_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C549",
+   "block": "aux_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "+12V_AUX",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C550",
+   "block": "aux_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "2.2u",
+   "nets": {
+    "1": "+5VA",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C601",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VBUS_PC",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "C602",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "ISO_VDD1",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "C603",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C604",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "ISO_VDD1",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "C605",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C606",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VBUS_PC",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "C607",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "+5V_ISO",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C701",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C702",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C703",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C704",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C705",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C706",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3A",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C707",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "VREF+",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C708",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "VREF+",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C709",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "NRST",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "D101",
+   "block": "usb_pd_input",
+   "prefix": "D",
+   "part": "D_Zener",
+   "value": "SMBJ30A",
+   "nets": {
+    "1": "VBUS_RAW",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "D102",
+   "block": "usb_pd_input",
+   "prefix": "D",
+   "part": "BAT54W",
+   "value": "BAT54W",
+   "nets": {
+    "1": "+5VA",
+    "3": "PD_V5V"
+   }
+  },
+  {
+   "ref": "D103",
+   "block": "usb_pd_input",
+   "prefix": "D",
+   "part": "LED",
+   "value": "green",
+   "nets": {
+    "1": "GND",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "D161",
+   "block": "dc_input",
+   "prefix": "D",
+   "part": "D_Zener",
+   "value": "SMCJ54A",
+   "nets": {
+    "1": "DCIN_RAW",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "D181",
+   "block": "input_sense",
+   "prefix": "D",
+   "part": "D_Zener",
+   "value": "SMBJ33A",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "D201",
+   "block": "buck",
+   "prefix": "D",
+   "part": "D_Zener",
+   "value": "BZT52C36",
+   "nets": {
+    "1": "BUCK_VINC",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "D202",
+   "block": "buck",
+   "prefix": "D",
+   "part": "D_Schottky",
+   "value": "CMDSH-4E",
+   "nets": {
+    "1": "BUCK_BOOST",
+    "2": "BUCK_INTVCC"
+   }
+  },
+  {
+   "ref": "D301",
+   "block": "control",
+   "prefix": "D",
+   "part": "BAT54W",
+   "value": "BAT54W",
+   "nets": {
+    "1": "ITH",
+    "3": "CV_OUT"
+   }
+  },
+  {
+   "ref": "D302",
+   "block": "control",
+   "prefix": "D",
+   "part": "BAT54W",
+   "value": "BAT54W",
+   "nets": {
+    "1": "ITH",
+    "3": "CC_OUT"
+   }
+  },
+  {
+   "ref": "D303",
+   "block": "control",
+   "prefix": "D",
+   "part": "BAT54S",
+   "value": "BAT54S",
+   "nets": {
+    "1": "GND",
+    "2": "+3V3A",
+    "3": "VTERM_SNS"
+   }
+  },
+  {
+   "ref": "D304",
+   "block": "control",
+   "prefix": "D",
+   "part": "BAT54W",
+   "value": "BAT54W",
+   "nets": {
+    "1": "OVP_FLT",
+    "3": "FAULT"
+   }
+  },
+  {
+   "ref": "D305",
+   "block": "control",
+   "prefix": "D",
+   "part": "BAT54W",
+   "value": "BAT54W",
+   "nets": {
+    "1": "OCP_FLT",
+    "3": "FAULT"
+   }
+  },
+  {
+   "ref": "D306",
+   "block": "control",
+   "prefix": "D",
+   "part": "BAT54W",
+   "value": "BAT54W",
+   "nets": {
+    "1": "HW_OVP",
+    "3": "FAULT"
+   }
+  },
+  {
+   "ref": "D401",
+   "block": "output_stage",
+   "prefix": "D",
+   "part": "BAT54W",
+   "value": "BAT54W",
+   "nets": {
+    "1": "CLAMP_CMP",
+    "3": "CLAMP_IN"
+   }
+  },
+  {
+   "ref": "D402",
+   "block": "output_stage",
+   "prefix": "D",
+   "part": "BAT54W",
+   "value": "BAT54W",
+   "nets": {
+    "1": "CLAMP_BUS_CMP",
+    "3": "CLAMP_IN"
+   }
+  },
+  {
+   "ref": "D403",
+   "block": "output_stage",
+   "prefix": "D",
+   "part": "D_Schottky_Dual_CommonCathode_AKA",
+   "value": "MBRB40100CT",
+   "nets": {
+    "1": "GND",
+    "2": "OUT+",
+    "3": "GND"
+   }
+  },
+  {
+   "ref": "D404",
+   "block": "output_stage",
+   "prefix": "D",
+   "part": "D_Zener",
+   "value": "SMCJ54A",
+   "nets": {
+    "1": "OUT+",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "D501",
+   "block": "logic_supply",
+   "prefix": "D",
+   "part": "D_Schottky",
+   "value": "SS110",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "VBUS_RAW"
+   }
+  },
+  {
+   "ref": "D502",
+   "block": "logic_supply",
+   "prefix": "D",
+   "part": "D_Schottky",
+   "value": "SS110",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "DCIN_RAW"
+   }
+  },
+  {
+   "ref": "D503",
+   "block": "logic_supply",
+   "prefix": "D",
+   "part": "D_Schottky",
+   "value": "SS14",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "+5V_ISO"
+   }
+  },
+  {
+   "ref": "D504",
+   "block": "logic_supply",
+   "prefix": "D",
+   "part": "LED",
+   "value": "green",
+   "nets": {
+    "1": "GND",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "F401",
+   "block": "output_stage",
+   "prefix": "F",
+   "part": "Fuse",
+   "value": "15A 32V MINI",
+   "nets": {
+    "1": "VTERM",
+    "2": "OUT+"
+   }
+  },
+  {
+   "ref": "FB501",
+   "block": "logic_supply",
+   "prefix": "FB",
+   "part": "FerriteBead_Small",
+   "value": "600R@100MHz",
+   "nets": {
+    "1": "+3V3",
+    "2": "+3V3A"
+   }
+  },
+  {
+   "ref": "H401",
+   "block": "output_stage",
+   "prefix": "H",
+   "part": "MountingHole_Pad",
+   "value": "POST+",
+   "nets": {
+    "1": "OUT+"
+   }
+  },
+  {
+   "ref": "H402",
+   "block": "output_stage",
+   "prefix": "H",
+   "part": "MountingHole_Pad",
+   "value": "POST-",
+   "nets": {
+    "1": "GND"
+   }
+  },
+  {
+   "ref": "H901",
+   "block": "top",
+   "prefix": "H",
+   "part": "MountingHole",
+   "value": "M3",
+   "nets": {}
+  },
+  {
+   "ref": "H902",
+   "block": "top",
+   "prefix": "H",
+   "part": "MountingHole",
+   "value": "M3",
+   "nets": {}
+  },
+  {
+   "ref": "H903",
+   "block": "top",
+   "prefix": "H",
+   "part": "MountingHole",
+   "value": "M3",
+   "nets": {}
+  },
+  {
+   "ref": "H904",
+   "block": "top",
+   "prefix": "H",
+   "part": "MountingHole",
+   "value": "M3",
+   "nets": {}
+  },
+  {
+   "ref": "H905",
+   "block": "top",
+   "prefix": "H",
+   "part": "MountingHole_Pad",
+   "value": "GND screw",
+   "nets": {
+    "1": "GND"
+   }
+  },
+  {
+   "ref": "J101",
+   "block": "usb_pd_input",
+   "prefix": "J",
+   "part": "USB_C_Receptacle_USB2.0_16P",
+   "value": "USB_C_Receptacle_USB2.0_16P",
+   "nets": {
+    "A1": "GND",
+    "A4": "VBUS_RAW",
+    "A5": "PD_CC1",
+    "A6": "PD_DP",
+    "A7": "PD_DN",
+    "A8": "NC",
+    "A9": "VBUS_RAW",
+    "A12": "GND",
+    "B1": "GND",
+    "B4": "VBUS_RAW",
+    "B5": "PD_CC2",
+    "B6": "PD_DP",
+    "B7": "PD_DN",
+    "B8": "NC",
+    "B9": "VBUS_RAW",
+    "B12": "GND",
+    "SH": "GND"
+   }
+  },
+  {
+   "ref": "J161",
+   "block": "dc_input",
+   "prefix": "J",
+   "part": "Conn_01x02",
+   "value": "XT60PW-M DC IN",
+   "nets": {
+    "1": "DCIN_RAW",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "J401",
+   "block": "output_stage",
+   "prefix": "J",
+   "part": "Conn_01x02",
+   "value": "XT60PW-F OUT",
+   "nets": {
+    "1": "OUT+",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "J581",
+   "block": "fan",
+   "prefix": "J",
+   "part": "Conn_01x04",
+   "value": "FAN 4-pin",
+   "nets": {
+    "1": "GND",
+    "2": "+12V_AUX",
+    "3": "FAN_TACH_PIN",
+    "4": "FAN_PWM_PIN"
+   }
+  },
+  {
+   "ref": "J601",
+   "block": "usb_isolated",
+   "prefix": "J",
+   "part": "USB_C_Receptacle_USB2.0_16P",
+   "value": "USB_C_Receptacle_USB2.0_16P",
+   "nets": {
+    "A1": "GND_ISO",
+    "A4": "VBUS_PC",
+    "A5": "~",
+    "A6": "ISO_UD+",
+    "A7": "ISO_UD-",
+    "A8": "NC",
+    "A9": "VBUS_PC",
+    "A12": "GND_ISO",
+    "B1": "GND_ISO",
+    "B4": "VBUS_PC",
+    "B5": "~",
+    "B6": "ISO_UD+",
+    "B7": "ISO_UD-",
+    "B8": "NC",
+    "B9": "VBUS_PC",
+    "B12": "GND_ISO",
+    "SH": "GND_ISO"
+   }
+  },
+  {
+   "ref": "J701",
+   "block": "mcu",
+   "prefix": "J",
+   "part": "Conn_02x05_Odd_Even",
+   "value": "SWD",
+   "nets": {
+    "1": "+3V3",
+    "2": "~",
+    "3": "GND",
+    "4": "~",
+    "5": "GND",
+    "6": "NC",
+    "7": "NC",
+    "8": "NC",
+    "9": "GND",
+    "10": "NRST"
+   }
+  },
+  {
+   "ref": "J702",
+   "block": "mcu",
+   "prefix": "J",
+   "part": "Conn_01x04",
+   "value": "UART",
+   "nets": {
+    "1": "+3V3",
+    "2": "UART_TX",
+    "3": "UART_RX",
+    "4": "GND"
+   }
+  },
+  {
+   "ref": "J703",
+   "block": "mcu",
+   "prefix": "J",
+   "part": "Conn_02x13_Odd_Even",
+   "value": "UI ribbon",
+   "nets": {
+    "1": "+3V3",
+    "2": "+3V3",
+    "3": "GND",
+    "4": "LCD_SCK",
+    "5": "GND",
+    "6": "LCD_MOSI",
+    "7": "LCD_CS",
+    "8": "LCD_DC",
+    "9": "LCD_RST",
+    "10": "LCD_BL",
+    "11": "GND",
+    "12": "I2C2_SDA",
+    "13": "I2C2_SCL",
+    "14": "UI_INT",
+    "15": "ENC1_A",
+    "16": "ENC1_B",
+    "17": "ENC1_SW",
+    "18": "GND",
+    "19": "ENC2_A",
+    "20": "ENC2_B",
+    "21": "ENC2_SW",
+    "22": "OE_BTN",
+    "23": "PWR_BTN",
+    "24": "BUZZER",
+    "25": "GND",
+    "26": "GND"
+   }
+  },
+  {
+   "ref": "L201",
+   "block": "buck",
+   "prefix": "L",
+   "part": "L",
+   "value": "10uH SER2918H-103KL",
+   "nets": {
+    "1": "SW",
+    "2": "IL_SENSE+"
+   }
+  },
+  {
+   "ref": "L202",
+   "block": "buck",
+   "prefix": "L",
+   "part": "L",
+   "value": "0.47uH",
+   "nets": {
+    "1": "VC1",
+    "2": "VOUT_INT"
+   }
+  },
+  {
+   "ref": "L501",
+   "block": "logic_supply",
+   "prefix": "L",
+   "part": "L",
+   "value": "22uH",
+   "nets": {
+    "1": "LOG_SW",
+    "2": "+3V3"
+   }
+  },
+  {
+   "ref": "L541",
+   "block": "aux_supply",
+   "prefix": "L",
+   "part": "L",
+   "value": "68uH",
+   "nets": {
+    "1": "AUX_SW",
+    "2": "+12V_AUX"
+   }
+  },
+  {
+   "ref": "PS601",
+   "block": "usb_isolated",
+   "prefix": "PS",
+   "part": "B0505S-1WR3",
+   "value": "B0505S-1WR3",
+   "nets": {
+    "1": "GND_ISO",
+    "2": "VBUS_PC",
+    "3": "GND",
+    "4": "+5V_ISO"
+   }
+  },
+  {
+   "ref": "Q101",
+   "block": "usb_pd_input",
+   "prefix": "Q",
+   "part": "CSD18532Q5B",
+   "value": "CSD18540Q5B",
+   "nets": {
+    "1": "VBUS_S",
+    "2": "VBUS_S",
+    "3": "VBUS_S",
+    "4": "~",
+    "5": "USBIN_MID"
+   }
+  },
+  {
+   "ref": "Q102",
+   "block": "usb_pd_input",
+   "prefix": "Q",
+   "part": "CSD18532Q5B",
+   "value": "CSD18540Q5B",
+   "nets": {
+    "1": "VIN_BUS",
+    "2": "VIN_BUS",
+    "3": "VIN_BUS",
+    "4": "~",
+    "5": "USBIN_MID"
+   }
+  },
+  {
+   "ref": "Q161",
+   "block": "dc_input",
+   "prefix": "Q",
+   "part": "BSC040N10NS5",
+   "value": "ISC030N10NM6",
+   "nets": {
+    "1": "DCIN_RAW",
+    "2": "DCIN_RAW",
+    "3": "DCIN_RAW",
+    "4": "~",
+    "5": "DCIN_MID"
+   }
+  },
+  {
+   "ref": "Q162",
+   "block": "dc_input",
+   "prefix": "Q",
+   "part": "BSC040N10NS5",
+   "value": "ISC030N10NM6",
+   "nets": {
+    "1": "VIN_BUS",
+    "2": "VIN_BUS",
+    "3": "VIN_BUS",
+    "4": "~",
+    "5": "DCIN_MID"
+   }
+  },
+  {
+   "ref": "Q201",
+   "block": "buck",
+   "prefix": "Q",
+   "part": "2N7002",
+   "value": "2N7002",
+   "nets": {
+    "1": "BUCK_PSKIP",
+    "2": "GND",
+    "3": "BUCK_MODE_LO"
+   }
+  },
+  {
+   "ref": "Q202",
+   "block": "buck",
+   "prefix": "Q",
+   "part": "CSD18531Q5A",
+   "value": "CSD18531Q5A",
+   "nets": {
+    "1": "SW",
+    "2": "SW",
+    "3": "SW",
+    "4": "~",
+    "5": "VIN_PWR"
+   }
+  },
+  {
+   "ref": "Q203",
+   "block": "buck",
+   "prefix": "Q",
+   "part": "CSD18531Q5A",
+   "value": "CSD18531Q5A",
+   "nets": {
+    "1": "GND",
+    "2": "GND",
+    "3": "GND",
+    "4": "~",
+    "5": "SW"
+   }
+  },
+  {
+   "ref": "Q301",
+   "block": "control",
+   "prefix": "Q",
+   "part": "BC857",
+   "value": "BC857",
+   "nets": {
+    "1": "DACICL_F",
+    "2": "ITH",
+    "3": "GND"
+   }
+  },
+  {
+   "ref": "Q302",
+   "block": "control",
+   "prefix": "Q",
+   "part": "2N7002",
+   "value": "2N7002",
+   "nets": {
+    "1": "FAULT",
+    "2": "GND",
+    "3": "RUN"
+   }
+  },
+  {
+   "ref": "Q401",
+   "block": "output_stage",
+   "prefix": "Q",
+   "part": "BSC040N10NS5",
+   "value": "BSC040N10NS5",
+   "nets": {
+    "1": "GND",
+    "2": "GND",
+    "3": "GND",
+    "4": "CLAMP_G",
+    "5": "CLAMP_R"
+   }
+  },
+  {
+   "ref": "Q402",
+   "block": "output_stage",
+   "prefix": "Q",
+   "part": "BSC040N10NS5",
+   "value": "BSC040N10NS5",
+   "nets": {
+    "1": "OUTSW_MID",
+    "2": "OUTSW_MID",
+    "3": "OUTSW_MID",
+    "4": "OUTSW_G",
+    "5": "VOUT_SH"
+   }
+  },
+  {
+   "ref": "Q403",
+   "block": "output_stage",
+   "prefix": "Q",
+   "part": "BSC040N10NS5",
+   "value": "BSC040N10NS5",
+   "nets": {
+    "1": "OUTSW_MID",
+    "2": "OUTSW_MID",
+    "3": "OUTSW_MID",
+    "4": "OUTSW_G",
+    "5": "VTERM"
+   }
+  },
+  {
+   "ref": "Q404",
+   "block": "output_stage",
+   "prefix": "Q",
+   "part": "2N7002",
+   "value": "2N7002",
+   "nets": {
+    "1": "OE_G",
+    "2": "GND",
+    "3": "OE_LED_K"
+   }
+  },
+  {
+   "ref": "Q405",
+   "block": "output_stage",
+   "prefix": "Q",
+   "part": "2N7002",
+   "value": "2N7002",
+   "nets": {
+    "1": "FAULT",
+    "2": "GND",
+    "3": "OE_G"
+   }
+  },
+  {
+   "ref": "Q581",
+   "block": "fan",
+   "prefix": "Q",
+   "part": "2N7002",
+   "value": "2N7002",
+   "nets": {
+    "1": "FAN_PWM",
+    "2": "GND",
+    "3": "FAN_PWM_PIN"
+   }
+  },
+  {
+   "ref": "R101",
+   "block": "usb_pd_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "5m",
+   "nets": {
+    "1": "VBUS_RAW",
+    "2": "VBUS_S"
+   }
+  },
+  {
+   "ref": "R102",
+   "block": "usb_pd_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "200",
+   "nets": {
+    "1": "VBUS_S",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R103",
+   "block": "usb_pd_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "5.1k",
+   "nets": {
+    "1": "PD_CC1",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R104",
+   "block": "usb_pd_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "5.1k",
+   "nets": {
+    "1": "PD_CC2",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R105",
+   "block": "usb_pd_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R106",
+   "block": "usb_pd_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "~",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R107",
+   "block": "usb_pd_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "~",
+    "2": "PD_IRQ"
+   }
+  },
+  {
+   "ref": "R108",
+   "block": "usb_pd_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "PD_IRQ",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R109",
+   "block": "usb_pd_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "PD_SINK_EN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R110",
+   "block": "usb_pd_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "243k",
+   "nets": {
+    "1": "~",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R111",
+   "block": "usb_pd_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R161",
+   "block": "dc_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "243k",
+   "nets": {
+    "1": "~",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R162",
+   "block": "dc_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R163",
+   "block": "dc_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "DCIN_MID",
+    "2": "DCIN_EN"
+   }
+  },
+  {
+   "ref": "R164",
+   "block": "dc_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "15k",
+   "nets": {
+    "1": "DCIN_EN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R181",
+   "block": "input_sense",
+   "prefix": "R",
+   "part": "R",
+   "value": "1m",
+   "nets": {
+    "1": "VIN_BUS",
+    "2": "VIN_PWR"
+   }
+  },
+  {
+   "ref": "R182",
+   "block": "input_sense",
+   "prefix": "R",
+   "part": "R",
+   "value": "120k",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "VIN_SNS"
+   }
+  },
+  {
+   "ref": "R183",
+   "block": "input_sense",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "VIN_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R201",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "10",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "BUCK_VINC"
+   }
+  },
+  {
+   "ref": "R202",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "61.9k",
+   "nets": {
+    "1": "BUCK_INTVCC",
+    "2": "BUCK_VFB"
+   }
+  },
+  {
+   "ref": "R203",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "BUCK_VFB",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R204",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "124k",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R205",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "BUCK_INTVCC",
+    "2": "BUCK_MODE"
+   }
+  },
+  {
+   "ref": "R206",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "BUCK_MODE",
+    "2": "BUCK_MODE_LO"
+   }
+  },
+  {
+   "ref": "R207",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "+3V3",
+    "2": "BUCK_PSKIP"
+   }
+  },
+  {
+   "ref": "R208",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "1",
+   "nets": {
+    "1": "BUCK_TG",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R209",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "0",
+   "nets": {
+    "1": "BUCK_BG",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R210",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "2.2",
+   "nets": {
+    "1": "SW",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R211",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "4m",
+   "nets": {
+    "1": "IL_SENSE+",
+    "2": "VC1"
+   }
+  },
+  {
+   "ref": "R212",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "4m",
+   "nets": {
+    "1": "IL_SENSE+",
+    "2": "VC1"
+   }
+  },
+  {
+   "ref": "R213",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "10",
+   "nets": {
+    "1": "IL_SENSE+",
+    "2": "BUCK_SENSE_P"
+   }
+  },
+  {
+   "ref": "R214",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "10",
+   "nets": {
+    "1": "VC1",
+    "2": "BUCK_SENSE_N"
+   }
+  },
+  {
+   "ref": "R215",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "0.1",
+   "nets": {
+    "1": "VC1",
+    "2": "VC1_DAMP"
+   }
+  },
+  {
+   "ref": "R216",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "4.7k",
+   "nets": {
+    "1": "IL_AMP",
+    "2": "IL_SNS"
+   }
+  },
+  {
+   "ref": "R217",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "IL_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R218",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3A",
+    "2": "NTC_FET"
+   }
+  },
+  {
+   "ref": "R219",
+   "block": "buck",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3A",
+    "2": "NTC_IND"
+   }
+  },
+  {
+   "ref": "R301",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "DAC_V",
+    "2": "DACV_F"
+   }
+  },
+  {
+   "ref": "R302",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "DAC_I",
+    "2": "DACI_F"
+   }
+  },
+  {
+   "ref": "R303",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "100",
+   "nets": {
+    "1": "DAC_ICL",
+    "2": "DACICL_F"
+   }
+  },
+  {
+   "ref": "R304",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "91.9k",
+   "nets": {
+    "1": "VOUT_INT",
+    "2": "CV_M"
+   }
+  },
+  {
+   "ref": "R305",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "CV_M",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R306",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "47.5k",
+   "nets": {
+    "1": "CV_M",
+    "2": "CV_Z"
+   }
+  },
+  {
+   "ref": "R307",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "IL_AMP",
+    "2": "CC_M"
+   }
+  },
+  {
+   "ref": "R308",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "2.4k",
+   "nets": {
+    "1": "CC_M",
+    "2": "CC_Z"
+   }
+  },
+  {
+   "ref": "R309",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "ITH",
+    "2": "ITH_MON"
+   }
+  },
+  {
+   "ref": "R310",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "110k",
+   "nets": {
+    "1": "VOUT_INT",
+    "2": "VOUT_SNS"
+   }
+  },
+  {
+   "ref": "R311",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "VOUT_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R312",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "110k",
+   "nets": {
+    "1": "OUT+",
+    "2": "VTERM_SNS"
+   }
+  },
+  {
+   "ref": "R313",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "VTERM_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R314",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+5VA",
+    "2": "HW_OVP_REF"
+   }
+  },
+  {
+   "ref": "R315",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "11.5k",
+   "nets": {
+    "1": "HW_OVP_REF",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R316",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "HW_OVP"
+   }
+  },
+  {
+   "ref": "R317",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "FAULT",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R318",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "BUCK_RUN",
+    "2": "RUN"
+   }
+  },
+  {
+   "ref": "R319",
+   "block": "control",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "RUN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R401",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "1m",
+   "nets": {
+    "1": "VOUT_INT",
+    "2": "VOUT_SH"
+   }
+  },
+  {
+   "ref": "R402",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "91.9k",
+   "nets": {
+    "1": "VOUT_SH",
+    "2": "CLAMP_SNS"
+   }
+  },
+  {
+   "ref": "R403",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "CLAMP_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R404",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "DACV_F",
+    "2": "CLAMP_REF"
+   }
+  },
+  {
+   "ref": "R405",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "470k",
+   "nets": {
+    "1": "+5VA",
+    "2": "CLAMP_REF"
+   }
+  },
+  {
+   "ref": "R406",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "4.7k",
+   "nets": {
+    "1": "+5VA",
+    "2": "CLAMP_CMP"
+   }
+  },
+  {
+   "ref": "R407",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "1M",
+   "nets": {
+    "1": "CLAMP_CMP",
+    "2": "CLAMP_SNS"
+   }
+  },
+  {
+   "ref": "R408",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "120k",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "CLAMP_BUS_SNS"
+   }
+  },
+  {
+   "ref": "R409",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "CLAMP_BUS_SNS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R410",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+5VA",
+    "2": "CLAMP_BUS_REF"
+   }
+  },
+  {
+   "ref": "R411",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "10.2k",
+   "nets": {
+    "1": "CLAMP_BUS_REF",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R412",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "4.7k",
+   "nets": {
+    "1": "+5VA",
+    "2": "CLAMP_BUS_CMP"
+   }
+  },
+  {
+   "ref": "R413",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "1M",
+   "nets": {
+    "1": "CLAMP_BUS_CMP",
+    "2": "CLAMP_BUS_SNS"
+   }
+  },
+  {
+   "ref": "R414",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "CLAMP_IN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R415",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "CLAMP_DIS",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R416",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "4.7",
+   "nets": {
+    "1": "~",
+    "2": "CLAMP_G"
+   }
+  },
+  {
+   "ref": "R417",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "2.2",
+   "nets": {
+    "1": "~",
+    "2": "CLAMP_G"
+   }
+  },
+  {
+   "ref": "R418",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "CLAMP_G",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R419",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "2R 100W LTO100",
+   "nets": {
+    "1": "VOUT_SH",
+    "2": "CLAMP_R"
+   }
+  },
+  {
+   "ref": "R420",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "91",
+   "nets": {
+    "1": "+3V3",
+    "2": "OE_LED_A"
+   }
+  },
+  {
+   "ref": "R421",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "OUT_EN",
+    "2": "OE_G"
+   }
+  },
+  {
+   "ref": "R422",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "OE_G",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R423",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3A",
+    "2": "NTC_CLAMP"
+   }
+  },
+  {
+   "ref": "R424",
+   "block": "output_stage",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3A",
+    "2": "NTC_OUTSW"
+   }
+  },
+  {
+   "ref": "R501",
+   "block": "logic_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "66.5k",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R502",
+   "block": "logic_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "23.2k",
+   "nets": {
+    "1": "+3V3",
+    "2": "LOG_FB"
+   }
+  },
+  {
+   "ref": "R503",
+   "block": "logic_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "LOG_FB",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R504",
+   "block": "logic_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "+3V3",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R541",
+   "block": "aux_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "VIN_PWR",
+    "2": "AUX_EN"
+   }
+  },
+  {
+   "ref": "R542",
+   "block": "aux_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "22k",
+   "nets": {
+    "1": "AUX_EN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R543",
+   "block": "aux_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R544",
+   "block": "aux_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "90.9k",
+   "nets": {
+    "1": "+12V_AUX",
+    "2": "AUX_FB"
+   }
+  },
+  {
+   "ref": "R545",
+   "block": "aux_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "AUX_FB",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R546",
+   "block": "aux_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "470k",
+   "nets": {
+    "1": "AUX_SW",
+    "2": "AUX_RA"
+   }
+  },
+  {
+   "ref": "R581",
+   "block": "fan",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "FAN_TACH_PIN",
+    "2": "FAN_TACH"
+   }
+  },
+  {
+   "ref": "R582",
+   "block": "fan",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "FAN_TACH"
+   }
+  },
+  {
+   "ref": "R583",
+   "block": "fan",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "FAN_PWM",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R601",
+   "block": "usb_isolated",
+   "prefix": "R",
+   "part": "R",
+   "value": "5.1k",
+   "nets": {
+    "1": "~",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "R602",
+   "block": "usb_isolated",
+   "prefix": "R",
+   "part": "R",
+   "value": "5.1k",
+   "nets": {
+    "1": "~",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "R603",
+   "block": "usb_isolated",
+   "prefix": "R",
+   "part": "R",
+   "value": "2.2k",
+   "nets": {
+    "1": "+5V_ISO",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R701",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "BOOT0",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R702",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "4.7k",
+   "nets": {
+    "1": "+3V3",
+    "2": "I2C1_SCL"
+   }
+  },
+  {
+   "ref": "R703",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "4.7k",
+   "nets": {
+    "1": "+3V3",
+    "2": "I2C1_SDA"
+   }
+  },
+  {
+   "ref": "R704",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "2.2k",
+   "nets": {
+    "1": "+3V3",
+    "2": "I2C2_SCL"
+   }
+  },
+  {
+   "ref": "R705",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "2.2k",
+   "nets": {
+    "1": "+3V3",
+    "2": "I2C2_SDA"
+   }
+  },
+  {
+   "ref": "R706",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "UI_INT"
+   }
+  },
+  {
+   "ref": "R707",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "INA_ALERT"
+   }
+  },
+  {
+   "ref": "SW701",
+   "block": "mcu",
+   "prefix": "SW",
+   "part": "SW_Push",
+   "value": "RESET",
+   "nets": {
+    "1": "NRST",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "SW702",
+   "block": "mcu",
+   "prefix": "SW",
+   "part": "SW_Push",
+   "value": "BOOT",
+   "nets": {
+    "1": "BOOT0",
+    "2": "+3V3"
+   }
+  },
+  {
+   "ref": "TH101",
+   "block": "usb_pd_input",
+   "prefix": "TH",
+   "part": "Thermistor_NTC",
+   "value": "10k B3950",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "TH201",
+   "block": "buck",
+   "prefix": "TH",
+   "part": "Thermistor_NTC",
+   "value": "10k B3950",
+   "nets": {
+    "1": "NTC_FET",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "TH202",
+   "block": "buck",
+   "prefix": "TH",
+   "part": "Thermistor_NTC",
+   "value": "10k B3950",
+   "nets": {
+    "1": "NTC_IND",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "TH401",
+   "block": "output_stage",
+   "prefix": "TH",
+   "part": "Thermistor_NTC",
+   "value": "10k B3950",
+   "nets": {
+    "1": "NTC_CLAMP",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "TH402",
+   "block": "output_stage",
+   "prefix": "TH",
+   "part": "Thermistor_NTC",
+   "value": "10k B3950",
+   "nets": {
+    "1": "NTC_OUTSW",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "TP101",
+   "block": "usb_pd_input",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "~"
+   }
+  },
+  {
+   "ref": "TP102",
+   "block": "usb_pd_input",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "~"
+   }
+  },
+  {
+   "ref": "TP103",
+   "block": "usb_pd_input",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "PD_SINK_EN"
+   }
+  },
+  {
+   "ref": "TP201",
+   "block": "buck",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "ITH"
+   }
+  },
+  {
+   "ref": "TP202",
+   "block": "buck",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "SW"
+   }
+  },
+  {
+   "ref": "TP301",
+   "block": "control",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "CV_OUT"
+   }
+  },
+  {
+   "ref": "TP302",
+   "block": "control",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "CC_OUT"
+   }
+  },
+  {
+   "ref": "TP303",
+   "block": "control",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "FAULT"
+   }
+  },
+  {
+   "ref": "TP304",
+   "block": "control",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "RUN"
+   }
+  },
+  {
+   "ref": "TP401",
+   "block": "output_stage",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "CLAMP_G"
+   }
+  },
+  {
+   "ref": "TP402",
+   "block": "output_stage",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "OUTSW_G"
+   }
+  },
+  {
+   "ref": "TP501",
+   "block": "logic_supply",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "+3V3"
+   }
+  },
+  {
+   "ref": "TP541",
+   "block": "aux_supply",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "+12V_AUX"
+   }
+  },
+  {
+   "ref": "TP542",
+   "block": "aux_supply",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "+5VA"
+   }
+  },
+  {
+   "ref": "U101",
+   "block": "usb_pd_input",
+   "prefix": "U",
+   "part": "AP33772S",
+   "value": "AP33772S",
+   "nets": {
+    "1": "VBUS_S",
+    "2": "NC",
+    "3": "GND",
+    "4": "I2C1_SDA",
+    "5": "I2C1_SCL",
+    "6": "~",
+    "7": "NC",
+    "8": "~",
+    "9": "~",
+    "10": "NC",
+    "11": "~",
+    "12": "~",
+    "13": "~",
+    "14": "NC",
+    "15": "~",
+    "16": "PD_CC2",
+    "17": "PD_CC1",
+    "18": "PD_DN",
+    "19": "PD_DP",
+    "20": "PD_V5V",
+    "21": "NC",
+    "22": "~",
+    "23": "~",
+    "24": "VBUS_RAW",
+    "25": "GND"
+   }
+  },
+  {
+   "ref": "U102",
+   "block": "usb_pd_input",
+   "prefix": "U",
+   "part": "LM74800",
+   "value": "LM74800",
+   "nets": {
+    "1": "~",
+    "2": "VBUS_S",
+    "3": "USBIN_MID",
+    "4": "~",
+    "5": "~",
+    "6": "PD_SINK_EN",
+    "7": "GND",
+    "8": "~",
+    "9": "VIN_BUS",
+    "10": "USBIN_MID",
+    "11": "~",
+    "12": "USBIN_MID",
+    "13": "NC"
+   }
+  },
+  {
+   "ref": "U161",
+   "block": "dc_input",
+   "prefix": "U",
+   "part": "LM74800",
+   "value": "LM74800",
+   "nets": {
+    "1": "~",
+    "2": "DCIN_RAW",
+    "3": "DCIN_MID",
+    "4": "~",
+    "5": "~",
+    "6": "DCIN_EN",
+    "7": "GND",
+    "8": "~",
+    "9": "VIN_BUS",
+    "10": "DCIN_MID",
+    "11": "~",
+    "12": "DCIN_MID",
+    "13": "NC"
+   }
+  },
+  {
+   "ref": "U181",
+   "block": "input_sense",
+   "prefix": "U",
+   "part": "INA228",
+   "value": "INA228",
+   "nets": {
+    "1": "GND",
+    "2": "GND",
+    "3": "INA_ALERT",
+    "4": "I2C1_SDA",
+    "5": "I2C1_SCL",
+    "6": "+3V3",
+    "7": "GND",
+    "8": "VIN_PWR",
+    "9": "VIN_PWR",
+    "10": "VIN_BUS"
+   }
+  },
+  {
+   "ref": "U201",
+   "block": "buck",
+   "prefix": "U",
+   "part": "LTC7803",
+   "value": "LTC7803",
+   "nets": {
+    "1": "BUCK_SS",
+    "2": "BUCK_SENSE_P",
+    "3": "BUCK_SENSE_N",
+    "4": "BUCK_VFB",
+    "5": "ITH",
+    "6": "RUN",
+    "7": "~",
+    "8": "GND",
+    "9": "BUCK_MODE",
+    "10": "BUCK_INTVCC",
+    "11": "+12V_AUX",
+    "12": "BUCK_VINC",
+    "13": "BUCK_BG",
+    "14": "BUCK_BOOST",
+    "15": "BUCK_TG",
+    "16": "SW",
+    "17": "GND"
+   }
+  },
+  {
+   "ref": "U202",
+   "block": "buck",
+   "prefix": "U",
+   "part": "INA240A3PW",
+   "value": "INA240A3PW",
+   "nets": {
+    "1": "GND",
+    "2": "IL_SENSE+",
+    "3": "VC1",
+    "4": "GND",
+    "5": "+5VA",
+    "6": "GND",
+    "7": "GND",
+    "8": "IL_AMP"
+   }
+  },
+  {
+   "ref": "U301",
+   "block": "control",
+   "prefix": "U",
+   "part": "ADA4522-2",
+   "value": "ADA4522-2",
+   "nets": {
+    "1": "CV_OUT",
+    "2": "CV_M",
+    "3": "DACV_F",
+    "5": "DACI_F",
+    "6": "CC_M",
+    "7": "CC_OUT",
+    "4": "GND",
+    "8": "+5VA"
+   }
+  },
+  {
+   "ref": "U302",
+   "block": "control",
+   "prefix": "U",
+   "part": "LMV331",
+   "value": "LMV331",
+   "nets": {
+    "1": "VOUT_SNS",
+    "2": "GND",
+    "3": "HW_OVP_REF",
+    "4": "HW_OVP",
+    "5": "+5VA"
+   }
+  },
+  {
+   "ref": "U401",
+   "block": "output_stage",
+   "prefix": "U",
+   "part": "INA228",
+   "value": "INA228",
+   "nets": {
+    "1": "GND",
+    "2": "+3V3",
+    "3": "INA_ALERT",
+    "4": "I2C1_SDA",
+    "5": "I2C1_SCL",
+    "6": "+3V3",
+    "7": "GND",
+    "8": "VOUT_SH",
+    "9": "VOUT_SH",
+    "10": "VOUT_INT"
+   }
+  },
+  {
+   "ref": "U402",
+   "block": "output_stage",
+   "prefix": "U",
+   "part": "LMV331",
+   "value": "LMV331",
+   "nets": {
+    "1": "CLAMP_SNS",
+    "2": "GND",
+    "3": "CLAMP_REF",
+    "4": "CLAMP_CMP",
+    "5": "+5VA"
+   }
+  },
+  {
+   "ref": "U403",
+   "block": "output_stage",
+   "prefix": "U",
+   "part": "LMV331",
+   "value": "LMV331",
+   "nets": {
+    "1": "CLAMP_BUS_SNS",
+    "2": "GND",
+    "3": "CLAMP_BUS_REF",
+    "4": "CLAMP_BUS_CMP",
+    "5": "+5VA"
+   }
+  },
+  {
+   "ref": "U404",
+   "block": "output_stage",
+   "prefix": "U",
+   "part": "UCC27511ADBV",
+   "value": "UCC27511ADBV",
+   "nets": {
+    "1": "+12V_AUX",
+    "2": "~",
+    "3": "~",
+    "4": "GND",
+    "5": "CLAMP_DIS",
+    "6": "CLAMP_IN"
+   }
+  },
+  {
+   "ref": "U405",
+   "block": "output_stage",
+   "prefix": "U",
+   "part": "VOM1271",
+   "value": "VOM1271",
+   "nets": {
+    "1": "OE_LED_A",
+    "2": "OE_LED_K",
+    "3": "OUTSW_MID",
+    "4": "OUTSW_G"
+   }
+  },
+  {
+   "ref": "U501",
+   "block": "logic_supply",
+   "prefix": "U",
+   "part": "LMR38010",
+   "value": "LMR38010",
+   "nets": {
+    "1": "GND",
+    "2": "LOGIC_IN",
+    "3": "LOGIC_IN",
+    "4": "~",
+    "5": "LOG_FB",
+    "6": "NC",
+    "7": "LOG_BOOT",
+    "8": "LOG_SW",
+    "9": "GND"
+   }
+  },
+  {
+   "ref": "U541",
+   "block": "aux_supply",
+   "prefix": "U",
+   "part": "LM5164DDA",
+   "value": "LM5164DDA",
+   "nets": {
+    "1": "GND",
+    "2": "VIN_PWR",
+    "3": "AUX_EN",
+    "4": "~",
+    "5": "AUX_FB",
+    "6": "NC",
+    "7": "AUX_BST",
+    "8": "AUX_SW",
+    "9": "GND"
+   }
+  },
+  {
+   "ref": "U542",
+   "block": "aux_supply",
+   "prefix": "U",
+   "part": "LP2985-5.0",
+   "value": "LP2985-5.0",
+   "nets": {
+    "1": "+12V_AUX",
+    "2": "GND",
+    "3": "+12V_AUX",
+    "4": "~",
+    "5": "+5VA"
+   }
+  },
+  {
+   "ref": "U601",
+   "block": "usb_isolated",
+   "prefix": "U",
+   "part": "USBLC6-2SC6",
+   "value": "USBLC6-2SC6",
+   "nets": {
+    "1": "ISO_UD+",
+    "2": "GND_ISO",
+    "3": "ISO_UD-",
+    "4": "ISO_UD-",
+    "5": "VBUS_PC",
+    "6": "ISO_UD+"
+   }
+  },
+  {
+   "ref": "U602",
+   "block": "usb_isolated",
+   "prefix": "U",
+   "part": "ADUM3160",
+   "value": "ADUM3160",
+   "nets": {
+    "1": "VBUS_PC",
+    "2": "GND_ISO",
+    "3": "ISO_VDD1",
+    "4": "ISO_VDD1",
+    "5": "ISO_VDD1",
+    "6": "ISO_UD-",
+    "7": "ISO_UD+",
+    "8": "GND_ISO",
+    "9": "GND",
+    "10": "USB_DP",
+    "11": "USB_DM",
+    "12": "+3V3",
+    "13": "+3V3",
+    "14": "+3V3",
+    "15": "GND",
+    "16": "+3V3"
+   }
+  },
+  {
+   "ref": "U701",
+   "block": "mcu",
+   "prefix": "U",
+   "part": "STM32G474RETx",
+   "value": "STM32G474RETx",
+   "nets": {
+    "1": "+3V3",
+    "2": "PWR_BTN",
+    "3": "INA_ALERT",
+    "4": "FAULT",
+    "5": "ENC1_SW",
+    "6": "ENC2_SW",
+    "7": "NRST",
+    "8": "ENC2_A",
+    "9": "ENC2_B",
+    "10": "ITH_MON",
+    "11": "NTC_FET",
+    "12": "OVP_FLT",
+    "13": "VOUT_SNS",
+    "14": "VTERM_SNS",
+    "15": "GND",
+    "16": "+3V3",
+    "17": "VIN_SNS",
+    "18": "DAC_V",
+    "19": "DAC_I",
+    "20": "DAC_ICL",
+    "21": "BUZZER",
+    "22": "NTC_IND",
+    "23": "NTC_CLAMP",
+    "24": "IL_SNS",
+    "25": "OCP_FLT",
+    "26": "NTC_OUTSW",
+    "27": "GND",
+    "28": "VREF+",
+    "29": "+3V3A",
+    "30": "FAN_PWM",
+    "31": "GND",
+    "32": "+3V3",
+    "33": "FAN_TACH",
+    "34": "BUCK_RUN",
+    "35": "LCD_SCK",
+    "36": "BUCK_PSKIP",
+    "37": "LCD_MOSI",
+    "38": "ENC1_A",
+    "39": "ENC1_B",
+    "40": "LCD_CS",
+    "41": "LCD_DC",
+    "42": "I2C2_SDA",
+    "43": "I2C2_SCL",
+    "44": "UI_INT",
+    "45": "USB_DM",
+    "46": "USB_DP",
+    "47": "GND",
+    "48": "+3V3",
+    "49": "~",
+    "50": "~",
+    "51": "I2C1_SCL",
+    "52": "UART_TX",
+    "53": "UART_RX",
+    "54": "LCD_RST",
+    "55": "OE_BTN",
+    "56": "PD_SINK_EN",
+    "57": "LCD_BL",
+    "58": "OUT_EN",
+    "59": "CLAMP_DIS",
+    "60": "I2C1_SDA",
+    "61": "BOOT0",
+    "62": "PD_IRQ",
+    "63": "GND",
+    "64": "+3V3"
+   }
+  }
+ ],
+ "retired": []
+}

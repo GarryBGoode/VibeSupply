@@ -17,6 +17,7 @@ from pathlib import Path
 
 from skidl import ERC, KICAD10, Net, Part, generate_netlist
 
+from design import reflock
 from design.mcu import UI_PINOUT
 from design.nets import *
 from design.parts import C, LED, NMOS_small, R, _fields, schottky_1a, testpoint
@@ -146,8 +147,9 @@ def write_bom(path):
 if __name__ == "__main__":
     OUT.mkdir(exist_ok=True)
     build()
-    for p in builtins.default_circuit.parts:
-        p.tag = p.ref
+    # stable refs across edits (design/reflock.py); the first run seeds the lock from skidl's automatic numbering
+    reflock.assign(list(builtins.default_circuit.parts), lambda p: "ui", lambda b: (1, 1000),
+                   Path(__file__).with_name("refs_ui.lock.json"), lambda parts: {id(p): p.ref for p in parts})
     # drop the main-board nets from design/nets.py that have nothing attached on this board
     empty = [n for n in builtins.default_circuit.nets if not n.pins and n is not builtins.NC]
     builtins.default_circuit.rmv_nets(*empty)

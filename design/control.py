@@ -2,8 +2,8 @@
 Analog control: CV and CC error amplifiers (ADA4522-2) diode-OR'd into ITH, the fast ITH current clamp
 (PNP + DAC), setpoint filters, MCU sense dividers, hardware OVP and the fault -> RUN logic.
 
-Loop values: sim/results.md (CV: Rz 35.7k, Cf 1.8n, Cp 100p on the 95.3k/5k divider;
-CC: Rin 10k, Rz 2.37k, Cf 27n, Cp 1.2n on INA240A2 at 0.125 V/A).
+Loop values: sim/results.md (CV: Rz 47.5k, Cf 1.3n, Cp 68p on the 91.9k/10k divider;
+CC: Rin 10k, Rz 2.4k, Cf 27n, Cp 1.3n on INA240A3 at 0.2 V/A). The ITH clamp level must be duty-aware (firmware).
 Anti-windup: both compensation networks return to ITH (the OR node), not to the amp outputs.
 """
 
@@ -38,13 +38,13 @@ def control():
 
     # ---- CV amp (unit A: 3 = +, 2 = -, 1 = out)
     cvm, cvz, cvo = Net("CV_M"), Net("CV_Z"), Net("CV_OUT")
-    r_top = R("95.3k", note="0.1 %, 25 ppm")
-    r_bot = R("5k", note="0.1 %, 25 ppm")
+    r_top = R("91.9k", note="0.1 %, 25 ppm")
+    r_bot = R("10k", note="0.1 %, 25 ppm")
     VOUT_INT & r_top & cvm & r_bot & GND
     op[3] += dacv_f
     op[2] += cvm
     op[1] += cvo
-    rz, cf, cp = R("35.7k"), C("1.8n", note="C0G"), C("100p", note="C0G")
+    rz, cf, cp = R("47.5k"), C("1.3n", note="C0G"), C("68p", note="C0G")
     cvm & rz & cvz & cf & ITH
     cp[1, 2] += cvm, ITH
     d_cv = schottky_small()
@@ -58,7 +58,7 @@ def control():
     op[5] += daci_f
     op[6] += ccm
     op[7] += cco
-    rz2, cf2, cp2 = R("2.37k"), C("27n", note="C0G/X7R"), C("1.2n", note="C0G")
+    rz2, cf2, cp2 = R("2.4k"), C("27n", note="C0G/X7R"), C("1.3n", note="C0G")
     ccm & rz2 & ccz & cf2 & ITH
     cp2[1, 2] += ccm, ITH
     d_cc = schottky_small()
@@ -77,11 +77,12 @@ def control():
     r_im, c_im = R("100k"), C("1n")
     ITH & r_im & ITH_MON
     c_im[1, 2] += ITH_MON, GND
-    r_vt, r_vb, c_vs = R("191k"), R("10k"), C("10n")
+    # 110k/10k (÷12): 34.8 V = 2.9 V (VREFBUF); 40 V still < 3.6 V at the pin
+    r_vt, r_vb, c_vs = R("110k", note="1 %"), R("10k", note="1 %"), C("10n")
     VOUT_INT & r_vt & VOUT_SNS & r_vb & GND
     c_vs[1, 2] += VOUT_SNS, GND
     # terminal voltage (after switch + fuse): may be negative (reversed battery) -> BAT54S clamp
-    r_tt, r_tb, c_ts = R("191k"), R("10k"), C("10n")
+    r_tt, r_tb, c_ts = R("110k", note="1 %"), R("10k", note="1 %"), C("10n")
     OUT_P & r_tt & VTERM_SNS & r_tb & GND
     c_ts[1, 2] += VTERM_SNS, GND
     cl = Part("Diode", "BAT54S", footprint="Package_TO_SOT_SMD:SOT-23")
@@ -89,9 +90,9 @@ def control():
     cl["COM"] += VTERM_SNS
     cl["K"] += P3V3A        # D2: COM -> +3V3A (clamps positive)
 
-    # ---- hardware absolute OVP: VOUT_SNS > 2.80 V (≈ 56 V out) -> HW_OVP high (open drain released)
+    # ---- hardware absolute OVP: VOUT_SNS > 2.67 V (≈ 32 V out, below the LTC7803's 40 V SENSE pins) -> HW_OVP high
     hw_ovp, ref = Net("HW_OVP"), Net("HW_OVP_REF")
-    r_r1, r_r2, c_r = R("10k", note="1 %"), R("12.7k", note="1 %"), C("100n")
+    r_r1, r_r2, c_r = R("10k", note="1 %"), R("11.5k", note="1 %"), C("100n")
     P5VA & r_r1 & ref & r_r2 & GND
     c_r[1, 2] += ref, GND
     cmp = comparator()

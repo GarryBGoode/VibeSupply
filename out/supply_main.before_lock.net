@@ -2,12 +2,12 @@
   (version "D")
   (design
     (source "supply_design.py")
-    (date "09/28/2026 03:14 PM")
+    (date "09/28/2026 12:05 PM")
     (tool "SKiDL (2.3.0)")
     (sheet
       (number 1)
-      (name "/input_sense/")
-      (tstamps "/e7805f46-f1e4-55b6-a1c1-72e407886fc1/")
+      (name "/usb_pd_input/")
+      (tstamps "/9085cd51-4a20-5809-9548-3eae1f4ead83/")
       (title_block
         (title)
         (company)
@@ -43,8 +43,8 @@
           (value ""))))
     (sheet
       (number 2)
-      (name "/buck/")
-      (tstamps "/d2781439-ebbb-5f87-8d4b-e3c05033173e/")
+      (name "/usb_isolated/")
+      (tstamps "/648ac8ef-faff-5213-9633-e6b23acdff2a/")
       (title_block
         (title)
         (company)
@@ -80,8 +80,8 @@
           (value ""))))
     (sheet
       (number 3)
-      (name "/logic_supply/")
-      (tstamps "/8321a7f1-d03c-507e-94d0-3e84424e1a34/")
+      (name "/dc_input/dcin_path/")
+      (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/f8bcfdbb-80d7-5a89-a6e2-acfe09aaf78e/")
       (title_block
         (title)
         (company)
@@ -117,8 +117,8 @@
           (value ""))))
     (sheet
       (number 4)
-      (name "/fan/")
-      (tstamps "/7848a409-0e42-56fc-8aa5-852460a04d95/")
+      (name "/usb_pd_input/usbin_path/")
+      (tstamps "/9085cd51-4a20-5809-9548-3eae1f4ead83/cd874311-25db-5073-bc30-99428b10a96e/")
       (title_block
         (title)
         (company)
@@ -154,8 +154,8 @@
           (value ""))))
     (sheet
       (number 5)
-      (name "/output_stage/")
-      (tstamps "/c8bab5cb-de77-5e50-86ea-b941131b9074/")
+      (name "/aux_supply/")
+      (tstamps "/c3dc944f-589d-5657-9064-b2e515668244/")
       (title_block
         (title)
         (company)
@@ -228,8 +228,8 @@
           (value ""))))
     (sheet
       (number 7)
-      (name "/dc_input/")
-      (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/")
+      (name "/input_sense/")
+      (tstamps "/e7805f46-f1e4-55b6-a1c1-72e407886fc1/")
       (title_block
         (title)
         (company)
@@ -265,6 +265,117 @@
           (value ""))))
     (sheet
       (number 8)
+      (name "/buck/")
+      (tstamps "/d2781439-ebbb-5f87-8d4b-e3c05033173e/")
+      (title_block
+        (title)
+        (company)
+        (rev)
+        (date)
+        (source "supply_design.py")
+        (comment
+          (number "1")
+          (value ""))
+        (comment
+          (number "2")
+          (value ""))
+        (comment
+          (number "3")
+          (value ""))
+        (comment
+          (number "4")
+          (value ""))
+        (comment
+          (number "5")
+          (value ""))
+        (comment
+          (number "6")
+          (value ""))
+        (comment
+          (number "7")
+          (value ""))
+        (comment
+          (number "8")
+          (value ""))
+        (comment
+          (number "9")
+          (value ""))))
+    (sheet
+      (number 9)
+      (name "/logic_supply/")
+      (tstamps "/8321a7f1-d03c-507e-94d0-3e84424e1a34/")
+      (title_block
+        (title)
+        (company)
+        (rev)
+        (date)
+        (source "supply_design.py")
+        (comment
+          (number "1")
+          (value ""))
+        (comment
+          (number "2")
+          (value ""))
+        (comment
+          (number "3")
+          (value ""))
+        (comment
+          (number "4")
+          (value ""))
+        (comment
+          (number "5")
+          (value ""))
+        (comment
+          (number "6")
+          (value ""))
+        (comment
+          (number "7")
+          (value ""))
+        (comment
+          (number "8")
+          (value ""))
+        (comment
+          (number "9")
+          (value ""))))
+    (sheet
+      (number 10)
+      (name "/fan/")
+      (tstamps "/7848a409-0e42-56fc-8aa5-852460a04d95/")
+      (title_block
+        (title)
+        (company)
+        (rev)
+        (date)
+        (source "supply_design.py")
+        (comment
+          (number "1")
+          (value ""))
+        (comment
+          (number "2")
+          (value ""))
+        (comment
+          (number "3")
+          (value ""))
+        (comment
+          (number "4")
+          (value ""))
+        (comment
+          (number "5")
+          (value ""))
+        (comment
+          (number "6")
+          (value ""))
+        (comment
+          (number "7")
+          (value ""))
+        (comment
+          (number "8")
+          (value ""))
+        (comment
+          (number "9")
+          (value ""))))
+    (sheet
+      (number 11)
       (name "/")
       (tstamps "/")
       (title_block
@@ -301,120 +412,9 @@
           (number "9")
           (value ""))))
     (sheet
-      (number 9)
-      (name "/usb_pd_input/")
-      (tstamps "/9085cd51-4a20-5809-9548-3eae1f4ead83/")
-      (title_block
-        (title)
-        (company)
-        (rev)
-        (date)
-        (source "supply_design.py")
-        (comment
-          (number "1")
-          (value ""))
-        (comment
-          (number "2")
-          (value ""))
-        (comment
-          (number "3")
-          (value ""))
-        (comment
-          (number "4")
-          (value ""))
-        (comment
-          (number "5")
-          (value ""))
-        (comment
-          (number "6")
-          (value ""))
-        (comment
-          (number "7")
-          (value ""))
-        (comment
-          (number "8")
-          (value ""))
-        (comment
-          (number "9")
-          (value ""))))
-    (sheet
-      (number 10)
-      (name "/control/")
-      (tstamps "/309e45ce-f992-5e79-806f-234b364e004d/")
-      (title_block
-        (title)
-        (company)
-        (rev)
-        (date)
-        (source "supply_design.py")
-        (comment
-          (number "1")
-          (value ""))
-        (comment
-          (number "2")
-          (value ""))
-        (comment
-          (number "3")
-          (value ""))
-        (comment
-          (number "4")
-          (value ""))
-        (comment
-          (number "5")
-          (value ""))
-        (comment
-          (number "6")
-          (value ""))
-        (comment
-          (number "7")
-          (value ""))
-        (comment
-          (number "8")
-          (value ""))
-        (comment
-          (number "9")
-          (value ""))))
-    (sheet
-      (number 11)
-      (name "/aux_supply/")
-      (tstamps "/c3dc944f-589d-5657-9064-b2e515668244/")
-      (title_block
-        (title)
-        (company)
-        (rev)
-        (date)
-        (source "supply_design.py")
-        (comment
-          (number "1")
-          (value ""))
-        (comment
-          (number "2")
-          (value ""))
-        (comment
-          (number "3")
-          (value ""))
-        (comment
-          (number "4")
-          (value ""))
-        (comment
-          (number "5")
-          (value ""))
-        (comment
-          (number "6")
-          (value ""))
-        (comment
-          (number "7")
-          (value ""))
-        (comment
-          (number "8")
-          (value ""))
-        (comment
-          (number "9")
-          (value ""))))
-    (sheet
       (number 12)
-      (name "/usb_isolated/")
-      (tstamps "/648ac8ef-faff-5213-9633-e6b23acdff2a/")
+      (name "/output_stage/")
+      (tstamps "/c8bab5cb-de77-5e50-86ea-b941131b9074/")
       (title_block
         (title)
         (company)
@@ -450,8 +450,8 @@
           (value ""))))
     (sheet
       (number 13)
-      (name "/dc_input/dcin_path/")
-      (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/f8bcfdbb-80d7-5a89-a6e2-acfe09aaf78e/")
+      (name "/dc_input/")
+      (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/")
       (title_block
         (title)
         (company)
@@ -487,8 +487,8 @@
           (value ""))))
     (sheet
       (number 14)
-      (name "/usb_pd_input/usbin_path/")
-      (tstamps "/9085cd51-4a20-5809-9548-3eae1f4ead83/cd874311-25db-5073-bc30-99428b10a96e/")
+      (name "/control/")
+      (tstamps "/309e45ce-f992-5e79-806f-234b364e004d/")
       (title_block
         (title)
         (company)

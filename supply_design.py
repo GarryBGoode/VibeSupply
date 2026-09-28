@@ -16,7 +16,7 @@ import builtins
 
 from skidl import ERC, KICAD10, Part, generate_netlist
 
-from design import buck, control, housekeeping, mcu, output, power_in, usb_iso
+from design import buck, control, housekeeping, mcu, output, power_in, reflock, usb_iso
 from design.nets import GND
 
 OUT = Path(__file__).with_name("out")
@@ -56,21 +56,34 @@ BLOCK_BASE = {
 BLOCK_ORDER = list(BLOCK_BASE)
 
 
-def assign_refs():
-    counters = defaultdict(int)
-    for i, p in enumerate(builtins.default_circuit.parts):     # clear auto refs first to avoid collisions
-        p.ref = f"TMP{i}"
-    for p in builtins.default_circuit.parts:
-        names = [h.rstrip("0123456789") for h in p.hiertuple]
-        block = next((h for h in names if h in BLOCK_BASE), "top")
-        base = BLOCK_BASE[block]
+def block_of(p):
+    names = [h.rstrip("0123456789") for h in p.hiertuple]
+    return next((h for h in names if h in BLOCK_BASE), "top")
+
+
+def num_range(block):
+    nxt = BLOCK_ORDER.index(block) + 1
+    return BLOCK_BASE[block] + 1, BLOCK_BASE[BLOCK_ORDER[nxt]] if nxt < len(BLOCK_ORDER) else 1000
+
+
+def seed_refs(parts):
+    """The original numbering (code order within each block). Only used when refs.lock.json doesn't exist yet."""
+    counters, refs = defaultdict(int), {}
+    for p in parts:
+        block = block_of(p)
         counters[(block, p.ref_prefix)] += 1
-        num = base + counters[(block, p.ref_prefix)]
-        nxt = BLOCK_ORDER.index(block) + 1
-        limit = BLOCK_BASE[BLOCK_ORDER[nxt]] if nxt < len(BLOCK_ORDER) else 1000
+        first, limit = num_range(block)
+        num = first - 1 + counters[(block, p.ref_prefix)]
         assert num < limit, f"block {block}: too many {p.ref_prefix} parts for its number range"
-        p.ref = f"{p.ref_prefix}{num}"
-        p.tag = p.ref
+        refs[id(p)] = f"{p.ref_prefix}{num}"
+    return refs
+
+
+def assign_refs():
+    """Stable refs from refs_main.lock.json (design/reflock.py): existing parts keep their ref across edits,
+    new parts get the next free number in their block. Tags = refs, so KiCad's netlist update keeps placement."""
+    reflock.assign(list(builtins.default_circuit.parts), block_of, num_range,
+                   Path(__file__).with_name("refs_main.lock.json"), seed_refs)
 
 
 def write_bom(path):

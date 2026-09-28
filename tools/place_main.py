@@ -25,6 +25,7 @@ Floor plan (x right, y down; rear panel = left edge, front panel = right edge):
 
 import math
 import re
+import sys
 from pathlib import Path
 
 import pcbnew
@@ -56,14 +57,10 @@ R = lambda a, b, p="C": [f"{p}{i}" for i in range(a, b + 1)]
 
 CLUSTERS = {
     "usb_pd_input": [
-        ("USB-C PWR in", ["C101", "D101"]),
-        ("TPD4S480 EPR front end", ["U101", "C102", "C103", "R101", "TP101"]),
-        ("TPS26750 PD controller", ["U102", "C104", "C105", "C106", "C107", "C108", "C109", "R102", "R103", "R104",
-                                    "R105", "R106", "R107", *R(111, 117, "R"), "TP102", "TP103", "TP104", "TP105",
-                                    "TP106"]),
-        ("PD config EEPROM", ["U103", "C110", "R108", "R109", "R110"]),
-        ("POWER_PATH_EN buffer", ["Q101", "Q102", "R118", "R119", "R120", "TP107"]),
-        ("USB sink switch LM74800", ["U104", "C111", "C112", "R121", "R122"]),
+        ("USB-C PWR in", ["C101", "C102", "D101"]),
+        ("AP33772S PD sink", ["U101", "C103", "C104", "D102", "C105", "C106", "TH101", "R102", "R103", "R104",
+                              "R105", "R106", "D103", "R107", "R108", "TP101", "TP102"]),
+        ("USB sink switch LM74800", ["U102", "C107", "C108", "R109", "R110", "R111", "TP103"]),
     ],
     "dc_input": [
         ("LM74800 DC", ["U161", "C162", "C163", "R161", "R162", "R163", "R164"]),
@@ -72,21 +69,23 @@ CLUSTERS = {
         ("INA228 VIN", ["U181", "C181", "R182", "R183", "C182"]),
     ],
     "buck": [
-        ("Gate R / boost / snubber", ["R211", "R212", "C208", "R213", "C209", "TP202", "C220", "C221"]),
-        ("LTC7801 controller", ["U201", "C201", "R201", "C202", "C203", "C204", "R202", "R203", "C205", "C206",
-                                "R204", "C207", "R205", "R209", "R210", "R216", "R217", "C224", "TP201"]),
-        ("MODE pulse-skip/FCM", ["Q201", "R206", "R207", "R208"]),
-        ("INA240 IL", ["U202", "C239", "R219", "R220", "C240"]),
-        ("NTC buck FETs", ["TH201", "R221", "C241"]),
-        ("NTC inductor", ["TH202", "R222", "C242"]),
+        ("Gate R / boost / snubber", ["R208", "R209", "R210", "C208", "TP202", "C207", "D202"]),
+        ("LTC7803 controller", ["U201", "C201", "R201", "D201", "C202", "C203", "R202", "R203", "C204", "C205",
+                                "C206", "R204", "R213", "R214", "C218", "TP201"]),
+        ("MODE pulse-skip/FCM", ["Q201", "R205", "R206", "R207"]),
+        ("INA240 IL", ["U202", "C229", "R216", "R217", "C230"]),
+        ("NTC buck FETs", ["TH201", "R218", "C231"]),
+        ("NTC inductor", ["TH202", "R219", "C232"]),
     ],
     "output_stage": [
-        ("Output switch drive VOM1271", ["U404", "R413", "Q404", "Q405", "R414", "R415", "TP402"]),
+        ("Output switch drive VOM1271", ["U405", "R420", "Q404", "Q405", "R421", "R422", "TP402"]),
         ("Output INA228", ["U401", "C401"]),
-        ("Clamp gate driver UCC27511", ["U403", "C404", "R408", "R409", "R410", "R411", "TP401"]),
-        ("Regen clamp comparator", ["U402", "C403", "R402", "R403", "C402", "R404", "R405", "R406", "R407"]),
-        ("NTC clamp resistor", ["TH401", "R416", "C406"]),
-        ("NTC output switch", ["TH402", "R417", "C407"]),
+        ("Clamp gate driver UCC27511", ["U404", "C406", "R414", "R415", "R416", "R417", "R418", "D401", "D402",
+                                        "TP401"]),
+        ("Clamp comparator Vout", ["U402", "C403", "R402", "R403", "C402", "R404", "R405", "R406", "R407"]),
+        ("Clamp comparator bus", ["U403", "C405", "R408", "R409", "C404", "R410", "R411", "R412", "R413"]),
+        ("NTC clamp resistor", ["TH401", "R423", "C408"]),
+        ("NTC output switch", ["TH402", "R424", "C409"]),
     ],
     "usb_isolated": [
         ("USB ESD + CC", ["U601", "R601", "R602", "C601", "C606"]),
@@ -102,7 +101,7 @@ CLUSTERS = {
         ("LM5164 12V aux", ["U541", "C541", "C542", "R541", "R542", "R543", "C543", "L541", "R544", "R545",
                             "R546", "C544", "C545", "C546", "C547", "TP541"]),
         ("LP2985 +5VA", ["U542", "C548", "C549", "C550", "TP542"]),
-        ("Fan", ["J581", "Q581", "R581", "R582", "R583"]),
+        ("Fan (DNP)", ["J581", "Q581", "R581", "R582", "R583"]),
     ],
     "mcu": [
         ("STM32G474 + decoupling", ["U701", "C701", "C702", "C703", "C704", "C705", "C706", "C707", "C708",
@@ -127,33 +126,36 @@ BX = REGIONS["buck"][0]
 OX = REGIONS["output_stage"][0]
 EXPLICIT = [
     # ---- buck hot loop: bulk + MLCC bank | half bridge | main inductor
-    ("C222", BX + 7, 7, 0), ("C223", BX + 7, 19, 0),
-    *[(f"C{210 + i}", BX + 16 + 5 * (i % 2), 3.5 + 3.8 * (i // 2), 0) for i in range(10)],
+    ("C217", BX + 7, 8, 0),
+    *[(f"C{209 + i}", BX + 16 + 5 * (i % 2), 3.5 + 3.8 * (i // 2), 0) for i in range(6)],
+    ("C215", BX + 16, 15.5, 0), ("C216", BX + 21, 15.5, 0),
     ("Q202", BX + 29.5, 7, 0), ("Q203", BX + 29.5, 15.5, 0),
     ("L201", BX + 51.5, 16, 0),
     # ---- sense resistors, C1 bank + damper, post filter, C2 bank + polymer
-    ("R214", BX + 72, 4, 0), ("R215", BX + 72, 8.5, 0),
-    ("C231", BX + 90, 7.5, 0), ("R218", BX + 81, 5, 90),
-    *[(f"C{225 + i}", BX + 70.5 + 5 * (i % 2), 13.5 + 3.8 * (i // 2), 0) for i in range(6)],
-    ("L202", BX + 76, 30, 0),
-    *[(f"C{232 + i}", BX + 69.5 + 5 * (i % 3), 39 + 3.8 * (i // 3), 0) for i in range(6)],
-    ("C238", BX + 89, 42, 0),
-    ("H905", BX + 7, 29, 0),               # GND screw next to the half bridge / heatsink
+    ("R211", BX + 72, 4, 0), ("R212", BX + 72, 8.5, 0),
+    ("C223", BX + 90, 7.5, 0), ("R215", BX + 81, 5, 90),
+    *[(f"C{219 + i}", BX + 70.5 + 5 * (i % 2), 13.5 + 3.8 * (i // 2), 0) for i in range(4)],
+    ("L202", BX + 76, 27, 0),
+    *[(f"C{224 + i}", BX + 70.5 + 5 * (i % 2), 36 + 3.8 * (i // 2), 0) for i in range(4)],
+    ("C228", BX + 89, 38, 0),
+    ("H905", BX + 7, 24, 0),               # GND screw next to the half bridge / extrusion contact
     # ---- input sense shunt between the ORing paths and VIN_PWR
     ("R181", 53.5, 40, 90),
+    ("D181", 53.5, 70, 90),               # bus TVS (SMBJ33A) on VIN_PWR
+    # ---- USB-C: AP33772S sense resistor next to the connector, sink switch FETs
+    ("R101", 17, 4, 0),
+    ("Q101", 43.5, 29, 90), ("Q102", 43.5, 38.5, 90),
     # ---- DC input power path
     ("Q161", 28.5, 52.5, 0), ("Q162", 28.5, 64, 0),
     ("D161", 6, 70, 0), ("C161", 14, 70, 0),
-    # ---- USB sink switch FETs
-    ("Q103", 43.5, 29, 90), ("Q104", 43.5, 38.5, 90),
     # ---- output stage power path
     ("R401", OX + 4, 48, 90),
     ("Q402", OX + 15.5, 41, 0), ("Q403", OX + 15.5, 53, 0),
     ("F401", OX + 29, 47, 90),
-    ("D402", OX + 34, 30, 0), ("C405", OX + 34, 36, 0),
-    ("D401", OX + 30, 69, 0),
+    ("D403", OX + 34, 30, 0), ("C407", OX + 34, 37.5, 0),
+    ("D404", OX + 30, 69, 0),
     ("H401", OX + 48, 28, 0), ("H402", OX + 48, 70, 0),
-    ("R412", OX + 17, 4, 0),               # 2R LTO100 along the top edge -> heatsink / extrusion wall
+    ("R419", OX + 17, 4, 0),               # 2R LTO100 along the top edge -> screwed to the extrusion
     ("Q401", OX + 17, 11, 0),
     # ---- isolated USB: barrier through U602 / PS601
     ("U602", 20, 84, 0), ("PS601", 20, 101, None),
@@ -170,7 +172,7 @@ EDGE = [("J101", "left", 14), ("J161", "left", 55), ("J601", "left", 83), ("J401
 AREAS = {
     "buck": [(BX + 12, 21, 25, 13), (BX, 34, 67, 41), (BX + 82, 50, 14, 25), (BX + 84, 15, 12, 17)],
     "output_stage": [(OX, 16, 27, 22), (OX, 76, 55, 49), (OX + 27, 0, 20, 24), (OX, 54, 12, 20)],
-    "usb_pd_input": [(11, 0, 37, 21), (11, 21, 20, 24), (28, 21, 12, 24), (1.5, 22, 10.5, 23)],
+    "usb_pd_input": [(11, 8, 37, 13), (11, 21, 20, 24), (28, 21, 12, 24), (1.5, 22, 10.5, 23)],
     "dc_input": [(36, 45, 12, 30)],
     "input_sense": [(48, 46, 11, 29), (48, 0, 11, 34)],
     "usb_isolated": [(1.5, 94, 11.5, 31), (27, 76, 9, 49)],
@@ -178,6 +180,7 @@ AREAS = {
 }
 CLUSTER_AREA = {                       # force a cluster into a specific area index of its block
     ("usb_pd_input", "USB-C PWR in"): 3,
+    ("usb_pd_input", "AP33772S PD sink"): 0,
     ("usb_pd_input", "USB sink switch LM74800"): 2,
     ("buck", "Gate R / boost / snubber"): 0,
     ("buck", "NTC inductor"): 2,
@@ -441,7 +444,7 @@ def main():
     # ---- label explicit power-path parts with small notes
     notes = [
         (BX + 37, 1, "SW node"),
-        (BX + 66, 0.2, "2.5 mOhm Kelvin"),
+        (BX + 66, 0.2, "2.0 mOhm Kelvin"),
         (BX + 67, 22.2, "C1 + damper"),
         (BX + 67, 45.5, "C2 -> VOUT_INT"),
         (OX + 8, 59.5, "back-to-back switch"),
@@ -453,8 +456,9 @@ def main():
     left = sorted(set(fps) - done, key=lambda r: (re.sub(r"\d", "", r), int(re.sub(r"\D", "", r))))
     if left:
         print("WARN not placed:", " ".join(left))
-    board.Save(str(PCB))
-    print(f"placed {len(done)} / {len(fps)} footprints, {groups_made} cluster groups -> {PCB.name}")
+    out = Path(sys.argv[1]) if len(sys.argv) > 1 else PCB      # optional: write to another file for review
+    board.Save(str(out))
+    print(f"placed {len(done)} / {len(fps)} footprints, {groups_made} cluster groups -> {out.name}")
 
 
 if __name__ == "__main__":

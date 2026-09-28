@@ -3,10 +3,9 @@
 Hobby bench supply, loosely inspired by the DP100, powered from a USB PD 3.1 EPR charger (up to 28 V / 5 A = 140 W).
 Schematic is written in skidl (`supply_design.py` + per-block modules), layout in KiCad.
 
-Status: **pivot in progress (2026-09-26): 240 W / 20 A → 140 W / 10 A, fanless if possible.**
-The schematic, `calc/` and `sim/` still describe the old 240 W / 20 A design (git `d8d0a65`); §1 and §1a are updated,
-§2–§4 are still the old design. Decided: DC input ≤ 30 V, fanless (extrusion as heatsink), re-shop the PD chip and the buck controller.
-ICs chosen: AP33772S + LTC7803 (`calc/ic_reshop.md`). Power stage recalculated (`calc/results.md`) and re-simulated with the LTC7803 model (`sim/results.md`). Next: update the skidl schematic.
+Status: **pivot to 140 W / 10 A done (2026-09-27): requirements, IC re-shop, calculations, LTspice and the skidl schematic are updated.**
+Next: netlist/BOM review, remaining LCSC picks, then KiCad layout. The pre-pivot 240 W / 20 A design is in git (`d8d0a65`).
+Numbers in `calc/results.md`, `sim/results.md`; work items in `TODO.md`.
 
 ---
 
@@ -30,9 +29,9 @@ ICs chosen: AP33772S + LTC7803 (`calc/ic_reshop.md`). Power stage recalculated (
 | Remote sense | No |
 | Assembly | Fab + assembly house (JLCPCB/PCBWay). 0402 / QFN where it matters (analog, power ICs); 0805/0603 + SOIC/TSSOP where tinkering is likely (LEDs, MCU periphery, UI board) |
 
-### Reality checks (140 W / 10 A, first-pass numbers with the existing 100 V parts)
+### Reality checks (140 W / 10 A)
 - 140 W in → **≈ 130 W out** after ~7–9 W of losses + housekeeping. Full 10 A from USB-C only up to **≈ 13 V**; ≈ 5.4 A at 24 V.
-- Max output from the 28 V PDO ≈ 26–27 V (LTC7801 can run 100 % duty; the rest is path drops, ≈ 0.1 V/A).
+- Max output from the 28 V PDO ≈ 26.5 V at ≈ 4.3 A (LTspice: the LTC7803's slope compensation limits the current near dropout).
 - 28 V is an EPR voltage: it needs an **EPR (50 V / 5 A, "240 W") e-marked cable**. With a plain 100 W 5 A cable the charger stays at 20 V / 5 A = 100 W.
 - Don't rely on AVS: many 140 W chargers only offer the fixed 28 V EPR PDO. SPR fixed PDOs (and PPS, if the PD chip handles it) cover part load.
 - Losses at 10 A: **≈ 7–8 W** including 2 W housekeeping (CSD18531Q5A ×2, 300 kHz; calc §2), top FET ≤ 3 W (vs 17–20 W at 20 A).
@@ -64,144 +63,132 @@ Why: 48 V / 5 A EPR chargers are rare and expensive; dozens of single-port 140 W
 ## 2. Architecture
 
 ```
- USB-C PWR ──TPD4S480──TPS26750 (PD policy, EPR/AVS)            USB-C DATA (to PC)
-     │   (CC/VBUS protect,     │ I2C (host)                          │
-     │    VBUS divider)        │                                  ADuM3160 + isolated 5V DC/DC
-     ▼                         ▼                                      │ USB FS
- LM74800 ideal-diode + sink switch ─┐                                 ▼
-                                    ├─► VIN_BUS (≤ 55 V*) ─► STM32G474 (supervisor, DACs, COMPs, UI, USB)
- XT60 DC IN ── LM74800 (10 A) ───────┘        │                   │ DAC: Vset, Iset   ▲ ADC/INA228
-                                             ▼                   ▼                   │
-                                   LTC7801 sync buck  ◄── external CV / CC error amps (op-amps)
-                                   100 V FETs, L, shunt              ▲           ▲
-                                             │                       │           │
-                                   LC post-filter ──► output shunt (INA240 for loop, INA228 for metering)
-                                             │
-                                   regen clamp / down-programmer (FET + power resistor)
-                                             │
-                                   back-to-back N-FET switch (isolated FET driver) ──► fuse ──► 4 mm posts + XT60
-                                                                                          └─ reverse-polarity diode
+ USB-C PWR ── 5 mΩ ── AP33772S (PD sink: EPR 28 V / AVS / PPS)          USB-C DATA (to PC)
+     │   (VCC, ISENP)      │ I2C (host), INT                                  │
+     ▼                     ▼                                             ADuM3160 + isolated 5 V DC/DC
+ LM74800 ideal diode + sink switch (OV lockout ~31 V, EN from MCU) ─┐         │ USB FS
+                                                                    ├─► VIN_BUS (≤ ~31 V) ─► STM32G474
+ XT60 DC IN (9–30 V, 10 A) ── LM74800 (OV lockout ~31 V, 100 V FETs)┘      │         (supervisor, 3 DACs, COMPs, UI, USB)
+                                                                           ▼                   │ DAC: Vset, Iset, ITH clamp
+                                                   LTC7803 sync buck, 300 kHz ◄── external CV / CC error amps (ADA4522)
+                                                   2× CSD18531Q5A, 10 µH, 2 mΩ               ▲            ▲
+                                                             │                               │            │
+                                                   LC post-filter ──► output shunt (INA240A3 on the inductor shunt for
+                                                             │         the loop, INA228 for metering)
+                                                   regen clamp (2 Ω; Vout > Vset + margin, or bus > ~33 V)
+                                                             │
+                                                   back-to-back 100 V N-FET switch (VOM1271) ──► 15 A fuse ──► 4 mm posts + XT60
+                                                                                                  └─ reverse-polarity diode
 ```
-\* Now ≤ ~32 V (28 V USB-C, ≤ 30 V DC with OV lockout).
 
 ### Control concept
 - **Buck controller runs current-mode; the regulation loops are external precision op-amps**, set by the STM32's 12-bit DACs:
-  - CV amp: compares divided Vout to `DAC_V` (0 V capable).
-  - CC amp: compares the **inductor current** (INA240A2 across the controller's 2.5 mΩ sense shunt) to `DAC_I`.
-    Sensing after the post filter was unstable near a short (calc §9); the 1 mΩ output shunt is used for metering and a slow firmware trim.
-  - Both steer the controller's ITH node through a diode-OR (lowest demand wins) — the classic lab-supply structure.
-    **Anti-windup:** each amp's compensation network returns to ITH, not to its own output (LTspice-verified, sim/results.md).
+  - CV amp: compares divided Vout (÷10.19) to `DAC_V` (0 V capable).
+  - CC amp: compares the **inductor current** (INA240A3 across the 2.0 mΩ sense shunt, 0.2 V/A) to `DAC_I`.
+    Sensing after the post filter was unstable near a short (calc §9); the 1 mΩ output shunt is for metering and a slow firmware trim.
+  - Both steer the LTC7803's ITH node through a diode-OR (lowest demand wins). The LTC7803's own error amp is parked by holding
+    VFB at ~0.7 V (above the 0.56 V foldback threshold, below the 0.88 V FB-OVP).
+    **Anti-windup:** each amp's compensation network returns to ITH, not to its own output (LTspice-verified).
   - **Fast current clamp:** PNP from ITH to GND, base from a 3rd DAC channel → caps the cycle-by-cycle peak current at Iset + ~3 A.
-    It acts instantly on shorts and load steps; the CC amp then settles the average. Firmware calibrates the ITH↔current mapping at run time.
-    Verified in LTspice: the LTC7801's ITH pull-up is only ~100 µA, so the op-amps override it easily. REGSD is defeated with 330 k from INTVCC to SS.
-- **Power limit** in firmware (≥1 kHz): `I_lim = min(I_set, P_max / V_out, source-contract limit)`.
-- **Input current limit**: input shunt → INA228 + fast comparator; firmware lowers `DAC_I` if input current approaches the PD contract.
+    **The ITH ↔ current map depends on duty** (≈ 25 A/V + 0.45 V up to D 0.75, ≈ 15 A/V + 0.8 V near D 0.9): firmware computes the
+    clamp from Vset/Vin and calibrates it at run time (ITH_MON + IL_SNS).
+- **Output envelope:** 10 A up to ≈ Vin − 3.5 V; near dropout the LTC7803's slope compensation limits the current
+  (28 V USB-C → ≈ 26.5 V at ≈ 4.3 A). Firmware limits Iset accordingly and keeps the output off below ~8–9 V input.
+- **Power limit** in firmware (≥ 1 kHz): `I_lim = min(I_set, P_max / V_out, source-contract limit, duty limit)`.
+- **Input current limit**: input shunt → INA228; firmware lowers `DAC_I` if input current approaches the PD contract.
 - **Regen / backfeed**: buck runs in pulse-skip (no reverse inductor current) whenever there's a risk of backfeed.
   Firmware may switch to forced-continuous for low noise at light load when the output isn't being pushed.
-- **Input voltage selection**: firmware requests the lowest PD voltage (fixed PDO or EPR AVS 15–48 V) that gives enough headroom above Vout for the requested power. This improves efficiency, ripple and minimum-on-time margin at low outputs.
-- **Hardware trips independent of firmware**: STM32 COMP+DAC on Vout (OVP) and Iout (OCP) → latch that disables the buck and opens the output switch.
+- **Input voltage selection**: firmware reads the source PDOs from the AP33772S and requests the lowest voltage (fixed, PPS or
+  EPR AVS) that gives enough headroom above Vout for the requested power.
+- **Hardware trips independent of firmware**: STM32 COMP+DAC on Vout (OVP) and inductor current (OCP), plus an LMV331 absolute
+  OVP at ~32 V → latch that stops the buck (RUN) and opens the output switch.
+- **Thermal**: fanless; FETs and the clamp resistor are tied to the aluminium extrusion. Firmware throttles on the NTCs
+  (full power is occasional use) and derates the clamp's average from the enclosure temperature.
 
 ---
 
 ## 3. Part selection
 
-> **Pre-pivot (240 W / 20 A).** The tables below are the old design, kept for reference until the re-pick. See §1a for what changes.
+Numbers: `calc/results.md`, `sim/results.md`; IC comparison: `calc/ic_reshop.md`; stock: `calc/stock_check_5.txt`.
 
-Verification column: **DS** = checked against datasheet in this session, **known** = standard part, not yet re-checked, **TODO** = must read datasheet before schematic.
-
-### 3.1 USB PD input
-| Function | Part | Why | Ver. |
-|---|---|---|---|
-| PD controller | **TI TPS26750** (VQFN-32 4×4) | USB-IF certified PD3.1, EPR 28/36/48 V **and AVS** sink. Public host interface (TRM SLVUCR7): host can write sink caps (0x33), enable EPR AVS and set voltage/current (Autonegotiate Sink 0x37), read source caps (0x30), active contract (0x34/0x35), load the config bundle over I2C (PBMs/PBMc/PBMe) or program its EEPROM (FLwd) | DS |
-| EPR front end | **TI TPD4S480** (WQFN-20 3×3) | TPS26750 pins are only 28 V rated; TPD4S480 gives 63 V short-to-VBUS protection for CC1/CC2 and the divided `VBUS_LV` sense — TI's reference EPR pairing | DS (product page) |
-| Config EEPROM | AT24C512C (64 KB, addr 0x50, SOIC-8) on TPS26750 I2Cc | TPS26750 requires ≥36 KB; lets the PD side boot and negotiate even with blank/broken STM32 firmware. ADCIN strap = **SafeMode** (sink path stays off until the EEPROM config is loaded; TI's recommendation with EEPROM) | DS |
-| Sink switch + anti-backfeed | **TI LM74800-Q1** (WSON-12 3×3; 3–65 V, 70 V abs max, −65 V reverse) ideal-diode (DGATE) + load-switch/OV cut-off (HGATE), back-to-back N-FETs | Blocks any reverse current into the charger; enabled from TPS26750 `POWER_PATH_EN` (via buffer per DS fig. 8-5) AND MCU. USB path sized for 5 A | TODO |
-| DC-input path | Second LM74800-Q1 + 2× IPT015N10N5 (TOLL, 1.5 mΩ), copper/shunt sized for **20 A continuous**, reverse-polarity protected | Full-power operation from a 48 V brick or battery | LCSC data |
-| Input caps | 10× 4.7 µF 100 V X7S/X7R 1210 at the half-bridge + ≥100 µF 100 V electrolytic (ESR 0.1–0.3 Ω, damping); ≤10 µF on raw VBUS before the sink switch | ~10 A RMS worst case, ≈0.8 V pp ripple (calc §5) | calc |
-| Input TVS | SMBJ/SMCJ ~54 V standoff | Surge only; cannot clamp below the 65 V of the ideal-diode controller at high current, so also rely on the controlled PD slew | TODO |
-| **Rejected** | HUSB238A | VBUS/GATE abs-max 33 V; 48 V needs an external pre-regulator; I2C register map not public | DS |
-| **Rejected** | AP33772S, CH224A/Q, AP43771H | EPR limited to 28 V (140 W) | DS / web |
-| **Rejected** | STM32 UCPD | No 48 V front end / mature EPR stack | web |
-
-The TPS26750 is a TI part but needs **no TI MCU and no TI firmware development**: it's configured once with TI's web GUI, then controlled from the STM32 over I2C with documented 4-character commands.
+### 3.1 Input
+| Function | Part | Why |
+|---|---|---|
+| PD sink | **Diodes AP33772S** (W-QFN4040-24, FA02 firmware, LCSC C50341643) | USB-IF certified PD3.1; EPR 28 V + AVS, PPS ≤ 21 V; full I2C host control (SRCPDO read, PD_REQMSG); CC short protection to 34 V; no EEPROM/GUI config. 5 mΩ VBUS sense for its OCP/current readback. V5V backed from +5VA via a diode so it can't clamp I2C1 when no USB-C is plugged in. Low LCSC stock: buy early |
+| USB sink path | **LM74800** + 2× **CSD18540Q5B** (60 V, 2.2 mΩ) | Ideal diode (no backfeed into the charger) + switch; OV lockout ~31 V (243 k / 10 k); EN = MCU `PD_SINK_EN` after the AP33772S reports a contract. The AP33772S's own NMOS driver is unused |
+| DC input path | **LM74800** + 2× **ISC030N10NM6** (100 V) | 9–30 V, 10 A; OV lockout ~31 V; must survive a 48 V battery (SMCJ54A TVS, 100 V FETs); UVLO ~9 V |
+| Input TVS | SMBJ30A on VBUS, SMCJ54A on the XT60, SMBJ33A on the bus | VBUS: above 28 V + 5 %, below the AP33772S's 34 V; bus: soft protection for the LTC7803 |
+| Input shunt + meter | 1 mΩ 2512 + **INA228** (0x40) | Input power limit per source |
 
 ### 3.2 Power stage
-| Function | Part | Why | Ver. |
-|---|---|---|---|
-| Buck controller | **ADI LTC7801** (TSSOP-24 w/ pad, or QFN-24) | 4–140 V (150 V abs max) — big margin for regen/transients; **gate drive programmable 5–10 V** so standard 100 V FETs work; current mode; 0.8–60 V out; 100 % duty; burst/pulse-skip/forced-CCM; EXTVCC input; **LTspice model** for loop verification | DS (see notes below) |
-| Alternative | TI LM5148 | 80 V, current mode, PFM/FPWM, hiccup OCP, 50 ns min on-time — but **5 V gate drive only** (needs logic-level 80–100 V FETs) | DS |
-| Power FETs | **Infineon ISC030N10NM6** ×2 (top + bottom; OptiMOS 6, 100 V, 3.0 mΩ max, Qg 55 nC, Qrr 266 nC @1000 A/µs, SuperSO8 5×6) at **300 kHz** | Lowest loss among the fully-specified candidates (calc §1): top FET ~7.5 W worst case vs ~11 W for TI CSD19532Q5B. Needs via array + bottom heatsink + fan. Alternative: ISC040N10NM7 (Qrr only given at 100 A/µs) | DS |
-| Inductor | **Coilcraft SER2918H-682KL** (6.8 µH ±10 %, Isat 45.9 A, DCR ≤ 2.86 mΩ, Irms 25 A, LCSC C3911802) | ΔI ≤ 5.9 A pp, peak 22.9 A at 20 A; ~1 W more copper loss than the Würth 7443640680B, which LCSC doesn't stock | DS (distributor data) |
-| Current sense (controller) | **2.5 mΩ** (2× 5 mΩ 2512 3 W), Kelvin | Peak limit 26.4 / 30 / 33.6 A (min/typ/max), well below the inductor Isat. 1 W at 20 A | calc + sim |
-| Output filter | C1: 6× 4.7 µF 100 V X7S 1210 + damper (100 µF 63 V polymer + 0.1 Ω) → **0.47 µH** FXL1040-R47 (1.7 mΩ, 30 A) → C2: 6× 4.7 µF 100 V 1210 + 100 µF 63 V polymer (24 mΩ) | ≈6 mV pp ripple (calc); CV loop fc ≈ 8–10 kHz, PM ≥ 74°, GM ≥ 9 dB; 9 A step → 0.63 V dip in LTspice | calc + sim |
-| Current amp (CC loop) | **TI INA240A2** (gain 50, −4…80 V CM, PWM rejection) across the 2.8 mΩ inductor shunt → 0.14 V/A, 20 A = 2.8 V (DAC on VREFBUF 2.9 V) | CC loop fc ≈ 10 kHz, load-independent (calc §9, sim t3) | known |
-| Metering | **TI INA228** ×2 (85 V, 20-bit, I2C) — output shunt + input shunt (common VIN_BUS shunt, range 0–20 A) | Accurate V/I/P/energy for display & logging; input power limit per source | known |
-| CV/CC error amps | **ADI ADA4522-2** (zero-drift, 55 V, RRO, SOIC-8) on a 5 V rail | The part used in the LTspice runs; input CM to V+ − 1.5 V covers the 2.9 V DAC range | sim |
-
-**LTC7801 datasheet notes (datasheets/ltc7801.pdf, Rev. B)**
-- **Current foldback**: when VFB < 70 % of nominal (≈ 0.56 V) the peak limit is lowered progressively to 40 %. This would break "CC into a short".
-  → **Chosen control scheme: hold VFB at a fixed ~0.70 V** (divider from a reference; above the foldback threshold, below the 0.88 V FB-OVP threshold).
-  The internal error amp then saturates high, and the **external CV and CC amps pull ITH down through a diode-OR**. So foldback and FB-OVP never trigger, and all regulation is done by the external loops.
-  Output OVP is provided by the STM32 comparators and the clamp instead.
-- MODE: pulse-skip (1.4 V … INTVCC−1.3 V) and Burst **block reverse inductor current**; forced-continuous (MODE = INTVCC) allows it. MODE is switched by the MCU through a small transistor/divider; the default (MCU in reset) is pulse-skip.
-- SENSE± common mode 0–65 V abs max → the internal output node must stay below ~60 V, including during clamp events. Max Vout setpoint 50 V.
-- VSENSE(MAX) 66/75/84 mV (min/typ/max); tON(min) 80 ns; fsw 50–900 kHz; DRVSET = INTVCC → 10 V gate drive; EXTVCC switchover 4.7 V (DRVUV low) / 7.7 V; EXTVCC abs max 14 V → feed from the 12 V aux rail.
-- Hiccup/REGSD only relates to EXTVCC / SS behaviour; no FB-based hiccup found.
+| Function | Part | Why |
+|---|---|---|
+| Buck controller | **ADI LTC7803** (MSOP-16-EP, LCSC C1016554) | Same ITH / FB-parked scheme as the LTC7801; SENSE works down to 0 V; 100 % duty; 40 ns min on; pulse-skip; LTspice model. 40 V abs max → bus hard-limited to ~31 V, VIN pin 10 Ω + 1 µF + 36 V zener. **EXTVCC from the 12 V aux** (5 V stalls it). **External boost diode** CMDSH-4E. 300 kHz (RFREQ 124 k). Low LCSC stock: buy early |
+| FETs | 2× **TI CSD18531Q5A** (60 V logic-level, 5.8 mΩ @4.5 V) | Lowest loss: the bottom FET's low Qoss/Qrr is paid in the top FET (calc §1) |
+| Inductor | **Coilcraft SER2918H-103KL** (10 µH, 2.86 mΩ, Isat 32 A, LCSC C3911665) | Same footprint as before; 0.4 W copper at 10 A |
+| Sense | 2× 4 mΩ 2512 (**2.0 mΩ**) | Low-duty limit 22.5–27.5 A (< Isat); enough current at high duty (LTspice t5) |
+| Input caps | 6× 4.7 µF 100 V X7S 1210 + 100 µF 100 V electrolytic | ~5 A RMS worst case |
+| Output filter | C1: 4× 4.7 µF + damper (100 µF polymer + 0.1 Ω) → 0.47 µH FXL1040 → C2: 4× 4.7 µF + 100 µF 24 mΩ polymer | ≈ 3–6 mV pp ripple |
+| CC-loop amp | **INA240A3** (gain 100) → 0.2 V/A, 14.5 A = 2.9 V | |
+| CV/CC error amps | **ADA4522-2** on +5VA | CV: Rz 47.5 k / Cf 1.3 nF / Cp 68 pF; CC: Rz 2.4 k / Cf 27 nF / Cp 1.3 nF |
 
 ### 3.3 Output stage
-| Function | Part | Why | Ver. |
-|---|---|---|---|
-| Output switch | 2× **Infineon IPT015N10N5** (TOLL, 100 V, 1.5 mΩ) back-to-back | Blocks both directions when off; ~1.4 W at 20 A | LCSC data |
-| Switch driver | **Vishay VOM1271** photovoltaic MOSFET driver with built-in fast turn-off (8.4 V Voc, 15 µA) | Isolated, so it works at any output voltage down to 0 V. ~30 ms turn-on → firmware closes the switch with the buck at 0 V and ramps afterwards. (Si8751 isn't stocked at LCSC) | web DS summary |
-| Regen clamp / down-programmer | Comparator (Vout > Vset + margin) → IPT015N10N5 + **2 Ω** Vishay LTO100 (TO-247, 100 W) bolted to the main heatsink, NTC + firmware energy budget | **Burst-only rating (agreed):** 50 W for ~10 s (≈500 J), ~10 W average, output off + warning beyond that. Absorbs 50 W down to ~10 V out. Verified in LTspice (t4) | calc + sim |
-| Fuse | **Littelfuse 0997030.WXN** (30 A blade, 58 V DC, 1.85 mΩ) + PCB holder | Reverse-battery and last-resort protection | LCSC data |
-| Reverse-polarity diode | Heavy Schottky / TVS across terminals, behind the fuse | Reversed battery → diode conducts → fuse opens | TODO |
-| Terminals | 4 mm binding posts (panel, wired) + PCB XT60 | Agreed | — |
+| Function | Part | Why |
+|---|---|---|
+| Output switch | 2× **BSC040N10NS5** (100 V) back-to-back + **VOM1271** | The terminals face the outside world (external batteries, the 54 V TVS) |
+| Regen clamp | 2 Ω **Vishay LTO100** (TO-247) on the extrusion, BSC040N10NS5, UCC27511; two LMV331 triggers (Vout > Vset + ~0.5–1 V; VIN_PWR > ~33 V) | Burst 50 W / ~10 s, average derated from the enclosure NTC |
+| Fuse | 15 A MINI blade (32 V) + Keystone 3568 holder | LCSC part to pick |
+| Protection | MBRB40100CT reverse crowbar, SMCJ54A | Reversed battery → fuse opens |
+| Terminals | 4 mm binding posts + XT60 | Agreed |
 
 ### 3.4 Control, housekeeping, UI
-| Function | Part | Why | Ver. |
-|---|---|---|---|
-| MCU | **STM32G474RET6** (LQFP-64, 0.5 mm) | 12-bit DACs (**3 external channels needed: Vset, Iset, ITH clamp** — G474 has exactly 3: DAC1 CH1/CH2, DAC2 CH1), VREFBUF 2.9 V, 7 comparators, op-amps, fast ADCs, HW quadrature timers, USB FS + ROM DFU bootloader | known |
-| USB isolation | **ADuM3160** (full-speed) + 1 W isolated 5 V module (B0505S class) | Breaks ground loop PC ↔ output; the isolated module also powers the logic from the PC, so it can be flashed with no charger connected | known |
-| Logic rail | **TI LMR38010** (4.2–80 V, 1 A) → 3.3 V, fed from diode-OR of *raw* VBUS, DC input and the isolated USB 5 V | The MCU boots from any source, before the PD sink path is enabled (TPS26750 SafeMode) | known |
-| Aux 12 V rail | **TI LM5164** (6–100 V, 1 A) | EXTVCC for LTC7801, fan, clamp driver; enabled once VIN_BUS ≥ ~15 V | known |
-| Fan | 40 mm 12 V 4-pin PWM header + tach | Agreed | — |
-| Temp sensing | NTCs: buck FETs, inductor, output switch, clamp resistor | Fan curve + derating | — |
-| Display | 2.0" 320×240 IPS, ST7789, SPI — e.g. HS20HS072RX bare panel (LCSC C5329582) + FPC connector on the UI board | Common, cheap, swappable | — |
-| UI board I/O | TCA9535 (I2C expander) for nav buttons / LEDs; encoders + OE button wired direct | Keeps the ribbon small and the encoders on hardware timers | — |
-| Ribbon | 2×10 2.54 mm IDC | Hand-friendly, easy to re-cable once the enclosure is decided | — |
+| Function | Part | Why |
+|---|---|---|
+| MCU | **STM32G474RET6** (LQFP-64) on the main board | 3 DACs (Vset, Iset, ITH clamp), VREFBUF 2.9 V, comparators, ADCs, timers, USB FS + DFU. Stays next to the analog loop (decided 2026-09-27) |
+| USB isolation | **ADuM3160** + B0505S | PC ground loop broken; PC powers the logic for flashing |
+| Logic rail | **LMR38010** → 3.3 V from a diode-OR of raw VBUS, DC input and the isolated USB 5 V | Boots from any source |
+| Aux 12 V | **LM5164** from VIN_PWR (on above ~8.3 V) | LTC7803 EXTVCC (≥ 7 V needed), clamp driver, +5VA (LP2985-5.0) |
+| Fan | 4-pin header, **DNP** | Fanless design; fallback only |
+| Temp sensing | NTCs: buck FETs, inductor, output switch, clamp resistor, USB-C connector (AP33772S OTP) | Throttling + clamp budget |
+| Display / UI board | ST7789 2.0" panel, TCA9535, 2× EC11, 2×13 IDC ribbon (3.3 V digital only) | Unchanged |
 
 ---
 
 ## 4. Board partitioning
-- **Main board** (4-layer, 2 oz outer if possible): USB-C PWR, XT60 DC in, PD front end, input path, buck, filters, shunts, clamp, output switch, output connectors, MCU, isolated USB, housekeeping, fan header, heatsink area.
-- **UI board** (2-layer): display, 2× EC11, 5-way nav, lit Output-Enable button, power button, I/O expander, buzzer (optional). Only 3.3 V logic on the ribbon.
+- **Main board** (4-layer, 2 oz outer if possible): USB-C PWR, XT60 DC in, PD sink, input paths, buck, filters, shunts, clamp,
+  output switch, output connectors, MCU, isolated USB, housekeeping. Buck FETs, clamp FET and clamp resistor sit where the board
+  meets the extrusion (via arrays under the FETs + gap pad; TO-247 screwed on).
+- **Enclosure (decided 2026-09-28):** slotted extrusion, the board slides into the side slots (no screw bosses). The case is
+  bonded to GND = output negative through H905. H905 sits in the power stage next to the half bridge: one countersunk M3 from
+  outside clamps floor → aluminium spacer block + gap pad → board, and also holds down the inductor / bulk caps. Only the bare
+  GND ring around H905 touches metal; the FET tabs (SW, VIN_PWR) sit on the insulating gap pad. The LTO100 clamp resistor
+  needs a second drilled hole. Measure the slot-to-floor gap before finalizing the layout.
+- **UI board** (2-layer): display, 2× EC11, 5-way nav, lit Output-Enable button, power button, I/O expander, buzzer. Only 3.3 V
+  digital on the ribbon (SPI to the display ≤ ~20 MHz, alternate signal/ground wires).
 
 ## 5. Firmware scope (later)
-Setpoint DACs, power-limit loop, PD policy (voltage selection, AVS), metering, protection latch handling, UI (V/I on knobs, push = digit select), menu (OVP/OCP/OPP, presets, slew, battery-charge mode, PD info, calibration, logging), USB CDC SCPI, jump-to-DFU command.
+Setpoint DACs, duty-aware ITH clamp, power-limit loop, PD policy (AP33772S: read PDOs, request fixed/PPS/AVS, EPR entry),
+sink-path enable, input-voltage check (output off below ~8–9 V), metering, protection latch handling, thermal throttling and clamp
+budget, UI, menu, USB CDC SCPI, jump-to-DFU command.
 
 ## 6. Open items / risks
-1. ~~LTC7801 datasheet~~ — resolved: FB held at 0.7 V and ITH driven externally (see 3.2); verified in LTspice (sim/results.md).
-2. ~~Ideal-diode choice~~ — LM74800-Q1 on both inputs (65 V operating / 70 V abs max). TVS: standoff ≥ 54 V, so it cannot fully protect the 70 V rating under a high-energy surge; accepted (PD voltage changes are slew-controlled, DC input is a bench source).
-3. Si8751: check turn-off time with the chosen FET pair's Qg (46 µs figure is for the datasheet load) and LCSC stock.
-4. ~~Clamp sizing~~ — burst-only: 50 W for ~10 s, ~10 W average (decided 2026-09-25).
-7. ~~DC-input power rating~~ — decided 2026-09-25: DC input rated **20 A**; power stage 20 A × Vout; firmware input-power limit per source (PD contract / user setting).
-5. ~~LCSC/JLC stock check~~ — done 2026-09-26, see `calc/parts_shortlist.md`. LTC7801 is ~$20 with low stock: buy early.
-6. TPS26750 boot-config (ADCIN strap) selection and GUI-generated config for "sink only, EPR, AVS, host controlled".
+1. LTC7803 at 40 V abs max: depends on the ~31 V OV lockouts; measure switch-node ringing on the first board.
+2. Sense-signal ripple is small (~5 mV vs LTC's 10–20 mV): careful Kelvin layout + SENSE RC filter.
+3. VOM1271 turn-off time with the BSC040N10NS5 pair (Si8751 not stocked).
+4. AP33772S with its NMOS driver unused, and with V5V fed while VCC is absent — check on the bench / with Diodes.
+5. LCSC picks for the small parts still without numbers (TODO.md).
 
 ## 7. Next steps
-1. ~~Datasheet open items~~, ~~calculations~~, ~~LTspice~~ (done).
-2. ~~skidl schematic~~ — `supply_design.py` (main, 321 parts) + `ui_design.py` (UI, 71 parts), ERC clean. See `design/README.md`.
-3. Review the netlists/BOMs; close the remaining part picks in `TODO.md`.
-4. Layout in KiCad (4-layer main board, 2-layer UI board): heatsink + fan position from the chosen extrusion.
-5. Firmware (STM32G474: DAC/COMP setup, PD policy over I2C, UI, USB CDC/SCPI, DFU) and staged bring-up from a current-limited bench supply on the DC input.
+1. ~~Pivot: requirements, IC re-shop, calculations, LTspice~~ (done 2026-09-27).
+2. ~~skidl schematic update~~ — `supply_design.py` (main, 303 parts) + `ui_design.py` (UI, 71 parts), ERC clean. See `design/README.md`.
+3. Review the netlists/BOMs; close the remaining part picks in `TODO.md`; buy the AP33772S and LTC7803 early.
+4. Layout in KiCad (4-layer main board, 2-layer UI board) around the chosen extrusion.
+5. Firmware and staged bring-up from a current-limited bench supply on the DC input.
 
 ## References
-- TPS26750 datasheet (SLVSH67): https://www.ti.com/lit/ds/symlink/tps26750.pdf
-- TPS26750 TRM (SLVUCR7): https://www.ti.com/lit/pdf/slvucr7
-- TPS26750 EEPROM update over I2C (SLVAFL1): https://www.ti.com/lit/an/slvafl1/slvafl1.pdf
-- TPD4S480: https://www.ti.com/product/TPD4S480
-- HUSB238A datasheet: https://datasheet.lcsc.com/datasheet/pdf/4ea6514a52a5c41dd654270022eda65d.pdf?productCode=C24833806
-- LTC7801: https://www.analog.com/en/products/ltc7801.html
-- LM5148: https://www.ti.com/lit/ds/symlink/lm5148.pdf
-- TPS4811-Q1 (rejected for output switch): https://www.ti.com/product/TPS4811-Q1
+- AP33772S datasheet (DS46176): https://www.diodes.com/datasheet/download/AP33772S.pdf (local: datasheets/ap33772s.pdf)
+- LTC7803 datasheet: https://www.analog.com/en/products/ltc7803.html (local: datasheets/ltc7803.pdf)
+- CSD18531Q5A / CSD18540Q5B: https://www.ti.com/lit/ds/symlink/csd18531q5a.pdf, https://www.ti.com/lit/ds/symlink/csd18540q5b.pdf
+- LM74800-Q1: https://www.ti.com/product/LM74800-Q1
+- LM5148 (runner-up buck controller): https://www.ti.com/lit/ds/symlink/lm5148.pdf
+- Pre-pivot parts (git d8d0a65): TPS26750 (SLVSH67, TRM SLVUCR7), TPD4S480, LTC7801

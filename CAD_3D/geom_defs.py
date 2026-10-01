@@ -81,6 +81,21 @@ class PCBSizeData:
 
 
 @dataclass(frozen=True)
+class PCBPlacement:
+    """Where a board sits in the enclosure: resting on the bottom of slot `slot_index`, centred across the width,
+    with its rear edge `rear_gap` in front of the rear end of the extrusion (enclosure -X end)."""
+
+    slot_index: int
+    rear_gap: float = 0
+
+    def origin(self, enclosure: "EnclosureData", pcb: PCBSizeData) -> tuple[float, float, float]:
+        """Board frame origin (board centre, bottom face) in the enclosure frame."""
+        x = -enclosure.length / 2 + self.rear_gap + pcb.length / 2
+        z = -enclosure.inside_height / 2 + enclosure.slot_position_from_case_bottom[self.slot_index]
+        return (x, 0.0, float(z))
+
+
+@dataclass(frozen=True)
 class H905_placement:
     """Placement of H905 nut on the PCB."""
 

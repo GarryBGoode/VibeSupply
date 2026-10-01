@@ -206,8 +206,9 @@ Numbers: `calc/results.md`, `sim/results.md`; IC comparison: `calc/ic_reshop.md`
 - **3D workflow (build123d, `CAD_3D/`):** `geom_defs.py` holds the parameter dataclasses, one module per part holds its
   `create_*()` function (`enclosure.py`, ...), `mech_design.py` is the single source of the mechanical reference values, and
   `check_fit.py` will build the assembly and report clearances. The PLAN numbers above are copies; `mech_design.py` wins.
-  Planned: KiCad board → part boxes (courtyard × height), or a STEP export via `kicad-cli pcb export step` → clearance report and a
-  height-zone DXF for a KiCad User layer. For the UI, 3D leads: front-panel positions in `mech_design.py` drive the printed add-on
+  KiCad → 3D (2026-10-01): `tools/export_mech.py` → `out/mech_<board>.json` → `kicad_board.py` + `electronic_components.py`
+  (F.Fab box × height from the KiCad model or an override) → `assembly.py`. Frames documented in `mech_design.py`.
+  Next: clearance report and a height-zone DXF for a KiCad User layer in `check_fit.py`. For the UI, 3D leads: front-panel positions in `mech_design.py` drive the printed add-on
   and the UI board footprint placement.
 - **Enclosure (decided 2026-09-28):** slotted extrusion, the board slides into the side slots (no screw bosses). The case is
   bonded to GND = output negative through H905. H905 sits in the power stage next to the half bridge: one countersunk M3 from

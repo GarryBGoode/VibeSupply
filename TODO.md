@@ -36,7 +36,12 @@ Legend: **[you]** needs your decision or a download · **[me]** I'll do it · �
   female header (J951, J971; match the height of the pins you have), long male-male pins
 - ☐ **[you/me]** Keep-outs from the stack (slot 6): control-board bottom side ≤ ~1.2 mm above the inductor; control-board top ≤ ~9.9 mm,
   ≤ ~5.8 mm within ~6 mm of the long edges (corner screw bosses; the model's bosses are simplified, so check again in `check_fit.py`)
-- ☐ **[me]** Part-height table for the tall parts: SER2918H 17.78 mm max (datasheet); bulk caps, TO-247 (LTO100 under the board: ≈ 5 mm + pad in the 7.06–7.46 mm floor gap), B2B headers, connectors TBD
+- ☑ Board → 3D (2026-10-01): `tools/export_mech.py` (KiCad python, auto-run when stale) → `out/mech_<board>.json` →
+  `CAD_3D/kicad_board.py` (slab + bodies) + `CAD_3D/electronic_components.py` (F.Fab box × height; heights from the KiCad
+  STEP model bbox, overrides by ref/footprint) → `CAD_3D/assembly.py` (enclosure + both boards, summary, ocp_vscode).
+  Rear end cap flush with the extrusion for now (`pcb_rear_gap = 0`); the power board sticks out at the front (add-on TBD).
+- ☐ **[you]** Confirm the estimated heights: F401 fuse holder + inserted mini fuse (17.5 assumed), C223 (13.5 = L12 + 1.5),
+  LTO100 body (5.0, no KiCad model), J601 HRO USB-C (3.3)
 - ☐ **[me]** Size the spacer + gap-pad stack under the power stage for 7.06–7.46 mm (+ tolerance/orientation)
 - ☐ **[me]** `check_fit.py` once the board split is laid out: boards in their slots + part boxes (or a KiCad STEP) → clearance
   report + height-zone DXF for KiCad
@@ -64,8 +69,7 @@ Legend: **[you]** needs your decision or a download · **[me]** I'll do it · �
 - ☑ Axis convention (2026-10-01): KiCad left (−X) = rear end cap; both boards have their rear edge at the rear end cap, the front
   (right) end is free. In power-board coordinates (centre = 0): rear edge −85, aluminium ends at ≈ +35 (120 mm), control board
   spans −85 … +25
-- ☐ **[me, later]** Move the axis / board-alignment convention out of PLAN §4 into the 3D scripts (`CAD_3D/mech_design.py` or
-  `geom_defs.py`: rear end cap = −X, both boards' rear edges at the rear end cap, board frame = board centre) and let
+- ◐ Axis convention moved into `CAD_3D/mech_design.py` (docstring + `PCBPlacement`, 2026-10-01); still TODO: let
   `tools/board_setup.py` read it from there
 - ☑ PCB: netlists imported into `kicad/supply_power` / `kicad/supply_control` (you, 2026-10-01)
 - ☑ Floor plan + first placement (layout steps 2 + 3, 2026-10-01): `tools/floorplan.py` (the data: areas, fixed power-path parts,
@@ -90,7 +94,7 @@ Legend: **[you]** needs your decision or a download · **[me]** I'll do it · �
   boards are out?), SW701/SW702. PS601 (B0505S, 10.2 mm) moved to the control board's bottom side
 - ☐ **[me]** JLC: price of the 0.2 mm thermal-via holes in the `_ThermalVias` footprints (U101, U201, U541), else plain footprints + own vias
 - ☑ `tools/place_main.py` deleted (2026-10-01; replaced by `tools/place.py`, old version in git)
-- ☐ **[me]** Later: PCB → mech export (connector / insert / B2B positions → JSON for `CAD_3D`, plus `kicad-cli pcb export step`)
+- ☑ PCB → mech export: `tools/export_mech.py` → `out/mech_<board>.json` (all footprints, outline, drills; 2026-10-01)
 - ☐ **[me]** Optional: posts H401/H402 (M4 lug pads) → solder-wire pads; SW701/SW702 → SMD tact switches
 - ☑ Thermal model for the real extrusion (2026-09-28): 3.8 K/W, τ ≈ 12 min, budget 6.5 W for ≤ 55 °C; worst load throttles after
   ~21 min; clamp average ≈ 4.5 W with the buck idle → [calc/results.md](calc/results.md) §3

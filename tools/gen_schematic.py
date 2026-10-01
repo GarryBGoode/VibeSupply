@@ -3,16 +3,17 @@ EXPERIMENTAL: skidl automatic KiCad schematic generation.
 Currently crashes inside skidl 2.3's placer (schematics/place.py similarity_force: pin.part is None) for
 both boards, so the netlist -> PCB path is the one to use. Kept here to retry after a skidl update.
 
-Usage: .venv/Scripts/python tools/gen_schematic.py main|ui
+Usage: .venv/Scripts/python tools/gen_schematic.py power|control|ui
 """
 import builtins, sys
 sys.path.insert(0, ".")
 from skidl import KICAD10, generate_schematic
 
-board = sys.argv[1] if len(sys.argv) > 1 else "main"
-if board == "main":
-    import supply_design as d
-    d.build(); d.assign_refs()
+board = sys.argv[1] if len(sys.argv) > 1 else "power"
+if board in ("power", "control"):
+    from design import board as b
+    d = __import__(f"{board}_design")
+    d.build(); b.assign_refs(f"supply_{board}")
 else:
     import ui_design as d
     d.build()

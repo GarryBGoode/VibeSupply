@@ -10,6 +10,91 @@ Legend: **[you]** needs your decision or a download · **[me]** I'll do it · �
 - ☑ Q2 Cooling: **fanless**, aluminium extrusion as the heatsink, unpopulated fan header as a fallback (2026-09-26)
 - ☑ Q3 **Re-shop both** the PD sink chip and the buck controller (2026-09-26)
 
+## Board size / enclosure (2026-09-28)
+- ☑ Enclosure: extrusion 120 × 70 × 40 mm inside + ~50 mm 3D-printed front add-on → ~170 × 70 × 40. Power stage stays in the
+  aluminium part (heat path), logic moves into the add-on. The 210 × 125 outline was only the placement-script placeholder.
+- ☑ Cuts: DC-input XT60 → wire pads (panel connector on the end cap), output XT60 removed, fan header removed, LTO100 clamp resistor
+  → wired to the wall. Kept: second DC input, isolated USB, SWD + UART + RESET/BOOT.
+- ☑ Extrusion profile (2026-09-28): 78 outside / 75 slot bottoms / 70 between ribs, 1.5 mm walls, 2 mm slots on 3.5 mm pitch,
+  lowest slot 7.06 mm above the floor → board ≈ 74.5 mm wide, ~3 mm edge keep-out both sides, ~5.5 mm spacer + gap pad (PLAN §4)
+- ☐ **[you]** Add-on in 3D: display on top, controls/posts on the front face (may make the add-on longer)
+
+## Mechanics / 3D (build123d, `CAD_3D/`, 2026-09-30) — see PLAN §4
+- ☑ Structure: `geom_defs.py` (dataclasses), `enclosure.py` (`create_enclosure`), `mech_design.py` (reference values),
+  `check_fit.py` (empty, later)
+- ☑ Slot offset checked against the Hammond drawing (profile view measured to scale): floor→lowest slot 7.04, top slot→ceiling
+  6.40 → the pattern really is ≈ 0.31 mm off-centre; `slot_offset = 0.31` is right. The extrusion is otherwise symmetric, so it can
+  go in upside down (floor gap 6.44)
+- ☐ **[you]** Measure the real extrusion (floor→lowest slot bottom from both sides) and mark "up" before drilling H905 / LTO100
+- ☑ `mech_design.py` board width is 74.5 now (was 75 = zero clearance in the slot bottoms)
+- ☑ Board split (2026-10-01): supply_power (slot 0, ~170 mm) + supply_control (slot 6 = `control_pcb_slot_index = -2`, 110 × 74.5 mm).
+  Link: 2×20 2.54 mm female headers + long male-male pins (19.8 mm stack at hand; slot 6 gives **19.0–19.8 mm** between the board
+  surfaces, pins not fully seated take up the play). skidl done: `power_design.py` / `control_design.py`, PLAN §4
+- ☐ **[you]** Slot 6: only **1.2–2.0 mm** between the SER2918H top (17.78 mm max) and the control board → no bottom-side parts on
+  the control board above the inductor; check the other tall power-board parts (100 µF radial D10, fuse holder + fuse) against it
+- ☐ **[me]** LCSC picks: Würth 9774030360R WA-SMSI M3 × 3 mm insert (H905, H906; alt. PEM SMTSO-M3-3ET / Sinhoo clone), 2×20 2.54 mm
+  female header (J951, J971; match the height of the pins you have), long male-male pins
+- ☐ **[you/me]** Keep-outs from the stack (slot 6): control-board bottom side ≤ ~1.2 mm above the inductor; control-board top ≤ ~9.9 mm,
+  ≤ ~5.8 mm within ~6 mm of the long edges (corner screw bosses; the model's bosses are simplified, so check again in `check_fit.py`)
+- ☐ **[me]** Part-height table for the tall parts: SER2918H 17.78 mm max (datasheet); bulk caps, TO-247 (LTO100 under the board: ≈ 5 mm + pad in the 7.06–7.46 mm floor gap), B2B headers, connectors TBD
+- ☐ **[me]** Size the spacer + gap-pad stack under the power stage for 7.06–7.46 mm (+ tolerance/orientation)
+- ☐ **[me]** `check_fit.py` once the board split is laid out: boards in their slots + part boxes (or a KiCad STEP) → clearance
+  report + height-zone DXF for KiCad
+- ☐ **[you]** UI board + add-on in build123d (front-panel positions in `mech_design.py` drive both)
+- ☑ UI (2026-09-28): 2.42" SSD1309 SPI OLED (7-pin header) instead of the ST7789; ribbon 2×10 1.27 mm (`design/mcu.py` UI_PINOUT);
+  encoder pushes moved to the TCA9535; MCU pins PB4, PB10, PB11, PF0, PF1 now free
+- ☑ skidl (2026-09-28): cuts applied, main 297 parts / UI 69 parts, ERC clean. J161 = DC-in wire pads, J402 = LTO100 wire pads,
+  J703 / UI J1 kept their refs (lock entry edited); retired J401, J581, Q581, R419, R581–R583, UI TP5/TP6
+- ☑ skidl split (2026-10-01): supply_power 251 parts, supply_control 75 parts, UI 69 parts; all ERC clean, no single-pin nets,
+  `tools/b2b_check.py` 40/40 pins and no refs shared between the boards. Both locks were seeded from the old `refs_main.lock.json`
+  (refs kept; each board retires the other board's refs). R419 LTO100 back on the board (TO-247-2 tab-down), J402 retired;
+  H905 + new H906 = WA-SMSI M3 inserts; LOGIC_IN diodes → D531/D532 (power), +3V3A filter on both boards; MCU-side
+  100 Ω + 1 nF on the 9 analog inputs (R708–R716, C710–C718)
+- ☑ Board setup (2026-10-01): `tools/board_setup.py` (KiCad's Python, boards closed; re-runnable, reads `mech_design.py` through the
+  venv) → outline from `pcb_size_*`, slot keep-out rule areas (F.Cu/B.Cu, `edge_keepout` along both long edges; inner layers free),
+  board centre = grid + drill/place origin at (150, 100), 4-layer stackup (power: 2 oz outer / 1 oz inner, min 0.15/0.15; control:
+  1/0.5 oz, min 0.127), JLC-safe minimums (via ≥ 0.6/0.3, copper–edge 0.4, silk 1.0 × 0.15), net classes by net-name pattern
+  (power: Power / Gate / Supply / Kelvin; control: Supply / ISO) and `.kicad_dru` rules (solid pour connection for Power-class
+  pads and ≥ 1206 GND pads; control: 1.5 mm isolation barrier around the ISO class, PS601's own pins exempt). DRC clean, rules
+  verified on a scratch board. Rules go into the script, not Board Setup (re-running overwrites them).
+  Run it with `.\tools\run_board_setup.ps1`. Fixed 2026-10-01: re-runs crashed (`'SwigPyObject' object has no attribute
+  'NewOutline'`) because `board.Remove()` hands the item to Python and the garbage-collected proxy corrupts SWIG's type table
+  → `detach()` sets `thisown = False`
+- ☑ H901–H904 removed from `power_design.py` (2026-10-01; numbers retired in the lock, 247 parts, ERC clean)
+- ☑ Axis convention (2026-10-01): KiCad left (−X) = rear end cap; both boards have their rear edge at the rear end cap, the front
+  (right) end is free. In power-board coordinates (centre = 0): rear edge −85, aluminium ends at ≈ +35 (120 mm), control board
+  spans −85 … +25
+- ☐ **[me, later]** Move the axis / board-alignment convention out of PLAN §4 into the 3D scripts (`CAD_3D/mech_design.py` or
+  `geom_defs.py`: rear end cap = −X, both boards' rear edges at the rear end cap, board frame = board centre) and let
+  `tools/board_setup.py` read it from there
+- ☑ PCB: netlists imported into `kicad/supply_power` / `kicad/supply_control` (you, 2026-10-01)
+- ☑ Floor plan + first placement (layout steps 2 + 3, 2026-10-01): `tools/floorplan.py` (the data: areas, fixed power-path parts,
+  clusters with targets — edit this), `tools/place.py` (engine), `tools/snapshot.py` (→ `out/placement_<board>.png`), run both with
+  `.\tools\run_place.ps1 [power|control]`. Frames + notes on User.Comments (group `floorplan`), each cluster a group `place:<name>`.
+  **Locked footprints / locked groups are never moved** (tested): move + lock what you want to keep, re-run, the rest follows.
+  Power: input left (USB-C row, DC row, ideal diodes), VIN bulk + hot loop + U201 under the FET pair, L201 top, LC filter, output
+  right; R419 on the bottom (body south, H906 near the bottom edge). Control: ISO column left, MCU centre, LMR38010 near LOGIC_IN,
+  debug/UI at the front. J971 is derived from J951 (all 40 mirrored pins checked on every run); the control board gets rule areas
+  (no bottom-side parts) over L201 / C217 / C223 / C228. Small refs (160 power, 59 control) hidden on silk, still on F.Fab.
+  DRC: no courtyard overlaps; `board_setup.py` got rules for footprint-internal pad/hole clearances and min drill 0.2 mm (thermal vias)
+- ☐ **[you]** Update the control PCB from the regenerated `out/supply_control.net` (Tools → Update PCB from Netlist, placement stays):
+  the USB-C CC nets are now named ISO_CC1 / ISO_CC2 (`design/usb_iso.py`) → ISO class → clears the 24 isolation-rule DRC errors
+- ☐ **[you]** Review the placement (KiCad + `out/placement_*.png`); move/lock what you want different, or tell me and I change
+  `floorplan.py`
+- ☐ **[me]** Layout step 4: power-stage review + copper (hot loop, SW node, gate drive, Kelvin pair from R211/R212 to U201 / U202,
+  pours per layer, thermal vias, spacer-block area under the FETs on the bottom, H905 position against it)
+- ☐ **[me/you]** H906 sits on R419's tab hole → DRC `holes_co_located` + `npth_inside_courtyard` (intended). Fix: TO-247 footprint
+  without the tab hole in `footprints/supply1.pretty`, or a DRC exclusion
+- ☐ **[me]** Silkscreen: place the remaining visible refs (62 silk overlaps on power, 9 on control)
+- ☐ **[you]** Heights on the control board top (ceiling 9.9 mm): J703 ribbon header + plug, J702 UART header (+ plug only when the
+  boards are out?), SW701/SW702. PS601 (B0505S, 10.2 mm) moved to the control board's bottom side
+- ☐ **[me]** JLC: price of the 0.2 mm thermal-via holes in the `_ThermalVias` footprints (U101, U201, U541), else plain footprints + own vias
+- ☑ `tools/place_main.py` deleted (2026-10-01; replaced by `tools/place.py`, old version in git)
+- ☐ **[me]** Later: PCB → mech export (connector / insert / B2B positions → JSON for `CAD_3D`, plus `kicad-cli pcb export step`)
+- ☐ **[me]** Optional: posts H401/H402 (M4 lug pads) → solder-wire pads; SW701/SW702 → SMD tact switches
+- ☑ Thermal model for the real extrusion (2026-09-28): 3.8 K/W, τ ≈ 12 min, budget 6.5 W for ≤ 55 °C; worst load throttles after
+  ~21 min; clamp average ≈ 4.5 W with the buck idle → [calc/results.md](calc/results.md) §3
+
 ## Pivot rework
 - ☑ IC re-shop → [calc/ic_reshop.md](calc/ic_reshop.md): **AP33772S** (PD sink) + **LTC7803** (buck controller) chosen 2026-09-26; LM5148 runner-up
 - ☐ **[you]** Buy early: AP33772S (LCSC ~140 pcs) and LTC7803 (LCSC 38 pcs MSOP) — or Mouser/Digi-Key
@@ -23,6 +108,8 @@ Legend: **[you]** needs your decision or a download · **[me]** I'll do it · �
 - ☑ Output envelope accepted (2026-09-27): 10 A up to ≈ Vin − 3.5 V; from 28 V USB-C ≈ 26.5 V max at ≈ 4.3 A. Full power is occasional use; thermal throttling in firmware is fine
 - ☑ LCSC picks: 4 mΩ 2512 (C2904236), CMDSH-4E (C5240486), SMBJ30A (C113998), SMBJ33A (C173526), BZT52C36 (C19077420), LP2985-50 (C74511)
 - ☐ **[me]** Still without LCSC number: 15 A MINI blade fuse, and the older small parts (2N7002, BAT54W/S, SS110/SS14, LMV331, UCC27511, USBLC6, NTCs, LEDs, ferrite, inductors 22/68 µH, connectors, switches)
+- ☐ **[me]** Check the STM32G4 DAC output load: DAC_ICL sees 100 Ω + 10 nF (DAC_V / DAC_I: 1 k + 100 nF); the buffered DAC is
+  specified for ≤ 50 pF / ≥ 5 kΩ → maybe a larger series R or an internal OPAMP follower. (Predates the split; the header adds nothing relevant)
 - ☐ **[me]** Firmware notes: duty-aware ITH clamp (map ~25 A/V + 0.45 V up to D 0.75, ~15 A/V + 0.8 V near D 0.9; calibrate at run time),
   Iset limited near dropout, S-curve end of the start-up ramp, clamp average derated from the enclosure NTC, all DAC setpoints ≤ 2.9 V
 - ☐ **[me]** AP33772S PD policy (firmware): read SRCPDO, request the lowest PDO/AVS/PPS that covers Vset + headroom and the power need; EPR 28 V needs an EPR cable
@@ -53,10 +140,10 @@ Shortlist with LCSC numbers: [calc/parts_shortlist.md](calc/parts_shortlist.md)
 - ☑ Light-load bottom-FET glitch in t2: timestep artifact (disappears at 20 ns max step)
 
 ## Schematic (skidl) — see design/README.md
-- ☑ Modules: `design/power_in.py`, `buck.py`, `control.py`, `output.py`, `housekeeping.py`, `usb_iso.py`, `mcu.py`; top level `supply_design.py`; UI board `ui_design.py`
+- ☑ Modules: `design/power_in.py`, `buck.py`, `control.py`, `output.py`, `housekeeping.py`, `usb_iso.py`, `mcu.py`, `interconnect.py`, `board.py`; top level `power_design.py` + `control_design.py` (was `supply_design.py`); UI board `ui_design.py`
 - ☑ Custom symbols generated into `symbols/supply1.kicad_sym` from the pin tables in `design/parts.py`; custom footprint `footprints/supply1.pretty/L_Coilcraft_SER2918H`
 - ☑ ERC: main board 0 errors (3 benign open-drain warnings), UI board clean. All 52 footprints resolve. No single-pin nets.
-- ☑ Netlists: `out/supply_main.net` (321 parts), `out/supply_ui.net` (71 parts), BOMs with LCSC numbers
+- ☑ Netlists: `out/supply_power.net`, `out/supply_control.net`, `out/supply_ui.net`, BOMs with LCSC numbers (the old `supply_main.*` outputs are deleted)
 - ☐ **[you]** Review the netlists / BOMs
 - ☐ **[me, optional]** Auto-generated KiCad schematic: skidl 2.3's placer crashes on both boards (`tools/gen_schematic.py`); retry after a skidl update or patch it — not needed for the PCB
 - ☐ **[me]** Pick LCSC parts still without a number: LMR38010 22 µH inductor, LM5164 68 µH inductor, MBRB40100CT-class reverse diode, gate/logic 2N7002, BAT54W, SS110/SS14, passives (mostly JLC basic parts)
@@ -66,7 +153,7 @@ Shortlist with LCSC numbers: [calc/parts_shortlist.md](calc/parts_shortlist.md)
 - ☐ **[me]** SER2918H footprint: pad 3 (mounting) position is approximate — check against the Coilcraft drawing before layout
 - ☐ **[me]** VOM1271 output polarity (pin 4 = +) — double-check the datasheet drawing
 - ☐ **[you]** Display module: header assumes the common GND/VCC/SCL/SDA/RES/DC/CS/BLK pinout — check against the module you buy
-- ☐ **[you]** Layout: KiCad projects live in `kicad/supply_main/supply_main` and `kicad/supply_ui/supply_ui` (fp/sym lib tables are next to the .kicad_pro), then PCB editor → File → Import → Netlist
+- ☐ **[you]** Layout: KiCad projects live in `kicad/supply_power`, `kicad/supply_control` and `kicad/supply_ui/supply_ui` (fp/sym lib tables are next to the .kicad_pro), then PCB editor → File → Import → Netlist
 
 ## Known limitations (accepted, documented)
 - Below ~1.15 V out from a 48 V input the controller pulse-skips (80 ns min on-time at 300 kHz): higher ripple, still regulates. From PD, the MCU can pick a lower input voltage when power allows.

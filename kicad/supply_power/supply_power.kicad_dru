@@ -1,0 +1,22 @@
+(version 1)
+
+# Written by tools/board_setup.py; edit the script, not this file (re-running overwrites it).
+
+(rule "fine-pitch IC / connector pins"
+  (condition "A.Type == 'Pad' && B.Type == 'Pad' && (A.memberOfFootprint('U*') || A.memberOfFootprint('J*')) && (B.memberOfFootprint('U*') || B.memberOfFootprint('J*'))")
+  (constraint clearance (min 0.15mm)))
+
+(rule "own holes of connectors and inserts"
+  (condition "A.Type == 'Pad' && B.Type == 'Pad' && ((A.memberOfFootprint('J*') && B.memberOfFootprint('J*')) || (A.memberOfFootprint('H*') && B.memberOfFootprint('H*')))")
+  (constraint hole_clearance (min 0mm)))
+
+# High-current pads connect to pours without thermal spokes (spokes would choke 10 A; reflow at the assembly house).
+(rule "power pads solid"
+  (condition "A.Type == 'Pad' && A.hasNetclass('Power')")
+  (constraint zone_connection solid))
+
+# Large GND pads (1206 and up: power MLCCs, bulk caps, FET sources, TVS, inserts) solid too; small passives keep
+# their spokes (tombstoning).
+(rule "large GND pads solid"
+  (condition "A.Type == 'Pad' && A.NetName == 'GND' && (A.Size_X >= 1.6mm || A.Size_Y >= 1.6mm)")
+  (constraint zone_connection solid))

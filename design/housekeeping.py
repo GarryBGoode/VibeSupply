@@ -1,14 +1,19 @@
 """
-Housekeeping supplies and fan.
+Housekeeping supplies. (The DNP fan header was removed 2026-09-28: fanless, board space.)
+
+Split 2026-09-30 between the two boards (design/interconnect.py carries LOGIC_IN up and +3V3 down):
+- logic_feed (supply_power): VBUS_RAW / DCIN_RAW diodes into LOGIC_IN, local +3V3A (NTC pull-ups, BAT54S clamp).
+- logic_supply (supply_control): the isolated USB 5 V diode into LOGIC_IN, LMR38010 -> +3V3, +3V3A for VDDA.
+- aux_supply (supply_power): LM5164 +12V_AUX, LP2985 +5VA.
 
 - LOGIC_IN: diode-OR of raw VBUS, raw DC input and the isolated USB 5 V -> the MCU boots from any source,
   before the PD sink path is enabled (the MCU enables it after the AP33772S reports a contract).
 - +3V3: LMR38010 (4.2-80 V), 400 kHz, 22 uH.
 - +12V_AUX: LM5164 (6-100 V) from VIN_PWR, 300 kHz COT with type-3 ripple injection, 68 uH. LTC7803 EXTVCC
-  (needs >= 7 V: at a 9 V input the rail sags to ~8.5 V, still fine), clamp gate driver, +5VA LDO, fan (DNP).
+  (needs >= 7 V: at a 9 V input the rail sags to ~8.5 V, still fine), clamp gate driver, +5VA LDO.
   Enabled above ~8.3 V. Below ~9 V input the output stays off (firmware, VIN_SNS).
 - +5VA: LP2985-5.0 from +12V_AUX (op-amps, INA240, comparators, AP33772S V5V backup).
-- +3V3A: ferrite-filtered +3V3 for the MCU VDDA and NTC pull-ups.
+- +3V3A: ferrite-filtered +3V3, made separately on each board (MCU VDDA / NTC pull-ups + VTERM_SNS clamp).
 """
 
 from skidl import Net, Part, subcircuit
@@ -17,12 +22,32 @@ from .nets import *
 from .parts import C, FB, L, LED, LMR38010, NMOS_small, R, _fields, schottky_1a, testpoint
 
 
+def p3v3a_filter():
+    fbd = FB()
+    fbd[1, 2] += P3V3, P3V3A
+    for v in ("1u", "100n"):
+        c = C(v)
+        c[1, 2] += P3V3A, GND
+
+
 @subcircuit
-def logic_supply():
-    for src, val in ((VBUS_RAW, "SS110"), (DCIN_RAW, "SS110"), (P5V_ISO, "SS14")):
-        d = schottky_1a(val)
+def logic_feed():
+    """supply_power side: the raw inputs into LOGIC_IN (goes up the B2B header), +3V3A from the +3V3 coming down."""
+    for src in (VBUS_RAW, DCIN_RAW):
+        d = schottky_1a("SS110")
         d["A"] += src
         d["K"] += LOGIC_IN
+    c = C("100n", "0603", note="100 V")
+    c[1, 2] += LOGIC_IN, GND
+    p3v3a_filter()
+
+
+@subcircuit
+def logic_supply():
+    """supply_control side: isolated USB 5 V into LOGIC_IN, LMR38010 -> +3V3, +3V3A for VDDA."""
+    d = schottky_1a("SS14")
+    d["A"] += P5V_ISO
+    d["K"] += LOGIC_IN
     for v, size in (("2.2u", "1206"), ("2.2u", "1206"), ("100n", "0603")):
         c = C(v, size, note="100 V")
         c[1, 2] += LOGIC_IN, GND
@@ -50,12 +75,8 @@ def logic_supply():
         co[1, 2] += P3V3, GND
     testpoint("+3V3")[1] += P3V3
 
-    # +3V3A for VDDA / NTCs
-    fbd = FB()
-    fbd[1, 2] += P3V3, P3V3A
-    for v in ("1u", "100n"):
-        c = C(v)
-        c[1, 2] += P3V3A, GND
+    # +3V3A for VDDA
+    p3v3a_filter()
 
     # power LED
     led, rl = LED("green"), R("1k")
@@ -113,22 +134,3 @@ def aux_supply():
     c_o[1, 2] += P5VA, GND
     testpoint("+5VA")[1] += P5VA
 
-
-@subcircuit
-def fan():
-    """Fallback only: the design is fanless (extrusion as heatsink). Header + driver fitted as DNP."""
-    j = Part("Connector_Generic", "Conn_01x04", value="FAN 4-pin",
-             footprint="Connector:FanPinHeader_1x04_P2.54mm_Vertical")
-    j.fields["DNP"] = "yes"
-    j[1] += GND
-    j[2] += P12V
-    tach, pwm = Net("FAN_TACH_PIN"), Net("FAN_PWM_PIN")
-    j[3] += tach
-    j[4] += pwm
-    r_t, r_tp = R("1k"), R("10k")
-    tach & r_t & FAN_TACH
-    r_tp[1, 2] += P3V3, FAN_TACH
-    q = NMOS_small()
-    q["D", "S", "G"] += pwm, GND, FAN_PWM      # open-drain PWM (fan has its own pull-up); inverted in firmware
-    r_g = R("100k")
-    r_g[1, 2] += FAN_PWM, GND

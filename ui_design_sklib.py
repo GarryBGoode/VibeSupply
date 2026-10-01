@@ -6,7 +6,7 @@ from skidl.pin import pin_types
 SKIDL_lib_version = '0.0.1'
 
 ui_design = SchLib(tool=SKIDL).add_parts(*[
-        Part(**{ 'name':'Conn_02x13_Odd_Even', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_02x13_Odd_Even'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_IDC:IDC-Header_2x13_P2.54mm_Vertical', 'keywords':'connector', 'description':'Generic connector, double row, 02x13, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[
+        Part(**{ 'name':'Conn_02x10_Odd_Even', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_02x10_Odd_Even'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical', 'keywords':'connector', 'description':'Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[
             Pin(num='1',name='Pin_1',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',name='Pin_2',func=pin_types.PASSIVE,unit=1),
             Pin(num='3',name='Pin_3',func=pin_types.PASSIVE,unit=1),
@@ -26,25 +26,18 @@ ui_design = SchLib(tool=SKIDL).add_parts(*[
             Pin(num='17',name='Pin_17',func=pin_types.PASSIVE,unit=1),
             Pin(num='18',name='Pin_18',func=pin_types.PASSIVE,unit=1),
             Pin(num='19',name='Pin_19',func=pin_types.PASSIVE,unit=1),
-            Pin(num='20',name='Pin_20',func=pin_types.PASSIVE,unit=1),
-            Pin(num='21',name='Pin_21',func=pin_types.PASSIVE,unit=1),
-            Pin(num='22',name='Pin_22',func=pin_types.PASSIVE,unit=1),
-            Pin(num='23',name='Pin_23',func=pin_types.PASSIVE,unit=1),
-            Pin(num='24',name='Pin_24',func=pin_types.PASSIVE,unit=1),
-            Pin(num='25',name='Pin_25',func=pin_types.PASSIVE,unit=1),
-            Pin(num='26',name='Pin_26',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
+            Pin(num='20',name='Pin_20',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
         Part(**{ 'name':'C', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'C'}), 'ref_prefix':'C', 'fplist':[''], 'footprint':'Capacitor_SMD:C_0805_2012Metric', 'keywords':'cap capacitor', 'description':'Unpolarized capacitor', 'datasheet':'', 'pins':[
             Pin(num='1',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
-        Part(**{ 'name':'Conn_01x08', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_01x08'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical', 'keywords':'connector', 'description':'Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[
+        Part(**{ 'name':'Conn_01x07', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_01x07'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Vertical', 'keywords':'connector', 'description':'Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[
             Pin(num='1',name='Pin_1',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',name='Pin_2',func=pin_types.PASSIVE,unit=1),
             Pin(num='3',name='Pin_3',func=pin_types.PASSIVE,unit=1),
             Pin(num='4',name='Pin_4',func=pin_types.PASSIVE,unit=1),
             Pin(num='5',name='Pin_5',func=pin_types.PASSIVE,unit=1),
             Pin(num='6',name='Pin_6',func=pin_types.PASSIVE,unit=1),
-            Pin(num='7',name='Pin_7',func=pin_types.PASSIVE,unit=1),
-            Pin(num='8',name='Pin_8',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
+            Pin(num='7',name='Pin_7',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
         Part(**{ 'name':'RotaryEncoder_Switch', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'RotaryEncoder_Switch'}), 'ref_prefix':'SW', 'fplist':[''], 'footprint':'Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm_MountingHoles', 'keywords':'rotary switch encoder switch push button', 'description':'Rotary encoder, dual channel, incremental quadrate outputs, with switch', 'datasheet':'', 'pins':[
             Pin(num='A',name='A',func=pin_types.PASSIVE,unit=1),
             Pin(num='B',name='B',func=pin_types.PASSIVE,unit=1),

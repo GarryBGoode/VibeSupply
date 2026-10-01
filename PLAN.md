@@ -1,10 +1,10 @@
 # USB-C PD Bench Supply — Design Plan
 
 Hobby bench supply, loosely inspired by the DP100, powered from a USB PD 3.1 EPR charger (up to 28 V / 5 A = 140 W).
-Schematic is written in skidl (`supply_design.py` + per-block modules), layout in KiCad.
+Schematic is written in skidl (`power_design.py`, `control_design.py`, `ui_design.py` + per-block modules), layout in KiCad.
 
 Status: **pivot to 140 W / 10 A done (2026-09-27): requirements, IC re-shop, calculations, LTspice and the skidl schematic are updated.**
-Next: netlist/BOM review, remaining LCSC picks, then KiCad layout. The pre-pivot 240 W / 20 A design is in git (`d8d0a65`).
+Board split into supply_power + supply_control done in skidl (2026-10-01, §4). Next: netlist/BOM review, remaining LCSC picks, KiCad layout. The pre-pivot 240 W / 20 A design is in git (`d8d0a65`).
 Numbers in `calc/results.md`, `sim/results.md`; work items in `TODO.md`.
 
 ---
@@ -14,18 +14,18 @@ Numbers in `calc/results.md`, `sim/results.md`; work items in `TODO.md`.
 | Item | Decision |
 |---|---|
 | Input | USB-C PD 3.1 sink, 5–28 V, **up to 140 W** (28 V / 5 A EPR fixed PDO; EPR AVS used if the charger offers it). Graceful with SPR (≤ 20 V, ≤ 100 W) chargers |
-| Aux input | Extra DC input (XT60), **≤ 30 V, rated 10 A** (24 V bricks, up to 7S Li-ion), OR-ed with the USB-C input through ideal diodes. **Over-voltage lockout at ~31–32 V and no damage up to ≥ 60 V** (a 48 V battery on the XT60 is a likely mistake) |
+| Aux input | Extra DC input (panel connector on the end cap, wired to the board), **≤ 30 V, rated 10 A** (24 V bricks, up to 7S Li-ion), OR-ed with the USB-C input through ideal diodes. **Over-voltage lockout at ~31–32 V and no damage up to ≥ 60 V** (a 48 V battery on the DC input is a likely mistake). Kept as a development fallback when the PD side misbehaves |
 | Topology | Synchronous buck only |
 | Output | **0 … ≈ 26.5 V, 0 … 10 A**. 10 A up to ≈ Vin − 3.5 V (26.5 V from a 30 V DC source); from 28 V USB-C ≈ 26.5 V max at ≈ 4.3 A — the LTC7803's slope compensation limits current near dropout (LTspice). USB-C: ≈ 130 W out; DC: 10 A × Vout and a user-set input power limit |
 | Modes | CV / CC (hardware loops), power limit (firmware, via CC setpoint), input-current limit |
 | Reverse energy | Must survive BLDC regen / backfeed: no energy back into the charger, active clamp on the output (clamp unchanged: 2 Ω, 50 W for ~10 s, ~10 W average) |
 | Output switching | Back-to-back N-FETs on **+** only. Ground is never switched |
 | Noise | Reasonably low ripple (target ≤ 20 mVpp at full load); stable with PWM / pulsed loads |
-| Cooling | **Fanless**: buck FETs, inductor and clamp resistor are thermally tied to the aluminium extrusion (the enclosure is the heatsink). Unpopulated 12 V fan header as a fallback |
+| Cooling | **Fanless**: buck FETs, inductor and clamp resistor are thermally tied to the aluminium extrusion (the enclosure is the heatsink). Fan header removed 2026-09-28 (board space) |
 | Voltage class | Everything downstream of the inputs sees ≤ ~32 V, plus regen margin → **60 V FETs**, ≥ 50 V MLCCs. Input-side protection parts must survive ≥ 60 V |
 | PC link | USB-C data port, **galvanically isolated**; USB CDC (SCPI-like) + firmware update over USB DFU, no programmer needed |
 | UI | Separate UI board over ribbon cable: TFT, 2× EC11 encoders w/ push, 5-way nav, dedicated lit Output-Enable button, power button |
-| Output terminals | 4 mm binding posts **and** XT60, in parallel |
+| Output terminals | 4 mm binding posts on the front cap, wired to the board (output XT60 dropped 2026-09-28) |
 | Remote sense | No |
 | Assembly | Fab + assembly house (JLCPCB/PCBWay). 0402 / QFN where it matters (analog, power ICs); 0805/0603 + SOIC/TSSOP where tinkering is likely (LEDs, MCU periphery, UI board) |
 
@@ -68,7 +68,7 @@ Why: 48 V / 5 A EPR chargers are rare and expensive; dozens of single-port 140 W
      ▼                     ▼                                             ADuM3160 + isolated 5 V DC/DC
  LM74800 ideal diode + sink switch (OV lockout ~31 V, EN from MCU) ─┐         │ USB FS
                                                                     ├─► VIN_BUS (≤ ~31 V) ─► STM32G474
- XT60 DC IN (9–30 V, 10 A) ── LM74800 (OV lockout ~31 V, 100 V FETs)┘      │         (supervisor, 3 DACs, COMPs, UI, USB)
+ DC IN wires (9–30 V, 10 A) ─ LM74800 (OV lockout ~31 V, 100 V FETs)┘      │         (supervisor, 3 DACs, COMPs, UI, USB)
                                                                            ▼                   │ DAC: Vset, Iset, ITH clamp
                                                    LTC7803 sync buck, 300 kHz ◄── external CV / CC error amps (ADA4522)
                                                    2× CSD18531Q5A, 10 µH, 2 mΩ               ▲            ▲
@@ -77,7 +77,7 @@ Why: 48 V / 5 A EPR chargers are rare and expensive; dozens of single-port 140 W
                                                              │         the loop, INA228 for metering)
                                                    regen clamp (2 Ω; Vout > Vset + margin, or bus > ~33 V)
                                                              │
-                                                   back-to-back 100 V N-FET switch (VOM1271) ──► 15 A fuse ──► 4 mm posts + XT60
+                                                   back-to-back 100 V N-FET switch (VOM1271) ──► 15 A fuse ──► 4 mm posts (wired)
                                                                                                   └─ reverse-polarity diode
 ```
 
@@ -103,7 +103,7 @@ Why: 48 V / 5 A EPR chargers are rare and expensive; dozens of single-port 140 W
 - **Hardware trips independent of firmware**: STM32 COMP+DAC on Vout (OVP) and inductor current (OCP), plus an LMV331 absolute
   OVP at ~32 V → latch that stops the buck (RUN) and opens the output switch.
 - **Thermal**: fanless; FETs and the clamp resistor are tied to the aluminium extrusion. Firmware throttles on the NTCs
-  (full power is occasional use) and derates the clamp's average from the enclosure temperature.
+  (full power is occasional use: ≈ 6.5 W continuous budget for a ≤ 55 °C case, worst-case load reaches it after ~20 min) and derates the clamp's average from the enclosure temperature.
 
 ---
 
@@ -117,7 +117,7 @@ Numbers: `calc/results.md`, `sim/results.md`; IC comparison: `calc/ic_reshop.md`
 | PD sink | **Diodes AP33772S** (W-QFN4040-24, FA02 firmware, LCSC C50341643) | USB-IF certified PD3.1; EPR 28 V + AVS, PPS ≤ 21 V; full I2C host control (SRCPDO read, PD_REQMSG); CC short protection to 34 V; no EEPROM/GUI config. 5 mΩ VBUS sense for its OCP/current readback. V5V backed from +5VA via a diode so it can't clamp I2C1 when no USB-C is plugged in. Low LCSC stock: buy early |
 | USB sink path | **LM74800** + 2× **CSD18540Q5B** (60 V, 2.2 mΩ) | Ideal diode (no backfeed into the charger) + switch; OV lockout ~31 V (243 k / 10 k); EN = MCU `PD_SINK_EN` after the AP33772S reports a contract. The AP33772S's own NMOS driver is unused |
 | DC input path | **LM74800** + 2× **ISC030N10NM6** (100 V) | 9–30 V, 10 A; OV lockout ~31 V; must survive a 48 V battery (SMCJ54A TVS, 100 V FETs); UVLO ~9 V |
-| Input TVS | SMBJ30A on VBUS, SMCJ54A on the XT60, SMBJ33A on the bus | VBUS: above 28 V + 5 %, below the AP33772S's 34 V; bus: soft protection for the LTC7803 |
+| Input TVS | SMBJ30A on VBUS, SMCJ54A on the DC input, SMBJ33A on the bus | VBUS: above 28 V + 5 %, below the AP33772S's 34 V; bus: soft protection for the LTC7803 |
 | Input shunt + meter | 1 mΩ 2512 + **INA228** (0x40) | Input power limit per source |
 
 ### 3.2 Power stage
@@ -136,33 +136,87 @@ Numbers: `calc/results.md`, `sim/results.md`; IC comparison: `calc/ic_reshop.md`
 | Function | Part | Why |
 |---|---|---|
 | Output switch | 2× **BSC040N10NS5** (100 V) back-to-back + **VOM1271** | The terminals face the outside world (external batteries, the 54 V TVS) |
-| Regen clamp | 2 Ω **Vishay LTO100** (TO-247) on the extrusion, BSC040N10NS5, UCC27511; two LMV331 triggers (Vout > Vset + ~0.5–1 V; VIN_PWR > ~33 V) | Burst 50 W / ~10 s, average derated from the enclosure NTC |
+| Regen clamp | 2 Ω **Vishay LTO100** (TO-247, on the power board's bottom side, tab on the extrusion floor via gap pad, M3 into H906), BSC040N10NS5, UCC27511; two LMV331 triggers (Vout > Vset + ~0.5–1 V; VIN_PWR > ~33 V) | Burst 50 W / ~10 s, average derated from the enclosure NTC |
 | Fuse | 15 A MINI blade (32 V) + Keystone 3568 holder | LCSC part to pick |
 | Protection | MBRB40100CT reverse crowbar, SMCJ54A | Reversed battery → fuse opens |
-| Terminals | 4 mm binding posts + XT60 | Agreed |
+| Terminals | 4 mm binding posts (wired) | Output XT60 dropped 2026-09-28 |
 
 ### 3.4 Control, housekeeping, UI
 | Function | Part | Why |
 |---|---|---|
-| MCU | **STM32G474RET6** (LQFP-64) on the main board | 3 DACs (Vset, Iset, ITH clamp), VREFBUF 2.9 V, comparators, ADCs, timers, USB FS + DFU. Stays next to the analog loop (decided 2026-09-27) |
+| MCU | **STM32G474RET6** (LQFP-64) on supply_control | 3 DACs (Vset, Iset, ITH clamp), VREFBUF 2.9 V, comparators, ADCs, timers, USB FS + DFU. The analog loop stays on supply_power; only setpoints and measurements cross the B2B header, over ~20 mm (split 2026-09-30) |
 | USB isolation | **ADuM3160** + B0505S | PC ground loop broken; PC powers the logic for flashing |
 | Logic rail | **LMR38010** → 3.3 V from a diode-OR of raw VBUS, DC input and the isolated USB 5 V | Boots from any source |
 | Aux 12 V | **LM5164** from VIN_PWR (on above ~8.3 V) | LTC7803 EXTVCC (≥ 7 V needed), clamp driver, +5VA (LP2985-5.0) |
-| Fan | 4-pin header, **DNP** | Fanless design; fallback only |
 | Temp sensing | NTCs: buck FETs, inductor, output switch, clamp resistor, USB-C connector (AP33772S OTP) | Throttling + clamp budget |
-| Display / UI board | ST7789 2.0" panel, TCA9535, 2× EC11, 2×13 IDC ribbon (3.3 V digital only) | Unchanged |
+| Display / UI board | 2.42" SSD1309 128×64 SPI OLED module, TCA9535 (also the encoder pushes), 2× EC11, 2×10 1.27 mm ribbon (3.3 V digital only) | Changed 2026-09-28 (OLED on top of the front add-on). Firmware: dim after idle + pixel shift against burn-in |
 
 ---
 
 ## 4. Board partitioning
-- **Main board** (4-layer, 2 oz outer if possible): USB-C PWR, XT60 DC in, PD sink, input paths, buck, filters, shunts, clamp,
-  output switch, output connectors, MCU, isolated USB, housekeeping. Buck FETs, clamp FET and clamp resistor sit where the board
-  meets the extrusion (via arrays under the FETs + gap pad; TO-247 screwed on).
+- **Two stacked boards (split done in skidl 2026-10-01)**, linked by a 2×20 2.54 mm B2B header (`design/interconnect.py`):
+  - **supply_power** (`power_design.py`, 4-layer, 2 oz outer if possible; lowest slot, ≈ 170 × 74.5 mm): USB-C PWR, DC-in wire
+    pads, PD sink, input paths + shunt, buck, filters, analog control (CV/CC amps, ITH clamp, DAC filters, HW OVP, fault logic),
+    output stage + regen clamp, +12V_AUX / +5VA, the LOGIC_IN diodes (VBUS, DC in) and a local +3V3A. Buck FETs, clamp FET and
+    clamp resistor sit where the board meets the extrusion (via arrays under the FETs + gap pad). The **LTO100 is back on the
+    board** (TO-247 tab-down footprint, R419), meant for the bottom side with its insulated tab on a gap pad on the floor and an
+    M3 screw from outside (H906). Bottom-side stack: TO-247 ≈ 5 mm + pad in the 7.06–7.46 mm floor gap.
+  - **supply_control** (`control_design.py`, slot 6 = second from the top, 110 × 74.5 mm, 10 mm free at one end): STM32G474,
+    SWD/UART/reset/boot, UI ribbon header (J703), isolated USB, LMR38010 3.3 V buck with the isolated-USB leg of LOGIC_IN, +3V3A for
+    VDDA. The analog inputs from the power board get 100 Ω + 1 nF at the MCU pins.
+  - **Across the header**: 24 signals (3 DACs, 9 analog sense lines, I2C1, PD/INA interrupts, enables, fault lines), LOGIC_IN up,
+    +3V3 down, 13 GND. No power-stage current or return current crosses, so the ground offset between the boards stays at the
+    logic-current level (the setpoints and the loop are referenced on the power board). The control socket is on its board's
+    bottom side, mirrored: pin 2k−1 ↔ 2k (see `interconnect.py`); `tools/b2b_check.py` verifies both netlists.
+  - Why this cut (2026-09-30): the single board needed ≈ 5,500 mm² of courtyard on ≈ 11,300 mm² of usable top side (~49 %, with
+    a 10 A stage, precision analog, an isolation gap and a 64-pin MCU); the power board now has ≈ 4,400 mm² (~39 %) and no
+    isolation gap / MCU fan-out. Moving the input stage up too was rejected: 10 A and its return current would cross the boards
+    (a few mV of load-dependent ground offset → tens of mV of CV error through the ÷10.19 divider).
+- **Enclosure size (2026-09-28):** extrusion 120 mm long, 78 mm wide outside, 75 mm across the slot bottoms, 70 mm between
+  the slot ribs, 40 mm inside height, 1.5 mm walls; slots 2 mm high on a 3.5 mm pitch, the lowest slot 7.06 mm above the floor.
+  Plus a ~50 mm 3D-printed front add-on (PETG/ASA) with the display on top and the controls/posts on its front face (to be
+  designed in 3D; may grow). Rear end cap: USB-C PWR, isolated USB-C, DC-in panel connector.
+  → Board ≈ 74.5 mm wide (0.25 mm clearance in the slots); keep a ~3.5 mm band along both long edges free of
+  parts on both sides (slot + rib). Board in the lowest slot → ~5.5 mm aluminium spacer + gap pad under the power stage.
+  Power stage in the aluminium part (bottom side = heat path, no parts there); MCU, control, housekeeping and the UI ribbon in
+  the add-on part (both sides usable). Thermal budget for a ≤ 55 °C case ≈ 6.5 W continuous (calc/results.md §3).
+- **Board stack (`CAD_3D/mech_design.py`):** the **power board** in the lowest slot (≈ 170 mm, reaches into the add-on) and the
+  **control board** in slot 6, the last-but-one (`control_pcb_slot_index = -2`, 110 mm; slot 7 would add 3.5 mm but sits close to
+  the ceiling bosses). Along the length (decided 2026-10-01): both boards have their rear edge at the rear end cap, the front end
+  is free; in KiCad the rear is on the left (−X), and the board centre is the grid / drill origin (`tools/board_setup.py`).
+- **Slot geometry (checked 2026-09-30 against the Hammond 1455K1201 drawing):** the 8 slots are **not centred**. The profile
+  view, measured to scale, gives 7.04 mm from the floor to the lowest slot vs 6.40 mm from the top slot to the ceiling; the
+  7.06 mm dimension is also from the inner floor. So the pattern is shifted ≈ 0.31 mm up (`slot_offset = 0.31`). Apart from
+  this the profile is mirror-symmetric, so the extrusion **can be assembled upside down** and the floor gap then becomes 6.44 mm.
+  Mark "up" on the real part before drilling (the drilled holes fix the orientation). Heights from the inner floor (board
+  resting on the slot bottom; the 1.6 mm board has 0.4 mm play in the 2 mm slot):
+  | | Height from the inner floor |
+  |---|---|
+  | Power board (slot 0) | bottom face 7.06–7.46, top face 8.66–9.06 |
+  | Control board (slot 6, chosen) | bottom face 28.06–28.46, top face 29.66–30.06 |
+  | Between the boards (slot 6) | **19.0–19.8 mm** clear. The SER2918H (17.78 mm max) leaves only **1.2–2.0 mm**: no control-board bottom-side parts above it, and check the other tall parts (bulk caps, fuse holder) |
+  | Above the control board (slot 6) | ≈ 9.9–10.3 mm to the ceiling, ≈ 5.8 mm under the corner screw bosses |
+  | (slot 7 for comparison) | bottom face 31.56–31.96; 22.5–22.9 mm between the boards, 6.44–6.84 mm to the ceiling, ≈ 2.3 mm under the bosses |
+  | Below the power board | the spacer + gap-pad stack must fill 7.06–7.46 mm plus extrusion tolerance and orientation (up to −0.62 mm) |
+
+  Design so these tolerances don't matter: the gap pad's compression range absorbs the stack error. The link between the boards
+  (decided 2026-09-30): **2×20 2.54 mm female headers on both boards + long male-male pins** (19.8 mm stack with the parts at hand);
+  the pins don't have to be fully seated, which takes up the slot play, and the two boards plug together outside the enclosure
+  and slide in as one unit.
+- **3D workflow (build123d, `CAD_3D/`):** `geom_defs.py` holds the parameter dataclasses, one module per part holds its
+  `create_*()` function (`enclosure.py`, ...), `mech_design.py` is the single source of the mechanical reference values, and
+  `check_fit.py` will build the assembly and report clearances. The PLAN numbers above are copies; `mech_design.py` wins.
+  Planned: KiCad board → part boxes (courtyard × height), or a STEP export via `kicad-cli pcb export step` → clearance report and a
+  height-zone DXF for a KiCad User layer. For the UI, 3D leads: front-panel positions in `mech_design.py` drive the printed add-on
+  and the UI board footprint placement.
 - **Enclosure (decided 2026-09-28):** slotted extrusion, the board slides into the side slots (no screw bosses). The case is
   bonded to GND = output negative through H905. H905 sits in the power stage next to the half bridge: one countersunk M3 from
   outside clamps floor → aluminium spacer block + gap pad → board, and also holds down the inductor / bulk caps. Only the bare
   GND ring around H905 touches metal; the FET tabs (SW, VIN_PWR) sit on the insulating gap pad. The LTO100 clamp resistor
-  needs a second drilled hole. Measure the slot-to-floor gap before finalizing the layout.
+  needs a second drilled hole (H906). Measure the slot-to-floor gap before finalizing the layout.
+  **H905 / H906 are threaded (2026-10-01):** Würth WA-SMSI 9774030360R (steel, tin-plated, M3 through-thread, 3 mm tall,
+  Ø6 mm, reflow-soldered on the top side; KiCad `Mounting_Wuerth` footprint; alt. PEM SMTSO-M3-3ET or its Sinhoo clones). The
+  screw comes up from the floor, so no nut has to be reached under the control board. Both rings are GND.
 - **UI board** (2-layer): display, 2× EC11, 5-way nav, lit Output-Enable button, power button, I/O expander, buzzer. Only 3.3 V
   digital on the ribbon (SPI to the display ≤ ~20 MHz, alternate signal/ground wires).
 
@@ -180,9 +234,10 @@ budget, UI, menu, USB CDC SCPI, jump-to-DFU command.
 
 ## 7. Next steps
 1. ~~Pivot: requirements, IC re-shop, calculations, LTspice~~ (done 2026-09-27).
-2. ~~skidl schematic update~~ — `supply_design.py` (main, 303 parts) + `ui_design.py` (UI, 71 parts), ERC clean. See `design/README.md`.
+2. ~~skidl schematic update~~ — split 2026-10-01: `power_design.py` (supply_power, 251 parts) + `control_design.py`
+   (supply_control, 75 parts) + `ui_design.py` (UI, 69 parts), ERC clean, B2B check 40/40. See `design/README.md`.
 3. Review the netlists/BOMs; close the remaining part picks in `TODO.md`; buy the AP33772S and LTC7803 early.
-4. Layout in KiCad (4-layer main board, 2-layer UI board) around the chosen extrusion.
+4. Layout in KiCad (4-layer supply_power, supply_control, 2-layer UI board) around the chosen extrusion; board split done in skidl 2026-10-01 (§4).
 5. Firmware and staged bring-up from a current-limited bench supply on the DC input.
 
 ## References

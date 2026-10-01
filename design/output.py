@@ -1,13 +1,15 @@
 """
 Output stage: 1 mOhm shunt + INA228 (0x41), regen clamp / down-programmer, isolated output switch
 (VOM1271 + 2x BSC040N10NS5 back-to-back, 100 V: the terminals face the outside world), 15 A MINI fuse,
-reverse-polarity diode, XT60 + binding posts.
+reverse-polarity diode, wire lugs to the binding posts on the front cap.
 
 Regen clamp (calc §8, sim t4): comparator 1 compares VOUT_SH/10.19 with DAC_V (filtered) + offset
 (≈ 1.0 V at the output at Vset = 0, ≈ 0.5 V at 27 V), ~0.5 V hysteresis. Comparator 2 fires on VIN_PWR > ~33 V
 (regen pushing the bus up through the top-FET body diode; protects the LTC7803's 40 V pins). Both are diode-OR'd
-into a UCC27511 that drives a BSC040N10NS5 into a 2 Ohm LTO100 screwed to the extrusion. The MCU can disable the
-clamp (CLAMP_DIS) when the energy budget / enclosure temperature says so.
+into a UCC27511 that drives a BSC040N10NS5 into a 2 Ohm LTO100 on the board (back on the PCB 2026-09-30 after the
+board split). The MCU can disable the clamp (CLAMP_DIS) when the energy budget / enclosure temperature says so.
+The LTO100 needs the extrusion as its heatsink (a few W in free air, bursts are 50 W): horizontal tab-down footprint, meant
+for the power board's bottom side, tab on a gap pad on the floor, M3 from outside through the tab hole (insulated tab).
 """
 
 from skidl import Net, Part, subcircuit
@@ -103,8 +105,8 @@ def output_stage():
     q["S"] += GND
     rcl = Net("CLAMP_R")
     q["D"] += rcl
-    rp = Part("Device", "R", value="2R 100W LTO100", footprint="Package_TO_SOT_THT:TO-247-2_Vertical")
-    _fields(rp, "C3546229", "Vishay LTO100F2R000JTE3, screwed to the extrusion (the enclosure is the heatsink)")
+    rp = Part("Device", "R", value="2R 100W LTO100", footprint="Package_TO_SOT_THT:TO-247-2_Horizontal_TabDown")
+    _fields(rp, "C3546229", "Vishay LTO100F2R000JTE3; tab (insulated) on the extrusion floor via gap pad, M3 screw")
     rp[1, 2] += VOUT_SH, rcl
     testpoint("CLAMP_G")[1] += g
 
@@ -149,11 +151,6 @@ def output_stage():
     c_out = C("100n", "0805", note="100 V")
     c_out[1, 2] += OUT_P, GND
 
-    j = Part("Connector_Generic", "Conn_01x02", ref="J4", value="XT60PW-F OUT",
-             footprint="Connector_AMASS:AMASS_XT60PW-F_1x02_P7.20mm_Horizontal")
-    _fields(j, None, "pin 1 = +, pin 2 = GND")
-    j[1] += OUT_P
-    j[2] += GND
     for net, label in ((OUT_P, "POST+"), (GND, "POST-")):
         lug = Part("Mechanical", "MountingHole_Pad", value=label,
                    footprint="MountingHole:MountingHole_4.3mm_M4_Pad_Via")

@@ -60,21 +60,22 @@ Notes:
 
 ## 3. Thermal — fanless, the aluminium extrusion is the heatsink
 
-Model: all heat ends up in the extrusion, which sheds it to the room: Rθ(enclosure→ambient) = 1/(h·A) = 1/(9 W/m²K × 0.060 m²) ≈ **1.9 K/W** (ASSUMPTION: 150×100×60 mm, anodized or painted; bare aluminium radiates poorly → ~1.5× worse).
-FET junction → extrusion ≈ 1 (jc) + 4 (via array) + 1.5 (gap pad) = **6.5 K/W** (ASSUMPTION). Ambient 30 °C.
+Model: all heat ends up in the extrusion, which sheds it to the room: Rθ(enclosure→ambient) = 1/(h·A) = 1/(9 W/m²K × 0.0290 m²) ≈ **3.8 K/W** (extrusion 120 × 78 × 43 mm outside, only the 4 long faces — the end caps and the front add-on are printed; anodized or painted assumed, bare aluminium radiates poorly → ~1.5× worse).
+Heat capacity ≈ 190 J/K (155 g aluminium + board) → thermal time constant ≈ **12 min**.
+FET junction → extrusion ≈ 1 (jc) + 4 (via array) + 1.5 (gap pad) = **6.5 K/W** (ASSUMPTION; board in the lowest slot, 7.06 mm above the floor → ~5.5 mm Al spacer + gap pad). Ambient 30 °C.
 
-| Case | Heat W | Extrusion °C | Top FET Tj °C |
-|---|---|---|---|
-| Worst continuous buck load, no regen | 8.0 | 45 | 64 |
-| Typical heavy use (half the worst loss) | 4.0 | 37 | 57 |
-| Worst buck load + clamp at its 10 W average | 18.0 | 63 | 83 |
-| Clamp 10 W average only (regen, buck idle) | 12.0 | 52 | 72 |
+| Case | Heat W | Extrusion °C (steady) | Top FET Tj °C | Time to 55 °C from cold |
+|---|---|---|---|---|
+| Worst continuous buck load, no regen | 8.0 | 61 | 80 | 21 min |
+| Typical heavy use (half the worst loss) | 4.0 | 45 | 65 | never |
+| Worst buck load + clamp at 10 W average | 18.0 | 99 | 118 | 5 min |
+| Clamp 10 W average only (regen, buck idle) | 12.0 | 76 | 95 | 10 min |
 
+- Continuous heat budget for a ≤ 55 °C enclosure: **6.5 W** in total (housekeeping 2 W included). The worst buck point (8.0 W) is above it: full load runs for the time in the table, then the firmware throttles current from the enclosure NTC. Typical heavy use never gets there.
 - Worst FET losses: top 3.01 W, bottom 0.89 W → only ~20 K above the extrusion. The FETs are not the problem; **the enclosure surface temperature is**.
-- Continuous worst-case buck load: extrusion ≈ 45 °C — warm, acceptable.
-- Adding the clamp's 10 W average on top pushes the extrusion to ≈ 63 °C: too hot to touch comfortably (metal surfaces ≲ 60 °C).
-  → Firmware should derate the clamp's average from the enclosure NTC, not a fixed 10 W (e.g. 10 W while the extrusion < 45 °C, tapering to ~3 W at 55 °C). Bursts (50 W / 10 s = 500 J) are fine: ~0.3–0.5 kg of aluminium rises only 1–2 K.
-- Parts that go on the extrusion side: both buck FETs, the clamp FET, the clamp resistor (TO-247, screwed directly to the extrusion). The inductor (~0.7 W) and shunts can stay on the board.
+- Regen clamp: its average must come out of the same budget. With the buck idle ≈ 4.5 W continuous; firmware derates it from the enclosure NTC (e.g. ~5 W below 45 °C, tapering to ~1 W at 55 °C). Bursts are fine: 50 W / 10 s = 500 J raises the extrusion ≈ 3 K.
+- Parts on the extrusion: both buck FETs and the clamp FET (bottom-side via arrays → gap pad → spacer → floor), the LTO100 clamp resistor (screwed to the wall, wired to the board). The inductor (~0.7 W) and shunts stay on the board.
+- 3D-printed add-on and end caps sit against a ≤ 60 °C extrusion: PETG or ASA, not PLA (softens around 60 °C).
 
 ## 4. Inductor and controller current sense
 

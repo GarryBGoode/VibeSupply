@@ -9,8 +9,8 @@ Qty,Refs,Part,Value,Footprint,LCSC
 1,D5,LED,yellow,LED_SMD:LED_0805_2012Metric,
 1,D6,D_Schottky,SS14,Diode_SMD:D_SMA,
 4,H1 H2 H3 H4,MountingHole,M3,MountingHole:MountingHole_3.2mm_M3,
-1,J1,Conn_02x13_Odd_Even,to main board,Connector_IDC:IDC-Header_2x13_P2.54mm_Vertical,
-1,J3,Conn_01x08,ST7789 2.0in module,Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical,
+1,J1,Conn_02x10_Odd_Even,to supply_control,Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical,
+1,J3,Conn_01x07,OLED 2.42in SSD1309 SPI,Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Vertical,
 1,J4,Conn_01x05,OE panel button,Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical,
 1,J5,Conn_01x02,POWER panel button,Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical,
 1,Q1,2N7002,2N7002,Package_TO_SOT_SMD:SOT-23,
@@ -26,5 +26,5 @@ Qty,Refs,Part,Value,Footprint,LCSC
 1,SW7,SW_Push,ENTER,Button_Switch_THT:SW_PUSH_6mm,
 1,SW8,SW_Push,OUTPUT,Button_Switch_THT:SW_PUSH_6mm,
 1,SW9,SW_Push,POWER,Button_Switch_THT:SW_PUSH_6mm,
-6,TP1 TP2 TP3 TP4 TP5 TP6,TestPoint,TestPoint,TestPoint:TestPoint_Pad_D1.0mm,
+4,TP1 TP2 TP3 TP4,TestPoint,TestPoint,TestPoint:TestPoint_Pad_D1.0mm,
 1,U1,TCA9535PWR,TCA9535PWR,Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm,C130204

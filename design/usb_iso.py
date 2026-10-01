@@ -24,7 +24,9 @@ def usb_isolated():
     j["SBU1", "SBU2"] += NC, NC
     for cc in ("CC1", "CC2"):
         rd = R("5.1k")
-        rd[1, 2] += j[cc], GND_ISO
+        n = Net(f"ISO_{cc}")  # named: the PCB puts every ISO_* net into the ISO net class (isolation rule)
+        j[cc] += n
+        rd[1, 2] += n, GND_ISO
     c_vb = C("4.7u", "0805", note="16 V")
     c_vb[1, 2] += VBUS_PC, GND_ISO
 

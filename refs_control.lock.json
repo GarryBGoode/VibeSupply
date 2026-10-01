@@ -1,0 +1,1250 @@
+{
+ "parts": [
+  {
+   "ref": "C501",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "2.2u",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C502",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "2.2u",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C503",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C504",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "LOG_BOOT",
+    "2": "LOG_SW"
+   }
+  },
+  {
+   "ref": "C505",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "22u",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C506",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "22u",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C507",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "+3V3A",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C508",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3A",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C601",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VBUS_PC",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "C602",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "ISO_VDD1",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "C603",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C604",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "ISO_VDD1",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "C605",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C606",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "VBUS_PC",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "C607",
+   "block": "usb_isolated",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "+5V_ISO",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C701",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C702",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C703",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C704",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C705",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C706",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3A",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C707",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "1u",
+   "nets": {
+    "1": "VREF+",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C708",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "VREF+",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C709",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "NRST",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C710",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "VOUT_SNS_MCU",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C711",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "VTERM_SNS_MCU",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C712",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "VIN_SNS_MCU",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C713",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "IL_SNS_MCU",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C714",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "NTC_OUTSW_MCU",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C715",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "ITH_MON_MCU",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C716",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "NTC_FET_MCU",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C717",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "NTC_IND_MCU",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C718",
+   "block": "mcu",
+   "prefix": "C",
+   "part": "C",
+   "value": "1n",
+   "nets": {
+    "1": "NTC_CLAMP_MCU",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C971",
+   "block": "b2b_control",
+   "prefix": "C",
+   "part": "C",
+   "value": "4.7u",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "C972",
+   "block": "b2b_control",
+   "prefix": "C",
+   "part": "C",
+   "value": "100n",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "D503",
+   "block": "logic_supply",
+   "prefix": "D",
+   "part": "D_Schottky",
+   "value": "SS14",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "+5V_ISO"
+   }
+  },
+  {
+   "ref": "D504",
+   "block": "logic_supply",
+   "prefix": "D",
+   "part": "LED",
+   "value": "green",
+   "nets": {
+    "1": "GND",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "FB501",
+   "block": "logic_supply",
+   "prefix": "FB",
+   "part": "FerriteBead_Small",
+   "value": "600R@100MHz",
+   "nets": {
+    "1": "+3V3",
+    "2": "+3V3A"
+   }
+  },
+  {
+   "ref": "J601",
+   "block": "usb_isolated",
+   "prefix": "J",
+   "part": "USB_C_Receptacle_USB2.0_16P",
+   "value": "USB_C_Receptacle_USB2.0_16P",
+   "nets": {
+    "A1": "GND_ISO",
+    "A4": "VBUS_PC",
+    "A5": "ISO_CC1",
+    "A6": "ISO_UD+",
+    "A7": "ISO_UD-",
+    "A8": "NC",
+    "A9": "VBUS_PC",
+    "A12": "GND_ISO",
+    "B1": "GND_ISO",
+    "B4": "VBUS_PC",
+    "B5": "ISO_CC2",
+    "B6": "ISO_UD+",
+    "B7": "ISO_UD-",
+    "B8": "NC",
+    "B9": "VBUS_PC",
+    "B12": "GND_ISO",
+    "SH": "GND_ISO"
+   }
+  },
+  {
+   "ref": "J701",
+   "block": "mcu",
+   "prefix": "J",
+   "part": "Conn_02x05_Odd_Even",
+   "value": "SWD",
+   "nets": {
+    "1": "+3V3",
+    "2": "~",
+    "3": "GND",
+    "4": "~",
+    "5": "GND",
+    "6": "NC",
+    "7": "NC",
+    "8": "NC",
+    "9": "GND",
+    "10": "NRST"
+   }
+  },
+  {
+   "ref": "J702",
+   "block": "mcu",
+   "prefix": "J",
+   "part": "Conn_01x04",
+   "value": "UART",
+   "nets": {
+    "1": "+3V3",
+    "2": "UART_TX",
+    "3": "UART_RX",
+    "4": "GND"
+   }
+  },
+  {
+   "ref": "J703",
+   "block": "mcu",
+   "prefix": "J",
+   "part": "Conn_02x10_Odd_Even",
+   "value": "UI ribbon",
+   "nets": {
+    "1": "+3V3",
+    "2": "GND",
+    "3": "LCD_SCK",
+    "4": "GND",
+    "5": "LCD_MOSI",
+    "6": "LCD_CS",
+    "7": "LCD_DC",
+    "8": "LCD_RST",
+    "9": "GND",
+    "10": "I2C2_SCL",
+    "11": "I2C2_SDA",
+    "12": "UI_INT",
+    "13": "ENC1_A",
+    "14": "ENC1_B",
+    "15": "ENC2_A",
+    "16": "ENC2_B",
+    "17": "OE_BTN",
+    "18": "PWR_BTN",
+    "19": "BUZZER",
+    "20": "+3V3"
+   }
+  },
+  {
+   "ref": "J971",
+   "block": "b2b_control",
+   "prefix": "J",
+   "part": "Conn_02x20_Odd_Even",
+   "value": "B2B to supply_power",
+   "nets": {
+    "1": "GND",
+    "2": "LOGIC_IN",
+    "3": "GND",
+    "4": "GND",
+    "5": "+3V3",
+    "6": "+3V3",
+    "7": "GND",
+    "8": "GND",
+    "9": "I2C1_SDA",
+    "10": "I2C1_SCL",
+    "11": "INA_ALERT",
+    "12": "PD_IRQ",
+    "13": "OUT_EN",
+    "14": "PD_SINK_EN",
+    "15": "BUCK_PSKIP",
+    "16": "BUCK_RUN",
+    "17": "FAULT",
+    "18": "CLAMP_DIS",
+    "19": "OCP_FLT",
+    "20": "OVP_FLT",
+    "21": "GND",
+    "22": "GND",
+    "23": "GND",
+    "24": "DAC_V",
+    "25": "GND",
+    "26": "DAC_I",
+    "27": "GND",
+    "28": "DAC_ICL",
+    "29": "IL_SNS",
+    "30": "VOUT_SNS",
+    "31": "VIN_SNS",
+    "32": "VTERM_SNS",
+    "33": "GND",
+    "34": "ITH_MON",
+    "35": "NTC_IND",
+    "36": "NTC_FET",
+    "37": "NTC_OUTSW",
+    "38": "NTC_CLAMP",
+    "39": "GND",
+    "40": "GND"
+   }
+  },
+  {
+   "ref": "L501",
+   "block": "logic_supply",
+   "prefix": "L",
+   "part": "L",
+   "value": "22uH",
+   "nets": {
+    "1": "LOG_SW",
+    "2": "+3V3"
+   }
+  },
+  {
+   "ref": "PS601",
+   "block": "usb_isolated",
+   "prefix": "PS",
+   "part": "B0505S-1WR3",
+   "value": "B0505S-1WR3",
+   "nets": {
+    "1": "GND_ISO",
+    "2": "VBUS_PC",
+    "3": "GND",
+    "4": "+5V_ISO"
+   }
+  },
+  {
+   "ref": "R501",
+   "block": "logic_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "66.5k",
+   "nets": {
+    "1": "~",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R502",
+   "block": "logic_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "23.2k",
+   "nets": {
+    "1": "+3V3",
+    "2": "LOG_FB"
+   }
+  },
+  {
+   "ref": "R503",
+   "block": "logic_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "LOG_FB",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R504",
+   "block": "logic_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "1k",
+   "nets": {
+    "1": "+3V3",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R601",
+   "block": "usb_isolated",
+   "prefix": "R",
+   "part": "R",
+   "value": "5.1k",
+   "nets": {
+    "1": "ISO_CC1",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "R602",
+   "block": "usb_isolated",
+   "prefix": "R",
+   "part": "R",
+   "value": "5.1k",
+   "nets": {
+    "1": "ISO_CC2",
+    "2": "GND_ISO"
+   }
+  },
+  {
+   "ref": "R603",
+   "block": "usb_isolated",
+   "prefix": "R",
+   "part": "R",
+   "value": "2.2k",
+   "nets": {
+    "1": "+5V_ISO",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R701",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "BOOT0",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R702",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "4.7k",
+   "nets": {
+    "1": "+3V3",
+    "2": "I2C1_SCL"
+   }
+  },
+  {
+   "ref": "R703",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "4.7k",
+   "nets": {
+    "1": "+3V3",
+    "2": "I2C1_SDA"
+   }
+  },
+  {
+   "ref": "R704",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "2.2k",
+   "nets": {
+    "1": "+3V3",
+    "2": "I2C2_SCL"
+   }
+  },
+  {
+   "ref": "R705",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "2.2k",
+   "nets": {
+    "1": "+3V3",
+    "2": "I2C2_SDA"
+   }
+  },
+  {
+   "ref": "R706",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "UI_INT"
+   }
+  },
+  {
+   "ref": "R707",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "10k",
+   "nets": {
+    "1": "+3V3",
+    "2": "INA_ALERT"
+   }
+  },
+  {
+   "ref": "R708",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "100",
+   "nets": {
+    "1": "VOUT_SNS",
+    "2": "VOUT_SNS_MCU"
+   }
+  },
+  {
+   "ref": "R709",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "100",
+   "nets": {
+    "1": "VTERM_SNS",
+    "2": "VTERM_SNS_MCU"
+   }
+  },
+  {
+   "ref": "R710",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "100",
+   "nets": {
+    "1": "VIN_SNS",
+    "2": "VIN_SNS_MCU"
+   }
+  },
+  {
+   "ref": "R711",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "100",
+   "nets": {
+    "1": "IL_SNS",
+    "2": "IL_SNS_MCU"
+   }
+  },
+  {
+   "ref": "R712",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "100",
+   "nets": {
+    "1": "NTC_OUTSW",
+    "2": "NTC_OUTSW_MCU"
+   }
+  },
+  {
+   "ref": "R713",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "100",
+   "nets": {
+    "1": "ITH_MON",
+    "2": "ITH_MON_MCU"
+   }
+  },
+  {
+   "ref": "R714",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "100",
+   "nets": {
+    "1": "NTC_FET",
+    "2": "NTC_FET_MCU"
+   }
+  },
+  {
+   "ref": "R715",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "100",
+   "nets": {
+    "1": "NTC_IND",
+    "2": "NTC_IND_MCU"
+   }
+  },
+  {
+   "ref": "R716",
+   "block": "mcu",
+   "prefix": "R",
+   "part": "R",
+   "value": "100",
+   "nets": {
+    "1": "NTC_CLAMP",
+    "2": "NTC_CLAMP_MCU"
+   }
+  },
+  {
+   "ref": "SW701",
+   "block": "mcu",
+   "prefix": "SW",
+   "part": "SW_Push",
+   "value": "RESET",
+   "nets": {
+    "1": "NRST",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "SW702",
+   "block": "mcu",
+   "prefix": "SW",
+   "part": "SW_Push",
+   "value": "BOOT",
+   "nets": {
+    "1": "BOOT0",
+    "2": "+3V3"
+   }
+  },
+  {
+   "ref": "TP501",
+   "block": "logic_supply",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "+3V3"
+   }
+  },
+  {
+   "ref": "U501",
+   "block": "logic_supply",
+   "prefix": "U",
+   "part": "LMR38010",
+   "value": "LMR38010",
+   "nets": {
+    "1": "GND",
+    "2": "LOGIC_IN",
+    "3": "LOGIC_IN",
+    "4": "~",
+    "5": "LOG_FB",
+    "6": "NC",
+    "7": "LOG_BOOT",
+    "8": "LOG_SW",
+    "9": "GND"
+   }
+  },
+  {
+   "ref": "U601",
+   "block": "usb_isolated",
+   "prefix": "U",
+   "part": "USBLC6-2SC6",
+   "value": "USBLC6-2SC6",
+   "nets": {
+    "1": "ISO_UD+",
+    "2": "GND_ISO",
+    "3": "ISO_UD-",
+    "4": "ISO_UD-",
+    "5": "VBUS_PC",
+    "6": "ISO_UD+"
+   }
+  },
+  {
+   "ref": "U602",
+   "block": "usb_isolated",
+   "prefix": "U",
+   "part": "ADUM3160",
+   "value": "ADUM3160",
+   "nets": {
+    "1": "VBUS_PC",
+    "2": "GND_ISO",
+    "3": "ISO_VDD1",
+    "4": "ISO_VDD1",
+    "5": "ISO_VDD1",
+    "6": "ISO_UD-",
+    "7": "ISO_UD+",
+    "8": "GND_ISO",
+    "9": "GND",
+    "10": "USB_DP",
+    "11": "USB_DM",
+    "12": "+3V3",
+    "13": "+3V3",
+    "14": "+3V3",
+    "15": "GND",
+    "16": "+3V3"
+   }
+  },
+  {
+   "ref": "U701",
+   "block": "mcu",
+   "prefix": "U",
+   "part": "STM32G474RETx",
+   "value": "STM32G474RETx",
+   "nets": {
+    "1": "+3V3",
+    "2": "PWR_BTN",
+    "3": "INA_ALERT",
+    "4": "FAULT",
+    "5": "NC",
+    "6": "NC",
+    "7": "NRST",
+    "8": "ENC2_A",
+    "9": "ENC2_B",
+    "10": "ITH_MON_MCU",
+    "11": "NTC_FET_MCU",
+    "12": "OVP_FLT",
+    "13": "VOUT_SNS_MCU",
+    "14": "VTERM_SNS_MCU",
+    "15": "GND",
+    "16": "+3V3",
+    "17": "VIN_SNS_MCU",
+    "18": "DAC_V",
+    "19": "DAC_I",
+    "20": "DAC_ICL",
+    "21": "BUZZER",
+    "22": "NTC_IND_MCU",
+    "23": "NTC_CLAMP_MCU",
+    "24": "IL_SNS_MCU",
+    "25": "OCP_FLT",
+    "26": "NTC_OUTSW_MCU",
+    "27": "GND",
+    "28": "VREF+",
+    "29": "+3V3A",
+    "30": "NC",
+    "31": "GND",
+    "32": "+3V3",
+    "33": "NC",
+    "34": "BUCK_RUN",
+    "35": "LCD_SCK",
+    "36": "BUCK_PSKIP",
+    "37": "LCD_MOSI",
+    "38": "ENC1_A",
+    "39": "ENC1_B",
+    "40": "LCD_CS",
+    "41": "LCD_DC",
+    "42": "I2C2_SDA",
+    "43": "I2C2_SCL",
+    "44": "UI_INT",
+    "45": "USB_DM",
+    "46": "USB_DP",
+    "47": "GND",
+    "48": "+3V3",
+    "49": "~",
+    "50": "~",
+    "51": "I2C1_SCL",
+    "52": "UART_TX",
+    "53": "UART_RX",
+    "54": "LCD_RST",
+    "55": "OE_BTN",
+    "56": "PD_SINK_EN",
+    "57": "NC",
+    "58": "OUT_EN",
+    "59": "CLAMP_DIS",
+    "60": "I2C1_SDA",
+    "61": "BOOT0",
+    "62": "PD_IRQ",
+    "63": "GND",
+    "64": "+3V3"
+   }
+  }
+ ],
+ "retired": [
+  "C101",
+  "C102",
+  "C103",
+  "C104",
+  "C105",
+  "C106",
+  "C107",
+  "C108",
+  "C161",
+  "C162",
+  "C163",
+  "C181",
+  "C182",
+  "C201",
+  "C202",
+  "C203",
+  "C204",
+  "C205",
+  "C206",
+  "C207",
+  "C208",
+  "C209",
+  "C210",
+  "C211",
+  "C212",
+  "C213",
+  "C214",
+  "C215",
+  "C216",
+  "C217",
+  "C218",
+  "C219",
+  "C220",
+  "C221",
+  "C222",
+  "C223",
+  "C224",
+  "C225",
+  "C226",
+  "C227",
+  "C228",
+  "C229",
+  "C230",
+  "C231",
+  "C232",
+  "C301",
+  "C302",
+  "C303",
+  "C304",
+  "C305",
+  "C306",
+  "C307",
+  "C308",
+  "C309",
+  "C310",
+  "C311",
+  "C312",
+  "C313",
+  "C314",
+  "C401",
+  "C402",
+  "C403",
+  "C404",
+  "C405",
+  "C406",
+  "C407",
+  "C408",
+  "C409",
+  "C541",
+  "C542",
+  "C543",
+  "C544",
+  "C545",
+  "C546",
+  "C547",
+  "C548",
+  "C549",
+  "C550",
+  "D101",
+  "D102",
+  "D103",
+  "D161",
+  "D181",
+  "D201",
+  "D202",
+  "D301",
+  "D302",
+  "D303",
+  "D304",
+  "D305",
+  "D306",
+  "D401",
+  "D402",
+  "D403",
+  "D404",
+  "D501",
+  "D502",
+  "F401",
+  "H401",
+  "H402",
+  "H901",
+  "H902",
+  "H903",
+  "H904",
+  "H905",
+  "J101",
+  "J161",
+  "J401",
+  "J402",
+  "J581",
+  "L201",
+  "L202",
+  "L541",
+  "Q101",
+  "Q102",
+  "Q161",
+  "Q162",
+  "Q201",
+  "Q202",
+  "Q203",
+  "Q301",
+  "Q302",
+  "Q401",
+  "Q402",
+  "Q403",
+  "Q404",
+  "Q405",
+  "Q581",
+  "R101",
+  "R102",
+  "R103",
+  "R104",
+  "R105",
+  "R106",
+  "R107",
+  "R108",
+  "R109",
+  "R110",
+  "R111",
+  "R161",
+  "R162",
+  "R163",
+  "R164",
+  "R181",
+  "R182",
+  "R183",
+  "R201",
+  "R202",
+  "R203",
+  "R204",
+  "R205",
+  "R206",
+  "R207",
+  "R208",
+  "R209",
+  "R210",
+  "R211",
+  "R212",
+  "R213",
+  "R214",
+  "R215",
+  "R216",
+  "R217",
+  "R218",
+  "R219",
+  "R301",
+  "R302",
+  "R303",
+  "R304",
+  "R305",
+  "R306",
+  "R307",
+  "R308",
+  "R309",
+  "R310",
+  "R311",
+  "R312",
+  "R313",
+  "R314",
+  "R315",
+  "R316",
+  "R317",
+  "R318",
+  "R319",
+  "R401",
+  "R402",
+  "R403",
+  "R404",
+  "R405",
+  "R406",
+  "R407",
+  "R408",
+  "R409",
+  "R410",
+  "R411",
+  "R412",
+  "R413",
+  "R414",
+  "R415",
+  "R416",
+  "R417",
+  "R418",
+  "R419",
+  "R420",
+  "R421",
+  "R422",
+  "R423",
+  "R424",
+  "R541",
+  "R542",
+  "R543",
+  "R544",
+  "R545",
+  "R546",
+  "R581",
+  "R582",
+  "R583",
+  "TH101",
+  "TH201",
+  "TH202",
+  "TH401",
+  "TH402",
+  "TP101",
+  "TP102",
+  "TP103",
+  "TP201",
+  "TP202",
+  "TP301",
+  "TP302",
+  "TP303",
+  "TP304",
+  "TP401",
+  "TP402",
+  "TP541",
+  "TP542",
+  "U101",
+  "U102",
+  "U161",
+  "U181",
+  "U201",
+  "U202",
+  "U301",
+  "U302",
+  "U401",
+  "U402",
+  "U403",
+  "U404",
+  "U405",
+  "U541",
+  "U542"
+ ]
+}

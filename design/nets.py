@@ -13,7 +13,7 @@ GND_ISO = Net("GND_ISO")          # PC side of the USB isolator (not connected t
 
 VBUS_RAW = Net("VBUS_RAW")        # USB-C PD connector VBUS (5-28 V)
 VBUS_S = Net("VBUS_S")            # after the AP33772S 5 mOhm current-sense resistor
-DCIN_RAW = Net("DCIN_RAW")        # XT60 DC input (9-30 V, survives a 48 V battery)
+DCIN_RAW = Net("DCIN_RAW")        # DC input wires (9-30 V, survives a 48 V battery)
 VIN_BUS = Net("VIN_BUS")          # common bus after both ideal diodes
 VIN_PWR = Net("VIN_PWR")          # after the input shunt = buck input
 LOGIC_IN = Net("LOGIC_IN")        # diode-OR of VBUS_RAW / DCIN_RAW / P5V_ISO -> 3.3 V buck
@@ -54,8 +54,6 @@ BUCK_PSKIP = Net("BUCK_PSKIP")    # PB14 (high/default = pulse-skip, low = force
 OUT_EN = Net("OUT_EN")            # PB5 (high = output switch on)
 CLAMP_DIS = Net("CLAMP_DIS")      # PB6 (high = regen clamp disabled; default enabled)
 FAULT = Net("FAULT")              # PC15 readback: OR of OVP_FLT, OCP_FLT, HW_OVP
-FAN_PWM = Net("FAN_PWM")          # PB10 TIM2_CH3
-FAN_TACH = Net("FAN_TACH")        # PB11 TIM2_CH4
 I2C1_SCL = Net("I2C1_SCL")        # PA15 (power bus: AP33772S 0x52, INA228 0x40/0x41, opt. DAC80502)
 I2C1_SDA = Net("I2C1_SDA")        # PB7
 PD_IRQ = Net("PD_IRQ")            # PB9 (AP33772S INT, active high)
@@ -73,13 +71,12 @@ LCD_MOSI = Net("LCD_MOSI")        # PB15 SPI2_MOSI
 LCD_CS = Net("LCD_CS")            # PC8
 LCD_DC = Net("LCD_DC")            # PC9
 LCD_RST = Net("LCD_RST")          # PC12
-LCD_BL = Net("LCD_BL")            # PB4 TIM16_CH1
 ENC1_A = Net("ENC1_A")            # PC6 TIM3_CH1
 ENC1_B = Net("ENC1_B")            # PC7 TIM3_CH2
-ENC1_SW = Net("ENC1_SW")          # PF0
+ENC1_SW = Net("ENC1_SW")          # UI board only: TCA9535 P05
 ENC2_A = Net("ENC2_A")            # PC0 TIM1_CH1
 ENC2_B = Net("ENC2_B")            # PC1 TIM1_CH2
-ENC2_SW = Net("ENC2_SW")          # PF1
+ENC2_SW = Net("ENC2_SW")          # UI board only: TCA9535 P06
 OE_BTN = Net("OE_BTN")            # PD2
 PWR_BTN = Net("PWR_BTN")          # PC13 WKUP2
 BUZZER = Net("BUZZER")            # PA7 TIM17_CH1

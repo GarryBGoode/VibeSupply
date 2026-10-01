@@ -1,6 +1,6 @@
 """
 Input power: USB-C PD sink (AP33772S + 5 mOhm VBUS sense + LM74800 ideal diode / sink switch),
-XT60 DC input (LM74800), input shunt + INA228, VIN sense divider.
+DC input (wired from a panel connector on the end cap; LM74800), input shunt + INA228, VIN sense divider.
 
 References: AP33772S datasheet DS46176 Rev. 10 (fig. 1 typical application, table 4 VSEL, I2C address 0x52),
 LM7480-Q1 datasheet SNOSD95C. Design notes: calc/ic_reshop.md.
@@ -144,9 +144,10 @@ def usb_pd_input():
 
 @subcircuit
 def dc_input():
-    j = Part("Connector_Generic", "Conn_01x02", ref="J2", value="XT60PW-M DC IN",
-             footprint="Connector_AMASS:AMASS_XT60PW-M_1x02_P7.20mm_Horizontal")
-    _fields(j, "C98732", "9-30 V, 10 A; survives a 48 V battery (OV lockout). Pin 1 = +, pin 2 = GND (check at layout)")
+    # wire landing: the DC connector (XT60 or anything else) sits on the end cap, 1.5 mm2 (AWG16) wires to the board
+    j = Part("Connector_Generic", "Conn_01x02", ref="J2", value="DC IN wires",
+             footprint="Connector_Wire:SolderWire-1.5sqmm_1x02_P6mm_D1.7mm_OD3mm_Relief")
+    _fields(j, None, "9-30 V, 10 A; survives a 48 V battery (OV lockout). Pin 1 = +, pin 2 = GND. Not assembled: wires")
     j[1] += DCIN_RAW
     j[2] += GND
     c = C("1u", "1206", note="100 V")

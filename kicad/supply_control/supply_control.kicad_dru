@@ -1,0 +1,18 @@
+(version 1)
+
+# Written by tools/board_setup.py; edit the script, not this file (re-running overwrites it).
+
+(rule "fine-pitch IC / connector pins"
+  (condition "A.Type == 'Pad' && B.Type == 'Pad' && (A.memberOfFootprint('U*') || A.memberOfFootprint('J*')) && (B.memberOfFootprint('U*') || B.memberOfFootprint('J*'))")
+  (constraint clearance (min 0.15mm)))
+
+(rule "own holes of connectors and inserts"
+  (condition "A.Type == 'Pad' && B.Type == 'Pad' && ((A.memberOfFootprint('J*') && B.memberOfFootprint('J*')) || (A.memberOfFootprint('H*') && B.memberOfFootprint('H*')))")
+  (constraint hole_clearance (min 0mm)))
+
+# Isolation barrier: PC-side copper (net class ISO) keeps 1.5 mm from everything else on every layer, which also
+# forces the plane split under U602 (ADuM3160). PS601 (B0505S, SIP-4 on 2.54 mm) has both sides on adjacent pins,
+# so its own pads are exempt; so are unconnected pads (USB-C SBU).
+(rule "isolation barrier"
+  (condition "A.hasNetclass('ISO') && !B.hasNetclass('ISO') && B.NetName != '' && !A.memberOfFootprint('PS601')")
+  (constraint clearance (min 1.5mm)))

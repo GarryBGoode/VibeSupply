@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "ui_design.py")
-    (date "09/28/2026 03:18 PM")
+    (date "10/01/2026 12:07 AM")
     (tool "SKiDL (2.3.0)")
     (sheet
       (number 1)
@@ -57,7 +57,7 @@
         (field
           (name "SKiDL Tag") "BZ1")
         (field
-          (name "SKiDL Line") "ui_design.py:120"))
+          (name "SKiDL Line") "ui_design.py:121"))
       (libsource
         (lib "Device")
         (part "Buzzer"))
@@ -489,7 +489,7 @@
         (field
           (name "SKiDL Tag") "H1")
         (field
-          (name "SKiDL Line") "ui_design.py:132"))
+          (name "SKiDL Line") "ui_design.py:133"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -513,7 +513,7 @@
         (field
           (name "SKiDL Tag") "H2")
         (field
-          (name "SKiDL Line") "ui_design.py:132"))
+          (name "SKiDL Line") "ui_design.py:133"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -537,7 +537,7 @@
         (field
           (name "SKiDL Tag") "H3")
         (field
-          (name "SKiDL Line") "ui_design.py:132"))
+          (name "SKiDL Line") "ui_design.py:133"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -561,7 +561,7 @@
         (field
           (name "SKiDL Tag") "H4")
         (field
-          (name "SKiDL Line") "ui_design.py:132"))
+          (name "SKiDL Line") "ui_design.py:133"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -572,14 +572,14 @@
       (tstamps "06da5295-48dd-5f5e-a314-66b923e79308"))
     (comp
       (ref "J1")
-      (value "to main board")
-      (description "Generic connector, double row, 02x13, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint "Connector_IDC:IDC-Header_2x13_P2.54mm_Vertical")
+      (value "to supply_control")
+      (description "Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
+      (footprint "Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical")
       (fields
         (field
-          (name "Description") "Generic connector, double row, 02x13, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
+          (name "Description") "Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
         (field
-          (name "Footprint") "Connector_IDC:IDC-Header_2x13_P2.54mm_Vertical")
+          (name "Footprint") "Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical")
         (field
           (name "Datasheet"))
         (field
@@ -588,7 +588,7 @@
           (name "SKiDL Line") "ui_design.py:38"))
       (libsource
         (lib "Connector_Generic")
-        (part "Conn_02x13_Odd_Even"))
+        (part "Conn_02x10_Odd_Even"))
       (sheetpath
         (names "/")
         (tstamps "/"))
@@ -596,14 +596,14 @@
       (tstamps "d7608689-a7d2-514c-aa16-0f8bde5cf213"))
     (comp
       (ref "J3")
-      (value "ST7789 2.0in module")
-      (description "Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical")
+      (value "OLED 2.42in SSD1309 SPI")
+      (description "Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)")
+      (footprint "Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Vertical")
       (fields
         (field
-          (name "Description") "Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)")
+          (name "Description") "Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)")
         (field
-          (name "Footprint") "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical")
+          (name "Footprint") "Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Vertical")
         (field
           (name "Datasheet"))
         (field
@@ -612,7 +612,7 @@
           (name "SKiDL Line") "ui_design.py:47"))
       (libsource
         (lib "Connector_Generic")
-        (part "Conn_01x08"))
+        (part "Conn_01x07"))
       (sheetpath
         (names "/")
         (tstamps "/"))
@@ -633,7 +633,7 @@
         (field
           (name "SKiDL Tag") "J4")
         (field
-          (name "SKiDL Line") "ui_design.py:109"))
+          (name "SKiDL Line") "ui_design.py:110"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x05"))
@@ -657,7 +657,7 @@
         (field
           (name "SKiDL Tag") "J5")
         (field
-          (name "SKiDL Line") "ui_design.py:115"))
+          (name "SKiDL Line") "ui_design.py:116"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x02"))
@@ -1549,7 +1549,7 @@
         (field
           (name "SKiDL Tag") "SW8")
         (field
-          (name "SKiDL Line") "ui_design.py:104"))
+          (name "SKiDL Line") "ui_design.py:105"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1573,7 +1573,7 @@
         (field
           (name "SKiDL Tag") "SW9")
         (field
-          (name "SKiDL Line") "ui_design.py:104"))
+          (name "SKiDL Line") "ui_design.py:105"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1589,7 +1589,7 @@
       (footprint "TestPoint:TestPoint_Pad_D1.0mm")
       (fields
         (field
-          (name "Label") "EXP_P05")
+          (name "Label") "EXP_P07")
         (field
           (name "Description") "test point")
         (field
@@ -1615,7 +1615,7 @@
       (footprint "TestPoint:TestPoint_Pad_D1.0mm")
       (fields
         (field
-          (name "Label") "EXP_P06")
+          (name "Label") "EXP_P15")
         (field
           (name "Description") "test point")
         (field
@@ -1641,7 +1641,7 @@
       (footprint "TestPoint:TestPoint_Pad_D1.0mm")
       (fields
         (field
-          (name "Label") "EXP_P07")
+          (name "Label") "EXP_P16")
         (field
           (name "Description") "test point")
         (field
@@ -1667,7 +1667,7 @@
       (footprint "TestPoint:TestPoint_Pad_D1.0mm")
       (fields
         (field
-          (name "Label") "EXP_P15")
+          (name "Label") "EXP_P17")
         (field
           (name "Description") "test point")
         (field
@@ -1686,58 +1686,6 @@
         (tstamps "/"))
       (component_classes)
       (tstamps "2b772136-9490-52ee-a6b6-3823f884de0d"))
-    (comp
-      (ref "TP5")
-      (value "TestPoint")
-      (description "test point")
-      (footprint "TestPoint:TestPoint_Pad_D1.0mm")
-      (fields
-        (field
-          (name "Label") "EXP_P16")
-        (field
-          (name "Description") "test point")
-        (field
-          (name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "TP5")
-        (field
-          (name "SKiDL Line") "design\parts.py:104"))
-      (libsource
-        (lib "Connector")
-        (part "TestPoint"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "3ef9c998-1bfd-52d6-903a-2314b2d59b7d"))
-    (comp
-      (ref "TP6")
-      (value "TestPoint")
-      (description "test point")
-      (footprint "TestPoint:TestPoint_Pad_D1.0mm")
-      (fields
-        (field
-          (name "Label") "EXP_P17")
-        (field
-          (name "Description") "test point")
-        (field
-          (name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "TP6")
-        (field
-          (name "SKiDL Line") "design\parts.py:104"))
-      (libsource
-        (lib "Connector")
-        (part "TestPoint"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "09741339-fe92-5d8d-9626-685dbcd30d75"))
     (comp
       (ref "U1")
       (value "TCA9535PWR")
@@ -1797,7 +1745,7 @@
         (pintype "PASSIVE"))
       (node
         (ref "J1")
-        (pin "2")
+        (pin "20")
         (pintype "PASSIVE"))
       (node
         (ref "J3")
@@ -1973,7 +1921,7 @@
       (class "Default")
       (node
         (ref "J1")
-        (pin "24")
+        (pin "19")
         (pintype "PASSIVE"))
       (node
         (ref "Q1")
@@ -2009,7 +1957,7 @@
         (pintype "PASSIVE"))
       (node
         (ref "J1")
-        (pin "15")
+        (pin "13")
         (pintype "PASSIVE"))
       (node
         (ref "R2")
@@ -2041,7 +1989,7 @@
         (pintype "PASSIVE"))
       (node
         (ref "J1")
-        (pin "16")
+        (pin "14")
         (pintype "PASSIVE"))
       (node
         (ref "R4")
@@ -2072,13 +2020,13 @@
         (pin "1")
         (pintype "PASSIVE"))
       (node
-        (ref "J1")
-        (pin "17")
-        (pintype "PASSIVE"))
-      (node
         (ref "R6")
         (pin "2")
-        (pintype "PASSIVE")))
+        (pintype "PASSIVE"))
+      (node
+        (ref "U1")
+        (pin "9")
+        (pintype "BIDIRECTIONAL")))
     (net
       (code 14)
       (name "ENC1_SW_RAW")
@@ -2105,7 +2053,7 @@
         (pintype "PASSIVE"))
       (node
         (ref "J1")
-        (pin "19")
+        (pin "15")
         (pintype "PASSIVE"))
       (node
         (ref "R8")
@@ -2137,7 +2085,7 @@
         (pintype "PASSIVE"))
       (node
         (ref "J1")
-        (pin "20")
+        (pin "16")
         (pintype "PASSIVE"))
       (node
         (ref "R10")
@@ -2168,13 +2116,13 @@
         (pin "1")
         (pintype "PASSIVE"))
       (node
-        (ref "J1")
-        (pin "21")
-        (pintype "PASSIVE"))
-      (node
         (ref "R12")
         (pin "2")
-        (pintype "PASSIVE")))
+        (pintype "PASSIVE"))
+      (node
+        (ref "U1")
+        (pin "10")
+        (pintype "BIDIRECTIONAL")))
     (net
       (code 20)
       (name "ENC2_SW_RAW")
@@ -2241,27 +2189,15 @@
         (pintype "PASSIVE"))
       (node
         (ref "J1")
-        (pin "11")
+        (pin "2")
         (pintype "PASSIVE"))
       (node
         (ref "J1")
-        (pin "18")
+        (pin "4")
         (pintype "PASSIVE"))
       (node
         (ref "J1")
-        (pin "25")
-        (pintype "PASSIVE"))
-      (node
-        (ref "J1")
-        (pin "26")
-        (pintype "PASSIVE"))
-      (node
-        (ref "J1")
-        (pin "3")
-        (pintype "PASSIVE"))
-      (node
-        (ref "J1")
-        (pin "5")
+        (pin "9")
         (pintype "PASSIVE"))
       (node
         (ref "J3")
@@ -2345,7 +2281,7 @@
       (class "Default")
       (node
         (ref "J1")
-        (pin "13")
+        (pin "10")
         (pintype "PASSIVE"))
       (node
         (ref "U1")
@@ -2357,7 +2293,7 @@
       (class "Default")
       (node
         (ref "J1")
-        (pin "12")
+        (pin "11")
         (pintype "PASSIVE"))
       (node
         (ref "U1")
@@ -2365,78 +2301,66 @@
         (pintype "BIDIRECTIONAL")))
     (net
       (code 24)
-      (name "LCD_BL")
-      (class "Default")
-      (node
-        (ref "J1")
-        (pin "10")
-        (pintype "PASSIVE"))
-      (node
-        (ref "J3")
-        (pin "8")
-        (pintype "PASSIVE")))
-    (net
-      (code 25)
       (name "LCD_CS")
       (class "Default")
       (node
         (ref "J1")
-        (pin "7")
+        (pin "6")
         (pintype "PASSIVE"))
       (node
         (ref "J3")
         (pin "7")
         (pintype "PASSIVE")))
     (net
-      (code 26)
+      (code 25)
       (name "LCD_DC")
       (class "Default")
       (node
         (ref "J1")
-        (pin "8")
+        (pin "7")
         (pintype "PASSIVE"))
       (node
         (ref "J3")
         (pin "6")
         (pintype "PASSIVE")))
     (net
-      (code 27)
+      (code 26)
       (name "LCD_MOSI")
       (class "Default")
       (node
         (ref "J1")
-        (pin "6")
+        (pin "5")
         (pintype "PASSIVE"))
       (node
         (ref "J3")
         (pin "4")
         (pintype "PASSIVE")))
     (net
-      (code 28)
+      (code 27)
       (name "LCD_RST")
       (class "Default")
       (node
         (ref "J1")
-        (pin "9")
+        (pin "8")
         (pintype "PASSIVE"))
       (node
         (ref "J3")
         (pin "5")
         (pintype "PASSIVE")))
     (net
-      (code 29)
+      (code 28)
       (name "LCD_SCK")
       (class "Default")
       (node
         (ref "J1")
-        (pin "4")
+        (pin "3")
         (pintype "PASSIVE"))
       (node
         (ref "J3")
         (pin "3")
         (pintype "PASSIVE")))
     (net
-      (code 30)
+      (code 29)
       (name "LED_CC_K")
       (class "Default")
       (node
@@ -2448,7 +2372,7 @@
         (pin "15")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 31)
+      (code 30)
       (name "LED_CV_K")
       (class "Default")
       (node
@@ -2460,7 +2384,7 @@
         (pin "16")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 32)
+      (code 31)
       (name "LED_FAULT_K")
       (class "Default")
       (node
@@ -2472,7 +2396,7 @@
         (pin "17")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 33)
+      (code 32)
       (name "LED_OE_G_K")
       (class "Default")
       (node
@@ -2488,7 +2412,7 @@
         (pin "14")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 34)
+      (code 33)
       (name "LED_OE_R_K")
       (class "Default")
       (node
@@ -2504,7 +2428,7 @@
         (pin "13")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 35)
+      (code 34)
       (name "N$1")
       (class "Default")
       (node
@@ -2513,35 +2437,11 @@
         (pintype "PASSIVE"))
       (node
         (ref "U1")
-        (pin "9")
+        (pin "11")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 36)
+      (code 35)
       (name "N$10")
-      (class "Default")
-      (node
-        (ref "TP5")
-        (pin "1")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U1")
-        (pin "19")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 37)
-      (name "N$11")
-      (class "Default")
-      (node
-        (ref "TP6")
-        (pin "1")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U1")
-        (pin "20")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 38)
-      (name "N$12")
       (class "Default")
       (node
         (ref "J4")
@@ -2552,32 +2452,8 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 39)
+      (code 36)
       (name "N$2")
-      (class "Default")
-      (node
-        (ref "TP2")
-        (pin "1")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U1")
-        (pin "10")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 40)
-      (name "N$3")
-      (class "Default")
-      (node
-        (ref "TP3")
-        (pin "1")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U1")
-        (pin "11")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 41)
-      (name "N$4")
       (class "Default")
       (node
         (ref "D1")
@@ -2588,8 +2464,8 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 42)
-      (name "N$5")
+      (code 37)
+      (name "N$3")
       (class "Default")
       (node
         (ref "D2")
@@ -2600,8 +2476,8 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 43)
-      (name "N$6")
+      (code 38)
+      (name "N$4")
       (class "Default")
       (node
         (ref "D3")
@@ -2612,8 +2488,8 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 44)
-      (name "N$7")
+      (code 39)
+      (name "N$5")
       (class "Default")
       (node
         (ref "D4")
@@ -2624,8 +2500,8 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 45)
-      (name "N$8")
+      (code 40)
+      (name "N$6")
       (class "Default")
       (node
         (ref "D5")
@@ -2636,7 +2512,31 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 46)
+      (code 41)
+      (name "N$7")
+      (class "Default")
+      (node
+        (ref "TP2")
+        (pin "1")
+        (pintype "PASSIVE"))
+      (node
+        (ref "U1")
+        (pin "18")
+        (pintype "BIDIRECTIONAL")))
+    (net
+      (code 42)
+      (name "N$8")
+      (class "Default")
+      (node
+        (ref "TP3")
+        (pin "1")
+        (pintype "PASSIVE"))
+      (node
+        (ref "U1")
+        (pin "19")
+        (pintype "BIDIRECTIONAL")))
+    (net
+      (code 43)
       (name "N$9")
       (class "Default")
       (node
@@ -2645,10 +2545,10 @@
         (pintype "PASSIVE"))
       (node
         (ref "U1")
-        (pin "18")
+        (pin "20")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 47)
+      (code 44)
       (name "OE_BTN")
       (class "Default")
       (node
@@ -2657,14 +2557,14 @@
         (pintype "PASSIVE"))
       (node
         (ref "J1")
-        (pin "22")
+        (pin "17")
         (pintype "PASSIVE"))
       (node
         (ref "R24")
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 48)
+      (code 45)
       (name "OE_BTN_RAW")
       (class "Default")
       (node
@@ -2684,7 +2584,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 49)
+      (code 46)
       (name "PWR_BTN")
       (class "Default")
       (node
@@ -2693,14 +2593,14 @@
         (pintype "PASSIVE"))
       (node
         (ref "J1")
-        (pin "23")
+        (pin "18")
         (pintype "PASSIVE"))
       (node
         (ref "R26")
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 50)
+      (code 47)
       (name "PWR_BTN_RAW")
       (class "Default")
       (node
@@ -2720,12 +2620,12 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 51)
+      (code 48)
       (name "UI_INT")
       (class "Default")
       (node
         (ref "J1")
-        (pin "14")
+        (pin "12")
         (pintype "PASSIVE"))
       (node
         (ref "U1")

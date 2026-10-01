@@ -243,44 +243,59 @@ out()
 out("## 3. Thermal — fanless, the aluminium extrusion is the heatsink")
 out()
 T_AMB = 30.0                   # C, bench room (ASSUMPTION)
-ENCL_DIM = (0.15, 0.10, 0.06)  # m, ASSUMPTION: ~150 × 100 × 60 mm extrusion + panels
+# Enclosure (measured 2026-09-28): slotted extrusion, 78 mm wide outside, 40 mm inside height, 1.5 mm walls, cut to 120 mm.
+# End caps and the ~50 mm front add-on are 3D printed and shed next to nothing -> only the 4 long faces count.
+EXT_W, EXT_H, EXT_L, EXT_T = 0.078, 0.040 + 2 * 0.0015, 0.120, 0.0015
 H_CONV_RAD = 9.0               # W/(m² K), natural convection + radiation, anodized/painted surface (ASSUMPTION; bare Al ≈ 5–6)
-a, b, c = ENCL_DIM
-A_ENCL = 2 * (a * b + a * c + b * c)
+A_ENCL = 2 * EXT_L * (EXT_W + EXT_H)
 RTH_ENCL = 1 / (H_CONV_RAD * A_ENCL)
-# junction -> extrusion for an SON 5x6 FET on the bottom side of the board, pressed onto the extrusion floor:
+# heat capacity: walls + ~10 slot ribs per side (1.5 × 2.5 mm) + spacer block, plus the board and parts (ASSUMPTION ~50 J/K)
+M_AL = 2700 * EXT_L * (2 * (EXT_W + EXT_H) * EXT_T + 20 * 0.0015 * 0.0025) + 2700 * 0.03 * 0.03 * 0.0055
+C_TH = 900 * M_AL + 50
+TAU = RTH_ENCL * C_TH
+# junction -> extrusion for an SON 5x6 FET on the bottom side of the board, pressed onto the extrusion floor.
+# Board in the lowest slot: its underside is 7.06 mm above the floor -> ~5.5 mm aluminium spacer block + gap pad.
 RTH_VIAS = 4.0                 # K/W, thermal-via array under the drain pad through 1.6 mm FR4 (ASSUMPTION, ~30× 0.3 mm vias)
-RTH_PAD = 1.5                  # K/W, gap pad ~1 mm, ~2 × 2 cm, 3 W/mK (ASSUMPTION)
+RTH_PAD = 1.5                  # K/W, gap pad ~1.5 mm, ~2 × 2 cm, 3 W/mK (ASSUMPTION); the Al spacer adds < 0.1 K/W
 RTH_J_ENCL = HS.rth_jc + RTH_VIAS + RTH_PAD
-P_CLAMP_AVG = 10.0             # W, regen clamp average limit (agreed rating, firmware-enforced)
+T_TOUCH = 55.0                 # C, throttle point for the enclosure (NTC-based, firmware)
+P_CLAMP_AVG = 10.0             # W, regen clamp average the resistor itself could take (agreed rating)
 
 worst = max((losses(p, F_SW, HS, LS) for p in POINTS), key=lambda x: x["total"])
 worst_hs = max(losses(p, F_SW, HS, LS)["p_hs"] for p in POINTS)
 worst_ls = max(losses(p, F_SW, HS, LS)["p_ls"] for p in POINTS)
+p_budget = (T_TOUCH - T_AMB) / RTH_ENCL
 out(f"Model: all heat ends up in the extrusion, which sheds it to the room: Rθ(enclosure→ambient) = 1/(h·A) = "
-    f"1/({H_CONV_RAD:.0f} W/m²K × {A_ENCL:.3f} m²) ≈ **{RTH_ENCL:.1f} K/W** "
-    f"(ASSUMPTION: {a*1e3:.0f}×{b*1e3:.0f}×{c*1e3:.0f} mm, anodized or painted; bare aluminium radiates poorly → ~1.5× worse).")
+    f"1/({H_CONV_RAD:.0f} W/m²K × {A_ENCL:.4f} m²) ≈ **{RTH_ENCL:.1f} K/W** "
+    f"(extrusion {EXT_L*1e3:.0f} × {EXT_W*1e3:.0f} × {EXT_H*1e3:.0f} mm outside, only the 4 long faces — the end caps and the "
+    f"front add-on are printed; anodized or painted assumed, bare aluminium radiates poorly → ~1.5× worse).")
+out(f"Heat capacity ≈ {C_TH:.0f} J/K ({M_AL*1e3:.0f} g aluminium + board) → thermal time constant ≈ **{TAU/60:.0f} min**.")
 out(f"FET junction → extrusion ≈ {HS.rth_jc:.0f} (jc) + {RTH_VIAS:.0f} (via array) + {RTH_PAD:.1f} (gap pad) = "
-    f"**{RTH_J_ENCL:.1f} K/W** (ASSUMPTION). Ambient {T_AMB:.0f} °C.")
+    f"**{RTH_J_ENCL:.1f} K/W** (ASSUMPTION; board in the lowest slot, 7.06 mm above the floor → ~5.5 mm Al spacer + gap pad). "
+    f"Ambient {T_AMB:.0f} °C.")
 out()
 rows = []
 for label, p_tot in [("Worst continuous buck load, no regen", worst["total"]),
                      ("Typical heavy use (half the worst loss)", worst["total"] / 2),
-                     (f"Worst buck load + clamp at its {P_CLAMP_AVG:.0f} W average", worst["total"] + P_CLAMP_AVG),
-                     ("Clamp 10 W average only (regen, buck idle)", P_HOUSEKEEPING + P_CLAMP_AVG)]:
+                     (f"Worst buck load + clamp at {P_CLAMP_AVG:.0f} W average", worst["total"] + P_CLAMP_AVG),
+                     (f"Clamp {P_CLAMP_AVG:.0f} W average only (regen, buck idle)", P_HOUSEKEEPING + P_CLAMP_AVG)]:
     t_encl = T_AMB + p_tot * RTH_ENCL
     tj_hs = t_encl + worst_hs * RTH_J_ENCL
-    rows.append([label, f"{p_tot:.1f}", f"{t_encl:.0f}", f"{tj_hs:.0f}"])
-table(["Case", "Heat W", "Extrusion °C", "Top FET Tj °C"], rows)
+    t_throttle = (f"{-TAU * math.log(1 - (T_TOUCH - T_AMB) / (p_tot * RTH_ENCL)) / 60:.0f} min"
+                  if p_tot > p_budget else "never")
+    rows.append([label, f"{p_tot:.1f}", f"{t_encl:.0f}", f"{tj_hs:.0f}", t_throttle])
+table(["Case", "Heat W", "Extrusion °C (steady)", "Top FET Tj °C", f"Time to {T_TOUCH:.0f} °C from cold"], rows)
+out(f"- Continuous heat budget for a ≤ {T_TOUCH:.0f} °C enclosure: **{p_budget:.1f} W** in total (housekeeping "
+    f"{P_HOUSEKEEPING:.0f} W included). The worst buck point ({worst['total']:.1f} W) is above it: full load runs for the time in "
+    "the table, then the firmware throttles current from the enclosure NTC. Typical heavy use never gets there.")
 out(f"- Worst FET losses: top {worst_hs:.2f} W, bottom {worst_ls:.2f} W → only ~{worst_hs*RTH_J_ENCL:.0f} K above the extrusion. "
     "The FETs are not the problem; **the enclosure surface temperature is**.")
-out(f"- Continuous worst-case buck load: extrusion ≈ {T_AMB + worst['total']*RTH_ENCL:.0f} °C — warm, acceptable.")
-out(f"- Adding the clamp's {P_CLAMP_AVG:.0f} W average on top pushes the extrusion to ≈ {T_AMB + (worst['total']+P_CLAMP_AVG)*RTH_ENCL:.0f} °C: "
-    "too hot to touch comfortably (metal surfaces ≲ 60 °C).")
-out("  → Firmware should derate the clamp's average from the enclosure NTC, not a fixed 10 W (e.g. 10 W while the extrusion < 45 °C,"
-    " tapering to ~3 W at 55 °C). Bursts (50 W / 10 s = 500 J) are fine: ~0.3–0.5 kg of aluminium rises only 1–2 K.")
-out("- Parts that go on the extrusion side: both buck FETs, the clamp FET, the clamp resistor (TO-247, screwed directly to the extrusion)."
-    " The inductor (~0.7 W) and shunts can stay on the board.")
+out(f"- Regen clamp: its average must come out of the same budget. With the buck idle ≈ {p_budget - P_HOUSEKEEPING:.1f} W "
+    "continuous; firmware derates it from the enclosure NTC (e.g. ~5 W below 45 °C, tapering to ~1 W at 55 °C). "
+    f"Bursts are fine: 50 W / 10 s = 500 J raises the extrusion ≈ {500 / C_TH:.0f} K.")
+out("- Parts on the extrusion: both buck FETs and the clamp FET (bottom-side via arrays → gap pad → spacer → floor), the LTO100 clamp "
+    "resistor (screwed to the wall, wired to the board). The inductor (~0.7 W) and shunts stay on the board.")
+out("- 3D-printed add-on and end caps sit against a ≤ 60 °C extrusion: PETG or ASA, not PLA (softens around 60 °C).")
 out()
 
 # ---- 4. inductor & current sense ------------------------------------------------------------

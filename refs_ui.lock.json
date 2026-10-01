@@ -234,43 +234,37 @@
    "ref": "J1",
    "block": "ui",
    "prefix": "J",
-   "part": "Conn_02x13_Odd_Even",
-   "value": "to main board",
+   "part": "Conn_02x10_Odd_Even",
+   "value": "to supply_control",
    "nets": {
     "1": "+3V3",
-    "2": "+3V3",
-    "3": "GND",
-    "4": "LCD_SCK",
-    "5": "GND",
-    "6": "LCD_MOSI",
-    "7": "LCD_CS",
-    "8": "LCD_DC",
-    "9": "LCD_RST",
-    "10": "LCD_BL",
-    "11": "GND",
-    "12": "I2C2_SDA",
-    "13": "I2C2_SCL",
-    "14": "UI_INT",
-    "15": "ENC1_A",
-    "16": "ENC1_B",
-    "17": "ENC1_SW",
-    "18": "GND",
-    "19": "ENC2_A",
-    "20": "ENC2_B",
-    "21": "ENC2_SW",
-    "22": "OE_BTN",
-    "23": "PWR_BTN",
-    "24": "BUZZER",
-    "25": "GND",
-    "26": "GND"
+    "2": "GND",
+    "3": "LCD_SCK",
+    "4": "GND",
+    "5": "LCD_MOSI",
+    "6": "LCD_CS",
+    "7": "LCD_DC",
+    "8": "LCD_RST",
+    "9": "GND",
+    "10": "I2C2_SCL",
+    "11": "I2C2_SDA",
+    "12": "UI_INT",
+    "13": "ENC1_A",
+    "14": "ENC1_B",
+    "15": "ENC2_A",
+    "16": "ENC2_B",
+    "17": "OE_BTN",
+    "18": "PWR_BTN",
+    "19": "BUZZER",
+    "20": "+3V3"
    }
   },
   {
    "ref": "J3",
    "block": "ui",
    "prefix": "J",
-   "part": "Conn_01x08",
-   "value": "ST7789 2.0in module",
+   "part": "Conn_01x07",
+   "value": "OLED 2.42in SSD1309 SPI",
    "nets": {
     "1": "GND",
     "2": "+3V3",
@@ -278,8 +272,7 @@
     "4": "LCD_MOSI",
     "5": "LCD_RST",
     "6": "LCD_DC",
-    "7": "LCD_CS",
-    "8": "LCD_BL"
+    "7": "LCD_CS"
    }
   },
   {
@@ -773,26 +766,6 @@
    }
   },
   {
-   "ref": "TP5",
-   "block": "ui",
-   "prefix": "TP",
-   "part": "TestPoint",
-   "value": "TestPoint",
-   "nets": {
-    "1": "~"
-   }
-  },
-  {
-   "ref": "TP6",
-   "block": "ui",
-   "prefix": "TP",
-   "part": "TestPoint",
-   "value": "TestPoint",
-   "nets": {
-    "1": "~"
-   }
-  },
-  {
    "ref": "U1",
    "block": "ui",
    "prefix": "U",
@@ -807,8 +780,8 @@
     "6": "BTN_LEFT",
     "7": "BTN_RIGHT",
     "8": "BTN_ENTER",
-    "9": "~",
-    "10": "~",
+    "9": "ENC1_SW",
+    "10": "ENC2_SW",
     "11": "~",
     "12": "GND",
     "13": "LED_OE_R_K",
@@ -826,5 +799,8 @@
    }
   }
  ],
- "retired": []
+ "retired": [
+  "TP5",
+  "TP6"
+ ]
 }

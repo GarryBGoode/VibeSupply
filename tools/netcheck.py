@@ -1,4 +1,4 @@
-"""Quick netlist reviewer: prints single-pin nets and the pins on selected nets. Usage: python tools/netcheck.py out/supply_main.net [NET ...]"""
+"""Quick netlist reviewer: prints single-pin nets and the pins on selected nets. Usage: python tools/netcheck.py out/supply_power.net [NET ...]"""
 import re, sys
 from pathlib import Path
 

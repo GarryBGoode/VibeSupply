@@ -1,11 +1,11 @@
 """
-USB-C PD bench supply — UI board (skidl). Connects to the main board via the 2x13 ribbon (design/mcu.py UI_PINOUT).
+USB-C PD bench supply — UI board (skidl). Connects to supply_control (J703) via the 2x10 1.27 mm ribbon (design/mcu.py UI_PINOUT).
 
 Run:     .venv/Scripts/python ui_design.py
 Output:  out/supply_ui.net, out/supply_ui_bom.csv
 
-Contents: 2.0" ST7789 display module header (8-pin, common GND/VCC/SCL/SDA/RES/DC/CS/BLK pinout),
-2x EC11E encoders with push (RC-debounced, direct to MCU timers), 5 navigation buttons + 3 status LEDs +
+Contents: 2.42" SSD1309 128x64 SPI OLED module header (7-pin, common GND/VCC/SCL/SDA/RES/DC/CS pinout),
+2x EC11E encoders (A/B RC-debounced, direct to MCU timers; pushes on the expander), 5 navigation buttons + 3 status LEDs +
 bi-colour output-enable LED on a TCA9535 (I2C 0x20), output-enable and power buttons (on-board tactile +
 connector for panel-mount lit buttons), magnetic buzzer. Everything 0603/0805/THT: easy to rework.
 """
@@ -18,7 +18,7 @@ from pathlib import Path
 from skidl import ERC, KICAD10, Net, Part, generate_netlist
 
 from design import reflock
-from design.mcu import UI_PINOUT
+from design.mcu import UI_CONN_FP, UI_PINOUT
 from design.nets import *
 from design.parts import C, LED, NMOS_small, R, _fields, schottky_1a, testpoint
 
@@ -35,18 +35,18 @@ def debounced_input(src_pin_net, out_net, pull_to=None):
 
 def build():
     # ---- ribbon
-    j = Part("Connector_Generic", "Conn_02x13_Odd_Even", ref="J1", value="to main board",
-             footprint="Connector_IDC:IDC-Header_2x13_P2.54mm_Vertical")
+    j = Part("Connector_Generic", "Conn_02x10_Odd_Even", ref="J1", value="to supply_control", footprint=UI_CONN_FP)
     for pin, net in UI_PINOUT.items():
         j[pin] += net
     for v in ("10u", "100n"):
         c = C(v, "0805")
         c[1, 2] += P3V3, GND
 
-    # ---- display module (8-pin header, pinout of the common 2.0" 240x320 ST7789 modules - check yours)
-    d = Part("Connector_Generic", "Conn_01x08", value="ST7789 2.0in module",
-             footprint="Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical")
-    for pin, net in zip(range(1, 9), (GND, P3V3, LCD_SCK, LCD_MOSI, LCD_RST, LCD_DC, LCD_CS, LCD_BL)):
+    # ---- display module (7-pin header, pinout of the common 2.42" SSD1309 SPI modules - check yours;
+    # SCL = D0 = SCK, SDA = D1 = MOSI; the module's own boost makes the panel voltage from 3.3 V)
+    d = Part("Connector_Generic", "Conn_01x07", value="OLED 2.42in SSD1309 SPI",
+             footprint="Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Vertical")
+    for pin, net in zip(range(1, 8), (GND, P3V3, LCD_SCK, LCD_MOSI, LCD_RST, LCD_DC, LCD_CS)):
         d[pin] += net
 
     # ---- encoders (A/B/push, common to GND)
@@ -83,8 +83,9 @@ def build():
         rp = R("10k")
         rp[1, 2] += P3V3, n
         ex[port0[f"P0{i}"]] += n
-    for p in ("P05", "P06", "P07"):
-        testpoint(f"EXP_{p}")[1] += ex[port0[p]]
+    ex[port0["P05"]] += ENC1_SW                    # encoder pushes (RC-debounced above, active low)
+    ex[port0["P06"]] += ENC2_SW
+    testpoint("EXP_P07")[1] += ex[port0["P07"]]
     # LEDs (expander sinks, active low): P10 OE red, P11 OE green, P12 CC, P13 CV, P14 FAULT
     led_nets = {}
     for pin, color, label in (("P10", "red", "OE_R"), ("P11", "green", "OE_G"), ("P12", "red", "CC"),
@@ -150,7 +151,7 @@ if __name__ == "__main__":
     # stable refs across edits (design/reflock.py); the first run seeds the lock from skidl's automatic numbering
     reflock.assign(list(builtins.default_circuit.parts), lambda p: "ui", lambda b: (1, 1000),
                    Path(__file__).with_name("refs_ui.lock.json"), lambda parts: {id(p): p.ref for p in parts})
-    # drop the main-board nets from design/nets.py that have nothing attached on this board
+    # drop the power/control-board nets from design/nets.py that have nothing attached on this board
     empty = [n for n in builtins.default_circuit.nets if not n.pins and n is not builtins.NC]
     builtins.default_circuit.rmv_nets(*empty)
     ERC()

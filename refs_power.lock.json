@@ -749,30 +749,8 @@
    }
   },
   {
-   "ref": "C501",
-   "block": "logic_supply",
-   "prefix": "C",
-   "part": "C",
-   "value": "2.2u",
-   "nets": {
-    "1": "LOGIC_IN",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C502",
-   "block": "logic_supply",
-   "prefix": "C",
-   "part": "C",
-   "value": "2.2u",
-   "nets": {
-    "1": "LOGIC_IN",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C503",
-   "block": "logic_supply",
+   "ref": "C531",
+   "block": "logic_feed",
    "prefix": "C",
    "part": "C",
    "value": "100n",
@@ -782,41 +760,8 @@
    }
   },
   {
-   "ref": "C504",
-   "block": "logic_supply",
-   "prefix": "C",
-   "part": "C",
-   "value": "100n",
-   "nets": {
-    "1": "LOG_BOOT",
-    "2": "LOG_SW"
-   }
-  },
-  {
-   "ref": "C505",
-   "block": "logic_supply",
-   "prefix": "C",
-   "part": "C",
-   "value": "22u",
-   "nets": {
-    "1": "+3V3",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C506",
-   "block": "logic_supply",
-   "prefix": "C",
-   "part": "C",
-   "value": "22u",
-   "nets": {
-    "1": "+3V3",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C507",
-   "block": "logic_supply",
+   "ref": "C532",
+   "block": "logic_feed",
    "prefix": "C",
    "part": "C",
    "value": "1u",
@@ -826,8 +771,8 @@
    }
   },
   {
-   "ref": "C508",
-   "block": "logic_supply",
+   "ref": "C533",
+   "block": "logic_feed",
    "prefix": "C",
    "part": "C",
    "value": "100n",
@@ -947,129 +892,8 @@
    }
   },
   {
-   "ref": "C601",
-   "block": "usb_isolated",
-   "prefix": "C",
-   "part": "C",
-   "value": "4.7u",
-   "nets": {
-    "1": "VBUS_PC",
-    "2": "GND_ISO"
-   }
-  },
-  {
-   "ref": "C602",
-   "block": "usb_isolated",
-   "prefix": "C",
-   "part": "C",
-   "value": "1u",
-   "nets": {
-    "1": "ISO_VDD1",
-    "2": "GND_ISO"
-   }
-  },
-  {
-   "ref": "C603",
-   "block": "usb_isolated",
-   "prefix": "C",
-   "part": "C",
-   "value": "1u",
-   "nets": {
-    "1": "+3V3",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C604",
-   "block": "usb_isolated",
-   "prefix": "C",
-   "part": "C",
-   "value": "100n",
-   "nets": {
-    "1": "ISO_VDD1",
-    "2": "GND_ISO"
-   }
-  },
-  {
-   "ref": "C605",
-   "block": "usb_isolated",
-   "prefix": "C",
-   "part": "C",
-   "value": "100n",
-   "nets": {
-    "1": "+3V3",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C606",
-   "block": "usb_isolated",
-   "prefix": "C",
-   "part": "C",
-   "value": "4.7u",
-   "nets": {
-    "1": "VBUS_PC",
-    "2": "GND_ISO"
-   }
-  },
-  {
-   "ref": "C607",
-   "block": "usb_isolated",
-   "prefix": "C",
-   "part": "C",
-   "value": "4.7u",
-   "nets": {
-    "1": "+5V_ISO",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C701",
-   "block": "mcu",
-   "prefix": "C",
-   "part": "C",
-   "value": "100n",
-   "nets": {
-    "1": "+3V3",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C702",
-   "block": "mcu",
-   "prefix": "C",
-   "part": "C",
-   "value": "100n",
-   "nets": {
-    "1": "+3V3",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C703",
-   "block": "mcu",
-   "prefix": "C",
-   "part": "C",
-   "value": "100n",
-   "nets": {
-    "1": "+3V3",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C704",
-   "block": "mcu",
-   "prefix": "C",
-   "part": "C",
-   "value": "100n",
-   "nets": {
-    "1": "+3V3",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C705",
-   "block": "mcu",
+   "ref": "C951",
+   "block": "b2b_power",
    "prefix": "C",
    "part": "C",
    "value": "4.7u",
@@ -1079,46 +903,13 @@
    }
   },
   {
-   "ref": "C706",
-   "block": "mcu",
+   "ref": "C952",
+   "block": "b2b_power",
    "prefix": "C",
    "part": "C",
    "value": "100n",
    "nets": {
-    "1": "+3V3A",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C707",
-   "block": "mcu",
-   "prefix": "C",
-   "part": "C",
-   "value": "1u",
-   "nets": {
-    "1": "VREF+",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C708",
-   "block": "mcu",
-   "prefix": "C",
-   "part": "C",
-   "value": "100n",
-   "nets": {
-    "1": "VREF+",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "C709",
-   "block": "mcu",
-   "prefix": "C",
-   "part": "C",
-   "value": "100n",
-   "nets": {
-    "1": "NRST",
+    "1": "+3V3",
     "2": "GND"
    }
   },
@@ -1312,8 +1103,8 @@
    }
   },
   {
-   "ref": "D501",
-   "block": "logic_supply",
+   "ref": "D531",
+   "block": "logic_feed",
    "prefix": "D",
    "part": "D_Schottky",
    "value": "SS110",
@@ -1323,36 +1114,14 @@
    }
   },
   {
-   "ref": "D502",
-   "block": "logic_supply",
+   "ref": "D532",
+   "block": "logic_feed",
    "prefix": "D",
    "part": "D_Schottky",
    "value": "SS110",
    "nets": {
     "1": "LOGIC_IN",
     "2": "DCIN_RAW"
-   }
-  },
-  {
-   "ref": "D503",
-   "block": "logic_supply",
-   "prefix": "D",
-   "part": "D_Schottky",
-   "value": "SS14",
-   "nets": {
-    "1": "LOGIC_IN",
-    "2": "+5V_ISO"
-   }
-  },
-  {
-   "ref": "D504",
-   "block": "logic_supply",
-   "prefix": "D",
-   "part": "LED",
-   "value": "green",
-   "nets": {
-    "1": "GND",
-    "2": "~"
    }
   },
   {
@@ -1367,8 +1136,8 @@
    }
   },
   {
-   "ref": "FB501",
-   "block": "logic_supply",
+   "ref": "FB531",
+   "block": "logic_feed",
    "prefix": "FB",
    "part": "FerriteBead_Small",
    "value": "600R@100MHz",
@@ -1398,43 +1167,21 @@
    }
   },
   {
-   "ref": "H901",
-   "block": "top",
-   "prefix": "H",
-   "part": "MountingHole",
-   "value": "M3",
-   "nets": {}
-  },
-  {
-   "ref": "H902",
-   "block": "top",
-   "prefix": "H",
-   "part": "MountingHole",
-   "value": "M3",
-   "nets": {}
-  },
-  {
-   "ref": "H903",
-   "block": "top",
-   "prefix": "H",
-   "part": "MountingHole",
-   "value": "M3",
-   "nets": {}
-  },
-  {
-   "ref": "H904",
-   "block": "top",
-   "prefix": "H",
-   "part": "MountingHole",
-   "value": "M3",
-   "nets": {}
-  },
-  {
    "ref": "H905",
    "block": "top",
    "prefix": "H",
    "part": "MountingHole_Pad",
-   "value": "GND screw",
+   "value": "GND screw (M3 insert)",
+   "nets": {
+    "1": "GND"
+   }
+  },
+  {
+   "ref": "H906",
+   "block": "top",
+   "prefix": "H",
+   "part": "MountingHole_Pad",
+   "value": "LTO100 screw (M3 insert)",
    "nets": {
     "1": "GND"
    }
@@ -1470,127 +1217,59 @@
    "block": "dc_input",
    "prefix": "J",
    "part": "Conn_01x02",
-   "value": "XT60PW-M DC IN",
+   "value": "DC IN wires",
    "nets": {
     "1": "DCIN_RAW",
     "2": "GND"
    }
   },
   {
-   "ref": "J401",
-   "block": "output_stage",
+   "ref": "J951",
+   "block": "b2b_power",
    "prefix": "J",
-   "part": "Conn_01x02",
-   "value": "XT60PW-F OUT",
+   "part": "Conn_02x20_Odd_Even",
+   "value": "B2B to supply_control",
    "nets": {
-    "1": "OUT+",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "J581",
-   "block": "fan",
-   "prefix": "J",
-   "part": "Conn_01x04",
-   "value": "FAN 4-pin",
-   "nets": {
-    "1": "GND",
-    "2": "+12V_AUX",
-    "3": "FAN_TACH_PIN",
-    "4": "FAN_PWM_PIN"
-   }
-  },
-  {
-   "ref": "J601",
-   "block": "usb_isolated",
-   "prefix": "J",
-   "part": "USB_C_Receptacle_USB2.0_16P",
-   "value": "USB_C_Receptacle_USB2.0_16P",
-   "nets": {
-    "A1": "GND_ISO",
-    "A4": "VBUS_PC",
-    "A5": "~",
-    "A6": "ISO_UD+",
-    "A7": "ISO_UD-",
-    "A8": "NC",
-    "A9": "VBUS_PC",
-    "A12": "GND_ISO",
-    "B1": "GND_ISO",
-    "B4": "VBUS_PC",
-    "B5": "~",
-    "B6": "ISO_UD+",
-    "B7": "ISO_UD-",
-    "B8": "NC",
-    "B9": "VBUS_PC",
-    "B12": "GND_ISO",
-    "SH": "GND_ISO"
-   }
-  },
-  {
-   "ref": "J701",
-   "block": "mcu",
-   "prefix": "J",
-   "part": "Conn_02x05_Odd_Even",
-   "value": "SWD",
-   "nets": {
-    "1": "+3V3",
-    "2": "~",
+    "1": "LOGIC_IN",
+    "2": "GND",
     "3": "GND",
-    "4": "~",
-    "5": "GND",
-    "6": "NC",
-    "7": "NC",
-    "8": "NC",
-    "9": "GND",
-    "10": "NRST"
-   }
-  },
-  {
-   "ref": "J702",
-   "block": "mcu",
-   "prefix": "J",
-   "part": "Conn_01x04",
-   "value": "UART",
-   "nets": {
-    "1": "+3V3",
-    "2": "UART_TX",
-    "3": "UART_RX",
-    "4": "GND"
-   }
-  },
-  {
-   "ref": "J703",
-   "block": "mcu",
-   "prefix": "J",
-   "part": "Conn_02x13_Odd_Even",
-   "value": "UI ribbon",
-   "nets": {
-    "1": "+3V3",
-    "2": "+3V3",
-    "3": "GND",
-    "4": "LCD_SCK",
-    "5": "GND",
-    "6": "LCD_MOSI",
-    "7": "LCD_CS",
-    "8": "LCD_DC",
-    "9": "LCD_RST",
-    "10": "LCD_BL",
-    "11": "GND",
-    "12": "I2C2_SDA",
-    "13": "I2C2_SCL",
-    "14": "UI_INT",
-    "15": "ENC1_A",
-    "16": "ENC1_B",
-    "17": "ENC1_SW",
-    "18": "GND",
-    "19": "ENC2_A",
-    "20": "ENC2_B",
-    "21": "ENC2_SW",
-    "22": "OE_BTN",
-    "23": "PWR_BTN",
-    "24": "BUZZER",
-    "25": "GND",
-    "26": "GND"
+    "4": "GND",
+    "5": "+3V3",
+    "6": "+3V3",
+    "7": "GND",
+    "8": "GND",
+    "9": "I2C1_SCL",
+    "10": "I2C1_SDA",
+    "11": "PD_IRQ",
+    "12": "INA_ALERT",
+    "13": "PD_SINK_EN",
+    "14": "OUT_EN",
+    "15": "BUCK_RUN",
+    "16": "BUCK_PSKIP",
+    "17": "CLAMP_DIS",
+    "18": "FAULT",
+    "19": "OVP_FLT",
+    "20": "OCP_FLT",
+    "21": "GND",
+    "22": "GND",
+    "23": "DAC_V",
+    "24": "GND",
+    "25": "DAC_I",
+    "26": "GND",
+    "27": "DAC_ICL",
+    "28": "GND",
+    "29": "VOUT_SNS",
+    "30": "IL_SNS",
+    "31": "VTERM_SNS",
+    "32": "VIN_SNS",
+    "33": "ITH_MON",
+    "34": "GND",
+    "35": "NTC_FET",
+    "36": "NTC_IND",
+    "37": "NTC_CLAMP",
+    "38": "NTC_OUTSW",
+    "39": "GND",
+    "40": "GND"
    }
   },
   {
@@ -1616,17 +1295,6 @@
    }
   },
   {
-   "ref": "L501",
-   "block": "logic_supply",
-   "prefix": "L",
-   "part": "L",
-   "value": "22uH",
-   "nets": {
-    "1": "LOG_SW",
-    "2": "+3V3"
-   }
-  },
-  {
    "ref": "L541",
    "block": "aux_supply",
    "prefix": "L",
@@ -1635,19 +1303,6 @@
    "nets": {
     "1": "AUX_SW",
     "2": "+12V_AUX"
-   }
-  },
-  {
-   "ref": "PS601",
-   "block": "usb_isolated",
-   "prefix": "PS",
-   "part": "B0505S-1WR3",
-   "value": "B0505S-1WR3",
-   "nets": {
-    "1": "GND_ISO",
-    "2": "VBUS_PC",
-    "3": "GND",
-    "4": "+5V_ISO"
    }
   },
   {
@@ -1834,18 +1489,6 @@
     "1": "FAULT",
     "2": "GND",
     "3": "OE_G"
-   }
-  },
-  {
-   "ref": "Q581",
-   "block": "fan",
-   "prefix": "Q",
-   "part": "2N7002",
-   "value": "2N7002",
-   "nets": {
-    "1": "FAN_PWM",
-    "2": "GND",
-    "3": "FAN_PWM_PIN"
    }
   },
   {
@@ -2729,50 +2372,6 @@
    }
   },
   {
-   "ref": "R501",
-   "block": "logic_supply",
-   "prefix": "R",
-   "part": "R",
-   "value": "66.5k",
-   "nets": {
-    "1": "~",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "R502",
-   "block": "logic_supply",
-   "prefix": "R",
-   "part": "R",
-   "value": "23.2k",
-   "nets": {
-    "1": "+3V3",
-    "2": "LOG_FB"
-   }
-  },
-  {
-   "ref": "R503",
-   "block": "logic_supply",
-   "prefix": "R",
-   "part": "R",
-   "value": "10k",
-   "nets": {
-    "1": "LOG_FB",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "R504",
-   "block": "logic_supply",
-   "prefix": "R",
-   "part": "R",
-   "value": "1k",
-   "nets": {
-    "1": "+3V3",
-    "2": "~"
-   }
-  },
-  {
    "ref": "R541",
    "block": "aux_supply",
    "prefix": "R",
@@ -2836,171 +2435,6 @@
    "nets": {
     "1": "AUX_SW",
     "2": "AUX_RA"
-   }
-  },
-  {
-   "ref": "R581",
-   "block": "fan",
-   "prefix": "R",
-   "part": "R",
-   "value": "1k",
-   "nets": {
-    "1": "FAN_TACH_PIN",
-    "2": "FAN_TACH"
-   }
-  },
-  {
-   "ref": "R582",
-   "block": "fan",
-   "prefix": "R",
-   "part": "R",
-   "value": "10k",
-   "nets": {
-    "1": "+3V3",
-    "2": "FAN_TACH"
-   }
-  },
-  {
-   "ref": "R583",
-   "block": "fan",
-   "prefix": "R",
-   "part": "R",
-   "value": "100k",
-   "nets": {
-    "1": "FAN_PWM",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "R601",
-   "block": "usb_isolated",
-   "prefix": "R",
-   "part": "R",
-   "value": "5.1k",
-   "nets": {
-    "1": "~",
-    "2": "GND_ISO"
-   }
-  },
-  {
-   "ref": "R602",
-   "block": "usb_isolated",
-   "prefix": "R",
-   "part": "R",
-   "value": "5.1k",
-   "nets": {
-    "1": "~",
-    "2": "GND_ISO"
-   }
-  },
-  {
-   "ref": "R603",
-   "block": "usb_isolated",
-   "prefix": "R",
-   "part": "R",
-   "value": "2.2k",
-   "nets": {
-    "1": "+5V_ISO",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "R701",
-   "block": "mcu",
-   "prefix": "R",
-   "part": "R",
-   "value": "10k",
-   "nets": {
-    "1": "BOOT0",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "R702",
-   "block": "mcu",
-   "prefix": "R",
-   "part": "R",
-   "value": "4.7k",
-   "nets": {
-    "1": "+3V3",
-    "2": "I2C1_SCL"
-   }
-  },
-  {
-   "ref": "R703",
-   "block": "mcu",
-   "prefix": "R",
-   "part": "R",
-   "value": "4.7k",
-   "nets": {
-    "1": "+3V3",
-    "2": "I2C1_SDA"
-   }
-  },
-  {
-   "ref": "R704",
-   "block": "mcu",
-   "prefix": "R",
-   "part": "R",
-   "value": "2.2k",
-   "nets": {
-    "1": "+3V3",
-    "2": "I2C2_SCL"
-   }
-  },
-  {
-   "ref": "R705",
-   "block": "mcu",
-   "prefix": "R",
-   "part": "R",
-   "value": "2.2k",
-   "nets": {
-    "1": "+3V3",
-    "2": "I2C2_SDA"
-   }
-  },
-  {
-   "ref": "R706",
-   "block": "mcu",
-   "prefix": "R",
-   "part": "R",
-   "value": "10k",
-   "nets": {
-    "1": "+3V3",
-    "2": "UI_INT"
-   }
-  },
-  {
-   "ref": "R707",
-   "block": "mcu",
-   "prefix": "R",
-   "part": "R",
-   "value": "10k",
-   "nets": {
-    "1": "+3V3",
-    "2": "INA_ALERT"
-   }
-  },
-  {
-   "ref": "SW701",
-   "block": "mcu",
-   "prefix": "SW",
-   "part": "SW_Push",
-   "value": "RESET",
-   "nets": {
-    "1": "NRST",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "SW702",
-   "block": "mcu",
-   "prefix": "SW",
-   "part": "SW_Push",
-   "value": "BOOT",
-   "nets": {
-    "1": "BOOT0",
-    "2": "+3V3"
    }
   },
   {
@@ -3166,16 +2600,6 @@
    "value": "TestPoint",
    "nets": {
     "1": "OUTSW_G"
-   }
-  },
-  {
-   "ref": "TP501",
-   "block": "logic_supply",
-   "prefix": "TP",
-   "part": "TestPoint",
-   "value": "TestPoint",
-   "nets": {
-    "1": "+3V3"
    }
   },
   {
@@ -3445,24 +2869,6 @@
    }
   },
   {
-   "ref": "U501",
-   "block": "logic_supply",
-   "prefix": "U",
-   "part": "LMR38010",
-   "value": "LMR38010",
-   "nets": {
-    "1": "GND",
-    "2": "LOGIC_IN",
-    "3": "LOGIC_IN",
-    "4": "~",
-    "5": "LOG_FB",
-    "6": "NC",
-    "7": "LOG_BOOT",
-    "8": "LOG_SW",
-    "9": "GND"
-   }
-  },
-  {
    "ref": "U541",
    "block": "aux_supply",
    "prefix": "U",
@@ -3493,120 +2899,75 @@
     "4": "~",
     "5": "+5VA"
    }
-  },
-  {
-   "ref": "U601",
-   "block": "usb_isolated",
-   "prefix": "U",
-   "part": "USBLC6-2SC6",
-   "value": "USBLC6-2SC6",
-   "nets": {
-    "1": "ISO_UD+",
-    "2": "GND_ISO",
-    "3": "ISO_UD-",
-    "4": "ISO_UD-",
-    "5": "VBUS_PC",
-    "6": "ISO_UD+"
-   }
-  },
-  {
-   "ref": "U602",
-   "block": "usb_isolated",
-   "prefix": "U",
-   "part": "ADUM3160",
-   "value": "ADUM3160",
-   "nets": {
-    "1": "VBUS_PC",
-    "2": "GND_ISO",
-    "3": "ISO_VDD1",
-    "4": "ISO_VDD1",
-    "5": "ISO_VDD1",
-    "6": "ISO_UD-",
-    "7": "ISO_UD+",
-    "8": "GND_ISO",
-    "9": "GND",
-    "10": "USB_DP",
-    "11": "USB_DM",
-    "12": "+3V3",
-    "13": "+3V3",
-    "14": "+3V3",
-    "15": "GND",
-    "16": "+3V3"
-   }
-  },
-  {
-   "ref": "U701",
-   "block": "mcu",
-   "prefix": "U",
-   "part": "STM32G474RETx",
-   "value": "STM32G474RETx",
-   "nets": {
-    "1": "+3V3",
-    "2": "PWR_BTN",
-    "3": "INA_ALERT",
-    "4": "FAULT",
-    "5": "ENC1_SW",
-    "6": "ENC2_SW",
-    "7": "NRST",
-    "8": "ENC2_A",
-    "9": "ENC2_B",
-    "10": "ITH_MON",
-    "11": "NTC_FET",
-    "12": "OVP_FLT",
-    "13": "VOUT_SNS",
-    "14": "VTERM_SNS",
-    "15": "GND",
-    "16": "+3V3",
-    "17": "VIN_SNS",
-    "18": "DAC_V",
-    "19": "DAC_I",
-    "20": "DAC_ICL",
-    "21": "BUZZER",
-    "22": "NTC_IND",
-    "23": "NTC_CLAMP",
-    "24": "IL_SNS",
-    "25": "OCP_FLT",
-    "26": "NTC_OUTSW",
-    "27": "GND",
-    "28": "VREF+",
-    "29": "+3V3A",
-    "30": "FAN_PWM",
-    "31": "GND",
-    "32": "+3V3",
-    "33": "FAN_TACH",
-    "34": "BUCK_RUN",
-    "35": "LCD_SCK",
-    "36": "BUCK_PSKIP",
-    "37": "LCD_MOSI",
-    "38": "ENC1_A",
-    "39": "ENC1_B",
-    "40": "LCD_CS",
-    "41": "LCD_DC",
-    "42": "I2C2_SDA",
-    "43": "I2C2_SCL",
-    "44": "UI_INT",
-    "45": "USB_DM",
-    "46": "USB_DP",
-    "47": "GND",
-    "48": "+3V3",
-    "49": "~",
-    "50": "~",
-    "51": "I2C1_SCL",
-    "52": "UART_TX",
-    "53": "UART_RX",
-    "54": "LCD_RST",
-    "55": "OE_BTN",
-    "56": "PD_SINK_EN",
-    "57": "LCD_BL",
-    "58": "OUT_EN",
-    "59": "CLAMP_DIS",
-    "60": "I2C1_SDA",
-    "61": "BOOT0",
-    "62": "PD_IRQ",
-    "63": "GND",
-    "64": "+3V3"
-   }
   }
  ],
- "retired": []
+ "retired": [
+  "C501",
+  "C502",
+  "C503",
+  "C504",
+  "C505",
+  "C506",
+  "C507",
+  "C508",
+  "C601",
+  "C602",
+  "C603",
+  "C604",
+  "C605",
+  "C606",
+  "C607",
+  "C701",
+  "C702",
+  "C703",
+  "C704",
+  "C705",
+  "C706",
+  "C707",
+  "C708",
+  "C709",
+  "D501",
+  "D502",
+  "D503",
+  "D504",
+  "FB501",
+  "H901",
+  "H902",
+  "H903",
+  "H904",
+  "J401",
+  "J402",
+  "J581",
+  "J601",
+  "J701",
+  "J702",
+  "J703",
+  "L501",
+  "PS601",
+  "Q581",
+  "R501",
+  "R502",
+  "R503",
+  "R504",
+  "R581",
+  "R582",
+  "R583",
+  "R601",
+  "R602",
+  "R603",
+  "R701",
+  "R702",
+  "R703",
+  "R704",
+  "R705",
+  "R706",
+  "R707",
+  "SW701",
+  "SW702",
+  "TP501",
+  "U501",
+  "U601",
+  "U602",
+  "U701"
+ ]
 }

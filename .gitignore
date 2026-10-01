@@ -1,2 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# KiCad: local history, per-user settings, backups, locks
 *.history
+.history/
+*.kicad_prl
+*.bak
+*-backups/
+*.lck
+~*.lck
+fp-info-cache
+_autosave-*
+
+# skidl run artifacts (regenerated on each run)
+/*.log
+/*.erc
+
+# misc
 *raw

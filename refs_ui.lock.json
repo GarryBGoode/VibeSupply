@@ -122,36 +122,14 @@
    }
   },
   {
-   "ref": "C11",
+   "ref": "C12",
    "block": "ui",
    "prefix": "C",
    "part": "C",
-   "value": "10n",
+   "value": "10u",
    "nets": {
-    "1": "PWR_BTN",
+    "1": "+3V3",
     "2": "GND"
-   }
-  },
-  {
-   "ref": "D1",
-   "block": "ui",
-   "prefix": "D",
-   "part": "LED",
-   "value": "red",
-   "nets": {
-    "1": "LED_OE_R_K",
-    "2": "~"
-   }
-  },
-  {
-   "ref": "D2",
-   "block": "ui",
-   "prefix": "D",
-   "part": "LED",
-   "value": "green",
-   "nets": {
-    "1": "LED_OE_G_K",
-    "2": "~"
    }
   },
   {
@@ -159,7 +137,7 @@
    "block": "ui",
    "prefix": "D",
    "part": "LED",
-   "value": "red",
+   "value": "red 3mm diffused CC",
    "nets": {
     "1": "LED_CC_K",
     "2": "~"
@@ -170,7 +148,7 @@
    "block": "ui",
    "prefix": "D",
    "part": "LED",
-   "value": "green",
+   "value": "green 3mm diffused CV",
    "nets": {
     "1": "LED_CV_K",
     "2": "~"
@@ -254,7 +232,7 @@
     "15": "ENC2_A",
     "16": "ENC2_B",
     "17": "OE_BTN",
-    "18": "PWR_BTN",
+    "18": "LCD_BL",
     "19": "BUZZER",
     "20": "+3V3"
    }
@@ -263,8 +241,8 @@
    "ref": "J3",
    "block": "ui",
    "prefix": "J",
-   "part": "Conn_01x07",
-   "value": "OLED 2.42in SSD1309 SPI",
+   "part": "Conn_01x08",
+   "value": "IPS 1.9in ST7789 SPI",
    "nets": {
     "1": "GND",
     "2": "+3V3",
@@ -272,32 +250,21 @@
     "4": "LCD_MOSI",
     "5": "LCD_RST",
     "6": "LCD_DC",
-    "7": "LCD_CS"
+    "7": "LCD_CS",
+    "8": "LCD_BLK"
    }
   },
   {
-   "ref": "J4",
+   "ref": "J6",
    "block": "ui",
    "prefix": "J",
-   "part": "Conn_01x05",
-   "value": "OE panel button",
+   "part": "Conn_01x04",
+   "value": "OUTPUT panel button",
    "nets": {
     "1": "OE_BTN_RAW",
     "2": "GND",
-    "3": "LED_OE_R_K",
-    "4": "LED_OE_G_K",
-    "5": "~"
-   }
-  },
-  {
-   "ref": "J5",
-   "block": "ui",
-   "prefix": "J",
-   "part": "Conn_01x02",
-   "value": "POWER panel button",
-   "nets": {
-    "1": "PWR_BTN_RAW",
-    "2": "+3V3"
+    "3": "OE_LED_A",
+    "4": "LED_OE_K"
    }
   },
   {
@@ -445,28 +412,6 @@
    }
   },
   {
-   "ref": "R13",
-   "block": "ui",
-   "prefix": "R",
-   "part": "R",
-   "value": "10k",
-   "nets": {
-    "1": "+3V3",
-    "2": "BTN_UP"
-   }
-  },
-  {
-   "ref": "R14",
-   "block": "ui",
-   "prefix": "R",
-   "part": "R",
-   "value": "10k",
-   "nets": {
-    "1": "+3V3",
-    "2": "BTN_DOWN"
-   }
-  },
-  {
    "ref": "R15",
    "block": "ui",
    "prefix": "R",
@@ -533,28 +478,6 @@
    }
   },
   {
-   "ref": "R21",
-   "block": "ui",
-   "prefix": "R",
-   "part": "R",
-   "value": "330",
-   "nets": {
-    "1": "+3V3",
-    "2": "~"
-   }
-  },
-  {
-   "ref": "R22",
-   "block": "ui",
-   "prefix": "R",
-   "part": "R",
-   "value": "330",
-   "nets": {
-    "1": "+3V3",
-    "2": "~"
-   }
-  },
-  {
    "ref": "R23",
    "block": "ui",
    "prefix": "R",
@@ -577,36 +500,14 @@
    }
   },
   {
-   "ref": "R25",
-   "block": "ui",
-   "prefix": "R",
-   "part": "R",
-   "value": "10k",
-   "nets": {
-    "1": "GND",
-    "2": "PWR_BTN_RAW"
-   }
-  },
-  {
-   "ref": "R26",
-   "block": "ui",
-   "prefix": "R",
-   "part": "R",
-   "value": "1k",
-   "nets": {
-    "1": "PWR_BTN_RAW",
-    "2": "PWR_BTN"
-   }
-  },
-  {
    "ref": "R27",
    "block": "ui",
    "prefix": "R",
    "part": "R",
-   "value": "330",
+   "value": "100",
    "nets": {
     "1": "+3V3",
-    "2": "~"
+    "2": "OE_LED_A"
    }
   },
   {
@@ -621,31 +522,38 @@
    }
   },
   {
+   "ref": "R29",
+   "block": "ui",
+   "prefix": "R",
+   "part": "R",
+   "value": "100",
+   "nets": {
+    "1": "LCD_BL",
+    "2": "LCD_BLK"
+   }
+  },
+  {
    "ref": "SW1",
    "block": "ui",
    "prefix": "SW",
-   "part": "RotaryEncoder_Switch",
-   "value": "EC11E15244G1",
+   "part": "RotaryEncoder",
+   "value": "EC10E1220501",
    "nets": {
     "A": "ENC1_A_RAW",
     "B": "ENC1_B_RAW",
-    "C": "GND",
-    "S1": "ENC1_SW_RAW",
-    "S2": "GND"
+    "C": "GND"
    }
   },
   {
    "ref": "SW2",
    "block": "ui",
    "prefix": "SW",
-   "part": "RotaryEncoder_Switch",
-   "value": "EC11E15244G1",
+   "part": "RotaryEncoder",
+   "value": "EC10E1220501",
    "nets": {
     "A": "ENC2_A_RAW",
     "B": "ENC2_B_RAW",
-    "C": "GND",
-    "S1": "ENC2_SW_RAW",
-    "S2": "GND"
+    "C": "GND"
    }
   },
   {
@@ -653,9 +561,9 @@
    "block": "ui",
    "prefix": "SW",
    "part": "SW_Push",
-   "value": "UP",
+   "value": "V WHEEL PUSH",
    "nets": {
-    "1": "BTN_UP",
+    "1": "ENC1_SW_RAW",
     "2": "GND"
    }
   },
@@ -664,9 +572,9 @@
    "block": "ui",
    "prefix": "SW",
    "part": "SW_Push",
-   "value": "DOWN",
+   "value": "I WHEEL PUSH",
    "nets": {
-    "1": "BTN_DOWN",
+    "1": "ENC2_SW_RAW",
     "2": "GND"
    }
   },
@@ -701,28 +609,6 @@
    "nets": {
     "1": "BTN_ENTER",
     "2": "GND"
-   }
-  },
-  {
-   "ref": "SW8",
-   "block": "ui",
-   "prefix": "SW",
-   "part": "SW_Push",
-   "value": "OUTPUT",
-   "nets": {
-    "1": "OE_BTN_RAW",
-    "2": "GND"
-   }
-  },
-  {
-   "ref": "SW9",
-   "block": "ui",
-   "prefix": "SW",
-   "part": "SW_Push",
-   "value": "POWER",
-   "nets": {
-    "1": "PWR_BTN_RAW",
-    "2": "+3V3"
    }
   },
   {
@@ -766,6 +652,36 @@
    }
   },
   {
+   "ref": "TP7",
+   "block": "ui",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "~"
+   }
+  },
+  {
+   "ref": "TP8",
+   "block": "ui",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "~"
+   }
+  },
+  {
+   "ref": "TP9",
+   "block": "ui",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "~"
+   }
+  },
+  {
    "ref": "U1",
    "block": "ui",
    "prefix": "U",
@@ -775,17 +691,17 @@
     "1": "UI_INT",
     "2": "GND",
     "3": "GND",
-    "4": "BTN_UP",
-    "5": "BTN_DOWN",
-    "6": "BTN_LEFT",
-    "7": "BTN_RIGHT",
-    "8": "BTN_ENTER",
+    "4": "BTN_LEFT",
+    "5": "BTN_RIGHT",
+    "6": "BTN_ENTER",
+    "7": "~",
+    "8": "~",
     "9": "ENC1_SW",
     "10": "ENC2_SW",
     "11": "~",
     "12": "GND",
-    "13": "LED_OE_R_K",
-    "14": "LED_OE_G_K",
+    "13": "LED_OE_K",
+    "14": "~",
     "15": "LED_CC_K",
     "16": "LED_CV_K",
     "17": "LED_FAULT_K",
@@ -800,7 +716,21 @@
   }
  ],
  "retired": [
+  "C11",
+  "D1",
+  "D2",
+  "J4",
+  "J5",
+  "R13",
+  "R14",
+  "R21",
+  "R22",
+  "R25",
+  "R26",
+  "SW8",
+  "SW9",
   "TP5",
-  "TP6"
+  "TP6",
+  "TP10"
  ]
 }

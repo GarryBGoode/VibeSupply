@@ -958,6 +958,17 @@
    }
   },
   {
+   "ref": "D162",
+   "block": "dc_input",
+   "prefix": "D",
+   "part": "D_Zener",
+   "value": "BZT52C12",
+   "nets": {
+    "1": "DCIN_HOLD",
+    "2": "GND"
+   }
+  },
+  {
    "ref": "D181",
    "block": "input_sense",
    "prefix": "D",
@@ -1251,7 +1262,7 @@
     "19": "OVP_FLT",
     "20": "OCP_FLT",
     "21": "GND",
-    "22": "GND",
+    "22": "DCIN_ON",
     "23": "DAC_V",
     "24": "GND",
     "25": "DAC_I",
@@ -1359,6 +1370,30 @@
     "3": "VIN_BUS",
     "4": "~",
     "5": "DCIN_MID"
+   }
+  },
+  {
+   "ref": "Q163",
+   "block": "dc_input",
+   "prefix": "Q",
+   "part": "2N7002",
+   "value": "2N7002",
+   "nets": {
+    "1": "DCIN_HOLD",
+    "2": "GND",
+    "3": "DCIN_EN"
+   }
+  },
+  {
+   "ref": "Q164",
+   "block": "dc_input",
+   "prefix": "Q",
+   "part": "2N7002",
+   "value": "2N7002",
+   "nets": {
+    "1": "DCIN_ON",
+    "2": "GND",
+    "3": "DCIN_HOLD"
    }
   },
   {
@@ -1653,6 +1688,28 @@
    "value": "15k",
    "nets": {
     "1": "DCIN_EN",
+    "2": "GND"
+   }
+  },
+  {
+   "ref": "R165",
+   "block": "dc_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "1M",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "DCIN_HOLD"
+   }
+  },
+  {
+   "ref": "R166",
+   "block": "dc_input",
+   "prefix": "R",
+   "part": "R",
+   "value": "100k",
+   "nets": {
+    "1": "DCIN_ON",
     "2": "GND"
    }
   },
@@ -2520,6 +2577,16 @@
    "value": "TestPoint",
    "nets": {
     "1": "PD_SINK_EN"
+   }
+  },
+  {
+   "ref": "TP161",
+   "block": "dc_input",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "DCIN_ON"
    }
   },
   {

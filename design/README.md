@@ -6,7 +6,7 @@ Three boards, three netlists (the former main board was split on 2026-10-01, PLA
 |---|---|---|---|
 | supply_power (lowest slot: input, buck, analog control, output, clamp, 12 V / 5 V aux) | `power_design.py` | `out/supply_power.net`, `out/supply_power_bom.csv` | `kicad/supply_power` |
 | supply_control (slot 6: MCU, isolated USB, 3.3 V buck) | `control_design.py` | `out/supply_control.net`, `out/supply_control_bom.csv` | `kicad/supply_control` |
-| UI (display, knobs, buttons) | `ui_design.py` | `out/supply_ui.net`, `out/supply_ui_bom.csv` | `kicad/supply_ui/supply_ui` |
+| UI (display, scroll wheels, buttons) | `ui_design.py` | `out/supply_ui.net`, `out/supply_ui_bom.csv` | `kicad/supply_ui/supply_ui` |
 
 Run from the project root with `.venv/Scripts/python power_design.py` (and `control_design.py`, `ui_design.py`), then
 `.venv/Scripts/python tools/b2b_check.py`: it checks that the B2B header carries the same net on the same physical pin on

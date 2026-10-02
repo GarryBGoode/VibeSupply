@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "power_design.py")
-    (date "10/01/2026 10:30 AM")
+    (date "10/01/2026 08:41 PM")
     (tool "SKiDL (2.3.0)")
     (sheet
       (number 1)
@@ -154,43 +154,6 @@
           (value ""))))
     (sheet
       (number 5)
-      (name "/control/")
-      (tstamps "/309e45ce-f992-5e79-806f-234b364e004d/")
-      (title_block
-        (title)
-        (company)
-        (rev)
-        (date)
-        (source "power_design.py")
-        (comment
-          (number "1")
-          (value ""))
-        (comment
-          (number "2")
-          (value ""))
-        (comment
-          (number "3")
-          (value ""))
-        (comment
-          (number "4")
-          (value ""))
-        (comment
-          (number "5")
-          (value ""))
-        (comment
-          (number "6")
-          (value ""))
-        (comment
-          (number "7")
-          (value ""))
-        (comment
-          (number "8")
-          (value ""))
-        (comment
-          (number "9")
-          (value ""))))
-    (sheet
-      (number 6)
       (name "/dc_input/dcin_path/")
       (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/f8bcfdbb-80d7-5a89-a6e2-acfe09aaf78e/")
       (title_block
@@ -227,7 +190,7 @@
           (number "9")
           (value ""))))
     (sheet
-      (number 7)
+      (number 6)
       (name "/dc_input/")
       (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/")
       (title_block
@@ -264,9 +227,46 @@
           (number "9")
           (value ""))))
     (sheet
+      (number 7)
+      (name "/buck/")
+      (tstamps "/d2781439-ebbb-5f87-8d4b-e3c05033173e/")
+      (title_block
+        (title)
+        (company)
+        (rev)
+        (date)
+        (source "power_design.py")
+        (comment
+          (number "1")
+          (value ""))
+        (comment
+          (number "2")
+          (value ""))
+        (comment
+          (number "3")
+          (value ""))
+        (comment
+          (number "4")
+          (value ""))
+        (comment
+          (number "5")
+          (value ""))
+        (comment
+          (number "6")
+          (value ""))
+        (comment
+          (number "7")
+          (value ""))
+        (comment
+          (number "8")
+          (value ""))
+        (comment
+          (number "9")
+          (value ""))))
+    (sheet
       (number 8)
-      (name "/input_sense/")
-      (tstamps "/e7805f46-f1e4-55b6-a1c1-72e407886fc1/")
+      (name "/control/")
+      (tstamps "/309e45ce-f992-5e79-806f-234b364e004d/")
       (title_block
         (title)
         (company)
@@ -302,43 +302,6 @@
           (value ""))))
     (sheet
       (number 9)
-      (name "/output_stage/")
-      (tstamps "/c8bab5cb-de77-5e50-86ea-b941131b9074/")
-      (title_block
-        (title)
-        (company)
-        (rev)
-        (date)
-        (source "power_design.py")
-        (comment
-          (number "1")
-          (value ""))
-        (comment
-          (number "2")
-          (value ""))
-        (comment
-          (number "3")
-          (value ""))
-        (comment
-          (number "4")
-          (value ""))
-        (comment
-          (number "5")
-          (value ""))
-        (comment
-          (number "6")
-          (value ""))
-        (comment
-          (number "7")
-          (value ""))
-        (comment
-          (number "8")
-          (value ""))
-        (comment
-          (number "9")
-          (value ""))))
-    (sheet
-      (number 10)
       (name "/logic_feed/")
       (tstamps "/765b684c-b5ca-5a53-b97d-d4b712462450/")
       (title_block
@@ -375,7 +338,7 @@
           (number "9")
           (value ""))))
     (sheet
-      (number 11)
+      (number 10)
       (name "/b2b_power/")
       (tstamps "/19f0dfe3-d65b-5c59-b43c-2085b7f9e24b/")
       (title_block
@@ -412,9 +375,46 @@
           (number "9")
           (value ""))))
     (sheet
+      (number 11)
+      (name "/output_stage/")
+      (tstamps "/c8bab5cb-de77-5e50-86ea-b941131b9074/")
+      (title_block
+        (title)
+        (company)
+        (rev)
+        (date)
+        (source "power_design.py")
+        (comment
+          (number "1")
+          (value ""))
+        (comment
+          (number "2")
+          (value ""))
+        (comment
+          (number "3")
+          (value ""))
+        (comment
+          (number "4")
+          (value ""))
+        (comment
+          (number "5")
+          (value ""))
+        (comment
+          (number "6")
+          (value ""))
+        (comment
+          (number "7")
+          (value ""))
+        (comment
+          (number "8")
+          (value ""))
+        (comment
+          (number "9")
+          (value ""))))
+    (sheet
       (number 12)
-      (name "/buck/")
-      (tstamps "/d2781439-ebbb-5f87-8d4b-e3c05033173e/")
+      (name "/input_sense/")
+      (tstamps "/e7805f46-f1e4-55b6-a1c1-72e407886fc1/")
       (title_block
         (title)
         (company)
@@ -2676,6 +2676,30 @@
       (component_classes)
       (tstamps "43781dd6-4550-5438-a3c7-14c7ff526404"))
     (comp
+      (ref "D162")
+      (value "BZT52C12")
+      (description "Zener diode")
+      (footprint "Diode_SMD:D_SOD-123")
+      (fields
+        (field
+          (name "Description") "Zener diode")
+        (field
+          (name "Footprint") "Diode_SMD:D_SOD-123")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "D162")
+        (field
+          (name "SKiDL Line") "design\power_in.py:173"))
+      (libsource
+        (lib "Device")
+        (part "D_Zener"))
+      (sheetpath
+        (names "/dc_input/")
+        (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/"))
+      (component_classes)
+      (tstamps "992153b1-1b36-53a3-aa9f-babd726c495f"))
+    (comp
       (ref "D181")
       (value "SMBJ33A")
       (description "Zener diode")
@@ -3216,7 +3240,7 @@
         (field
           (name "SKiDL Tag") "J101")
         (field
-          (name "SKiDL Line") "design\power_in.py:58"))
+          (name "SKiDL Line") "design\power_in.py:61"))
       (libsource
         (lib "Connector")
         (part "USB_C_Receptacle_USB2.0_16P"))
@@ -3242,7 +3266,7 @@
         (field
           (name "SKiDL Tag") "J161")
         (field
-          (name "SKiDL Line") "design\power_in.py:148"))
+          (name "SKiDL Line") "design\power_in.py:151"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x02"))
@@ -3461,6 +3485,54 @@
         (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/f8bcfdbb-80d7-5a89-a6e2-acfe09aaf78e/"))
       (component_classes)
       (tstamps "9fe9cd06-9a09-5d4e-9bbc-486fbca16eef"))
+    (comp
+      (ref "Q163")
+      (value "2N7002")
+      (description "0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23")
+      (footprint "Package_TO_SOT_SMD:SOT-23")
+      (fields
+        (field
+          (name "Description") "0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23")
+        (field
+          (name "Footprint") "Package_TO_SOT_SMD:SOT-23")
+        (field
+          (name "Datasheet") "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF")
+        (field
+          (name "SKiDL Tag") "Q163")
+        (field
+          (name "SKiDL Line") "design\parts.py:71"))
+      (libsource
+        (lib "Transistor_FET")
+        (part "2N7002"))
+      (sheetpath
+        (names "/dc_input/")
+        (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/"))
+      (component_classes)
+      (tstamps "76d3b4d6-7524-52a4-a0e0-101c3394709d"))
+    (comp
+      (ref "Q164")
+      (value "2N7002")
+      (description "0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23")
+      (footprint "Package_TO_SOT_SMD:SOT-23")
+      (fields
+        (field
+          (name "Description") "0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23")
+        (field
+          (name "Footprint") "Package_TO_SOT_SMD:SOT-23")
+        (field
+          (name "Datasheet") "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF")
+        (field
+          (name "SKiDL Tag") "Q164")
+        (field
+          (name "SKiDL Line") "design\parts.py:71"))
+      (libsource
+        (lib "Transistor_FET")
+        (part "2N7002"))
+      (sheetpath
+        (names "/dc_input/")
+        (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/"))
+      (component_classes)
+      (tstamps "19668ca3-0e7d-5499-9a1a-f21ff9dc8e25"))
     (comp
       (ref "Q201")
       (value "2N7002")
@@ -4095,6 +4167,56 @@
         (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/"))
       (component_classes)
       (tstamps "7a06f1cf-3de3-54fe-b843-4f23f1dad5ff"))
+    (comp
+      (ref "R165")
+      (value "1M")
+      (description "Resistor")
+      (footprint "Resistor_SMD:R_0603_1608Metric")
+      (fields
+        (field
+          (name "Description") "Resistor")
+        (field
+          (name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "R165")
+        (field
+          (name "SKiDL Line") "design\parts.py:45"))
+      (libsource
+        (lib "Device")
+        (part "R"))
+      (sheetpath
+        (names "/dc_input/")
+        (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/"))
+      (component_classes)
+      (tstamps "c9a30733-5426-52f5-b5de-2c27ae7dda9b"))
+    (comp
+      (ref "R166")
+      (value "100k")
+      (description "Resistor")
+      (footprint "Resistor_SMD:R_0603_1608Metric")
+      (fields
+        (field
+          (name "Note") "DC path off while the MCU is in reset")
+        (field
+          (name "Description") "Resistor")
+        (field
+          (name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "R166")
+        (field
+          (name "SKiDL Line") "design\parts.py:45"))
+      (libsource
+        (lib "Device")
+        (part "R"))
+      (sheetpath
+        (names "/dc_input/")
+        (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/"))
+      (component_classes)
+      (tstamps "35c6df93-6916-597d-b05d-7fc486e7b7a2"))
     (comp
       (ref "R181")
       (value "1m")
@@ -6074,6 +6196,32 @@
       (component_classes)
       (tstamps "bfa2e39f-fe39-54f2-9ddd-2b5b7d882b7c"))
     (comp
+      (ref "TP161")
+      (value "TestPoint")
+      (description "test point")
+      (footprint "TestPoint:TestPoint_Pad_D1.0mm")
+      (fields
+        (field
+          (name "Label") "DCIN_ON")
+        (field
+          (name "Description") "test point")
+        (field
+          (name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "TP161")
+        (field
+          (name "SKiDL Line") "design\parts.py:104"))
+      (libsource
+        (lib "Connector")
+        (part "TestPoint"))
+      (sheetpath
+        (names "/dc_input/")
+        (tstamps "/dacf6add-69af-5cb6-a467-f2baeed22103/"))
+      (component_classes)
+      (tstamps "4a1122d6-b302-56b1-a64e-7650813e7cbc"))
+    (comp
       (ref "TP201")
       (value "TestPoint")
       (description "test point")
@@ -6430,7 +6578,7 @@
         (field
           (name "SKiDL Tag") "U181")
         (field
-          (name "SKiDL Line") "design\power_in.py:171"))
+          (name "SKiDL Line") "design\power_in.py:189"))
       (libsource
         (lib "Sensor_Energy")
         (part "INA228"))
@@ -6688,7 +6836,7 @@
         (field
           (name "SKiDL Tag") "U541")
         (field
-          (name "SKiDL Line") "design\housekeeping.py:89"))
+          (name "SKiDL Line") "design\housekeeping.py:104"))
       (libsource
         (lib "Regulator_Switching")
         (part "LM5164DDA"))
@@ -6714,7 +6862,7 @@
         (field
           (name "SKiDL Tag") "U542")
         (field
-          (name "SKiDL Line") "design\housekeeping.py:124"))
+          (name "SKiDL Line") "design\housekeeping.py:139"))
       (libsource
         (lib "Regulator_Linear")
         (part "LP2985-5.0"))
@@ -7629,6 +7777,10 @@
       (name "DCIN_EN")
       (class "Default")
       (node
+        (ref "Q163")
+        (pin "3")
+        (pintype "PASSIVE"))
+      (node
         (ref "R163")
         (pin "2")
         (pintype "PASSIVE"))
@@ -7642,6 +7794,26 @@
         (pintype "INPUT")))
     (net
       (code 46)
+      (name "DCIN_HOLD")
+      (class "Default")
+      (node
+        (ref "D162")
+        (pin "1")
+        (pintype "PASSIVE"))
+      (node
+        (ref "Q163")
+        (pin "1")
+        (pintype "INPUT"))
+      (node
+        (ref "Q164")
+        (pin "3")
+        (pintype "PASSIVE"))
+      (node
+        (ref "R165")
+        (pin "2")
+        (pintype "PASSIVE")))
+    (net
+      (code 47)
       (name "DCIN_MID")
       (class "Default")
       (node
@@ -7677,7 +7849,27 @@
         (pin "3")
         (pintype "INPUT")))
     (net
-      (code 47)
+      (code 48)
+      (name "DCIN_ON")
+      (class "Default")
+      (node
+        (ref "J951")
+        (pin "22")
+        (pintype "PASSIVE"))
+      (node
+        (ref "Q164")
+        (pin "1")
+        (pintype "INPUT"))
+      (node
+        (ref "R166")
+        (pin "1")
+        (pintype "PASSIVE"))
+      (node
+        (ref "TP161")
+        (pin "1")
+        (pintype "PASSIVE")))
+    (net
+      (code 49)
       (name "DCIN_RAW")
       (class "Default")
       (node
@@ -7713,7 +7905,7 @@
         (pin "2")
         (pintype "INPUT")))
     (net
-      (code 48)
+      (code 50)
       (name "FAULT")
       (class "Default")
       (node
@@ -7749,7 +7941,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 49)
+      (code 51)
       (name "GND")
       (class "Default")
       (node
@@ -8053,6 +8245,10 @@
         (pin "2")
         (pintype "PASSIVE"))
       (node
+        (ref "D162")
+        (pin "2")
+        (pintype "PASSIVE"))
+      (node
         (ref "D181")
         (pin "2")
         (pintype "PASSIVE"))
@@ -8122,10 +8318,6 @@
         (pintype "PASSIVE"))
       (node
         (ref "J951")
-        (pin "22")
-        (pintype "PASSIVE"))
-      (node
-        (ref "J951")
         (pin "24")
         (pintype "PASSIVE"))
       (node
@@ -8163,6 +8355,14 @@
       (node
         (ref "J951")
         (pin "8")
+        (pintype "PASSIVE"))
+      (node
+        (ref "Q163")
+        (pin "2")
+        (pintype "PASSIVE"))
+      (node
+        (ref "Q164")
+        (pin "2")
         (pintype "PASSIVE"))
       (node
         (ref "Q201")
@@ -8238,6 +8438,10 @@
         (pintype "PASSIVE"))
       (node
         (ref "R164")
+        (pin "2")
+        (pintype "PASSIVE"))
+      (node
+        (ref "R166")
         (pin "2")
         (pintype "PASSIVE"))
       (node
@@ -8433,7 +8637,7 @@
         (pin "2")
         (pintype "POWER-IN")))
     (net
-      (code 50)
+      (code 52)
       (name "HW_OVP")
       (class "Default")
       (node
@@ -8449,7 +8653,7 @@
         (pin "4")
         (pintype "OPEN-COLLECTOR")))
     (net
-      (code 51)
+      (code 53)
       (name "HW_OVP_REF")
       (class "Default")
       (node
@@ -8469,7 +8673,7 @@
         (pin "3")
         (pintype "INPUT")))
     (net
-      (code 52)
+      (code 54)
       (name "I2C1_SCL")
       (class "Default")
       (node
@@ -8489,7 +8693,7 @@
         (pin "5")
         (pintype "INPUT")))
     (net
-      (code 53)
+      (code 55)
       (name "I2C1_SDA")
       (class "Default")
       (node
@@ -8509,7 +8713,7 @@
         (pin "4")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 54)
+      (code 56)
       (name "IL_AMP")
       (class "Default")
       (node
@@ -8525,7 +8729,7 @@
         (pin "8")
         (pintype "OUTPUT")))
     (net
-      (code 55)
+      (code 57)
       (name "IL_SENSE+")
       (class "Default")
       (node
@@ -8549,7 +8753,7 @@
         (pin "2")
         (pintype "INPUT")))
     (net
-      (code 56)
+      (code 58)
       (name "IL_SNS")
       (class "Default")
       (node
@@ -8569,7 +8773,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 57)
+      (code 59)
       (name "INA_ALERT")
       (class "Default")
       (node
@@ -8585,7 +8789,7 @@
         (pin "3")
         (pintype "OPEN-COLLECTOR")))
     (net
-      (code 58)
+      (code 60)
       (name "ITH")
       (class "Default")
       (node
@@ -8633,7 +8837,7 @@
         (pin "5")
         (pintype "PASSIVE")))
     (net
-      (code 59)
+      (code 61)
       (name "ITH_MON")
       (class "Default")
       (node
@@ -8649,7 +8853,7 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 60)
+      (code 62)
       (name "LOGIC_IN")
       (class "Default")
       (node
@@ -8667,9 +8871,13 @@
       (node
         (ref "J951")
         (pin "1")
+        (pintype "PASSIVE"))
+      (node
+        (ref "R165")
+        (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 61)
+      (code 63)
       (name "N$1")
       (class "Default")
       (node
@@ -8681,7 +8889,7 @@
         (pin "22")
         (pintype "INPUT")))
     (net
-      (code 62)
+      (code 64)
       (name "N$10")
       (class "Default")
       (node
@@ -8693,7 +8901,7 @@
         (pin "9")
         (pintype "OUTPUT")))
     (net
-      (code 63)
+      (code 65)
       (name "N$11")
       (class "Default")
       (node
@@ -8705,7 +8913,7 @@
         (pin "1")
         (pintype "OUTPUT")))
     (net
-      (code 64)
+      (code 66)
       (name "N$12")
       (class "Default")
       (node
@@ -8717,7 +8925,7 @@
         (pin "8")
         (pintype "OUTPUT")))
     (net
-      (code 65)
+      (code 67)
       (name "N$13")
       (class "Default")
       (node
@@ -8729,7 +8937,7 @@
         (pin "11")
         (pintype "PASSIVE")))
     (net
-      (code 66)
+      (code 68)
       (name "N$14")
       (class "Default")
       (node
@@ -8741,7 +8949,7 @@
         (pin "4")
         (pintype "PASSIVE")))
     (net
-      (code 67)
+      (code 69)
       (name "N$15")
       (class "Default")
       (node
@@ -8757,7 +8965,7 @@
         (pin "5")
         (pintype "INPUT")))
     (net
-      (code 68)
+      (code 70)
       (name "N$16")
       (class "Default")
       (node
@@ -8769,7 +8977,7 @@
         (pin "1")
         (pintype "OUTPUT")))
     (net
-      (code 69)
+      (code 71)
       (name "N$17")
       (class "Default")
       (node
@@ -8781,7 +8989,7 @@
         (pin "8")
         (pintype "OUTPUT")))
     (net
-      (code 70)
+      (code 72)
       (name "N$18")
       (class "Default")
       (node
@@ -8793,7 +9001,7 @@
         (pin "11")
         (pintype "PASSIVE")))
     (net
-      (code 71)
+      (code 73)
       (name "N$19")
       (class "Default")
       (node
@@ -8805,7 +9013,7 @@
         (pin "4")
         (pintype "PASSIVE")))
     (net
-      (code 72)
+      (code 74)
       (name "N$2")
       (class "Default")
       (node
@@ -8817,7 +9025,7 @@
         (pin "23")
         (pintype "OUTPUT")))
     (net
-      (code 73)
+      (code 75)
       (name "N$20")
       (class "Default")
       (node
@@ -8833,7 +9041,7 @@
         (pin "5")
         (pintype "INPUT")))
     (net
-      (code 74)
+      (code 76)
       (name "N$21")
       (class "Default")
       (node
@@ -8845,7 +9053,7 @@
         (pin "7")
         (pintype "PASSIVE")))
     (net
-      (code 75)
+      (code 77)
       (name "N$22")
       (class "Default")
       (node
@@ -8857,7 +9065,7 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 76)
+      (code 78)
       (name "N$23")
       (class "Default")
       (node
@@ -8869,7 +9077,7 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 77)
+      (code 79)
       (name "N$24")
       (class "Default")
       (node
@@ -8881,7 +9089,7 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 78)
+      (code 80)
       (name "N$25")
       (class "Default")
       (node
@@ -8893,7 +9101,7 @@
         (pin "2")
         (pintype "OUTPUT")))
     (net
-      (code 79)
+      (code 81)
       (name "N$26")
       (class "Default")
       (node
@@ -8905,7 +9113,7 @@
         (pin "3")
         (pintype "OUTPUT")))
     (net
-      (code 80)
+      (code 82)
       (name "N$27")
       (class "Default")
       (node
@@ -8917,7 +9125,7 @@
         (pin "4")
         (pintype "PASSIVE")))
     (net
-      (code 81)
+      (code 83)
       (name "N$28")
       (class "Default")
       (node
@@ -8929,7 +9137,7 @@
         (pin "4")
         (pintype "INPUT")))
     (net
-      (code 82)
+      (code 84)
       (name "N$3")
       (class "Default")
       (node
@@ -8941,7 +9149,7 @@
         (pin "12")
         (pintype "POWER-OUT")))
     (net
-      (code 83)
+      (code 85)
       (name "N$4")
       (class "Default")
       (node
@@ -8953,7 +9161,7 @@
         (pin "15")
         (pintype "PASSIVE")))
     (net
-      (code 84)
+      (code 86)
       (name "N$5")
       (class "Default")
       (node
@@ -8965,7 +9173,7 @@
         (pin "13")
         (pintype "PASSIVE")))
     (net
-      (code 85)
+      (code 87)
       (name "N$6")
       (class "Default")
       (node
@@ -8977,7 +9185,7 @@
         (pin "11")
         (pintype "PASSIVE")))
     (net
-      (code 86)
+      (code 88)
       (name "N$7")
       (class "Default")
       (node
@@ -8989,7 +9197,7 @@
         (pin "8")
         (pintype "OUTPUT")))
     (net
-      (code 87)
+      (code 89)
       (name "N$8")
       (class "Default")
       (node
@@ -9001,7 +9209,7 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 88)
+      (code 90)
       (name "N$9")
       (class "Default")
       (node
@@ -9013,7 +9221,7 @@
         (pin "6")
         (pintype "OUTPUT")))
     (net
-      (code 89)
+      (code 91)
       (name "NTC_CLAMP")
       (class "Default")
       (node
@@ -9033,7 +9241,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 90)
+      (code 92)
       (name "NTC_FET")
       (class "Default")
       (node
@@ -9053,7 +9261,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 91)
+      (code 93)
       (name "NTC_IND")
       (class "Default")
       (node
@@ -9073,7 +9281,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 92)
+      (code 94)
       (name "NTC_OUTSW")
       (class "Default")
       (node
@@ -9093,7 +9301,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 93)
+      (code 95)
       (name "OCP_FLT")
       (class "Default")
       (node
@@ -9105,7 +9313,7 @@
         (pin "20")
         (pintype "PASSIVE")))
     (net
-      (code 94)
+      (code 96)
       (name "OE_G")
       (class "Default")
       (node
@@ -9125,7 +9333,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 95)
+      (code 97)
       (name "OE_LED_A")
       (class "Default")
       (node
@@ -9137,7 +9345,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 96)
+      (code 98)
       (name "OE_LED_K")
       (class "Default")
       (node
@@ -9149,7 +9357,7 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 97)
+      (code 99)
       (name "OUT+")
       (class "Default")
       (node
@@ -9177,7 +9385,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 98)
+      (code 100)
       (name "OUTSW_G")
       (class "Default")
       (node
@@ -9197,7 +9405,7 @@
         (pin "4")
         (pintype "PASSIVE")))
     (net
-      (code 99)
+      (code 101)
       (name "OUTSW_MID")
       (class "Default")
       (node
@@ -9229,7 +9437,7 @@
         (pin "3")
         (pintype "PASSIVE")))
     (net
-      (code 100)
+      (code 102)
       (name "OUT_EN")
       (class "Default")
       (node
@@ -9241,7 +9449,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 101)
+      (code 103)
       (name "OVP_FLT")
       (class "Default")
       (node
@@ -9253,7 +9461,7 @@
         (pin "19")
         (pintype "PASSIVE")))
     (net
-      (code 102)
+      (code 104)
       (name "PD_CC1")
       (class "Default")
       (node
@@ -9269,7 +9477,7 @@
         (pin "17")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 103)
+      (code 105)
       (name "PD_CC2")
       (class "Default")
       (node
@@ -9285,7 +9493,7 @@
         (pin "16")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 104)
+      (code 106)
       (name "PD_DN")
       (class "Default")
       (node
@@ -9301,7 +9509,7 @@
         (pin "18")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 105)
+      (code 107)
       (name "PD_DP")
       (class "Default")
       (node
@@ -9317,7 +9525,7 @@
         (pin "19")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 106)
+      (code 108)
       (name "PD_IRQ")
       (class "Default")
       (node
@@ -9333,7 +9541,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 107)
+      (code 109)
       (name "PD_SINK_EN")
       (class "Default")
       (node
@@ -9353,7 +9561,7 @@
         (pin "6")
         (pintype "INPUT")))
     (net
-      (code 108)
+      (code 110)
       (name "PD_V5V")
       (class "Default")
       (node
@@ -9369,7 +9577,7 @@
         (pin "20")
         (pintype "POWER-OUT")))
     (net
-      (code 109)
+      (code 111)
       (name "RUN")
       (class "Default")
       (node
@@ -9393,7 +9601,7 @@
         (pin "6")
         (pintype "INPUT")))
     (net
-      (code 110)
+      (code 112)
       (name "SW")
       (class "Default")
       (node
@@ -9433,7 +9641,7 @@
         (pin "16")
         (pintype "PASSIVE")))
     (net
-      (code 111)
+      (code 113)
       (name "USBIN_MID")
       (class "Default")
       (node
@@ -9465,7 +9673,7 @@
         (pin "3")
         (pintype "INPUT")))
     (net
-      (code 112)
+      (code 114)
       (name "VBUS_RAW")
       (class "Default")
       (node
@@ -9509,7 +9717,7 @@
         (pin "24")
         (pintype "POWER-IN")))
     (net
-      (code 113)
+      (code 115)
       (name "VBUS_S")
       (class "Default")
       (node
@@ -9545,7 +9753,7 @@
         (pin "2")
         (pintype "INPUT")))
     (net
-      (code 114)
+      (code 116)
       (name "VC1")
       (class "Default")
       (node
@@ -9589,7 +9797,7 @@
         (pin "3")
         (pintype "INPUT")))
     (net
-      (code 115)
+      (code 117)
       (name "VC1_DAMP")
       (class "Default")
       (node
@@ -9601,7 +9809,7 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 116)
+      (code 118)
       (name "VIN_BUS")
       (class "Default")
       (node
@@ -9645,7 +9853,7 @@
         (pin "10")
         (pintype "INPUT")))
     (net
-      (code 117)
+      (code 119)
       (name "VIN_PWR")
       (class "Default")
       (node
@@ -9733,7 +9941,7 @@
         (pin "2")
         (pintype "POWER-IN")))
     (net
-      (code 118)
+      (code 120)
       (name "VIN_SNS")
       (class "Default")
       (node
@@ -9753,7 +9961,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 119)
+      (code 121)
       (name "VOUT_INT")
       (class "Default")
       (node
@@ -9797,7 +10005,7 @@
         (pin "10")
         (pintype "INPUT")))
     (net
-      (code 120)
+      (code 122)
       (name "VOUT_SH")
       (class "Default")
       (node
@@ -9825,7 +10033,7 @@
         (pin "9")
         (pintype "INPUT")))
     (net
-      (code 121)
+      (code 123)
       (name "VOUT_SNS")
       (class "Default")
       (node
@@ -9849,7 +10057,7 @@
         (pin "1")
         (pintype "INPUT")))
     (net
-      (code 122)
+      (code 124)
       (name "VTERM")
       (class "Default")
       (node
@@ -9861,7 +10069,7 @@
         (pin "5")
         (pintype "PASSIVE")))
     (net
-      (code 123)
+      (code 125)
       (name "VTERM_SNS")
       (class "Default")
       (node

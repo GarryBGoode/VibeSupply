@@ -24,7 +24,7 @@ Numbers in `calc/results.md`, `sim/results.md`; work items in `TODO.md`.
 | Cooling | **Fanless**: buck FETs, inductor and clamp resistor are thermally tied to the aluminium extrusion (the enclosure is the heatsink). Fan header removed 2026-09-28 (board space) |
 | Voltage class | Everything downstream of the inputs sees ≤ ~32 V, plus regen margin → **60 V FETs**, ≥ 50 V MLCCs. Input-side protection parts must survive ≥ 60 V |
 | PC link | USB-C data port, **galvanically isolated**; USB CDC (SCPI-like) + firmware update over USB DFU, no programmer needed |
-| UI | Separate UI board over ribbon cable: TFT, 2× EC11 encoders w/ push, 5-way nav, dedicated lit Output-Enable button, power button |
+| UI | Separate UI board over ribbon cable: 1.9" IPS colour display (170×320, ST7789), 2× mouse-style scroll wheels w/ push (left = voltage, right = current; push = unlock for adjusting, push again = lock), 3 nav buttons (Left / Right / Enter), latching lit OUTPUT push button, POWER rocker (hard off: cuts the 3.3 V regulator's EN, wired to supply_control). Changed 2026-10-01: wheels stay inside the add-on's outline, unlike knobs; physical on/off feel for OUTPUT and POWER |
 | Output terminals | 4 mm binding posts on the front cap, wired to the board (output XT60 dropped 2026-09-28) |
 | Remote sense | No |
 | Assembly | Fab + assembly house (JLCPCB/PCBWay). 0402 / QFN where it matters (analog, power ICs); 0805/0603 + SOIC/TSSOP where tinkering is likely (LEDs, MCU periphery, UI board) |
@@ -146,10 +146,10 @@ Numbers: `calc/results.md`, `sim/results.md`; IC comparison: `calc/ic_reshop.md`
 |---|---|---|
 | MCU | **STM32G474RET6** (LQFP-64) on supply_control | 3 DACs (Vset, Iset, ITH clamp), VREFBUF 2.9 V, comparators, ADCs, timers, USB FS + DFU. The analog loop stays on supply_power; only setpoints and measurements cross the B2B header, over ~20 mm (split 2026-09-30) |
 | USB isolation | **ADuM3160** + B0505S | PC ground loop broken; PC powers the logic for flashing |
-| Logic rail | **LMR38010** → 3.3 V from a diode-OR of raw VBUS, DC input and the isolated USB 5 V | Boots from any source |
+| Logic rail | **LMR38010** → 3.3 V from a diode-OR of raw VBUS, DC input and the isolated USB 5 V; EN through the panel POWER rocker | Boots from any source when the rocker is on. Rocker off = MCU unpowered, every power-board enable falls back to its pull-down (2026-10-01) |
 | Aux 12 V | **LM5164** from VIN_PWR (on above ~8.3 V) | LTC7803 EXTVCC (≥ 7 V needed), clamp driver, +5VA (LP2985-5.0) |
 | Temp sensing | NTCs: buck FETs, inductor, output switch, clamp resistor, USB-C connector (AP33772S OTP) | Throttling + clamp budget |
-| Display / UI board | 2.42" SSD1309 128×64 SPI OLED module, TCA9535 (also the encoder pushes), 2× EC11, 2×10 1.27 mm ribbon (3.3 V digital only) | Changed 2026-09-28 (OLED on top of the front add-on). Firmware: dim after idle + pixel shift against burn-in |
+| Display / UI board | **1.9" IPS 170×320 ST7789 SPI module** (HESTORE IPS-1.9-ST7789-SPI-M, decided 2026-10-01), TCA9535 (wheel pushes, nav buttons, LEDs), 2× **Alps EC10E1220501** scroll-wheel encoders + **Omron B3F-1060** tact switches (wheel pushes and the 3 nav buttons), 2×10 1.27 mm ribbon (3.3 V digital only) | Display on top of the front add-on (2026-09-28). IPS chosen over the 2.42" 128×64 OLED (2026-10-01): ~3× finer pixels, colour (CV/CC at a glance), no burn-in with a static layout, wide viewing angle (you look down at it; the 1.8" TN TFT was rejected for that), smaller module (62 × 29) leaves room for the wheels and a bezel. Module: 4× Ø2.0 holes on 25.8 × 57.9 mm, active area 22.7 × 42.72 mm, 5.1 mm thick, 8-pin 2.54 mm header GND/VCC/SCL/SDA/RES/DC/CS/BLK, VCC 3–5 V, backlight 4 LEDs ≈ 80 mA → BLK driven by PWM (PB10 TIM2_CH3, ribbon pin 18, 100 Ω series). Speed: SPI2 at 21.25 MHz → full 16-bit frame in ≈ 41 ms (≈ 24 fps), the firmware redraws only changed regions. Firmware notes: no full framebuffer (109 KB of 128 KB RAM) → strip/partial buffers (LVGL partial mode) or an 8-bit palette buffer; 170-px panel = column offset 35 in the ST7789's 240×320 RAM; dim the backlight after idle Wheels (2026-10-01): EC10E = Alps quality, through-hole, chosen over Kailh/TTC mouse encoders (same 1.73 mm hex bore) and the edge-drive jog encoders (Panasonic EVQWK, Mitsumi SIQ: 15 detents, need a vertical board). Magnetic sensing (MT6701) rejected as scope creep. |
 
 ---
 
@@ -174,8 +174,8 @@ Numbers: `calc/results.md`, `sim/results.md`; IC comparison: `calc/ic_reshop.md`
     (a few mV of load-dependent ground offset → tens of mV of CV error through the ÷10.19 divider).
 - **Enclosure size (2026-09-28):** extrusion 120 mm long, 78 mm wide outside, 75 mm across the slot bottoms, 70 mm between
   the slot ribs, 40 mm inside height, 1.5 mm walls; slots 2 mm high on a 3.5 mm pitch, the lowest slot 7.06 mm above the floor.
-  Plus a ~50 mm 3D-printed front add-on (PETG/ASA) with the display on top and the controls/posts on its front face (to be
-  designed in 3D; may grow). Rear end cap: USB-C PWR, isolated USB-C, DC-in panel connector.
+  Plus a ~50 mm 3D-printed front add-on (PETG/ASA) with the display and the two scroll wheels on top (you mostly look down on
+  the unit) and the binding posts plus the remaining controls on its front face (to be designed in 3D; may grow). Rear end cap: USB-C PWR, isolated USB-C, DC-in panel connector.
   → Board ≈ 74.5 mm wide (0.25 mm clearance in the slots); keep a ~3.5 mm band along both long edges free of
   parts on both sides (slot + rib). Board in the lowest slot → ~5.5 mm aluminium spacer + gap pad under the power stage.
   Power stage in the aluminium part (bottom side = heat path, no parts there); MCU, control, housekeeping and the UI ribbon in
@@ -218,8 +218,49 @@ Numbers: `calc/results.md`, `sim/results.md`; IC comparison: `calc/ic_reshop.md`
   **H905 / H906 are threaded (2026-10-01):** Würth WA-SMSI 9774030360R (steel, tin-plated, M3 through-thread, 3 mm tall,
   Ø6 mm, reflow-soldered on the top side; KiCad `Mounting_Wuerth` footprint; alt. PEM SMTSO-M3-3ET or its Sinhoo clones). The
   screw comes up from the floor, so no nut has to be reached under the control board. Both rings are GND.
-- **UI board** (2-layer): display, 2× EC11, 5-way nav, lit Output-Enable button, power button, I/O expander, buzzer. Only 3.3 V
-  digital on the ribbon (SPI to the display ≤ ~20 MHz, alternate signal/ground wires).
+- **UI board** (2-layer): display, 2 scroll wheels with push, 3 nav buttons, connector for the latching OUTPUT button, I/O
+  expander, buzzer. The POWER rocker is not on the UI board (see below). Only 3.3 V digital on the ribbon (SPI to the display ≤ ~21 MHz, alternate signal/ground wires; backlight PWM on pin 18, ≈ 80 mA extra on +3V3).
+- **Scroll wheels (decided 2026-10-01)**, mouse style. Numbers from the Alps EC10E catalog (Update2510) and the Omron B3F datasheet:
+  - Encoder **Alps EC10E1220501**: 24 detents / 12 PPR, 100k cycles, detent torque 5 ± 3 mN·m, through hole (footprint
+    `supply1:RotaryEncoder_Alps_EC10E_Horizontal`). The shaft axis runs parallel to the board, **9.0 mm above it** (variants
+    EC10E1220505 = 7 mm, EC10E1220503 = 11 mm, same footprint). The bore is a **1.73 mm hex** (Ø2.98 across the corners) with a 3°
+    entry flare, so the axle can tilt for the push. The body top sits ≈ 12.6 mm above the board. Pins A, B, C with
+    **C = common at the end** (EC11: in the middle).
+  - Push: the axle's free end (the far side of the wheel) rests on an **Omron B3F-1060** (6 × 6 THT, plunger top 7.0 mm,
+    100 gf, 1M operations, pretravel 0.25 +0.2/−0.1 mm). The axle centre is at 9.0 mm, so a Ø4 mm collar/bushing on the axle end
+    sits right on the plunger. Tilt = travel / L (L = distance from the encoder hub to the switch): with the worst-case 0.45 mm,
+    L ≥ 9 mm stays inside the 3° flare; aim for 12–15 mm.
+    The same B3F-1060 with printed caps is used for Left / Right / Enter (B3F-1062 = 150 gf, same footprint, if 100 gf is too light).
+  - Click pitch on the rim = π·D / 24: Ø12 mm → 1.6 mm, Ø14 mm → 1.8 mm (a typical mouse: Ø20+ mm → 2.6 mm). The wheel top is at
+    9 + D/2 above the board (Ø14 → 16 mm), so the top surface of the add-on goes ≈ 2–3 mm below that.
+  - Axle: metal rather than printed (the Alpakka's printed wheel feels flimsy), e.g. a printed wheel pressed onto a steel pin with
+    a 1.73 mm hex end, or a spare mouse-wheel axle; to be worked out in the add-on CAD.
+  - Firmware: the wheels change the selected digit, Left / Right move the digit cursor (and switch screens in the menu), Enter
+    confirms. Push = unlock for adjusting, push again (or a timeout) = lock.
+- **OUTPUT button (decided 2026-10-01):** panel-mount latching push button, **E-Switch PV4** (19 mm cutout, 1-pole on-on
+  latching, gold contacts, red ring LED without an internal resistor, 1.8 V @ 20 mA), e.g. PV4F230SSG-311 (configurator code
+  built from the datasheet, confirm before ordering; "-M01" adds the laser-etched power symbol). 4-pin JST XH on the UI board:
+  switch NO + COM (GND) → OE_BTN (RC-debounced, level), LED anode via 100 Ω from +3V3, cathode on TCA9535 P10. The switch
+  only reports its position; the firmware owns the output state and the LED shows the real state (on = lit, tripped / not
+  armed = blinking). Pushed in at power-up or after a trip → the output stays off until the button is released and pushed
+  again. The on-board OUTPUT tactile and the on-board OE LEDs are gone.
+- **POWER rocker (decided 2026-10-01):** hard off. The rocker is wired straight to supply_control J501 (JST XH 2-pin): pin 1 =
+  LOGIC_IN through 4.7 kΩ 1206 (a wire-to-case short draws ≤ 6.4 mA), pin 2 = LMR38010 EN with a 47 kΩ pull-down (off when
+  open or unplugged) and 10 nF. Rocker off → no +3V3 → MCU off; on supply_power the buck RUN (100k pull-down), the USB-C sink
+  path (PD_SINK_EN, 100k pull-down), the DC input path (DCIN_ON, below) and the output switch (VOM1271 LED fed from +3V3) all
+  go off. USB flashing needs the rocker
+  on. Part: a panel rocker from a local shop (e.g. E-Switch RA1113112R class, unlit; the display shows "on"). Its contacts carry
+  only 0.1–0.6 mA, so gold contacts would be better; silver works but may need a second flip after a long idle time. The old
+  PWR_BTN ribbon line (pin 18) became UI_SPARE, and on 2026-10-01 the display backlight PWM LCD_BL (moved PC13 → PB10).
+- **DC input path enable (2026-10-01):** DCIN_EN = UVLO divider (on above ~9 V) AND the MCU's **DCIN_ON** (PB4, B2B pin 22, which
+  was a GND pin). Q164 (2N7002) holds EN low unless the MCU raises DCIN_ON; its gate is pulled up from LOGIC_IN through 1 MΩ with
+  a 12 V zener (D162, 60 V survival case), and Q163 (gate = DCIN_ON, 100k pull-down) releases it. MCU off / in reset / rocker
+  off → DC path off, so a connected DC source only feeds the LOGIC_IN diode. Both inputs are now firmware-enabled: the MCU
+  boots from LOGIC_IN and enables a path (USB after the PD contract). VIN_SNS sits after the paths, so the DC voltage can't be
+  read before enabling; the path's own UVLO (~9 V) and OV lockout (~31 V) still guard it in hardware.
+- **CC / CV indicators (2026-10-01):** 3 mm diffused THT LEDs (D3 red = CC, D4 green = CV, `LED_THT:LED_D3.0mm`) on the UI board,
+  soldered standing off the board so they reach the panel (cut-to-length spacers or long legs); TCA9535 P12 / P13 via 330 Ω
+  (~4 mA with standard-efficiency Vf ≈ 2 V parts; use a matching Vf for green). FAULT stays an on-board 0805.
 
 ## 5. Firmware scope (later)
 Setpoint DACs, duty-aware ITH clamp, power-limit loop, PD policy (AP33772S: read PDOs, request fixed/PPS/AVS, EPR entry),

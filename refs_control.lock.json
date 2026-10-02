@@ -89,6 +89,17 @@
    }
   },
   {
+   "ref": "C509",
+   "block": "logic_supply",
+   "prefix": "C",
+   "part": "C",
+   "value": "10n",
+   "nets": {
+    "1": "LOG_EN",
+    "2": "GND"
+   }
+  },
+  {
    "ref": "C601",
    "block": "usb_isolated",
    "prefix": "C",
@@ -419,6 +430,17 @@
    }
   },
   {
+   "ref": "J501",
+   "block": "logic_supply",
+   "prefix": "J",
+   "part": "Conn_01x02",
+   "value": "POWER rocker",
+   "nets": {
+    "1": "~",
+    "2": "LOG_EN"
+   }
+  },
+  {
    "ref": "J601",
    "block": "usb_isolated",
    "prefix": "J",
@@ -500,7 +522,7 @@
     "15": "ENC2_A",
     "16": "ENC2_B",
     "17": "OE_BTN",
-    "18": "PWR_BTN",
+    "18": "LCD_BL",
     "19": "BUZZER",
     "20": "+3V3"
    }
@@ -532,7 +554,7 @@
     "18": "CLAMP_DIS",
     "19": "OCP_FLT",
     "20": "OVP_FLT",
-    "21": "GND",
+    "21": "DCIN_ON",
     "22": "GND",
     "23": "GND",
     "24": "DAC_V",
@@ -620,6 +642,28 @@
    "nets": {
     "1": "+3V3",
     "2": "~"
+   }
+  },
+  {
+   "ref": "R505",
+   "block": "logic_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "4.7k",
+   "nets": {
+    "1": "LOGIC_IN",
+    "2": "~"
+   }
+  },
+  {
+   "ref": "R506",
+   "block": "logic_supply",
+   "prefix": "R",
+   "part": "R",
+   "value": "47k",
+   "nets": {
+    "1": "LOG_EN",
+    "2": "GND"
    }
   },
   {
@@ -864,6 +908,16 @@
    }
   },
   {
+   "ref": "TP502",
+   "block": "logic_supply",
+   "prefix": "TP",
+   "part": "TestPoint",
+   "value": "TestPoint",
+   "nets": {
+    "1": "LOG_EN"
+   }
+  },
+  {
    "ref": "U501",
    "block": "logic_supply",
    "prefix": "U",
@@ -871,7 +925,7 @@
    "value": "LMR38010",
    "nets": {
     "1": "GND",
-    "2": "LOGIC_IN",
+    "2": "LOG_EN",
     "3": "LOGIC_IN",
     "4": "~",
     "5": "LOG_FB",
@@ -929,7 +983,7 @@
    "value": "STM32G474RETx",
    "nets": {
     "1": "+3V3",
-    "2": "PWR_BTN",
+    "2": "NC",
     "3": "INA_ALERT",
     "4": "FAULT",
     "5": "NC",
@@ -957,7 +1011,7 @@
     "27": "GND",
     "28": "VREF+",
     "29": "+3V3A",
-    "30": "NC",
+    "30": "LCD_BL",
     "31": "GND",
     "32": "+3V3",
     "33": "NC",
@@ -984,7 +1038,7 @@
     "54": "LCD_RST",
     "55": "OE_BTN",
     "56": "PD_SINK_EN",
-    "57": "NC",
+    "57": "DCIN_ON",
     "58": "OUT_EN",
     "59": "CLAMP_DIS",
     "60": "I2C1_SDA",

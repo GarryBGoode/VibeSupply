@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "control_design.py")
-    (date "10/01/2026 11:13 AM")
+    (date "10/01/2026 10:08 PM")
     (tool "SKiDL (2.3.0)")
     (sheet
       (number 1)
@@ -392,6 +392,32 @@
         (tstamps "/8321a7f1-d03c-507e-94d0-3e84424e1a34/"))
       (component_classes)
       (tstamps "0876c77d-19b3-506b-8166-31acd19626a0"))
+    (comp
+      (ref "C509")
+      (value "10n")
+      (description "Unpolarized capacitor")
+      (footprint "Capacitor_SMD:C_0603_1608Metric")
+      (fields
+        (field
+          (name "Note") "50 V")
+        (field
+          (name "Description") "Unpolarized capacitor")
+        (field
+          (name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "C509")
+        (field
+          (name "SKiDL Line") "design\parts.py:49"))
+      (libsource
+        (lib "Device")
+        (part "C"))
+      (sheetpath
+        (names "/logic_supply/")
+        (tstamps "/8321a7f1-d03c-507e-94d0-3e84424e1a34/"))
+      (component_classes)
+      (tstamps "e7e9c98d-52bd-5f68-bc3f-d93202dc76c1"))
     (comp
       (ref "C601")
       (value "4.7u")
@@ -1119,6 +1145,32 @@
       (component_classes)
       (tstamps "c03a0b84-f498-5c75-bccf-61cb70a7b9dc"))
     (comp
+      (ref "J501")
+      (value "POWER rocker")
+      (description "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)")
+      (footprint "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
+      (fields
+        (field
+          (name "Note") "pin 1 = LOGIC_IN via 4.7k (up to ~30 V), pin 2 = LMR38010 EN")
+        (field
+          (name "Description") "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)")
+        (field
+          (name "Footprint") "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "J501")
+        (field
+          (name "SKiDL Line") "design\housekeeping.py:62"))
+      (libsource
+        (lib "Connector_Generic")
+        (part "Conn_01x02"))
+      (sheetpath
+        (names "/logic_supply/")
+        (tstamps "/8321a7f1-d03c-507e-94d0-3e84424e1a34/"))
+      (component_classes)
+      (tstamps "a090cee0-8faf-560b-b7df-a3b57ae31c3d"))
+    (comp
       (ref "J601")
       (value "USB_C_Receptacle_USB2.0_16P")
       (description "USB 2.0-only 16P Type-C Receptacle connector")
@@ -1161,7 +1213,7 @@
         (field
           (name "SKiDL Tag") "J701")
         (field
-          (name "SKiDL Line") "design\mcu.py:114"))
+          (name "SKiDL Line") "design\mcu.py:116"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_02x05_Odd_Even"))
@@ -1185,7 +1237,7 @@
         (field
           (name "SKiDL Tag") "J702")
         (field
-          (name "SKiDL Line") "design\mcu.py:125"))
+          (name "SKiDL Line") "design\mcu.py:127"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x04"))
@@ -1209,7 +1261,7 @@
         (field
           (name "SKiDL Tag") "J703")
         (field
-          (name "SKiDL Line") "design\mcu.py:136"))
+          (name "SKiDL Line") "design\mcu.py:138"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_02x10_Odd_Even"))
@@ -1392,6 +1444,56 @@
         (tstamps "/8321a7f1-d03c-507e-94d0-3e84424e1a34/"))
       (component_classes)
       (tstamps "f6dfa6b6-b2bd-5eff-a97c-8659bff25096"))
+    (comp
+      (ref "R505")
+      (value "4.7k")
+      (description "Resistor")
+      (footprint "Resistor_SMD:R_1206_3216Metric")
+      (fields
+        (field
+          (name "Note") "wire short: 30 V / 4.7k = 6.4 mA, 0.19 W")
+        (field
+          (name "Description") "Resistor")
+        (field
+          (name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "R505")
+        (field
+          (name "SKiDL Line") "design\parts.py:45"))
+      (libsource
+        (lib "Device")
+        (part "R"))
+      (sheetpath
+        (names "/logic_supply/")
+        (tstamps "/8321a7f1-d03c-507e-94d0-3e84424e1a34/"))
+      (component_classes)
+      (tstamps "2855b7bb-b84e-5086-b3aa-c3c8013b1688"))
+    (comp
+      (ref "R506")
+      (value "47k")
+      (description "Resistor")
+      (footprint "Resistor_SMD:R_0603_1608Metric")
+      (fields
+        (field
+          (name "Description") "Resistor")
+        (field
+          (name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "R506")
+        (field
+          (name "SKiDL Line") "design\parts.py:45"))
+      (libsource
+        (lib "Device")
+        (part "R"))
+      (sheetpath
+        (names "/logic_supply/")
+        (tstamps "/8321a7f1-d03c-507e-94d0-3e84424e1a34/"))
+      (component_classes)
+      (tstamps "e41c785a-97b9-560b-a967-8f9c7a44249f"))
     (comp
       (ref "R601")
       (value "5.1k")
@@ -1865,7 +1967,7 @@
         (field
           (name "SKiDL Tag") "SW701")
         (field
-          (name "SKiDL Line") "design\mcu.py:108"))
+          (name "SKiDL Line") "design\mcu.py:110"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1889,7 +1991,7 @@
         (field
           (name "SKiDL Tag") "SW702")
         (field
-          (name "SKiDL Line") "design\mcu.py:110"))
+          (name "SKiDL Line") "design\mcu.py:112"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1924,6 +2026,32 @@
         (tstamps "/8321a7f1-d03c-507e-94d0-3e84424e1a34/"))
       (component_classes)
       (tstamps "6cd42e0a-7070-5055-b951-9b77a9e7c1d1"))
+    (comp
+      (ref "TP502")
+      (value "TestPoint")
+      (description "test point")
+      (footprint "TestPoint:TestPoint_Pad_D1.0mm")
+      (fields
+        (field
+          (name "Label") "LOG_EN")
+        (field
+          (name "Description") "test point")
+        (field
+          (name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "TP502")
+        (field
+          (name "SKiDL Line") "design\parts.py:104"))
+      (libsource
+        (lib "Connector")
+        (part "TestPoint"))
+      (sheetpath
+        (names "/logic_supply/")
+        (tstamps "/8321a7f1-d03c-507e-94d0-3e84424e1a34/"))
+      (component_classes)
+      (tstamps "714d7044-1dd3-5578-9e6e-97ef5d9d401f"))
     (comp
       (ref "U501")
       (value "LMR38010")
@@ -2017,7 +2145,7 @@
         (field
           (name "SKiDL Tag") "U701")
         (field
-          (name "SKiDL Line") "design\mcu.py:67"))
+          (name "SKiDL Line") "design\mcu.py:69"))
       (libsource
         (lib "MCU_ST_STM32G4")
         (part "STM32G474RETx"))
@@ -2329,6 +2457,18 @@
         (pintype "BIDIRECTIONAL")))
     (net
       (code 12)
+      (name "DCIN_ON")
+      (class "Default")
+      (node
+        (ref "J971")
+        (pin "21")
+        (pintype "PASSIVE"))
+      (node
+        (ref "U701")
+        (pin "57")
+        (pintype "BIDIRECTIONAL")))
+    (net
+      (code 13)
       (name "ENC1_A")
       (class "Default")
       (node
@@ -2340,7 +2480,7 @@
         (pin "38")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 13)
+      (code 14)
       (name "ENC1_B")
       (class "Default")
       (node
@@ -2352,7 +2492,7 @@
         (pin "39")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 14)
+      (code 15)
       (name "ENC2_A")
       (class "Default")
       (node
@@ -2364,7 +2504,7 @@
         (pin "8")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 15)
+      (code 16)
       (name "ENC2_B")
       (class "Default")
       (node
@@ -2376,7 +2516,7 @@
         (pin "9")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 16)
+      (code 17)
       (name "FAULT")
       (class "Default")
       (node
@@ -2388,7 +2528,7 @@
         (pin "4")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 17)
+      (code 18)
       (name "GND")
       (class "Default")
       (node
@@ -2417,6 +2557,10 @@
         (pintype "PASSIVE"))
       (node
         (ref "C508")
+        (pin "2")
+        (pintype "PASSIVE"))
+      (node
+        (ref "C509")
         (pin "2")
         (pintype "PASSIVE"))
       (node
@@ -2549,10 +2693,6 @@
         (pintype "PASSIVE"))
       (node
         (ref "J971")
-        (pin "21")
-        (pintype "PASSIVE"))
-      (node
-        (ref "J971")
         (pin "22")
         (pintype "PASSIVE"))
       (node
@@ -2608,6 +2748,10 @@
         (pin "2")
         (pintype "PASSIVE"))
       (node
+        (ref "R506")
+        (pin "2")
+        (pintype "PASSIVE"))
+      (node
         (ref "R603")
         (pin "2")
         (pintype "PASSIVE"))
@@ -2656,7 +2800,7 @@
         (pin "63")
         (pintype "PASSIVE")))
     (net
-      (code 18)
+      (code 19)
       (name "GND_ISO")
       (class "Default")
       (node
@@ -2720,7 +2864,7 @@
         (pin "8")
         (pintype "POWER-IN")))
     (net
-      (code 19)
+      (code 20)
       (name "I2C1_SCL")
       (class "Default")
       (node
@@ -2736,7 +2880,7 @@
         (pin "51")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 20)
+      (code 21)
       (name "I2C1_SDA")
       (class "Default")
       (node
@@ -2752,7 +2896,7 @@
         (pin "60")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 21)
+      (code 22)
       (name "I2C2_SCL")
       (class "Default")
       (node
@@ -2768,7 +2912,7 @@
         (pin "43")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 22)
+      (code 23)
       (name "I2C2_SDA")
       (class "Default")
       (node
@@ -2784,7 +2928,7 @@
         (pin "42")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 23)
+      (code 24)
       (name "IL_SNS")
       (class "Default")
       (node
@@ -2796,7 +2940,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 24)
+      (code 25)
       (name "IL_SNS_MCU")
       (class "Default")
       (node
@@ -2812,7 +2956,7 @@
         (pin "24")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 25)
+      (code 26)
       (name "INA_ALERT")
       (class "Default")
       (node
@@ -2828,7 +2972,7 @@
         (pin "3")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 26)
+      (code 27)
       (name "ISO_CC1")
       (class "Default")
       (node
@@ -2840,7 +2984,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 27)
+      (code 28)
       (name "ISO_CC2")
       (class "Default")
       (node
@@ -2852,7 +2996,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 28)
+      (code 29)
       (name "ISO_UD+")
       (class "Default")
       (node
@@ -2876,7 +3020,7 @@
         (pin "7")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 29)
+      (code 30)
       (name "ISO_UD-")
       (class "Default")
       (node
@@ -2900,7 +3044,7 @@
         (pin "6")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 30)
+      (code 31)
       (name "ISO_VDD1")
       (class "Default")
       (node
@@ -2924,7 +3068,7 @@
         (pin "5")
         (pintype "INPUT")))
     (net
-      (code 31)
+      (code 32)
       (name "ITH_MON")
       (class "Default")
       (node
@@ -2936,7 +3080,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 32)
+      (code 33)
       (name "ITH_MON_MCU")
       (class "Default")
       (node
@@ -2952,7 +3096,19 @@
         (pin "10")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 33)
+      (code 34)
+      (name "LCD_BL")
+      (class "Default")
+      (node
+        (ref "J703")
+        (pin "18")
+        (pintype "PASSIVE"))
+      (node
+        (ref "U701")
+        (pin "30")
+        (pintype "BIDIRECTIONAL")))
+    (net
+      (code 35)
       (name "LCD_CS")
       (class "Default")
       (node
@@ -2964,7 +3120,7 @@
         (pin "40")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 34)
+      (code 36)
       (name "LCD_DC")
       (class "Default")
       (node
@@ -2976,7 +3132,7 @@
         (pin "41")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 35)
+      (code 37)
       (name "LCD_MOSI")
       (class "Default")
       (node
@@ -2988,7 +3144,7 @@
         (pin "37")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 36)
+      (code 38)
       (name "LCD_RST")
       (class "Default")
       (node
@@ -3000,7 +3156,7 @@
         (pin "54")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 37)
+      (code 39)
       (name "LCD_SCK")
       (class "Default")
       (node
@@ -3012,7 +3168,7 @@
         (pin "35")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 38)
+      (code 40)
       (name "LOGIC_IN")
       (class "Default")
       (node
@@ -3036,15 +3192,15 @@
         (pin "2")
         (pintype "PASSIVE"))
       (node
-        (ref "U501")
-        (pin "2")
-        (pintype "INPUT"))
+        (ref "R505")
+        (pin "1")
+        (pintype "PASSIVE"))
       (node
         (ref "U501")
         (pin "3")
         (pintype "POWER-IN")))
     (net
-      (code 39)
+      (code 41)
       (name "LOG_BOOT")
       (class "Default")
       (node
@@ -3056,7 +3212,31 @@
         (pin "7")
         (pintype "PASSIVE")))
     (net
-      (code 40)
+      (code 42)
+      (name "LOG_EN")
+      (class "Default")
+      (node
+        (ref "C509")
+        (pin "1")
+        (pintype "PASSIVE"))
+      (node
+        (ref "J501")
+        (pin "2")
+        (pintype "PASSIVE"))
+      (node
+        (ref "R506")
+        (pin "1")
+        (pintype "PASSIVE"))
+      (node
+        (ref "TP502")
+        (pin "1")
+        (pintype "PASSIVE"))
+      (node
+        (ref "U501")
+        (pin "2")
+        (pintype "INPUT")))
+    (net
+      (code 43)
       (name "LOG_FB")
       (class "Default")
       (node
@@ -3072,7 +3252,7 @@
         (pin "5")
         (pintype "INPUT")))
     (net
-      (code 41)
+      (code 44)
       (name "LOG_SW")
       (class "Default")
       (node
@@ -3088,8 +3268,20 @@
         (pin "8")
         (pintype "POWER-OUT")))
     (net
-      (code 42)
+      (code 45)
       (name "N$1")
+      (class "Default")
+      (node
+        (ref "J501")
+        (pin "1")
+        (pintype "PASSIVE"))
+      (node
+        (ref "R505")
+        (pin "2")
+        (pintype "PASSIVE")))
+    (net
+      (code 46)
+      (name "N$2")
       (class "Default")
       (node
         (ref "R501")
@@ -3100,8 +3292,8 @@
         (pin "4")
         (pintype "PASSIVE")))
     (net
-      (code 43)
-      (name "N$2")
+      (code 47)
+      (name "N$3")
       (class "Default")
       (node
         (ref "D504")
@@ -3112,8 +3304,8 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 44)
-      (name "N$3")
+      (code 48)
+      (name "N$4")
       (class "Default")
       (node
         (ref "J701")
@@ -3124,8 +3316,8 @@
         (pin "49")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 45)
-      (name "N$4")
+      (code 49)
+      (name "N$5")
       (class "Default")
       (node
         (ref "J701")
@@ -3136,7 +3328,7 @@
         (pin "50")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 46)
+      (code 50)
       (name "NRST")
       (class "Default")
       (node
@@ -3156,7 +3348,7 @@
         (pin "7")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 47)
+      (code 51)
       (name "NTC_CLAMP")
       (class "Default")
       (node
@@ -3168,7 +3360,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 48)
+      (code 52)
       (name "NTC_CLAMP_MCU")
       (class "Default")
       (node
@@ -3184,7 +3376,7 @@
         (pin "23")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 49)
+      (code 53)
       (name "NTC_FET")
       (class "Default")
       (node
@@ -3196,7 +3388,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 50)
+      (code 54)
       (name "NTC_FET_MCU")
       (class "Default")
       (node
@@ -3212,7 +3404,7 @@
         (pin "11")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 51)
+      (code 55)
       (name "NTC_IND")
       (class "Default")
       (node
@@ -3224,7 +3416,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 52)
+      (code 56)
       (name "NTC_IND_MCU")
       (class "Default")
       (node
@@ -3240,7 +3432,7 @@
         (pin "22")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 53)
+      (code 57)
       (name "NTC_OUTSW")
       (class "Default")
       (node
@@ -3252,7 +3444,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 54)
+      (code 58)
       (name "NTC_OUTSW_MCU")
       (class "Default")
       (node
@@ -3268,7 +3460,7 @@
         (pin "26")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 55)
+      (code 59)
       (name "OCP_FLT")
       (class "Default")
       (node
@@ -3280,7 +3472,7 @@
         (pin "25")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 56)
+      (code 60)
       (name "OE_BTN")
       (class "Default")
       (node
@@ -3292,7 +3484,7 @@
         (pin "55")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 57)
+      (code 61)
       (name "OUT_EN")
       (class "Default")
       (node
@@ -3304,7 +3496,7 @@
         (pin "58")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 58)
+      (code 62)
       (name "OVP_FLT")
       (class "Default")
       (node
@@ -3316,7 +3508,7 @@
         (pin "12")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 59)
+      (code 63)
       (name "PD_IRQ")
       (class "Default")
       (node
@@ -3328,7 +3520,7 @@
         (pin "62")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 60)
+      (code 64)
       (name "PD_SINK_EN")
       (class "Default")
       (node
@@ -3340,19 +3532,7 @@
         (pin "56")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 61)
-      (name "PWR_BTN")
-      (class "Default")
-      (node
-        (ref "J703")
-        (pin "18")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U701")
-        (pin "2")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 62)
+      (code 65)
       (name "UART_RX")
       (class "Default")
       (node
@@ -3364,7 +3544,7 @@
         (pin "53")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 63)
+      (code 66)
       (name "UART_TX")
       (class "Default")
       (node
@@ -3376,7 +3556,7 @@
         (pin "52")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 64)
+      (code 67)
       (name "UI_INT")
       (class "Default")
       (node
@@ -3392,7 +3572,7 @@
         (pin "44")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 65)
+      (code 68)
       (name "USB_DM")
       (class "Default")
       (node
@@ -3404,7 +3584,7 @@
         (pin "45")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 66)
+      (code 69)
       (name "USB_DP")
       (class "Default")
       (node
@@ -3416,7 +3596,7 @@
         (pin "46")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 67)
+      (code 70)
       (name "VBUS_PC")
       (class "Default")
       (node
@@ -3456,7 +3636,7 @@
         (pin "1")
         (pintype "POWER-IN")))
     (net
-      (code 68)
+      (code 71)
       (name "VIN_SNS")
       (class "Default")
       (node
@@ -3468,7 +3648,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 69)
+      (code 72)
       (name "VIN_SNS_MCU")
       (class "Default")
       (node
@@ -3484,7 +3664,7 @@
         (pin "17")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 70)
+      (code 73)
       (name "VOUT_SNS")
       (class "Default")
       (node
@@ -3496,7 +3676,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 71)
+      (code 74)
       (name "VOUT_SNS_MCU")
       (class "Default")
       (node
@@ -3512,7 +3692,7 @@
         (pin "13")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 72)
+      (code 75)
       (name "VREF+")
       (class "Default")
       (node
@@ -3528,7 +3708,7 @@
         (pin "28")
         (pintype "INPUT")))
     (net
-      (code 73)
+      (code 76)
       (name "VTERM_SNS")
       (class "Default")
       (node
@@ -3540,7 +3720,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 74)
+      (code 77)
       (name "VTERM_SNS_MCU")
       (class "Default")
       (node

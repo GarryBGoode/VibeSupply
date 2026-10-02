@@ -10,12 +10,15 @@ USB path: VBUS -> 5 mOhm (AP33772S current sense, ISENP) -> VBUS_S -> LM74800 (i
 input OR-ed with a 20 V contract would otherwise push current into the charger) and gives a fast hardware OV cut-off.
 The MCU enables the path (PD_SINK_EN) once the AP33772S reports a valid contract, and drops it on an AP33772S
 interrupt (OVP/UVP/OCP/OTP). EPR 28 V needs an EPR (240 W e-marked) cable.
+
+DC path: UVLO divider on EN (on above ~9 V) AND the MCU's DCIN_ON (2026-10-01). A 2N7002 holds EN low unless DCIN_ON is
+high, so with the MCU off (POWER rocker off, reset, no firmware) a connected DC source sees only the LOGIC_IN diode.
 """
 
 from skidl import Net, Part, subcircuit
 
 from .nets import *
-from .parts import AP33772S, C, LM74800, R, _fields, ntc, power_fet, schottky_small, testpoint, tvs, LED
+from .parts import AP33772S, C, LM74800, NMOS_small, R, _fields, ntc, power_fet, schottky_small, testpoint, tvs, LED
 
 
 @subcircuit
@@ -161,6 +164,21 @@ def dc_input():
     mid = lm74800_path(DCIN_RAW, VIN_BUS, en, "DCIN", "ISC030N10NM6", tag="dcin_path")
     r1, r2 = R("100k"), R("15k")
     mid & r1 & en & r2 & GND
+    # MCU gate: q_hold pulls EN low (path off) unless the MCU raises DCIN_ON. q_hold's gate is pulled up from LOGIC_IN
+    # (present whenever DC is connected: DCIN_RAW diode), 1M + 12 V zener keep it within VGS limits up to the 60 V
+    # survival case; q_rel (gate = DCIN_ON) pulls that gate low. MCU off / in reset -> DCIN_ON low -> path off.
+    hold = Net("DCIN_HOLD")
+    r_h = R("1M")
+    r_h[1, 2] += LOGIC_IN, hold
+    dz = Part("Device", "D_Zener", value="BZT52C12", footprint="Diode_SMD:D_SOD-123")
+    dz["K"] += hold
+    dz["A"] += GND
+    q_hold, q_rel = NMOS_small(), NMOS_small()
+    q_hold["D", "S", "G"] += en, GND, hold
+    q_rel["D", "S", "G"] += hold, GND, DCIN_ON
+    r_on = R("100k", note="DC path off while the MCU is in reset")
+    r_on[1, 2] += DCIN_ON, GND
+    testpoint("DCIN_ON")[1] += DCIN_ON
 
 
 @subcircuit

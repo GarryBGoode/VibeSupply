@@ -100,6 +100,10 @@ power_design = SchLib(tool=SKIDL).add_parts(*[
             Pin(num='3',name='S',func=pin_types.PASSIVE,unit=1),
             Pin(num='4',name='G',func=pin_types.INPUT,unit=1),
             Pin(num='5',name='D',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
+        Part(**{ 'name':'2N7002', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'2N7002'}), 'ref_prefix':'Q', 'fplist':['', 'Package_TO_SOT_SMD:SOT-23'], 'footprint':'Package_TO_SOT_SMD:SOT-23', 'keywords':'N-Channel Switching MOSFET', 'description':'0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23', 'datasheet':'https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF', 'pins':[
+            Pin(num='1',name='G',func=pin_types.INPUT,unit=1),
+            Pin(num='2',name='S',func=pin_types.PASSIVE,unit=1),
+            Pin(num='3',name='D',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
         Part(**{ 'name':'INA228', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'INA228'}), 'ref_prefix':'U', 'fplist':['Package_SO:TSSOP-10_3x3mm_P0.5mm', 'Package_SO:TSSOP-10_3x3mm_P0.5mm'], 'footprint':'Package_SO:TSSOP-10_3x3mm_P0.5mm', 'keywords':'ADC I2C 20-Bit Oversampling Current Shunt', 'description':'High-Side or Low-Side Measurement, Bi-Directional Current and Power Monitor (0-85V) with I2C, SMBus-, and PMBus-Compatible Interface, TSSOP-10 (Texas DGS0010A / VSSOP)', 'datasheet':'https://www.ti.com/lit/ds/symlink/ina228.pdf', 'pins':[
             Pin(num='1',name='A1',func=pin_types.INPUT,unit=1),
             Pin(num='2',name='A0',func=pin_types.INPUT,unit=1),
@@ -129,10 +133,6 @@ power_design = SchLib(tool=SKIDL).add_parts(*[
             Pin(num='15',name='TG',func=pin_types.OUTPUT,unit=1),
             Pin(num='16',name='SW',func=pin_types.PASSIVE,unit=1),
             Pin(num='17',name='GND',func=pin_types.PWRIN,unit=1)], 'unit_defs':[] }),
-        Part(**{ 'name':'2N7002', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'2N7002'}), 'ref_prefix':'Q', 'fplist':['', 'Package_TO_SOT_SMD:SOT-23'], 'footprint':'Package_TO_SOT_SMD:SOT-23', 'keywords':'N-Channel Switching MOSFET', 'description':'0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23', 'datasheet':'https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF', 'pins':[
-            Pin(num='1',name='G',func=pin_types.INPUT,unit=1),
-            Pin(num='2',name='S',func=pin_types.PASSIVE,unit=1),
-            Pin(num='3',name='D',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
         Part(**{ 'name':'D_Schottky', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'D_Schottky'}), 'ref_prefix':'D', 'fplist':[''], 'footprint':'Diode_SMD:D_SOD-323', 'keywords':'diode Schottky', 'description':'Schottky diode', 'datasheet':'', 'pins':[
             Pin(num='1',name='K',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',name='A',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),

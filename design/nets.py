@@ -58,6 +58,7 @@ I2C1_SCL = Net("I2C1_SCL")        # PA15 (power bus: AP33772S 0x52, INA228 0x40/
 I2C1_SDA = Net("I2C1_SDA")        # PB7
 PD_IRQ = Net("PD_IRQ")            # PB9 (AP33772S INT, active high)
 PD_SINK_EN = Net("PD_SINK_EN")    # PB3 (high = USB-C sink path on; was SWO)
+DCIN_ON = Net("DCIN_ON")          # PB4 (high = DC input path allowed, still gated by its UVLO; added 2026-10-01)
 INA_ALERT = Net("INA_ALERT")      # PC14
 USB_DP = Net("USB_DP")            # PA12 (to ADuM3160 DD+)
 USB_DM = Net("USB_DM")            # PA11 (to ADuM3160 DD-)
@@ -78,7 +79,7 @@ ENC2_A = Net("ENC2_A")            # PC0 TIM1_CH1
 ENC2_B = Net("ENC2_B")            # PC1 TIM1_CH2
 ENC2_SW = Net("ENC2_SW")          # UI board only: TCA9535 P06
 OE_BTN = Net("OE_BTN")            # PD2
-PWR_BTN = Net("PWR_BTN")          # PC13 WKUP2
+LCD_BL = Net("LCD_BL")            # PB10 TIM2_CH3, display backlight PWM (2026-10-01; ribbon pin 18, was UI_SPARE on PC13)
 BUZZER = Net("BUZZER")            # PA7 TIM17_CH1
 UART_TX = Net("UART_TX")          # PC10 USART3_TX
 UART_RX = Net("UART_RX")          # PC11 USART3_RX

@@ -22,14 +22,17 @@ control_design = SchLib(tool=SKIDL).add_parts(*[
             Pin(num='7',name='BOOT',func=pin_types.PASSIVE,unit=1),
             Pin(num='8',name='SW',func=pin_types.PWROUT,unit=1),
             Pin(num='9',name='EP',func=pin_types.PWRIN,unit=1)], 'unit_defs':[] }),
-        Part(**{ 'name':'R', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'R'}), 'ref_prefix':'R', 'fplist':[''], 'footprint':'Resistor_SMD:R_0603_1608Metric', 'keywords':'R res resistor', 'description':'Resistor', 'datasheet':'', 'pins':[
+        Part(**{ 'name':'Conn_01x02', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_01x02'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical', 'keywords':'connector', 'description':'Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[
+            Pin(num='1',name='Pin_1',func=pin_types.PASSIVE,unit=1),
+            Pin(num='2',name='Pin_2',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
+        Part(**{ 'name':'R', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'R'}), 'ref_prefix':'R', 'fplist':[''], 'footprint':'Resistor_SMD:R_1206_3216Metric', 'keywords':'R res resistor', 'description':'Resistor', 'datasheet':'', 'pins':[
             Pin(num='1',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
+        Part(**{ 'name':'TestPoint', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'TestPoint'}), 'ref_prefix':'TP', 'fplist':[''], 'footprint':'TestPoint:TestPoint_Pad_D1.0mm', 'keywords':'test point tp', 'description':'test point', 'datasheet':'', 'pins':[
+            Pin(num='1',name='1',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
         Part(**{ 'name':'L', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'L'}), 'ref_prefix':'L', 'fplist':[''], 'footprint':'Inductor_SMD:L_Bourns_SRN6045TA', 'keywords':'inductor choke coil reactor magnetic', 'description':'Inductor', 'datasheet':'', 'pins':[
             Pin(num='1',name='1',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',name='2',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
-        Part(**{ 'name':'TestPoint', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'TestPoint'}), 'ref_prefix':'TP', 'fplist':[''], 'footprint':'TestPoint:TestPoint_Pad_D1.0mm', 'keywords':'test point tp', 'description':'test point', 'datasheet':'', 'pins':[
-            Pin(num='1',name='1',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
         Part(**{ 'name':'FerriteBead_Small', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'FerriteBead_Small'}), 'ref_prefix':'FB', 'fplist':[''], 'footprint':'Inductor_SMD:L_0603_1608Metric', 'keywords':'L ferrite bead inductor filter', 'description':'Ferrite bead, small symbol', 'datasheet':'', 'pins':[
             Pin(num='1',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),

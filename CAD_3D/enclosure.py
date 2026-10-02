@@ -112,7 +112,7 @@ def create_enclosure(
 if __name__ == "__main__":
     from ocp_vscode import show
 
-    slot_data = EnclosureSlotData(slot_cut_depth=1)
+    slot_data = EnclosureSlotData(slot_cut_depth=-2)
     # screw_pattern = EnclosureEndcapScrewPattern()
     enclosure_data = EnclosureData(slots=slot_data)
 

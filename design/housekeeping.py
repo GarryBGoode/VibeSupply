@@ -8,7 +8,8 @@ Split 2026-09-30 between the two boards (design/interconnect.py carries LOGIC_IN
 
 - LOGIC_IN: diode-OR of raw VBUS, raw DC input and the isolated USB 5 V -> the MCU boots from any source,
   before the PD sink path is enabled (the MCU enables it after the AP33772S reports a contract).
-- +3V3: LMR38010 (4.2-80 V), 400 kHz, 22 uH.
+- +3V3: LMR38010 (4.2-80 V), 400 kHz, 22 uH. Its EN goes through the panel POWER rocker (2026-10-01): rocker off = no +3V3,
+  MCU unpowered, and every enable on supply_power falls back to its pull-down (buck RUN, USB sink path, output switch).
 - +12V_AUX: LM5164 (6-100 V) from VIN_PWR, 300 kHz COT with type-3 ripple injection, 68 uH. LTC7803 EXTVCC
   (needs >= 7 V: at a 9 V input the rail sags to ~8.5 V, still fine), clamp gate driver, +5VA LDO.
   Enabled above ~8.3 V. Below ~9 V input the output stays off (firmware, VIN_SNS).
@@ -55,7 +56,21 @@ def logic_supply():
     u = LMR38010()
     sw, bst, fb = Net("LOG_SW"), Net("LOG_BOOT"), Net("LOG_FB")
     u["VIN"] += LOGIC_IN
-    u["EN"] += LOGIC_IN
+    # ---- POWER rocker (panel mount, wired straight to this board): closed = on. The series 4.7k limits a wire-to-case
+    # short to ~6 mA at 30 V; the 47k pull-down keeps it off with the rocker open or unplugged; EN ~ 0.91 x LOGIC_IN.
+    en = Net("LOG_EN")
+    j = Part("Connector_Generic", "Conn_01x02", value="POWER rocker",
+             footprint="Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
+    _fields(j, None, "pin 1 = LOGIC_IN via 4.7k (up to ~30 V), pin 2 = LMR38010 EN")
+    r_s = R("4.7k", "1206", note="wire short: 30 V / 4.7k = 6.4 mA, 0.19 W")
+    LOGIC_IN & r_s & j[1]
+    j[2] += en
+    r_pd = R("47k")
+    r_pd[1, 2] += en, GND
+    c_en = C("10n", note="50 V")
+    c_en[1, 2] += en, GND
+    testpoint("LOG_EN")[1] += en
+    u["EN"] += en
     u["GND"] += GND
     u["EP"] += GND
     u["SW"] += sw

@@ -27,7 +27,7 @@ B2B_PINOUT = {
     1: LOGIC_IN, 2: GND, 3: GND, 4: GND, 5: P3V3, 6: P3V3, 7: GND, 8: GND,
     # digital
     9: I2C1_SCL, 10: I2C1_SDA, 11: PD_IRQ, 12: INA_ALERT, 13: PD_SINK_EN, 14: OUT_EN, 15: BUCK_RUN, 16: BUCK_PSKIP,
-    17: CLAMP_DIS, 18: FAULT, 19: OVP_FLT, 20: OCP_FLT, 21: GND, 22: GND,
+    17: CLAMP_DIS, 18: FAULT, 19: OVP_FLT, 20: OCP_FLT, 21: GND, 22: DCIN_ON,     # 22 was GND until 2026-10-01
     # analog: DAC setpoints (filtered on the power board), then the sense signals (RC-filtered on both ends)
     23: DAC_V, 24: GND, 25: DAC_I, 26: GND, 27: DAC_ICL, 28: GND,
     29: VOUT_SNS, 30: IL_SNS, 31: VTERM_SNS, 32: VIN_SNS, 33: ITH_MON, 34: GND,

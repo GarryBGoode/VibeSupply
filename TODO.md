@@ -46,6 +46,56 @@ Legend: **[you]** needs your decision or a download · **[me]** I'll do it · �
 - ☐ **[me]** `check_fit.py` once the board split is laid out: boards in their slots + part boxes (or a KiCad STEP) → clearance
   report + height-zone DXF for KiCad
 - ☐ **[you]** UI board + add-on in build123d (front-panel positions in `mech_design.py` drive both)
+
+## UI rework: scroll wheels (2026-10-01) — see PLAN §3.4 / §4
+- ☑ Concept: 2 scroll wheels with push on the add-on top next to the display (left = V, right = I; push = unlock, push again = lock),
+  nav 5 → 3 buttons (Left / Right / Enter). Magnetic sensing (MT6701) rejected as scope creep; edge-drive jog encoders (EVQWK,
+  SIQ-02FVS3) rejected (15 detents, need a vertical board)
+- ☑ Parts: Alps **EC10E1220501** (24 det, shaft axis 9.0 mm, 1.73 mm hex bore with a 3° flare) + Omron **B3F-1060** (7.0 mm, 100 gf)
+  under the free axle end; the same B3F-1060 for the 3 nav buttons
+- ☑ skidl `ui_design.py`: EC10E ×2 (SW1 = V, SW2 = I), wheel pushes SW3/SW4 (ex-UP/DOWN refs), LEFT/RIGHT/ENTER on TCA9535
+  P00–P02, P03/P04 spare → TP7/TP8, R13/R14 retired; still 69 parts, ERC clean. Ribbon pinout unchanged
+- ☑ Footprint `footprints/supply1.pretty/RotaryEncoder_Alps_EC10E_Horizontal.kicad_mod` (from the catalog's mounting-hole drawing)
+- ☐ **[you]** Buy samples (Farnell / DigiKey: EC10E1220501 ×3–4, B3F-1060 ×10; not found at LCSC → hand-solder, they're THT).
+  With an ohmmeter, check which **end** pin is C (common): the footprint assumes A, B, C from left to right as seen from the top
+  with the bracket slots towards −Y, but I can't tell from the catalog whether that view is mirrored
+- ☐ **[you]** Wheel + axle + push in the add-on CAD: wheel Ø (12–14 mm → 1.6–1.8 mm per click), metal axle, collar on the B3F,
+  switch 12–15 mm from the encoder hub (≥ 9 mm), top surface ≈ 2–3 mm below the wheel top. Then place SW1–SW4 to match
+- ☐ **[me]** CAD heights for the UI board: EC10E body ≈ 12.6 mm (estimate; the Alps STEP is in the catalog zip if needed),
+  B3F-1060 has a KiCad model
+
+## Display: 1.9" IPS (2026-10-01) — see PLAN §3.4
+- ☑ 2.42" OLED → **1.9" IPS 170×320 ST7789** (HESTORE IPS-1.9-ST7789-SPI-M). UI J3 → 8-pin socket (GND/VCC/SCL/SDA/RES/DC/CS/BLK,
+  from the HESTORE drawing), BLK ← LCD_BL via R29 100 Ω, C12 10 µF local bulk; TP10 (UI_SPARE) retired. Ribbon pin 18
+  UI_SPARE → LCD_BL, MCU PC13 → PB10 (TIM2_CH3), PC13 now free. UI 62 parts, control 80 parts, both ERC clean
+- ☐ **[you]** Update PCB from netlist on supply_ui (J3 footprint 1×07 → 1×08, R29 / C12 new, TP10 gone) and supply_control
+  (U701 pin 30 = PB10 LCD_BL, pin 2 = PC13 NC)
+- ☐ **[you]** When the module arrives, check BLK with a meter: a pull-up to VCC (tens of kΩ) = transistor input, the PWM drives
+  it as designed; ~0 Ω-ish diode path to the LEDs = direct anode → swap R29 for a high-side P-FET driver
+- ☐ **[you]** Add-on CAD: the module screws to the printed top (4× M2 on 25.8 × 57.9 mm) behind a window over the 22.7 × 42.72
+  active area; 5.1 mm total depth + header. Decide how J3 reaches it (socket stack vs short wires) — the UI board footprint
+  for J3 is a vertical 1×08 socket for now
+- ☐ **[me]** Firmware notes (later): ST7789 column offset 35, partial-buffer rendering, backlight dim after idle
+
+## OUTPUT button + POWER rocker (2026-10-01) — see PLAN §4
+- ☑ OUTPUT = latching lit push button (E-Switch PV4, 19 mm, on-on latching, gold, red ring LED): UI J6 (4-pin JST XH: switch,
+  GND, LED anode via R27 100 Ω, LED cathode → TCA9535 P10). On-board OUTPUT tactile, on-board OE LEDs and the 5-pin J4 retired;
+  P11 spare (TP)
+- ☑ POWER = rocker → supply_control J501 → LMR38010 EN (R505 4.7k series, R506 47k pull-down, C509 10n, TP502). UI POWER tactile
+  and J5 retired; ribbon pin 18 / PC13 renamed PWR_BTN → UI_SPARE. All three boards ERC clean, B2B 40/40
+- ☐ **[you]** Update PCB from netlist on supply_ui (11 parts retired, J6 / TP9 / TP10 new) and supply_control (J501, R505, R506,
+  C509, TP502 new)
+- ☐ **[you]** Order: PV4 OUTPUT button (PV4F230SSG-311 = flat, solder, on-on, gold, red ring, bare LED; add -M01 for the power
+  symbol; I built the code from the datasheet configurator, so confirm it exists and check the body depth behind the panel)
+  + a rocker (RA1113112R or a gold-contact one) — together with the EC10E / B3F-1060 samples above
+- ☑ DC input path is firmware-enabled (DCIN_ON, PB4, B2B pin 22 ex-GND): Q163/Q164 2N7002, D162 BZT52C12, R165 1M, R166 100k,
+  TP161 on supply_power. Rocker off → DC path off too
+- ☑ CC / CV LEDs → 3 mm THT (D3 red CC, D4 green CV), standing off the board up to the panel; FAULT stays 0805
+- ☐ **[you]** Update PCB from netlist on supply_power too (6 new parts, J951 pin 22 now DCIN_ON), and on supply_ui (D3/D4 footprint
+  change)
+- ☐ **[you]** Rocker from a local shop; CC/CV LED positions in the add-on CAD (panel holes, standoff height)
+- ☐ **[me]** Firmware notes: raise DCIN_ON at boot (hardware UVLO / OV still guard the DC path; VIN_SNS only reads after the path); OUTPUT is level-sensitive (pushed in at boot / after a trip → needs release + push), LED blinks
+  when the output is not on although the button is in
 - ☑ UI (2026-09-28): 2.42" SSD1309 SPI OLED (7-pin header) instead of the ST7789; ribbon 2×10 1.27 mm (`design/mcu.py` UI_PINOUT);
   encoder pushes moved to the TCA9535; MCU pins PB4, PB10, PB11, PF0, PF1 now free
 - ☑ skidl (2026-09-28): cuts applied, main 297 parts / UI 69 parts, ERC clean. J161 = DC-in wire pads, J402 = LTO100 wire pads,
@@ -156,7 +206,6 @@ Shortlist with LCSC numbers: [calc/parts_shortlist.md](calc/parts_shortlist.md)
 - ☐ **[me]** Mini 58 V fuse vs Keystone 3568 holder (58 V fuses have a rejection feature)
 - ☐ **[me]** SER2918H footprint: pad 3 (mounting) position is approximate — check against the Coilcraft drawing before layout
 - ☐ **[me]** VOM1271 output polarity (pin 4 = +) — double-check the datasheet drawing
-- ☐ **[you]** Display module: header assumes the common GND/VCC/SCL/SDA/RES/DC/CS/BLK pinout — check against the module you buy
 - ☐ **[you]** Layout: KiCad projects live in `kicad/supply_power`, `kicad/supply_control` and `kicad/supply_ui/supply_ui` (fp/sym lib tables are next to the .kicad_pro), then PCB editor → File → Import → Netlist
 
 ## Known limitations (accepted, documented)

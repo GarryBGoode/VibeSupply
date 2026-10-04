@@ -39,16 +39,16 @@ def create_encoder_ec10e(data: EncoderEC10EData = EC10E1220505) -> bd.Compound:
     profile -= bd.Pos(0, h) * bd.Circle(rotor_clearance)
     body = _y_extrude(profile, d.body_rear_y, d.body_front_y)
 
-    foot = _box(-d.base_width / 2, d.base_width / 2, d.base_rear_y, d.base_front_y, 0, d.base_height)
+    foot = _box(-d.base_width / 2, d.base_width / 2, d.base_front_y, d.base_rear_y, 0, d.base_height)
     taper_top = d.terminal_block_top if d.terminal_block_top > d.base_height else d.base_height + 0.5
     taper = bd.loft(
         [
             bd.Plane.XY.offset(d.base_height)
             * bd.Pos(0, (d.base_rear_y + d.base_front_y) / 2)
-            * bd.Rectangle(d.base_width, d.base_front_y - d.base_rear_y),
+            * bd.Rectangle(d.base_width, d.base_rear_y - d.base_front_y),
             bd.Plane.XY.offset(taper_top)
             * bd.Pos(0, (d.body_rear_y + d.body_front_y) / 2)
-            * bd.Rectangle(d.base_width, d.body_front_y - d.body_rear_y),
+            * bd.Rectangle(d.base_width, d.body_rear_y - d.body_front_y),
         ]
     )
     body += foot + taper
@@ -56,18 +56,18 @@ def create_encoder_ec10e(data: EncoderEC10EData = EC10E1220505) -> bd.Compound:
     # bracket clips at axis height, protruding past the frame sides
     for sx in (-1, 1):
         x_in, x_out = sx * half_w, sx * (half_w + d.clip_protrusion)
-        body += _box(min(x_in, x_out), max(x_in, x_out), d.face_f_y - 1.2, d.body_front_y, h - 0.6, h + 0.6)
+        body += _box(min(x_in, x_out), max(x_in, x_out), d.body_front_y, d.face_f_y + 1.2, h - 0.6, h + 0.6)
 
     boss = bd.Circle(d.boss_dia / 2) - bd.Circle(rotor_clearance)
     body += _y_extrude(bd.Pos(0, h) * boss, d.boss_rear_y, d.body_rear_y)
     body.label, body.color = "body", bd.Color(BODY_COLOR)
 
-    # --- rotor: hex bore from face F, round bore at the rear ---
+    # --- rotor: hex bore from face F (-Y), round bore at the rear ---
     rotor = _y_extrude(bd.Pos(0, h) * bd.Circle(d.rotor_dia / 2), d.boss_rear_y, d.face_f_y)
     hex_bore = bd.Pos(0, h) * bd.RegularPolygon(d.hex_across_flats / 2, 6, major_radius=False)
-    rotor -= _y_extrude(hex_bore, d.boss_rear_y - 1, d.face_f_y + 1)
+    rotor -= _y_extrude(hex_bore, d.face_f_y - 1, d.boss_rear_y + 1)
     rear_bore = bd.Pos(0, h) * bd.Circle(d.rear_bore_dia / 2)
-    rotor -= _y_extrude(rear_bore, d.boss_rear_y - 1, d.face_f_y - d.hex_end_depth)
+    rotor -= _y_extrude(rear_bore, d.face_f_y + d.hex_end_depth, d.boss_rear_y + 1)
     rotor.label, rotor.color = "rotor", bd.Color(ROTOR_COLOR)
 
     # --- leads ---

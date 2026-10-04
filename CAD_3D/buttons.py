@@ -16,27 +16,25 @@ class Buttons:
     cutter_center: bd.Part
 
     @property
-    def shape(self) -> bd.Compound:
+    def caps(self) -> tuple[bd.Part, ...]:
+        """The moving parts."""
+        return (self.left, self.right, self.center)
+
+    @property
+    def sleeves(self) -> tuple[bd.Part, ...]:
+        """To be joined to the panel; with merge_sleeve the center sleeve is the single merged one."""
         if self.merge_sleeve:
-            return bd.Compound(
-                children=[
-                    self.left,
-                    self.right,
-                    self.center,
-                    self.center_sleeve,
-                ]
-            )
-        else:
-            return bd.Compound(
-                children=[
-                    self.left,
-                    self.right,
-                    self.center,
-                    self.left_sleeve,
-                    self.right_sleeve,
-                    self.center_sleeve,
-                ]
-            )
+            return (self.center_sleeve,)
+        return (self.left_sleeve, self.right_sleeve, self.center_sleeve)
+
+    @property
+    def cutters(self) -> tuple[bd.Part, ...]:
+        """To be subtracted from the panel: the button openings through the sleeves."""
+        return (self.cutter_left, self.cutter_right, self.cutter_center)
+
+    @property
+    def shape(self) -> bd.Compound:
+        return bd.Compound(children=[*self.caps, *self.sleeves])
 
 
 def create_buttons(input: ButtonData):

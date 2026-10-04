@@ -1,4 +1,6 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
+from typing import Literal
+
 import numpy as np
 
 
@@ -447,12 +449,24 @@ class ScrollWheelAssemblyData:
 
 @dataclass(frozen=True)
 class ScreenData:
+    """1.9" IPS display module. Frame: origin at the centre of the module pcb on its top surface, Z up (towards the
+    viewer); the panel sits on the pcb top surface.
+
+    The pcb and screen X/Y sizes are known; values marked (est) are eyeballed from pictures, to be measured on the
+    real module.
+    """
+
     width: float = 62
     height: float = 29
+    pcb_thickness: float = 1.6  # (est)
     screen_width: float = 43.72
     screen_height: float = 23.7
-    hole_diameter: float = 3.0
-    hole_offset: float = 0.5
+    screen_thickness: float = 2.3  # (est) above the pcb top surface
+    hole_diameter: float = 3.0  # (est)
+    hole_offset: float = 0.5  # (est) hole edge to pcb edge
+    # panel opening: gap all round the screen, and a lead-in chamfer on the pcb side of the opening
+    opening_clearance: float = 0.3
+    opening_chamfer: float = 1.0
 
     @property
     def hole_pattern(self) -> list[tuple[float, float]]:
@@ -470,7 +484,7 @@ class ScreenData:
 
 @dataclass(frozen=True)
 class ButtonData:
-    diameter: float = 10.0
+    diameter: float = 10
     spacing: float = 10.0
     depth: float = 10.0
     button_height: float = 1.5
@@ -487,3 +501,346 @@ class ButtonData:
         left = -self.spacing - self.diameter
         right = self.spacing + self.diameter
         return [left, center, right]
+
+
+@dataclass(frozen=True)
+class ButtonAssemblyData:
+    """Three buttons in a row, each resting on the plunger of a B3F switch, guided by sleeves coming down from the
+    panel.
+
+    Frame: origin on the board top surface under the centre button axis, X along the row, Z up. The switches are
+    not rotated (leads spread along X), their plunger axes are on the button pressure points
+    (ButtonData.switch_positions).
+
+    The button length is derived here from the panel height, see `buttons`; `depth` of button_style is ignored.
+    """
+
+    button_style: ButtonData = field(default_factory=ButtonData)
+    switch: TactileSwitchB3FData = field(default_factory=TactileSwitchB3FData)
+    # panel front face above the board top surface
+    panel_height: float = 15.0
+    # button foot above the plunger top; 0 = resting on it
+    plunger_gap: float = 0.0
+
+    @property
+    def button_z(self) -> float:
+        """Buttons origin = bottom of the button feet and sleeves, above the board."""
+        return self.switch.height + self.plunger_gap
+
+    @property
+    def buttons(self) -> ButtonData:
+        return replace(self.button_style, depth=self.panel_height - self.button_z)
+
+    @property
+    def switch_origins(self) -> tuple[tuple[float, float, float], ...]:
+        """Switch frame origins (pin 1) of the left, centre and right switch."""
+        cx, cy = self.switch.center_xy
+        return tuple((x - cx, -cy, 0.0) for x in self.buttons.switch_positions)
+
+
+@dataclass(frozen=True)
+class BoardScrewData:
+    """Screw that holds the UI board against a boss on the back of the panel. It goes in from behind the board, into
+    a heat-set insert in the end of the printed boss.
+
+    Frame: origin on the board top surface (= end of the boss) on the screw axis, Z up towards the panel.
+    """
+
+    size: str = "M3-0.5"
+    length: float = 8.0
+    # bd_warehouse PanHeadScrew; iso14583 = pan head, torx
+    fastener_type: Literal["iso1580", "iso14583", "asme_b_18.6.3"] = "iso14583"
+    # bd_warehouse HeatSetNut; McMaster-Carr M3 Standard = 4.7 dia x 5.7 long
+    insert_size: str = "M3-0.5-Standard"
+    insert_type: Literal["McMaster-Carr", "Hilitchi"] = "McMaster-Carr"
+    # hole the insert is melted into; also clears the screw tip behind the insert
+    insert_hole_diameter: float = 4.0
+    # hole deeper than the insert and the screw tip
+    hole_margin: float = 1.0
+    boss_diameter: float = 8.0
+    # clearance hole in the board
+    board_hole_diameter: float = 3.2
+    board_thickness: float = 1.6
+    # boss length: board top surface up to the back of the panel plate
+    boss_height: float = 12.0
+
+
+@dataclass(frozen=True)
+class LedData:
+    """3 mm round THT LED (T-1), standing off the board on its leads so that the dome reaches through the panel.
+
+    Frame: origin on the board top surface midway between the two leads, leads along X, Z up.
+    Values marked (est) are typical T-1 dimensions, to be measured on the real part.
+    """
+
+    body_diameter: float = 3.0
+    body_height: float = 5.3  # (est) bottom of the flange to the top of the dome
+    flange_diameter: float = 3.8  # (est)
+    flange_height: float = 1.0  # (est)
+    pin_pitch: float = 2.54
+    lead_section: float = 0.5  # (est) square
+    # leads as supplied, from the body
+    lead_length: float = 25.0
+    # leads below the board top surface, after soldering and trimming
+    lead_protrusion: float = 3.5
+    # bottom of the body above the board top surface
+    standoff: float = 5.0
+    # radial gap around the body in the panel hole
+    hole_clearance: float = 0.1
+
+    @property
+    def top_z(self) -> float:
+        return self.standoff + self.body_height
+
+    @property
+    def lead_length_used(self) -> float:
+        """Has to fit in lead_length."""
+        return self.standoff + self.lead_protrusion
+
+    @property
+    def hole_diameter(self) -> float:
+        return self.body_diameter + 2 * self.hole_clearance
+
+
+@dataclass(frozen=True)
+class PowerButtonData:
+    """12 mm panel-mount metal push button with an illuminated ring (datasheets/powerbutton/powerbutton_dims.webp).
+    It goes in from the front of the panel and is clamped by the nut from behind.
+
+    Frame: origin on the button axis on the panel front face (where the seal sits), Z out of the panel towards the
+    user. X along the 5.5 mm terminal pair, Y along the 7.25 mm pair; the nut is drawn with two corners on X, as in
+    the drawing.
+    Along -Z: head | seal | panel | nut | rest of the thread | plastic body (collar, then switch block) | terminals.
+
+    Dimensioned values are exact; values marked (est) are scaled from the drawing and only matter for looks / a
+    little clearance. The drawing is not to scale along the axis (the thread is drawn about 3.4 mm short, as for a
+    shorter variant), so the body length is derived from the dimensioned overall length, see `body_length`.
+    The two side views draw both terminal pairs at the same spacing, but dimension them 5.5 and 7.25: to be
+    measured on the real part, as is which pair is the switch and which the LED.
+    """
+
+    # --- panel ---
+    hole_diameter: float = 12.0  # borehole, from the webshop
+    panel_thickness: float = 2.0  # sets the nut position
+
+    # --- head (bezel) ---
+    head_diameter: float = 13.8
+    head_height: float = 1.5  # (est)
+    head_chamfer: tuple[float, float] = (1.2, 0.8)  # (est) radial, axial
+    seal_diameter: float = 13.5  # (est) O-ring between the head and the panel
+    seal_thickness: float = 1.0  # (est) as drawn, i.e. not compressed
+
+    # --- button ---
+    button_diameter: float = 9.0  # including the illuminated ring
+    ring_width: float = 1.0  # (est)
+    button_protrusion: float = 0.0  # (est) above the head; drawn flush
+
+    # --- thread and nut ---
+    thread_diameter: float = 12.0  # M12
+    thread_pitch: float = 0.75  # (est) fine pitch; only used for the detailed model
+    thread_length: float = 13.0  # from the underside of the head
+    nut_across_flats: float = 13.9
+    nut_across_corners: float = (
+        15.7  # less than a sharp hexagon (16.05): the corners are turned off
+    )
+    nut_thickness: float = 2.0  # (est)
+
+    # --- plastic body behind the thread ---
+    overall_length: float = 27.6  # top of the head to the terminal tips
+    collar_diameter: float = 10.8  # (est)
+    collar_height: float = 3.4  # (est)
+    body_diameter: float = 9.5  # (est) switch block, simplified to a cylinder
+
+    # --- terminals (solder lugs) ---
+    terminal_length: float = 4.0
+    terminal_width: float = 2.0
+    terminal_thickness: float = 0.5
+    terminal_pitch_x: float = (
+        5.5  # pair seen edge-on in the left side view; flat faces towards the axis
+    )
+    terminal_pitch_y: float = 7.25
+    terminal_hole: tuple[float, float] = (0.7, 1.4)  # (est) slot width, length
+    terminal_hole_offset: float = 2.5  # (est) slot centre below the body
+    terminal_tip_chamfer: float = 0.4  # (est)
+
+    @property
+    def head_bottom_z(self) -> float:
+        return self.seal_thickness
+
+    @property
+    def head_top_z(self) -> float:
+        return self.seal_thickness + self.head_height
+
+    @property
+    def button_top_z(self) -> float:
+        return self.head_top_z + self.button_protrusion
+
+    @property
+    def nut_top_z(self) -> float:
+        """The nut sits against the back of the panel."""
+        return -self.panel_thickness
+
+    @property
+    def nut_bottom_z(self) -> float:
+        return self.nut_top_z - self.nut_thickness
+
+    @property
+    def thread_end_z(self) -> float:
+        """End of the metal housing = top of the plastic body."""
+        return self.head_bottom_z - self.thread_length
+
+    @property
+    def tip_z(self) -> float:
+        """Terminal tips = rear end of the part."""
+        return self.head_top_z - self.overall_length
+
+    @property
+    def body_bottom_z(self) -> float:
+        return self.tip_z + self.terminal_length
+
+    @property
+    def body_length(self) -> float:
+        """Plastic body, collar included: what is left of overall_length."""
+        return self.thread_end_z - self.body_bottom_z
+
+    @property
+    def depth_behind_panel(self) -> float:
+        """Space needed behind the panel front face, without the wires."""
+        return -self.tip_z
+
+    @property
+    def max_panel_thickness(self) -> float:
+        """With the nut fully on the thread."""
+        return self.thread_length - self.seal_thickness - self.nut_thickness
+
+    @property
+    def terminal_xy(self) -> tuple[tuple[float, float], ...]:
+        """X pair (-X, +X), then Y pair (-Y, +Y)."""
+        x, y = self.terminal_pitch_x / 2, self.terminal_pitch_y / 2
+        return ((-x, 0.0), (x, 0.0), (0.0, -y), (0.0, y))
+
+
+@dataclass(frozen=True)
+class PanelPlacement:
+    """Where a UI element sits on the front panel: its origin in the panel frame (see UIPanelData) and its rotation
+    about Z (degrees, counter-clockwise seen from the front)."""
+
+    x: float = 0.0
+    y: float = 0.0
+    rotation: float = 0.0
+
+
+@dataclass(frozen=True)
+class UIPanelData:
+    """Front panel with the screen, the three buttons and the scroll wheels behind it.
+
+    Panel frame: origin at the panel centre on its front (outer) face, X across the width, Y up, Z out of the panel
+    towards the user. The plate is Z = -thickness .. 0, the UI board top surface is at Z = board_z.
+
+    The depths that have to fit the other parts are derived here: the board depth from how far the wheels stick out
+    of the panel, the button length from the board depth (see `buttons`); only the free ones are fields.
+
+    The UI board is held against bosses on the back of the panel by screws from behind (see BoardScrewData).
+    The LEDs stand on the board and reach through holes in the plate (see LedData).
+    The on-off button is clamped in the plate and is wired, it does not sit on the board (see PowerButtonData).
+    """
+
+    width: float = 75.0
+    height: float = 80.0
+    thickness: float = 2.0
+    offset_y: float = +5.0
+
+    # screen module: centre of the module pcb, pcb top surface against the back of the plate
+    screen: ScreenData = field(default_factory=ScreenData)
+    screen_placement: PanelPlacement = PanelPlacement(0, 25)
+
+    # scroll wheels: encoder frame origin (pin B, on the wheel axis); rotated so the encoders are on the outside
+    scrollwheel: ScrollWheelAssemblyData = field(
+        default_factory=ScrollWheelAssemblyData
+    )
+    scrollwheel_placements: tuple[PanelPlacement, ...] = (
+        PanelPlacement(-23.5, -19, 90),
+        PanelPlacement(23.5, -19, -90),
+    )
+    # height that the wheel raises above the panel level
+    wheel_protrusion: float = 3.7
+
+    # buttons: centre of the centre button; `depth` of button_style is ignored, see `buttons`
+    button_style: ButtonData = field(
+        default_factory=lambda: ButtonData(
+            spacing=5, foot_add_height=1, foot_add_width=1, sleeve_width=1
+        )
+    )
+    button_switch: TactileSwitchB3FData = field(default_factory=TactileSwitchB3FData)
+    button_placement: PanelPlacement = PanelPlacement(7, 1)
+
+    # UI board screws: left and right of the buttons, and in the centre below the scroll wheels;
+    # `board_thickness` and `boss_height` of screw_style are ignored, see `screw`
+    board_thickness: float = 1.6
+    screw_style: BoardScrewData = field(default_factory=BoardScrewData)
+    screw_placements: tuple[PanelPlacement, ...] = (
+        PanelPlacement(30, -7.5),
+        PanelPlacement(0, -10),
+        PanelPlacement(0, -30),
+    )
+
+    # LEDs: below the screen module, near the two sides; `standoff` of led_style is ignored, see `led`
+    led_style: LedData = field(default_factory=LedData)
+    led_placements: tuple[PanelPlacement, ...] = (
+        PanelPlacement(-25, -26.0),
+        PanelPlacement(25, -26.0),
+    )
+    # height that the LED dome raises above the panel level
+    led_protrusion: float = 2.3
+
+    # on-off button: toggles the output on and off (sold as a "power button", hence PowerButtonData; the actual
+    # power switch is a separate part); button axis, mounted in the plate itself.
+    # `panel_thickness` of onoff_button_data is ignored, see `onoff_button`
+    onoff_button_placement: PanelPlacement = PanelPlacement(-25, 1)
+
+    onoff_button_data: PowerButtonData = field(default_factory=PowerButtonData)
+
+    @property
+    def board_depth(self) -> float:
+        """UI board top surface below the panel front face, set by the wheels."""
+        return self.scrollwheel.wheel_top_z - self.wheel_protrusion
+
+    @property
+    def buttons(self) -> ButtonAssemblyData:
+        return ButtonAssemblyData(
+            button_style=self.button_style,
+            switch=self.button_switch,
+            panel_height=self.board_depth,
+        )
+
+    @property
+    def screw(self) -> BoardScrewData:
+        """Bosses from the back of the plate down to the board top surface."""
+        return replace(
+            self.screw_style,
+            board_thickness=self.board_thickness,
+            boss_height=self.board_depth - self.thickness,
+        )
+
+    @property
+    def led(self) -> LedData:
+        return replace(
+            self.led_style,
+            standoff=self.board_depth
+            + self.led_protrusion
+            - self.led_style.body_height,
+        )
+
+    @property
+    def onoff_button(self) -> PowerButtonData:
+        return replace(self.onoff_button_data, panel_thickness=self.thickness)
+
+    @property
+    def board_z(self) -> float:
+        """Origin of everything that sits on the UI board (scroll wheels, buttons, screws, LEDs) = board top surface."""
+        return -self.board_depth
+
+    @property
+    def screen_z(self) -> float:
+        """Screen origin = top surface of the module pcb."""
+        return -self.thickness

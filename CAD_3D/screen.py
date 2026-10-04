@@ -1,30 +1,64 @@
 import build123d as bd
 from geom_defs import ScreenData
 
+# cutter reach above the pcb top surface, more than any panel thickness
+CUTTER_HEIGHT = 30
+
 
 def create_screen(input: ScreenData):
-
-    pcb = bd.Box(input.width, input.height, 1.6)
-    pcb.color = "#2500cc"
+    """Screen module in the screen frame (see ScreenData): pcb top surface on the XY plane."""
+    pcb_align = (bd.Align.CENTER, bd.Align.CENTER, bd.Align.MAX)
+    pcb = bd.Box(input.width, input.height, input.pcb_thickness, align=pcb_align)
     hole_locs = bd.Locations(*input.hole_pattern)
-    pinhole = bd.Cylinder(1.5 / 2, 1.6)
+    pinhole = bd.Cylinder(1.5 / 2, input.pcb_thickness, align=pcb_align)
     pin_locs = bd.GridLocations(x_spacing=1, y_spacing=2.54, x_count=1, y_count=8)
 
-    pcb = pcb - hole_locs * bd.Cylinder(input.hole_diameter / 2, 1.6)
+    pcb = pcb - hole_locs * bd.Cylinder(
+        input.hole_diameter / 2, input.pcb_thickness, align=pcb_align
+    )
     pcb = pcb - bd.Pos(input.width / 2 - 2, 0, 0) * pin_locs * pinhole
-    screen = bd.Box(input.screen_width, input.screen_height, 3).translate((0, 0, 1.6))
-    screen.color = "#000000"
-    module = bd.Compound(children=[pcb, screen])
+    pcb.label, pcb.color = "pcb", bd.Color("#2500cc")
 
-    # align pcb top with xy plane
-    return bd.Pos(0, 0, -1.6 / 2) * module
+    screen = bd.Box(
+        input.screen_width,
+        input.screen_height,
+        input.screen_thickness,
+        align=(bd.Align.CENTER, bd.Align.CENTER, bd.Align.MIN),
+    )
+    screen.label, screen.color = "screen", bd.Color("#000000")
+    return bd.Compound(children=[pcb, screen])
 
 
-def create_screen_cutter(input: ScreenData):
-    screen = bd.Box(input.screen_width, input.screen_height, 30)
-    hole_locs = bd.Locations(*input.hole_pattern)
-    holes = hole_locs * bd.Cylinder(input.hole_diameter / 2, 30)
-    return bd.Compound(children=[screen, *holes])
+def create_screen_cutter(input: ScreenData) -> bd.Part:
+    """To be subtracted from the panel, which sits on the pcb top surface: the opening for the screen with
+    opening_clearance all round, widened by opening_chamfer on the pcb side as a lead-in, and the mounting holes.
+    """
+    width = input.screen_width + 2 * input.opening_clearance
+    height = input.screen_height + 2 * input.opening_clearance
+    chamfer = input.opening_chamfer
+
+    opening = bd.Box(
+        width,
+        height,
+        CUTTER_HEIGHT,
+        align=(bd.Align.CENTER, bd.Align.CENTER, bd.Align.MIN),
+    )
+    if chamfer > 0:
+        opening += bd.loft(
+            [
+                bd.Rectangle(width + 2 * chamfer, height + 2 * chamfer),
+                bd.Pos(0, 0, chamfer) * bd.Rectangle(width, height),
+            ]
+        )
+
+    hole = bd.Cylinder(
+        input.hole_diameter / 2,
+        CUTTER_HEIGHT,
+        align=(bd.Align.CENTER, bd.Align.CENTER, bd.Align.MIN),
+    )
+    for x, y in input.hole_pattern:
+        opening += bd.Pos(x, y, 0) * hole
+    return opening
 
 
 if __name__ == "__main__":
@@ -32,4 +66,4 @@ if __name__ == "__main__":
 
     screen_data = ScreenData()
     screen = create_screen(screen_data)
-    show(screen)
+    show(screen, create_screen_cutter(screen_data), alphas=[1, 0.3])

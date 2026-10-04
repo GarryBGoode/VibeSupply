@@ -36,3 +36,6 @@ nut_placement = H905_placement()
 
 # Wall width of the endcap of the 3D print enclosure
 endcap_wall_width = 1.5
+
+# UI front panel: screen, buttons and scroll wheels, in its own panel frame (see UIPanelData)
+ui_panel = UIPanelData()

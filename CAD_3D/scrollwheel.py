@@ -16,7 +16,7 @@ def generate_scrollwheel(input: ScrollWheelData, simple=True) -> bd.Part:
     notch_depth = 0.5
     axis = bd.Line((0, 0, 0), (0, 0, input.width / 2))
     helix_guide = bd.Helix(
-        pitch=input.width * 4,
+        pitch=input.width * 6,
         height=input.width / 2,
         center=(0, 0, 0),
         radius=input.diameter / 2,
@@ -136,7 +136,7 @@ def generate_scrollwheel_supports(input: ScrollWheelData) -> bd.Part:
     support_bot = bd.Box(
         w * 2,
         input.diameter / 2 + w,
-        w,
+        w * 2,
         align=[bd.Align.CENTER, bd.Align.MIN, bd.Align.MAX],
     )
     support_bot = support_bot.translate(

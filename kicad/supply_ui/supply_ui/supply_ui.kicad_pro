@@ -312,7 +312,7 @@
     "netclass_patterns": [
       {
         "netclass": "Supply",
-        "pattern": "+3v3"
+        "pattern": "+3V3"
       },
       {
         "netclass": "Supply",
@@ -325,7 +325,7 @@
       "idf": "",
       "netlist": "../../../out/supply_ui.net",
       "plot": "",
-      "specctra_dsn": "",
+      "specctra_dsn": "supply_ui_dsn.dsn",
       "step": "",
       "vrml": ""
     },

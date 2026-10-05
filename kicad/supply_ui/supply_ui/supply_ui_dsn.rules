@@ -1,0 +1,80 @@
+
+(rules PCB supply_ui_dsn.dsn
+  (snapAngle 
+    fortyfive_degree
+  )
+  (rule
+    (width 200.0)
+    (clearance 200.0)
+    (clearance 100.0 (type smd_to_turn_gap))
+    (clearance 50.0 (type smd))
+    (clearance 200.0 (type Supply,Default))
+    (clearance 500.0 (type "board_edge"))
+  )
+  (padstack "Via[0-1]_600:300_um"
+    (shape
+      (circle F.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 600.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (padstack "Via[0-1]_1000:300_um"
+    (shape
+      (circle F.Cu 1000.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 1000.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_600:300_um" "Via[0-1]_600:300_um" default
+  )
+  (via 
+    "Via[0-1]_1000:300_um" "Via[0-1]_1000:300_um" default
+  )
+  (via 
+    "Via[0-1]_600:300_um-Supply,Default" "Via[0-1]_600:300_um" Supply,Default
+  )
+  (via 
+    "Via[0-1]_1000:300_um-Supply,Default" "Via[0-1]_1000:300_um" Supply,Default
+  )
+  (viaRule
+    default "Via[0-1]_600:300_um"
+  )
+  (viaRule
+    default "Via[0-1]_600:300_um"
+  )
+  (viaRule
+    Supply,Default "Via[0-1]_1000:300_um-Supply,Default"
+  )
+  (class default
+    "BTN_ENTER" "LED_CV_K" N$5 "ENC2_SW_RAW" +3V3 "LCD_SCK" "LCD_MOSI" "LCD_RST"
+    "LCD_DC" "LCD_CS" "LCD_BLK" "ENC1_A_RAW" "ENC1_B_RAW" "BTN_RIGHT" "ENC1_SW_RAW" "ENC2_A_RAW"
+    "ENC2_B_RAW" "BTN_LEFT" "LED_CC_K" N$4 "ENC2_SW" BUZZER "BUZZER_K" "OE_LED_A"
+    "ENC1_B" N$10 "ENC1_A" "I2C2_SCL" "I2C2_SDA" "UI_INT" "ENC2_A" "ENC2_B"
+    "OE_BTN" "LCD_BL" "OE_BTN_RAW" "LED_FAULT_K" N$6 N$9 "ENC1_SW" "LED_OE_K"
+    N$3 N$7 N$8 N$1 N$2
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 200.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class Supply,Default
+    GND
+    (clearance_class Supply,Default)
+    (via_rule Supply,Default)
+    (rule
+      (width 400.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)

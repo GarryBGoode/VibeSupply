@@ -604,26 +604,6 @@
    }
   },
   {
-   "ref": "TP1",
-   "block": "ui",
-   "prefix": "TP",
-   "part": "TestPoint",
-   "value": "TestPoint",
-   "nets": {
-    "1": "~"
-   }
-  },
-  {
-   "ref": "TP2",
-   "block": "ui",
-   "prefix": "TP",
-   "part": "TestPoint",
-   "value": "TestPoint",
-   "nets": {
-    "1": "~"
-   }
-  },
-  {
    "ref": "TP3",
    "block": "ui",
    "prefix": "TP",
@@ -635,36 +615,6 @@
   },
   {
    "ref": "TP4",
-   "block": "ui",
-   "prefix": "TP",
-   "part": "TestPoint",
-   "value": "TestPoint",
-   "nets": {
-    "1": "~"
-   }
-  },
-  {
-   "ref": "TP7",
-   "block": "ui",
-   "prefix": "TP",
-   "part": "TestPoint",
-   "value": "TestPoint",
-   "nets": {
-    "1": "~"
-   }
-  },
-  {
-   "ref": "TP8",
-   "block": "ui",
-   "prefix": "TP",
-   "part": "TestPoint",
-   "value": "TestPoint",
-   "nets": {
-    "1": "~"
-   }
-  },
-  {
-   "ref": "TP9",
    "block": "ui",
    "prefix": "TP",
    "part": "TestPoint",
@@ -686,8 +636,6 @@
     "4": "BTN_LEFT",
     "5": "BTN_RIGHT",
     "6": "BTN_ENTER",
-    "7": "~",
-    "8": "~",
     "9": "ENC1_SW",
     "10": "ENC2_SW",
     "11": "~",
@@ -697,9 +645,6 @@
     "15": "LED_CC_K",
     "16": "LED_CV_K",
     "17": "LED_FAULT_K",
-    "18": "~",
-    "19": "~",
-    "20": "~",
     "21": "GND",
     "22": "I2C2_SCL",
     "23": "I2C2_SDA",
@@ -722,8 +667,13 @@
   "R26",
   "SW8",
   "SW9",
+  "TP1",
+  "TP2",
   "TP5",
   "TP6",
+  "TP7",
+  "TP8",
+  "TP9",
   "TP10"
  ]
 }

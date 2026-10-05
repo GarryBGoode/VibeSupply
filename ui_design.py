@@ -112,8 +112,7 @@ def build():
         ex[port0[f"P0{i}"]] += n
     ex[port0["P05"]] += ENC1_SW                    # wheel pushes (RC-debounced above, active low)
     ex[port0["P06"]] += ENC2_SW
-    for p in ("P03", "P04", "P07"):
-        testpoint(f"EXP_{p}")[1] += ex[port0[p]]
+    testpoint("EXP_P07")[1] += ex[port0["P07"]]    # one spare pin per port on a test point; P03, P04 are left open
     # LEDs (expander sinks, active low): P10 OUTPUT button ring LED (below), P12 CC, P13 CV, P14 FAULT.
     # CC / CV: 3 mm diffused THT, mounted standing off the board up to the panel (standard-efficiency red / green,
     # Vf ~2 V -> ~4 mA with 330R; change R for brightness). The footprint is only the two pads: the body is ~10 mm above
@@ -128,8 +127,7 @@ def build():
         P3V3 & rl & led["A"]
         led["K"] += k
         ex[port1[pin]] += k
-    for p in ("P11", "P15", "P16", "P17"):
-        testpoint(f"EXP_{p}")[1] += ex[port1[p]]
+    testpoint("EXP_P11")[1] += ex[port1["P11"]]    # P15, P16, P17 are left open
 
     # ---- OUTPUT: panel-mount latching push button, E-Switch PV4 (19 mm, SPDT on-on, gold contacts, red ring LED without
     # an internal resistor, 1.8 V @ 20 mA). The switch only reports its position (level, active low = pushed in); the

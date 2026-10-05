@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "ui_design.py")
-    (date "10/05/2026 09:41 AM")
+    (date "10/05/2026 10:29 PM")
     (tool "SKiDL (2.3.0)")
     (sheet
       (number 1)
@@ -57,7 +57,7 @@
         (field
           (name "SKiDL Tag") "BZ1")
         (field
-          (name "SKiDL Line") "ui_design.py:149"))
+          (name "SKiDL Line") "ui_design.py:147"))
       (libsource
         (lib "Device")
         (part "Buzzer"))
@@ -345,7 +345,7 @@
         (field
           (name "SKiDL Tag") "D3")
         (field
-          (name "SKiDL Line") "ui_design.py:123"))
+          (name "SKiDL Line") "ui_design.py:122"))
       (libsource
         (lib "Device")
         (part "LED"))
@@ -369,7 +369,7 @@
         (field
           (name "SKiDL Tag") "D4")
         (field
-          (name "SKiDL Line") "ui_design.py:123"))
+          (name "SKiDL Line") "ui_design.py:122"))
       (libsource
         (lib "Device")
         (part "LED"))
@@ -441,7 +441,7 @@
         (field
           (name "SKiDL Tag") "H1")
         (field
-          (name "SKiDL Line") "ui_design.py:163"))
+          (name "SKiDL Line") "ui_design.py:161"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -465,7 +465,7 @@
         (field
           (name "SKiDL Tag") "H2")
         (field
-          (name "SKiDL Line") "ui_design.py:163"))
+          (name "SKiDL Line") "ui_design.py:161"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -489,7 +489,7 @@
         (field
           (name "SKiDL Tag") "H3")
         (field
-          (name "SKiDL Line") "ui_design.py:163"))
+          (name "SKiDL Line") "ui_design.py:161"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -561,7 +561,7 @@
         (field
           (name "SKiDL Tag") "J6")
         (field
-          (name "SKiDL Line") "ui_design.py:141"))
+          (name "SKiDL Line") "ui_design.py:139"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x04"))
@@ -1325,58 +1325,6 @@
       (component_classes)
       (tstamps "ce592c2d-b143-57d6-9e4e-da3537ca5e84"))
     (comp
-      (ref "TP1")
-      (value "TestPoint")
-      (description "test point")
-      (footprint "TestPoint:TestPoint_Pad_D1.0mm")
-      (fields
-        (field
-          (name "Label") "EXP_P03")
-        (field
-          (name "Description") "test point")
-        (field
-          (name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "TP1")
-        (field
-          (name "SKiDL Line") "design\parts.py:104"))
-      (libsource
-        (lib "Connector")
-        (part "TestPoint"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "ec7b7017-d3a1-52a1-ab31-ef99bc577234"))
-    (comp
-      (ref "TP2")
-      (value "TestPoint")
-      (description "test point")
-      (footprint "TestPoint:TestPoint_Pad_D1.0mm")
-      (fields
-        (field
-          (name "Label") "EXP_P04")
-        (field
-          (name "Description") "test point")
-        (field
-          (name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "TP2")
-        (field
-          (name "SKiDL Line") "design\parts.py:104"))
-      (libsource
-        (lib "Connector")
-        (part "TestPoint"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "21c4b62b-8c2d-56ee-9b42-d10ab095f277"))
-    (comp
       (ref "TP3")
       (value "TestPoint")
       (description "test point")
@@ -1428,84 +1376,6 @@
         (tstamps "/"))
       (component_classes)
       (tstamps "2b772136-9490-52ee-a6b6-3823f884de0d"))
-    (comp
-      (ref "TP7")
-      (value "TestPoint")
-      (description "test point")
-      (footprint "TestPoint:TestPoint_Pad_D1.0mm")
-      (fields
-        (field
-          (name "Label") "EXP_P15")
-        (field
-          (name "Description") "test point")
-        (field
-          (name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "TP7")
-        (field
-          (name "SKiDL Line") "design\parts.py:104"))
-      (libsource
-        (lib "Connector")
-        (part "TestPoint"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "47117044-94ce-5dd7-abf9-83e3ef59bacb"))
-    (comp
-      (ref "TP8")
-      (value "TestPoint")
-      (description "test point")
-      (footprint "TestPoint:TestPoint_Pad_D1.0mm")
-      (fields
-        (field
-          (name "Label") "EXP_P16")
-        (field
-          (name "Description") "test point")
-        (field
-          (name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "TP8")
-        (field
-          (name "SKiDL Line") "design\parts.py:104"))
-      (libsource
-        (lib "Connector")
-        (part "TestPoint"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "dbebd152-e861-5059-b279-ee96be584c75"))
-    (comp
-      (ref "TP9")
-      (value "TestPoint")
-      (description "test point")
-      (footprint "TestPoint:TestPoint_Pad_D1.0mm")
-      (fields
-        (field
-          (name "Label") "EXP_P17")
-        (field
-          (name "Description") "test point")
-        (field
-          (name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "TP9")
-        (field
-          (name "SKiDL Line") "design\parts.py:104"))
-      (libsource
-        (lib "Connector")
-        (part "TestPoint"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "9850fe91-cf09-54be-87a9-d3a0cc96fc3e"))
     (comp
       (ref "U1")
       (value "TCA9535PWR")
@@ -2188,42 +2058,6 @@
       (name "N$1")
       (class "Default")
       (node
-        (ref "TP1")
-        (pin "1")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U1")
-        (pin "7")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 34)
-      (name "N$10")
-      (class "Default")
-      (node
-        (ref "TP9")
-        (pin "1")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U1")
-        (pin "20")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 35)
-      (name "N$2")
-      (class "Default")
-      (node
-        (ref "TP2")
-        (pin "1")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U1")
-        (pin "8")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 36)
-      (name "N$3")
-      (class "Default")
-      (node
         (ref "TP3")
         (pin "1")
         (pintype "PASSIVE"))
@@ -2232,8 +2066,8 @@
         (pin "11")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 37)
-      (name "N$4")
+      (code 34)
+      (name "N$2")
       (class "Default")
       (node
         (ref "D3")
@@ -2244,8 +2078,8 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 38)
-      (name "N$5")
+      (code 35)
+      (name "N$3")
       (class "Default")
       (node
         (ref "D4")
@@ -2256,8 +2090,8 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 39)
-      (name "N$6")
+      (code 36)
+      (name "N$4")
       (class "Default")
       (node
         (ref "D5")
@@ -2268,8 +2102,8 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 40)
-      (name "N$7")
+      (code 37)
+      (name "N$5")
       (class "Default")
       (node
         (ref "TP4")
@@ -2280,31 +2114,7 @@
         (pin "14")
         (pintype "BIDIRECTIONAL")))
     (net
-      (code 41)
-      (name "N$8")
-      (class "Default")
-      (node
-        (ref "TP7")
-        (pin "1")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U1")
-        (pin "18")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 42)
-      (name "N$9")
-      (class "Default")
-      (node
-        (ref "TP8")
-        (pin "1")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U1")
-        (pin "19")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 43)
+      (code 38)
       (name "OE_BTN")
       (class "Default")
       (node
@@ -2320,7 +2130,7 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 44)
+      (code 39)
       (name "OE_BTN_RAW")
       (class "Default")
       (node
@@ -2336,7 +2146,7 @@
         (pin "1")
         (pintype "PASSIVE")))
     (net
-      (code 45)
+      (code 40)
       (name "OE_LED_A")
       (class "Default")
       (node
@@ -2348,7 +2158,7 @@
         (pin "2")
         (pintype "PASSIVE")))
     (net
-      (code 46)
+      (code 41)
       (name "UI_INT")
       (class "Default")
       (node

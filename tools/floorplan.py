@@ -243,7 +243,7 @@ UI = dict(
         ("OUTPUT button", _UI_LOGIC, "J6", ["R23", "R24", "C10", "R27"], None, "bottom"),
         ("Buzzer driver", _UI_LOGIC, "BZ1", ["Q1", "D6", "R28"], None, "bottom"),
         ("TCA9535", _UI_LOGIC, "U1",
-         ["C9", "R15", "R16", "R17", "R18", "R19", "R20", "D5", "TP1", "TP2", "TP3", "TP4", "TP7", "TP8", "TP9"],
+         ["C9", "R15", "R16", "R17", "R18", "R19", "R20", "D5", "TP3", "TP4"],
          (21, -22), "bottom"),
         # RC debounce: series R = anchor, pull-up + cap next to it; the wheel A/B ones near the ribbon header
         ("V wheel A", _UI_LOGIC, "R2", ["R1", "C3"], (-12, -26), "bottom"),

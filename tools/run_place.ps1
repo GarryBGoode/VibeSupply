@@ -1,6 +1,7 @@
 # Runs tools/place.py (floor plan + placement) and tools/snapshot.py (out/placement_<board>.png) with KiCad's Python.
-# Usage:  .\tools\run_place.ps1            # both boards (power first: J971 follows J951)
+# Usage:  .\tools\run_place.ps1            # power + control (power first: J971 follows J951)
 #         .\tools\run_place.ps1 control    # one board
+#         .\tools\run_place.ps1 ui         # the UI board (after .\tools\run_ui_board_setup.ps1)
 # Locked footprints (or footprints in a locked group) are not moved; everything else is re-placed.
 param([string[]]$Boards)
 

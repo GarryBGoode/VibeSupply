@@ -13,7 +13,7 @@ Qty,Refs,Part,Value,Footprint,LCSC,DNP
 1,J601,USB_C_Receptacle_USB2.0_16P,USB_C_Receptacle_USB2.0_16P,Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12,C2765186,
 1,J701,Conn_02x05_Odd_Even,SWD,Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical,,
 1,J702,Conn_01x04,UART,Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical,,
-1,J703,Conn_02x10_Odd_Even,UI ribbon,Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical,,
+1,J703,Conn_02x10_Odd_Even,UI ribbon,Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Horizontal,,
 1,J971,Conn_02x20_Odd_Even,B2B to supply_power,Connector_PinSocket_2.54mm:PinSocket_2x20_P2.54mm_Vertical,,
 1,L501,L,22uH,Inductor_SMD:L_Bourns_SRN6045TA,,
 1,PS601,B0505S-1WR3,B0505S-1WR3,Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical,C7465178,

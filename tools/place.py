@@ -5,8 +5,10 @@ the pin it connects to) as close to its target as its area allows. Each cluster 
 "place:<cluster>", so it can be dragged around by hand as one block.
 
 Run with KiCad's Python, boards CLOSED in KiCad (power before control: J971 follows J951 on the power board):
-    .\\tools\\run_place.ps1                 # both boards
+    .\\tools\\run_place.ps1                 # power + control
     .\\tools\\run_place.ps1 control         # one board
+    .\\tools\\run_place.ps1 ui              # the UI board (after tools/run_ui_board_setup.ps1, which places and locks
+                                            # everything that lines up with the front panel)
 
 Locked footprints (locked directly, or through a locked group) are never moved and act as obstacles: lock what you have
 placed by hand, re-run, and the script arranges the rest around it. Everything else is moved on every run.
@@ -72,23 +74,36 @@ class Placer:
     def __init__(self, name):
         self.name = name
         self.cfg = FP.BOARDS[name]
-        self.path = ROOT / f"kicad/supply_{name}/supply_{name}.kicad_pcb"
+        self.path = board_path(name)
         if self.path.with_name(f"~{self.path.name}.lck").exists():
             sys.exit(f"{self.path.name} is open in KiCad (lock file present) - close it first")
         self.b = pcbnew.LoadBoard(str(self.path))
         self.x0s, self.y0s, self.L, self.W = outline(self.b)
-        self.cx, self.cy = self.x0s + self.L / 2, self.y0s + self.W / 2
+        # board frame origin = drill/place origin: the board centre on power / control (board_setup.py), the panel
+        # origin on the UI board (ui_board_setup.py), which is not centred on it
+        origin = self.b.GetDesignSettings().GetAuxOrigin()
+        self.cx, self.cy = tomm(origin.x), tomm(origin.y)
+        self.edges = (self.x0s - self.cx, self.y0s - self.cy,
+                      self.x0s + self.L - self.cx, self.y0s + self.W - self.cy)  # x0, y0, x1, y1, board coordinates
         self.fps = {f.GetReference(): f for f in self.b.GetFootprints()}
         self.obst = {"top": [], "bottom": []}  # (x0, y0, x1, y1, ref) in board coordinates
         self.pos = {}                           # ref -> (rot, bottom, px, py) footprint origin, board coordinates
         self.cache = {}
         self.report = []
         self.locked = locked_refs(self.b)
-        for z in self.b.Zones():  # slot keep-outs block both sides
+        for z in self.b.Zones():  # keep-outs block the sides they are on (slot keep-outs: both)
             if z.GetIsRuleArea() and z.GetZoneName().startswith("board_setup:"):
                 r = self.to_board_rect(z.GetBoundingBox())
-                self.obst["top"].append((*r, "slot"))
-                self.obst["bottom"].append((*r, "slot"))
+                for side, layer in (("top", pcbnew.F_Cu), ("bottom", pcbnew.B_Cu)):
+                    if z.IsOnLayer(layer):
+                        self.obst[side].append((*r, "keep-out"))
+        ps = pcbnew.SHAPE_POLY_SET()  # cutouts inside the outline block both sides
+        if self.b.GetBoardPolygonOutlines(ps, False):
+            for i in range(ps.OutlineCount()):
+                for h in range(ps.HoleCount(i)):
+                    r = self.to_board_rect(ps.Hole(i, h).BBox())
+                    self.obst["top"].append((*r, "cutout"))
+                    self.obst["bottom"].append((*r, "cutout"))
         for ref in self.locked:
             self.register_current(ref)
 
@@ -182,7 +197,12 @@ class Placer:
         fp.BuildCourtyardCaches()
         cy = fp.GetCourtyard(pcbnew.B_CrtYd if bottom else pcbnew.F_CrtYd)
         box = cy.BBox() if cy.OutlineCount() else fp.GetBoundingBox(False)
-        self.obst["bottom" if bottom else "top"].append((*self.to_board_rect(box), ref))
+        side, other = ("bottom", "top") if bottom else ("top", "bottom")
+        self.obst[side].append((*self.to_board_rect(box), ref))
+        for pad in fp.Pads():
+            if pad.GetAttribute() in (pcbnew.PAD_ATTRIB_PTH, pcbnew.PAD_ATTRIB_NPTH):
+                r = self.to_board_rect(pad.GetBoundingBox())
+                self.obst[other].append((r[0] - 0.2, r[1] - 0.2, r[2] + 0.2, r[3] + 0.2, ref))
         p = fp.GetPosition()
         self.pos[ref] = (fp.GetOrientationDegrees(), bottom, tomm(p.x) - self.cx, tomm(p.y) - self.cy)
 
@@ -197,19 +217,26 @@ class Placer:
 
     # ------------------------------------------------------------------ steps
     def place_fixed(self):
-        half = self.L / 2
+        ex0, ey0, ex1, ey1 = self.edges
         for ref, x, y, spec, side in self.cfg["fixed"]:
             if ref in self.locked:
                 continue
             bottom = side == "bottom"
             rot = self.rot_for(ref, spec, bottom)
             r = self.geom(ref, rot, bottom)["rect"]
-            w = r[2] - r[0]
+            w, h = r[2] - r[0], r[3] - r[1]
+            # ("E", 6.5): the courtyard sticks out 6.5 mm past that edge (right-angle header, plug outside the board)
+            x, over_x = x if isinstance(x, tuple) else (x, 0.0)
+            y, over_y = y if isinstance(y, tuple) else (y, 0.0)
             if x == "W":
-                x = -half + w / 2
+                x = ex0 + w / 2 - over_x
             elif x == "E":
-                x = half - w / 2
-            c_r = (x - w / 2, y - (r[3] - r[1]) / 2, x + w / 2, y + (r[3] - r[1]) / 2)
+                x = ex1 - w / 2 + over_x
+            if y == "N":
+                y = ey0 + h / 2 - over_y
+            elif y == "S":
+                y = ey1 - h / 2 + over_y
+            c_r = (x - w / 2, y - h / 2, x + w / 2, y + h / 2)
             hit = self.hits(c_r, "bottom" if bottom else "top", 0.0)
             if hit:
                 self.report.append(f"  ! fixed {ref} overlaps {hit[4]}")
@@ -241,7 +268,7 @@ class Placer:
         sys.exit(f"no rotation of {ref} matches {other}'s mirrored pinout")
 
     # ------------------------------------------------------------------ clusters
-    def place_members(self, anchor, members, obst, bounds, frame_pos):
+    def place_members(self, anchor, members, obst, bounds, frame_pos, bottom=False):
         """Pin-aware placement around an already positioned anchor. obst = list of rects (same frame);
         frame_pos(ref) -> pads in that frame. Returns {ref: (rot, px, py)}."""
         out = {}
@@ -249,12 +276,12 @@ class Placer:
         a_rect = next(o for o in obst if o[4] == anchor)
         a_c = centre(a_rect)
         remaining = list(members)
-        nets_of = {m: {p["net"] for p in self.geom(m, 0, False)["pads"]} - GROUNDS for m in remaining}
+        nets_of = {m: {p["net"] for p in self.geom(m, 0, bottom)["pads"]} - GROUNDS for m in remaining}
 
         def placed_pads():
             yield from ((anchor, p) for p in frame_pos(anchor))
             for r, (rot, px, py) in out.items():
-                yield from ((r, dict(p, x=p["x"] + px, y=p["y"] + py)) for p in self.geom(r, rot, False)["pads"])
+                yield from ((r, dict(p, x=p["x"] + px, y=p["y"] + py)) for p in self.geom(r, rot, bottom)["pads"])
 
         while remaining:
             pp = list(placed_pads())
@@ -289,7 +316,7 @@ class Placer:
             for spiral_pts in (SPIRAL, SPIRAL_FAR):
                 near = [o for o in obst if abs(centre(o)[0] - tx) < 45 and abs(centre(o)[1] - ty) < 45]
                 for rot in ROTS:
-                    g = self.geom(best_m, rot, False)
+                    g = self.geom(best_m, rot, bottom)
                     mp = [p for p in g["pads"] if net and p["net"] == net]
                     ox, oy = (mp[0]["x"], mp[0]["y"]) if mp else centre(g["rect"])
                     found = 0
@@ -317,45 +344,47 @@ class Placer:
             obst.append((*r, best_m))
         return out
 
-    def place_cluster(self, name, area, anchor, members, target):
+    def place_cluster(self, name, area, anchor, members, target, side="top"):
+        """side = where the members go (and the anchor, unless it is FIXED / locked)."""
+        bottom = side == "bottom"
         members = [m for m in members if m not in self.locked and m not in self.pos]
         bounds = self.cfg["areas"].get(area) if area else None
         if anchor in self.pos:  # anchor fixed / locked: place the members directly on the board
-            obst = self.obst["top"]
-            if not any(o[4] == anchor for o in obst):  # bottom-side anchor: its THT pads are on top already
+            obst = self.obst[side]
+            if not any(o[4] == anchor for o in obst):  # anchor on the other side: its THT pads are here already
                 rect = self.to_board_rect(self.fps[anchor].GetBoundingBox(False)) if anchor in self.locked else \
                     shift(self.geom(anchor, self.pos[anchor][0], self.pos[anchor][1])["rect"], *self.pos[anchor][2:])
                 obst = obst + [(*rect, anchor)]
-            out = self.place_members(anchor, members, list(obst), bounds, lambda r: self.abs_pads(r))
+            out = self.place_members(anchor, members, list(obst), bounds, lambda r: self.abs_pads(r), bottom)
             for ref, (rot, px, py) in out.items():
-                self.put_origin(ref, rot, False, px, py)
+                self.put_origin(ref, rot, bottom, px, py)
             self.report.append(f"  {name:32s} {len(out):3d} parts around the fixed {anchor}")
             self.group(name, list(out))
             return
         # build the cluster around the anchor at the origin, then move it as one block
-        ga = self.geom(anchor, 0, False)
+        ga = self.geom(anchor, 0, bottom)
         obst = [(*ga["rect"], anchor)]
-        out = self.place_members(anchor, members, obst, None, lambda r: self.geom(anchor, 0, False)["pads"])
+        out = self.place_members(anchor, members, obst, None, lambda r: self.geom(anchor, 0, bottom)["pads"], bottom)
         out[anchor] = (0, 0.0, 0.0)
         rects = [o[:4] for o in obst]
         bb = (min(r[0] for r in rects), min(r[1] for r in rects), max(r[2] for r in rects), max(r[3] for r in rects))
         bc = centre(bb)
         target = target or (0.0, 0.0)
-        t = self.fit(bb, rects, bounds, target)
+        t = self.fit(bb, rects, bounds, target, side)
         where = "" if t else " (OUTSIDE its area)"
         if not t:
-            t = self.fit(bb, rects, [(-self.L / 2, -self.W / 2, self.L / 2, self.W / 2)], target)
+            t = self.fit(bb, rects, [self.edges], target, side)
         if not t:
             self.report.append(f"  ! cluster {name}: no room anywhere")
             return
         for ref, (rot, px, py) in out.items():
-            self.put_origin(ref, rot, False, px + t[0], py + t[1])
+            self.put_origin(ref, rot, bottom, px + t[0], py + t[1])
         dist = math.dist((bc[0] + t[0], bc[1] + t[1]), target)
         self.report.append(f"  {name:32s} {len(out):3d} parts {bb[2] - bb[0]:5.1f} x {bb[3] - bb[1]:5.1f} mm, "
                            f"{dist:4.1f} mm from target{where}")
         self.group(name, list(out))
 
-    def fit(self, bb, rects, bounds, target, step=0.5):
+    def fit(self, bb, rects, bounds, target, side="top", step=0.5):
         """Translation that puts the cluster (bbox bb, part rects) inside one of the bounds, as close to target as
         possible, with GAP_OUT around each part (clusters may interlock; only the parts must stay clear)."""
         cands = []
@@ -368,11 +397,11 @@ class Placer:
                     x, y = box[0] - bb[0] + i * step, box[1] - bb[1] + j * step
                     cands.append((math.hypot(bc[0] + x - target[0], bc[1] + y - target[1]), x, y))
         cands.sort()
-        top = self.obst["top"]
+        obst = self.obst[side]
         for _, x, y in cands:
             sb = shift(bb, x, y)
-            near = [o for o in top if overlap(sb, o, GAP_OUT)]
-            if not near or not any(self.hits(shift(r, x, y), "top", GAP_OUT, near) for r in rects):
+            near = [o for o in obst if overlap(sb, o, GAP_OUT)]
+            if not near or not any(self.hits(shift(r, x, y), side, GAP_OUT, near) for r in rects):
                 return x, y
         return None
 
@@ -401,7 +430,7 @@ class Placer:
                 best[3].append(ref)
                 self.report.append(f"  + {ref} -> cluster '{best[0]}' (shares {', '.join(sorted(shared))})")
             else:
-                clusters.append((ref, None, ref, [], (0, 0)))
+                clusters.append((ref, None, ref, [], (0, 0), self.cfg.get("default_side", "top")))
                 self.report.append(f"  + {ref}: no shared net, placed on its own")
 
     # ------------------------------------------------------------------ drawing
@@ -501,7 +530,8 @@ class Placer:
 
     # ------------------------------------------------------------------ main
     def run(self, power=None):
-        clusters = [(n, a, an, list(m), t) for n, a, an, m, t in self.cfg["clusters"]]
+        # (name, area, anchor, members, target[, side]); the members list is copied: assign_leftovers extends it
+        clusters = [(c[0], c[1], c[2], list(c[3]), c[4], c[5] if len(c) > 5 else "top") for c in self.cfg["clusters"]]
         self.draw_frames(power)
         self.place_fixed()
         if power and "b2b" in self.cfg:
@@ -517,6 +547,12 @@ class Placer:
               f"{hidden} small refs hidden on silk")
         for line in self.report:
             print(line)
+
+
+def board_path(name):
+    d = ROOT / f"kicad/supply_{name}"
+    path = d / f"supply_{name}.kicad_pcb"
+    return path if path.exists() else d / f"supply_{name}" / path.name  # supply_ui has its project one level down
 
 
 def outline(board):
@@ -553,3 +589,5 @@ if __name__ == "__main__":
                 power.register_current(ref)
         power.locked = set(power.fps)
         Placer("control").run(power)
+    if "ui" in names:
+        Placer("ui").run()

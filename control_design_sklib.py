@@ -170,7 +170,7 @@ control_design = SchLib(tool=SKIDL).add_parts(*[
             Pin(num='2',name='Pin_2',func=pin_types.PASSIVE,unit=1),
             Pin(num='3',name='Pin_3',func=pin_types.PASSIVE,unit=1),
             Pin(num='4',name='Pin_4',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
-        Part(**{ 'name':'Conn_02x10_Odd_Even', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_02x10_Odd_Even'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical', 'keywords':'connector', 'description':'Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[
+        Part(**{ 'name':'Conn_02x10_Odd_Even', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_02x10_Odd_Even'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Horizontal', 'keywords':'connector', 'description':'Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[
             Pin(num='1',name='Pin_1',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',name='Pin_2',func=pin_types.PASSIVE,unit=1),
             Pin(num='3',name='Pin_3',func=pin_types.PASSIVE,unit=1),

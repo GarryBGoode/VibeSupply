@@ -4741,7 +4741,7 @@
 	(footprint "Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical"
 		(layer "F.Cu")
 		(uuid "3cb5cf69-4ed2-48a2-b249-233d0d0ce97c")
-		(at 202.115 82.285)
+		(at 208.615 82.285)
 		(descr "Through hole straight pin header, 2x10, 1.27mm pitch, double rows")
 		(tags "Through hole pin header THT 2x10 1.27mm double row")
 		(property "Reference" "J703"
@@ -18248,7 +18248,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "20d8f301-e4c1-4a35-9761-4443ecb5c521")
+		(uuid "ee4fe7ce-f6b4-4239-9fb1-5b01e79ea34f")
 	)
 	(gr_line
 		(start 95.2 134.05)
@@ -18259,7 +18259,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "95550a94-a957-4f0d-9cd9-701bf8392e79")
+		(uuid "edd9f1c1-2ea1-4f8e-a5d0-f164d3b322e2")
 	)
 	(gr_line
 		(start 112.3 65.95)
@@ -18270,7 +18270,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "6ae665e8-bcfc-4819-8089-1741a9308f52")
+		(uuid "1c14cc4a-57e7-4e63-8e8d-baa59a9513f4")
 	)
 	(gr_line
 		(start 112.3 134.05)
@@ -18281,7 +18281,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "6b778096-8833-4273-af45-7750dda95f14")
+		(uuid "c9b3113f-535e-4ef1-9e3b-c3cc125aa95e")
 	)
 	(gr_line
 		(start 114 62.75)
@@ -18292,7 +18292,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "03e1abcb-1563-472f-b14c-51808568b32c")
+		(uuid "1a992d65-3574-411e-b372-0f1016af8d1c")
 	)
 	(gr_line
 		(start 115.7 65.95)
@@ -18303,7 +18303,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "29741cb1-dc90-45db-98c4-c791d7920c9e")
+		(uuid "9014324e-d30c-4699-adb6-1dbd02e66694")
 	)
 	(gr_line
 		(start 115.7 103.8)
@@ -18314,7 +18314,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "de86cf41-a906-4bdb-a295-4a1518f1552b")
+		(uuid "cbcd6627-8ee7-4cf1-92c0-a6e8bdf4eeb4")
 	)
 	(gr_line
 		(start 115.7 104.2)
@@ -18325,7 +18325,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "bd1a0742-360a-4c96-a420-a175444cadb2")
+		(uuid "1abe6c59-c7da-410a-bb61-08c105cb1b4d")
 	)
 	(gr_line
 		(start 115.7 127.3)
@@ -18336,7 +18336,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "e7d9c251-0a59-4d1b-ad58-a6c0a06f7aa0")
+		(uuid "c9e4b176-bc17-447b-92a7-6970e074ee83")
 	)
 	(gr_line
 		(start 143.8 104.2)
@@ -18347,7 +18347,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "29e75f12-f00c-4d1f-86e6-1c2476dad3a4")
+		(uuid "616f218c-48cf-47d3-8933-a3253cb8fd7c")
 	)
 	(gr_line
 		(start 143.8 127.3)
@@ -18358,7 +18358,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "f7a408e9-214e-4747-88c5-8f928ac325ca")
+		(uuid "bd3b83ab-2ab3-447a-8cdd-25720d188719")
 	)
 	(gr_line
 		(start 144.2 104.2)
@@ -18369,7 +18369,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "de3c4a3e-bca6-4965-9491-8b4a3ca13ca9")
+		(uuid "5ddc2ac7-bf50-4ed3-b015-85cf0768bb78")
 	)
 	(gr_line
 		(start 144.2 127.3)
@@ -18380,7 +18380,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "ddb374b3-1b1d-4e9d-ada6-d8d70784c908")
+		(uuid "03e882ab-85ce-4f8f-8b1b-d5612879fa8b")
 	)
 	(gr_line
 		(start 184.8 65.95)
@@ -18391,7 +18391,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "3146e15a-c109-4cfd-a5aa-cf9d77e4757f")
+		(uuid "6897e889-04ec-44d5-a4e8-bd20c4d55984")
 	)
 	(gr_line
 		(start 184.8 103.8)
@@ -18402,7 +18402,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "0f2637bf-7128-42e3-937a-57e743c3ad23")
+		(uuid "dd644bb5-1fdb-4472-ab28-9891de850eca")
 	)
 	(gr_line
 		(start 184.8 104.2)
@@ -18413,7 +18413,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "e9f0df60-c1f3-430f-a179-8b1115dbdc41")
+		(uuid "4fb5697e-63f3-44be-b536-4eadb5b873b0")
 	)
 	(gr_line
 		(start 184.8 127.3)
@@ -18424,7 +18424,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "e93cf797-6862-45f3-b10d-689b2deb0ba6")
+		(uuid "50b00232-0aef-47a2-b703-aa54ed3890f3")
 	)
 	(gr_line
 		(start 185.2 71.95)
@@ -18435,7 +18435,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "1de2d03f-4fa1-4118-8fe4-4f40ebbce767")
+		(uuid "ab852a35-d403-403b-be7d-62c8f09d60b8")
 	)
 	(gr_line
 		(start 185.2 121.3)
@@ -18446,7 +18446,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "b0165ecf-90f5-4ba7-a3cc-672dabd8ca50")
+		(uuid "b04f2a54-6cfe-4a8e-aa84-ef711cedceb8")
 	)
 	(gr_line
 		(start 204.8 71.95)
@@ -18457,7 +18457,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "001b429e-dd7c-4f40-8a24-234f29d0aeb9")
+		(uuid "cb97cc5e-d5ce-4901-9679-81df1a3f1a5c")
 	)
 	(gr_line
 		(start 204.8 121.3)
@@ -18468,7 +18468,7 @@
 		)
 		(locked yes)
 		(layer "Cmts.User")
-		(uuid "819ffa4d-7945-447e-8f82-2e6b57d8e50f")
+		(uuid "7fa31b91-83dc-4a12-9110-9ca05ecfe23f")
 	)
 	(gr_rect
 		(start 95 62.75)
@@ -18486,7 +18486,7 @@
 		(locked yes)
 		(at 95.7 132.449999 0)
 		(layer "Cmts.User")
-		(uuid "e4d6f45d-db3f-41e3-9fd5-c217b5be8e41")
+		(uuid "fd6f4de0-643a-447b-9be5-ed3ae500c5a4")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18499,7 +18499,7 @@
 		(locked yes)
 		(at 113 126 0)
 		(layer "Cmts.User")
-		(uuid "808e6624-467d-449f-9f80-f00d81348fd3")
+		(uuid "0d461552-9840-4d9c-92a1-420f420cacb2")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18512,7 +18512,7 @@
 		(locked yes)
 		(at 114.5 66.25 0)
 		(layer "Cmts.User")
-		(uuid "48ce6188-cabe-4df9-82ec-08ba38388382")
+		(uuid "9b321052-d620-44a6-94b2-b56e2890394d")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18525,7 +18525,7 @@
 		(locked yes)
 		(at 116.2 102.2 0)
 		(layer "Cmts.User")
-		(uuid "ea595a76-e868-4f72-a512-6b1bc9c19d67")
+		(uuid "6145c37f-9d30-4889-98ab-de28e17121b8")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18538,7 +18538,7 @@
 		(locked yes)
 		(at 116.2 125.7 0)
 		(layer "Cmts.User")
-		(uuid "b1613d48-aae4-41db-b3fc-35f3267b3679")
+		(uuid "8c8625f4-157b-4c7c-8f63-121526bebf31")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18551,7 +18551,7 @@
 		(locked yes)
 		(at 133.206249 80.207498 0)
 		(layer "Cmts.User")
-		(uuid "a5d934c9-499e-4121-a72c-551ce09cba60")
+		(uuid "2f732be5-d1c2-4cf7-86c5-db43258706c4")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18564,7 +18564,7 @@
 		(locked yes)
 		(at 144 126.2 0)
 		(layer "Cmts.User")
-		(uuid "97522b60-311f-44c1-91e0-dbb4f9ea49d2")
+		(uuid "be1ddb42-fcd9-4183-aecc-650d3c5f1abe")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18577,7 +18577,7 @@
 		(locked yes)
 		(at 161.905 65.48 0)
 		(layer "Cmts.User")
-		(uuid "d7269c97-0abb-4ab1-ab17-26292f09418d")
+		(uuid "c22903a6-280a-4754-ad57-8ba6ebe85021")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18590,7 +18590,7 @@
 		(locked yes)
 		(at 185.7 119.7 0)
 		(layer "Cmts.User")
-		(uuid "1a9fe9b9-0de7-475f-87d4-dec7e5caef93")
+		(uuid "360e3a64-db5b-470b-aac1-4c56865afb11")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18603,7 +18603,7 @@
 		(locked yes)
 		(at 186 66.5 0)
 		(layer "Cmts.User")
-		(uuid "49c6ab32-9e63-4cfd-afc3-2d65e0acbe51")
+		(uuid "ad0e7f65-9073-496b-8e7e-13d33a58be2a")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18616,7 +18616,7 @@
 		(locked yes)
 		(at 191.206249 81.707498 0)
 		(layer "Cmts.User")
-		(uuid "a39a56be-21ec-41b8-8bc3-94cbf5b99ef9")
+		(uuid "08866954-d14a-4343-a27e-05d163d09b0f")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18629,7 +18629,7 @@
 		(locked yes)
 		(at 202.055 81.055 0)
 		(layer "Cmts.User")
-		(uuid "9a331af8-f0dd-42d5-8cea-12d3387275bc")
+		(uuid "7293084d-ecdd-45d9-81d9-8822920020dd")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -18705,71 +18705,7 @@
 	(zone
 		(locked yes)
 		(layer "B.Cu")
-		(uuid "1e365e2b-0ec0-4ed5-b95a-998aa64b3470")
-		(name "floorplan: C223 on the power board below (tall)")
-		(hatch edge 0.5)
-		(connect_pads
-			(clearance 0)
-		)
-		(min_thickness 0.25)
-		(keepout
-			(tracks allowed)
-			(vias allowed)
-			(pads allowed)
-			(copperpour allowed)
-			(footprints not_allowed)
-		)
-		(placement
-			(enabled no)
-			(sheetname "")
-		)
-		(fill
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-			(island_removal_mode 0)
-		)
-		(polygon
-			(pts
-				(xy 190.706249 81.207498) (xy 203.29375 81.207498) (xy 203.29375 93.792502) (xy 190.706249 93.792502)
-			)
-		)
-	)
-	(zone
-		(locked yes)
-		(layer "B.Cu")
-		(uuid "3cd1e70f-6f88-4ba3-9063-9896dfe2b369")
-		(name "floorplan: L201 on the power board below (tall)")
-		(hatch edge 0.5)
-		(connect_pads
-			(clearance 0)
-		)
-		(min_thickness 0.25)
-		(keepout
-			(tracks allowed)
-			(vias allowed)
-			(pads allowed)
-			(copperpour allowed)
-			(footprints not_allowed)
-		)
-		(placement
-			(enabled no)
-			(sheetname "")
-		)
-		(fill
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-			(island_removal_mode 0)
-		)
-		(polygon
-			(pts
-				(xy 161.405 64.98) (xy 192.395 64.98) (xy 192.395 94.92) (xy 161.405 94.92)
-			)
-		)
-	)
-	(zone
-		(locked yes)
-		(layer "B.Cu")
-		(uuid "a281029b-7e2a-4351-9fd6-b7caf81232bb")
+		(uuid "324fe440-7e0c-4b1d-83b7-b498eb4080a0")
 		(name "floorplan: C228 on the power board below (tall)")
 		(hatch edge 0.5)
 		(connect_pads
@@ -18801,7 +18737,71 @@
 	(zone
 		(locked yes)
 		(layer "B.Cu")
-		(uuid "dafe0343-02b1-4407-8a22-a6ff296d7903")
+		(uuid "4c56c81a-7c43-4921-8d54-45f3c214948a")
+		(name "floorplan: L201 on the power board below (tall)")
+		(hatch edge 0.5)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.25)
+		(keepout
+			(tracks allowed)
+			(vias allowed)
+			(pads allowed)
+			(copperpour allowed)
+			(footprints not_allowed)
+		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
+		(fill
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 0)
+		)
+		(polygon
+			(pts
+				(xy 161.405 64.98) (xy 192.395 64.98) (xy 192.395 94.92) (xy 161.405 94.92)
+			)
+		)
+	)
+	(zone
+		(locked yes)
+		(layer "B.Cu")
+		(uuid "843fb230-58b3-4ead-9f79-a7878e336c4d")
+		(name "floorplan: C223 on the power board below (tall)")
+		(hatch edge 0.5)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.25)
+		(keepout
+			(tracks allowed)
+			(vias allowed)
+			(pads allowed)
+			(copperpour allowed)
+			(footprints not_allowed)
+		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
+		(fill
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 0)
+		)
+		(polygon
+			(pts
+				(xy 190.706249 81.207498) (xy 203.29375 81.207498) (xy 203.29375 93.792502) (xy 190.706249 93.792502)
+			)
+		)
+	)
+	(zone
+		(locked yes)
+		(layer "B.Cu")
+		(uuid "d329c1e7-1e39-451c-ac70-6d50afa45a4c")
 		(name "floorplan: C217 on the power board below (tall)")
 		(hatch edge 0.5)
 		(connect_pads
@@ -18830,22 +18830,23 @@
 			)
 		)
 	)
-	(group "place:B2B decoupling"
-		(uuid "0f0ba9e4-b5eb-49a4-b51d-b464b25a7cd3")
-		(members "19df6b39-ebfc-45c9-a469-59388f320b7e" "1f98fff2-004d-4afa-9746-1dceb6a5cbe6")
-	)
-	(group "place:Debug: SWD, UART, reset, boot"
-		(uuid "28409087-fe08-4e9f-95aa-a3dc0c206618")
-		(members "098e87e8-775a-4317-ab6d-a252bd1943bc" "45a0fa4d-2b01-41e8-86ee-7137af7c5590"
-			"77c2969d-e58f-4558-b9ac-a95625df3670" "82b39b74-d08f-48f4-a54c-2d44e21537e1"
+	(group "place:USB-C iso in"
+		(uuid "1892e546-8af1-4616-99db-5bd8b403f20f")
+		(members "164f89de-20dd-4124-8da1-ed733a12b481" "8bf929c0-e6ed-4a13-b934-a7add551427f"
+			"8fb93ad6-2053-4398-a265-31e07129cb04" "b78ded54-b343-4105-afc5-e6f0eb8666a2"
+			"c3da4db2-31b3-4f2b-b65c-7acc6d89cdcf"
 		)
 	)
-	(group "place:ADuM side 1 (PC)"
-		(uuid "366a0751-7261-4284-854a-1716837b58c4")
-		(members "013f1d01-8ae7-4bea-bddf-fd0585caa897" "4147e0b8-e13a-4cfc-b5f6-3a029c2d832c")
+	(group "place:ADuM side 2 (MCU)"
+		(uuid "228fa530-b824-456d-ad47-e8b224f56f7f")
+		(members "03297722-b0ab-4e94-ac46-935e0d1636a3" "5789382e-05bf-4f47-ac0c-edcc57ff832b")
+	)
+	(group "place:B2B decoupling"
+		(uuid "24e5c7a0-0d7d-4d2c-8817-fc31b6013d6f")
+		(members "19df6b39-ebfc-45c9-a469-59388f320b7e" "1f98fff2-004d-4afa-9746-1dceb6a5cbe6")
 	)
 	(group "place:LMR38010 3.3V"
-		(uuid "5dde4f7d-fcdb-4f30-a0a3-08780d0a31a4")
+		(uuid "2d849a47-226c-4484-9314-73307e044dae")
 		(members "196e9528-4598-492e-b78f-20e7b462b674" "3a63ebaa-7396-4dba-b2a2-06c547017e16"
 			"4b546be5-91e3-4334-9586-b0e7e4d3984b" "4c49a3e9-f4ed-4f30-9ac5-b245b643592d"
 			"5b864627-c5cc-4842-ba2a-daf0968a024f" "736465e9-0b45-435d-8528-41cb5cc234d3"
@@ -18858,8 +18859,12 @@
 			"da012dc1-7b86-4106-abdc-98fb62810c67" "ed482cae-eef6-4edc-9781-1d325a8701d6"
 		)
 	)
+	(group "place:B0505S out"
+		(uuid "7d122abd-d6cc-4946-aaf7-66307e036082")
+		(members "284b26d2-9df1-4416-8676-dca69f693828" "a5682d17-5b93-43cc-8613-be2e1f29720d")
+	)
 	(group "place:STM32G474"
-		(uuid "63612183-47a6-44a8-860f-61c782d19dcc")
+		(uuid "ad4f2bc4-9446-4053-9e72-4d9d89b4e6d7")
 		(members "07ca002f-af3b-4a0a-9ae5-d8a9b6ad320a" "0cf84e9a-2f72-4947-ac3b-132c75ace886"
 			"0df6321f-b77f-4cfd-b5ec-24b846019311" "149b79c9-172c-4952-b67c-ca9f5aeb3aed"
 			"1b2154ca-5577-42ce-a8f9-4d8e5d95b235" "24ef87b7-df18-4ef9-b9ac-c4451a8cf914"
@@ -18880,26 +18885,21 @@
 			"f67f536d-228d-4203-a050-e32dce2c114f"
 		)
 	)
-	(group "place:B0505S out"
-		(uuid "7bd60658-5797-4d10-ad5a-677bbfa97327")
-		(members "284b26d2-9df1-4416-8676-dca69f693828" "a5682d17-5b93-43cc-8613-be2e1f29720d")
-	)
-	(group "place:ADuM side 2 (MCU)"
-		(uuid "c6a6179f-0697-4755-adfa-3b596ab3825a")
-		(members "03297722-b0ab-4e94-ac46-935e0d1636a3" "5789382e-05bf-4f47-ac0c-edcc57ff832b")
-	)
 	(group "place:+3V3A filter"
-		(uuid "e8452974-4c9e-44ed-8a70-f307d35e4f86")
+		(uuid "b9e9595d-689c-4ea3-a20f-2d2d49fb0a6d")
 		(members "0d43a9d1-6113-4fe9-be78-7558ef7dc3aa" "36a822bb-badb-4e42-8c95-392c8572b139"
 			"fd1d880a-34ec-4c00-99e9-d1467d0a06a6"
 		)
 	)
-	(group "place:USB-C iso in"
-		(uuid "facc2c92-3af4-4f83-a9c4-d5b795210485")
-		(members "164f89de-20dd-4124-8da1-ed733a12b481" "8bf929c0-e6ed-4a13-b934-a7add551427f"
-			"8fb93ad6-2053-4398-a265-31e07129cb04" "b78ded54-b343-4105-afc5-e6f0eb8666a2"
-			"c3da4db2-31b3-4f2b-b65c-7acc6d89cdcf"
+	(group "place:Debug: SWD, UART, reset, boot"
+		(uuid "bac6eb91-6b0f-45c8-a645-f02fcae5ee10")
+		(members "098e87e8-775a-4317-ab6d-a252bd1943bc" "45a0fa4d-2b01-41e8-86ee-7137af7c5590"
+			"77c2969d-e58f-4558-b9ac-a95625df3670" "82b39b74-d08f-48f4-a54c-2d44e21537e1"
 		)
+	)
+	(group "place:ADuM side 1 (PC)"
+		(uuid "c2c6f76b-eeec-46e0-8554-c58b126286b1")
+		(members "013f1d01-8ae7-4bea-bddf-fd0585caa897" "4147e0b8-e13a-4cfc-b5f6-3a029c2d832c")
 	)
 	(group "board_setup"
 		(uuid "27ea7ddd-8024-4d18-8d83-ba18367cb8d6")
@@ -18909,27 +18909,27 @@
 		)
 	)
 	(group "floorplan"
-		(uuid "1e81b682-0b8c-4cd2-ba04-843caf1e4591")
+		(uuid "b038ea1a-88b0-4943-a579-c09ba28017c3")
 		(locked yes)
-		(members "001b429e-dd7c-4f40-8a24-234f29d0aeb9" "03e1abcb-1563-472f-b14c-51808568b32c"
-			"0f2637bf-7128-42e3-937a-57e743c3ad23" "1a9fe9b9-0de7-475f-87d4-dec7e5caef93"
-			"1de2d03f-4fa1-4118-8fe4-4f40ebbce767" "1e365e2b-0ec0-4ed5-b95a-998aa64b3470"
-			"20d8f301-e4c1-4a35-9761-4443ecb5c521" "29741cb1-dc90-45db-98c4-c791d7920c9e"
-			"29e75f12-f00c-4d1f-86e6-1c2476dad3a4" "3146e15a-c109-4cfd-a5aa-cf9d77e4757f"
-			"3cd1e70f-6f88-4ba3-9063-9896dfe2b369" "48ce6188-cabe-4df9-82ec-08ba38388382"
-			"49c6ab32-9e63-4cfd-afc3-2d65e0acbe51" "6ae665e8-bcfc-4819-8089-1741a9308f52"
-			"6b778096-8833-4273-af45-7750dda95f14" "808e6624-467d-449f-9f80-f00d81348fd3"
-			"819ffa4d-7945-447e-8f82-2e6b57d8e50f" "95550a94-a957-4f0d-9cd9-701bf8392e79"
-			"97522b60-311f-44c1-91e0-dbb4f9ea49d2" "9a331af8-f0dd-42d5-8cea-12d3387275bc"
-			"a281029b-7e2a-4351-9fd6-b7caf81232bb" "a39a56be-21ec-41b8-8bc3-94cbf5b99ef9"
-			"a5d934c9-499e-4121-a72c-551ce09cba60" "b0165ecf-90f5-4ba7-a3cc-672dabd8ca50"
-			"b1613d48-aae4-41db-b3fc-35f3267b3679" "bd1a0742-360a-4c96-a420-a175444cadb2"
-			"d7269c97-0abb-4ab1-ab17-26292f09418d" "dafe0343-02b1-4407-8a22-a6ff296d7903"
-			"ddb374b3-1b1d-4e9d-ada6-d8d70784c908" "de3c4a3e-bca6-4965-9491-8b4a3ca13ca9"
-			"de86cf41-a906-4bdb-a295-4a1518f1552b" "e4d6f45d-db3f-41e3-9fd5-c217b5be8e41"
-			"e7d9c251-0a59-4d1b-ad58-a6c0a06f7aa0" "e93cf797-6862-45f3-b10d-689b2deb0ba6"
-			"e9f0df60-c1f3-430f-a179-8b1115dbdc41" "ea595a76-e868-4f72-a512-6b1bc9c19d67"
-			"f7a408e9-214e-4747-88c5-8f928ac325ca"
+		(members "03e882ab-85ce-4f8f-8b1b-d5612879fa8b" "08866954-d14a-4343-a27e-05d163d09b0f"
+			"0d461552-9840-4d9c-92a1-420f420cacb2" "1a992d65-3574-411e-b372-0f1016af8d1c"
+			"1abe6c59-c7da-410a-bb61-08c105cb1b4d" "1c14cc4a-57e7-4e63-8e8d-baa59a9513f4"
+			"2f732be5-d1c2-4cf7-86c5-db43258706c4" "324fe440-7e0c-4b1d-83b7-b498eb4080a0"
+			"360e3a64-db5b-470b-aac1-4c56865afb11" "4c56c81a-7c43-4921-8d54-45f3c214948a"
+			"4fb5697e-63f3-44be-b536-4eadb5b873b0" "50b00232-0aef-47a2-b703-aa54ed3890f3"
+			"5ddc2ac7-bf50-4ed3-b015-85cf0768bb78" "6145c37f-9d30-4889-98ab-de28e17121b8"
+			"616f218c-48cf-47d3-8933-a3253cb8fd7c" "6897e889-04ec-44d5-a4e8-bd20c4d55984"
+			"7293084d-ecdd-45d9-81d9-8822920020dd" "7fa31b91-83dc-4a12-9110-9ca05ecfe23f"
+			"843fb230-58b3-4ead-9f79-a7878e336c4d" "8c8625f4-157b-4c7c-8f63-121526bebf31"
+			"9014324e-d30c-4699-adb6-1dbd02e66694" "9b321052-d620-44a6-94b2-b56e2890394d"
+			"ab852a35-d403-403b-be7d-62c8f09d60b8" "ad0e7f65-9073-496b-8e7e-13d33a58be2a"
+			"b04f2a54-6cfe-4a8e-aa84-ef711cedceb8" "bd3b83ab-2ab3-447a-8cdd-25720d188719"
+			"be1ddb42-fcd9-4183-aecc-650d3c5f1abe" "c22903a6-280a-4754-ad57-8ba6ebe85021"
+			"c9b3113f-535e-4ef1-9e3b-c3cc125aa95e" "c9e4b176-bc17-447b-92a7-6970e074ee83"
+			"cb97cc5e-d5ce-4901-9679-81df1a3f1a5c" "cbcd6627-8ee7-4cf1-92c0-a6e8bdf4eeb4"
+			"d329c1e7-1e39-451c-ac70-6d50afa45a4c" "dd644bb5-1fdb-4472-ab28-9891de850eca"
+			"edd9f1c1-2ea1-4f8e-a5d0-f164d3b322e2" "ee4fe7ce-f6b4-4239-9fb1-5b01e79ea34f"
+			"fd6f4de0-643a-447b-9be5-ed3ae500c5a4"
 		)
 	)
 	(embedded_fonts no)

@@ -1,5 +1,5 @@
 """
-STM32G474RET6 (LQFP-64) + debug/UART headers + UI ribbon connector (2x10, 1.27 mm). On supply_control since the
+STM32G474RET6 (LQFP-64) + debug/UART headers + UI ribbon connector (2x10, 2.54 mm). On supply_control since the
 2026-09-30 board split; the power-stage signals arrive through the B2B header (design/interconnect.py). The analog
 inputs from the power board get a 100 R + 1 nF filter at the MCU pin (header pickup, ADC sampling kick-back); they are
 already filtered at the source, so the extra ~0.1 us doesn't matter, not even for the COMP1/COMP4 trips.
@@ -49,7 +49,8 @@ PIN_MAP = {
     "PD2": OE_BTN,
 }
 
-# UI ribbon: 2x10, 1.27 mm (flat cable, pin n = wire n). Same table is used by ui_design.py for the UI board side.
+# UI ribbon: 2x10, 2.54 mm IDC (1.27 mm flat cable, pin n = wire n; was a 1.27 mm header until 2026-10-05). Same table
+# is used by ui_design.py for the UI board side.
 # 1.9" ST7789 IPS 170x320: SPI2 at 170 MHz / 8 = 21.25 MHz -> full 16-bit frame (870 kbit) in ~41 ms; the firmware redraws only
 # changed regions. SCK between two GNDs. Pin 18 = backlight PWM (the module's BLK input).
 # Encoder pushes go through the UI board's TCA9535; encoder A/B stay on MCU timers, OE button direct (PD2).
@@ -58,7 +59,10 @@ UI_PINOUT = {
     11: I2C2_SDA, 12: UI_INT, 13: ENC1_A, 14: ENC1_B, 15: ENC2_A, 16: ENC2_B, 17: OE_BTN, 18: LCD_BL,
     19: BUZZER, 20: P3V3,
 }
-UI_CONN_FP = "Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical"
+# Right-angle on both boards (the same part): a straight 2.54 mm header is 8.5 mm tall before the plug goes on, the
+# control board's top side has 9.9 mm. Lying down it is 5.1 mm; the body sits at the board edge with the pins past it,
+# because the IDC socket (~6 mm thick around rows at 1.27 / 3.81 mm) reaches below the board surface.
+UI_CONN_FP = "Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Horizontal"
 
 # analog inputs that come up the B2B header -> 100 R + 1 nF at the pin
 PIN_FILTERED = {n.name for n in (VOUT_SNS, VTERM_SNS, VIN_SNS, IL_SNS, ITH_MON, NTC_FET, NTC_IND, NTC_CLAMP, NTC_OUTSW)}

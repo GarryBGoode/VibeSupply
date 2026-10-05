@@ -50,6 +50,9 @@ BY_FPID = {
     "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm": Body(shape="cyl"),
     "Connector_PinHeader_2.54mm:": Body(shape="header", base=2.5),
     "Connector_PinHeader_1.27mm:": Body(shape="header", base=1.5),
+    # right-angle headers: one box over body + pins (F.Fab), without the plug
+    "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal": Body(note="right-angle, pins included"),
+    "Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Horizontal": Body(note="right-angle, pins included"),
     # KiCad 10 library has no model file for these
     "Connector_Wire:": Body(shape="none", note="wires leave the board"),
     "Package_SON:Infineon_PG-TDSON-8_6.15x5.15mm": Body(height=1.1, note="PG-TDSON-8 max"),
@@ -59,7 +62,8 @@ BY_FPID = {
     "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12": Body(height=3.3, note="16P top-mount", estimate=True),
 }
 
-# Both boards in one table (power: 1xx-4xx, 9xx; control: 5xx-7xx, 971)
+# Power and control board in one table (power: 1xx-4xx, 9xx; control: 5xx-7xx, 971). The UI board numbers from 1:
+# its overrides go by footprint (BY_FPID)
 BY_REF = {
     "C217": Body(height=14.0, note="LKME1402A101MF D10xL14, LCSC C443138 seated max"),
     "C223": Body(height=13.5, note="SPZ1JM101G12O00RAXXX D10xL12 +1.5 sleeve", estimate=True),

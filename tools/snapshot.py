@@ -2,7 +2,7 @@
 Placement snapshot: draws a board's footprints (courtyards, pads, references), the floor-plan frames and the rule areas
 into a PNG, coloured by placement cluster (group). For reviewing placement without opening KiCad.
 
-    "C:/Program Files/KiCad/10.0/bin/python.exe" tools/snapshot.py [power] [control]   -> out/placement_<board>.png
+    "C:/Program Files/KiCad/10.0/bin/python.exe" tools/snapshot.py [power] [control] [ui]   -> out/placement_<board>.png
 """
 
 import colorsys
@@ -33,9 +33,14 @@ def colour(name, light=0.82):
     return int(r * 255), int(g * 255), int(b * 255)
 
 
+def board_path(name):
+    d = ROOT / f"kicad/supply_{name}"
+    path = d / f"supply_{name}.kicad_pcb"
+    return path if path.exists() else d / f"supply_{name}" / path.name  # supply_ui has its project one level down
+
+
 def snapshot(name):
-    path = ROOT / f"kicad/supply_{name}/supply_{name}.kicad_pcb"
-    b = pcbnew.LoadBoard(str(path))
+    b = pcbnew.LoadBoard(str(board_path(name)))
     xs, ys = [], []
     for d in b.GetDrawings():
         if d.GetLayer() == pcbnew.Edge_Cuts:
@@ -57,8 +62,16 @@ def snapshot(name):
             pts.append([P(tomm(o.CPoint(j).x), tomm(o.CPoint(j).y)) for j in range(o.PointCount())])
         return pts
 
-    # board + rule areas
-    dr.rectangle([P(x0, y0), P(x1, y1)], fill=(246, 246, 240), outline="black", width=2)
+    # board (with its cutouts) + rule areas
+    ps = pcbnew.SHAPE_POLY_SET()
+    if b.GetBoardPolygonOutlines(ps, False) and ps.OutlineCount():
+        for i in range(ps.OutlineCount()):
+            chain = lambda c: [P(tomm(c.CPoint(j).x), tomm(c.CPoint(j).y)) for j in range(c.PointCount())]  # noqa: E731
+            dr.polygon(chain(ps.Outline(i)), fill=(246, 246, 240), outline="black", width=2)
+            for h in range(ps.HoleCount(i)):
+                dr.polygon(chain(ps.Hole(i, h)), fill="white", outline="black", width=2)
+    else:
+        dr.rectangle([P(x0, y0), P(x1, y1)], fill=(246, 246, 240), outline="black", width=2)
     for z in b.Zones():
         if z.GetIsRuleArea():
             for pts in poly_pts(z.Outline()):

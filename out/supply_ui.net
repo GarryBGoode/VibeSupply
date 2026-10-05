@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "ui_design.py")
-    (date "10/01/2026 10:08 PM")
+    (date "10/05/2026 09:41 AM")
     (tool "SKiDL (2.3.0)")
     (sheet
       (number 1)
@@ -57,7 +57,7 @@
         (field
           (name "SKiDL Tag") "BZ1")
         (field
-          (name "SKiDL Line") "ui_design.py:144"))
+          (name "SKiDL Line") "ui_design.py:149"))
       (libsource
         (lib "Device")
         (part "Buzzer"))
@@ -334,18 +334,18 @@
       (ref "D3")
       (value "red 3mm diffused CC")
       (description "Light emitting diode")
-      (footprint "LED_THT:LED_D3.0mm")
+      (footprint "supply1:LED_D3.0mm_Standoff")
       (fields
         (field
           (name "Description") "Light emitting diode")
         (field
-          (name "Footprint") "LED_THT:LED_D3.0mm")
+          (name "Footprint") "supply1:LED_D3.0mm_Standoff")
         (field
           (name "Datasheet"))
         (field
           (name "SKiDL Tag") "D3")
         (field
-          (name "SKiDL Line") "ui_design.py:118"))
+          (name "SKiDL Line") "ui_design.py:123"))
       (libsource
         (lib "Device")
         (part "LED"))
@@ -358,18 +358,18 @@
       (ref "D4")
       (value "green 3mm diffused CV")
       (description "Light emitting diode")
-      (footprint "LED_THT:LED_D3.0mm")
+      (footprint "supply1:LED_D3.0mm_Standoff")
       (fields
         (field
           (name "Description") "Light emitting diode")
         (field
-          (name "Footprint") "LED_THT:LED_D3.0mm")
+          (name "Footprint") "supply1:LED_D3.0mm_Standoff")
         (field
           (name "Datasheet"))
         (field
           (name "SKiDL Tag") "D4")
         (field
-          (name "SKiDL Line") "ui_design.py:118"))
+          (name "SKiDL Line") "ui_design.py:123"))
       (libsource
         (lib "Device")
         (part "LED"))
@@ -441,7 +441,7 @@
         (field
           (name "SKiDL Tag") "H1")
         (field
-          (name "SKiDL Line") "ui_design.py:156"))
+          (name "SKiDL Line") "ui_design.py:163"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -465,7 +465,7 @@
         (field
           (name "SKiDL Tag") "H2")
         (field
-          (name "SKiDL Line") "ui_design.py:156"))
+          (name "SKiDL Line") "ui_design.py:163"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -489,7 +489,7 @@
         (field
           (name "SKiDL Tag") "H3")
         (field
-          (name "SKiDL Line") "ui_design.py:156"))
+          (name "SKiDL Line") "ui_design.py:163"))
       (libsource
         (lib "Mechanical")
         (part "MountingHole"))
@@ -499,45 +499,21 @@
       (component_classes)
       (tstamps "bd944ac4-6bb1-5a9e-8f09-1ff91f139dbd"))
     (comp
-      (ref "H4")
-      (value "M3")
-      (description "Mounting Hole without connection")
-      (footprint "MountingHole:MountingHole_3.2mm_M3")
-      (fields
-        (field
-          (name "Description") "Mounting Hole without connection")
-        (field
-          (name "Footprint") "MountingHole:MountingHole_3.2mm_M3")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "H4")
-        (field
-          (name "SKiDL Line") "ui_design.py:156"))
-      (libsource
-        (lib "Mechanical")
-        (part "MountingHole"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "06da5295-48dd-5f5e-a314-66b923e79308"))
-    (comp
       (ref "J1")
       (value "to supply_control")
       (description "Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint "Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical")
+      (footprint "Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Horizontal")
       (fields
         (field
           (name "Description") "Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
         (field
-          (name "Footprint") "Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical")
+          (name "Footprint") "Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Horizontal")
         (field
           (name "Datasheet"))
         (field
           (name "SKiDL Tag") "J1")
         (field
-          (name "SKiDL Line") "ui_design.py:50"))
+          (name "SKiDL Line") "ui_design.py:52"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_02x10_Odd_Even"))
@@ -548,20 +524,20 @@
       (tstamps "d7608689-a7d2-514c-aa16-0f8bde5cf213"))
     (comp
       (ref "J3")
-      (value "IPS 1.9in ST7789 SPI")
+      (value "IPS 1.9in ST7789 SPI (wired)")
       (description "Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical")
+      (footprint "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal")
       (fields
         (field
           (name "Description") "Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)")
         (field
-          (name "Footprint") "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical")
+          (name "Footprint") "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal")
         (field
           (name "Datasheet"))
         (field
           (name "SKiDL Tag") "J3")
         (field
-          (name "SKiDL Line") "ui_design.py:60"))
+          (name "SKiDL Line") "ui_design.py:64"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x08"))
@@ -585,7 +561,7 @@
         (field
           (name "SKiDL Tag") "J6")
         (field
-          (name "SKiDL Line") "ui_design.py:136"))
+          (name "SKiDL Line") "ui_design.py:141"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x04"))
@@ -1172,7 +1148,7 @@
       (tstamps "abe8364b-5ed9-593a-a990-c9655e96dd67"))
     (comp
       (ref "SW1")
-      (value "EC10E1220501")
+      (value "EC10E1220505")
       (description "Rotary encoder, dual channel, incremental quadrate outputs")
       (footprint "supply1:RotaryEncoder_Alps_EC10E_Horizontal")
       (fields
@@ -1185,7 +1161,7 @@
         (field
           (name "SKiDL Tag") "SW1")
         (field
-          (name "SKiDL Line") "ui_design.py:76"))
+          (name "SKiDL Line") "ui_design.py:80"))
       (libsource
         (lib "Device")
         (part "RotaryEncoder"))
@@ -1196,7 +1172,7 @@
       (tstamps "ccd6b1b1-065e-52d8-bb15-76892f2b4e17"))
     (comp
       (ref "SW2")
-      (value "EC10E1220501")
+      (value "EC10E1220505")
       (description "Rotary encoder, dual channel, incremental quadrate outputs")
       (footprint "supply1:RotaryEncoder_Alps_EC10E_Horizontal")
       (fields
@@ -1209,7 +1185,7 @@
         (field
           (name "SKiDL Tag") "SW2")
         (field
-          (name "SKiDL Line") "ui_design.py:76"))
+          (name "SKiDL Line") "ui_design.py:80"))
       (libsource
         (lib "Device")
         (part "RotaryEncoder"))
@@ -1222,20 +1198,20 @@
       (ref "SW3")
       (value "V WHEEL PUSH")
       (description "Push button switch, generic, two pins")
-      (footprint "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x")
+      (footprint "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x")
       (fields
         (field
-          (name "MPN") "B3F-1060")
+          (name "MPN") "B3F-1020")
         (field
           (name "Description") "Push button switch, generic, two pins")
         (field
-          (name "Footprint") "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x")
+          (name "Footprint") "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x")
         (field
           (name "Datasheet"))
         (field
           (name "SKiDL Tag") "SW3")
         (field
-          (name "SKiDL Line") "ui_design.py:35"))
+          (name "SKiDL Line") "ui_design.py:37"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1248,20 +1224,20 @@
       (ref "SW4")
       (value "I WHEEL PUSH")
       (description "Push button switch, generic, two pins")
-      (footprint "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x")
+      (footprint "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x")
       (fields
         (field
-          (name "MPN") "B3F-1060")
+          (name "MPN") "B3F-1020")
         (field
           (name "Description") "Push button switch, generic, two pins")
         (field
-          (name "Footprint") "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x")
+          (name "Footprint") "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x")
         (field
           (name "Datasheet"))
         (field
           (name "SKiDL Tag") "SW4")
         (field
-          (name "SKiDL Line") "ui_design.py:35"))
+          (name "SKiDL Line") "ui_design.py:37"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1274,20 +1250,20 @@
       (ref "SW5")
       (value "LEFT")
       (description "Push button switch, generic, two pins")
-      (footprint "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x")
+      (footprint "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x")
       (fields
         (field
-          (name "MPN") "B3F-1060")
+          (name "MPN") "B3F-1020")
         (field
           (name "Description") "Push button switch, generic, two pins")
         (field
-          (name "Footprint") "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x")
+          (name "Footprint") "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x")
         (field
           (name "Datasheet"))
         (field
           (name "SKiDL Tag") "SW5")
         (field
-          (name "SKiDL Line") "ui_design.py:35"))
+          (name "SKiDL Line") "ui_design.py:37"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1300,20 +1276,20 @@
       (ref "SW6")
       (value "RIGHT")
       (description "Push button switch, generic, two pins")
-      (footprint "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x")
+      (footprint "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x")
       (fields
         (field
-          (name "MPN") "B3F-1060")
+          (name "MPN") "B3F-1020")
         (field
           (name "Description") "Push button switch, generic, two pins")
         (field
-          (name "Footprint") "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x")
+          (name "Footprint") "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x")
         (field
           (name "Datasheet"))
         (field
           (name "SKiDL Tag") "SW6")
         (field
-          (name "SKiDL Line") "ui_design.py:35"))
+          (name "SKiDL Line") "ui_design.py:37"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1326,20 +1302,20 @@
       (ref "SW7")
       (value "ENTER")
       (description "Push button switch, generic, two pins")
-      (footprint "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x")
+      (footprint "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x")
       (fields
         (field
-          (name "MPN") "B3F-1060")
+          (name "MPN") "B3F-1020")
         (field
           (name "Description") "Push button switch, generic, two pins")
         (field
-          (name "Footprint") "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x")
+          (name "Footprint") "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x")
         (field
           (name "Datasheet"))
         (field
           (name "SKiDL Tag") "SW7")
         (field
-          (name "SKiDL Line") "ui_design.py:35"))
+          (name "SKiDL Line") "ui_design.py:37"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1549,7 +1525,7 @@
         (field
           (name "SKiDL Tag") "U1")
         (field
-          (name "SKiDL Line") "ui_design.py:87"))
+          (name "SKiDL Line") "ui_design.py:91"))
       (libsource
         (lib "Interface_Expansion")
         (part "TCA9535PWR"))

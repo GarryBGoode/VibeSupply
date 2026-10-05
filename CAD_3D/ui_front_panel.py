@@ -1,6 +1,6 @@
 """
 UI front panel: the plate with the screen, the three buttons, the scroll wheels and the LEDs behind it, the on-off
-button in it, and the screws for the UI board.
+button in it, the UI board and its screws.
 
 Frame: see UIPanelData (panel frame: origin at the panel centre on its front face, Z out towards the user).
 
@@ -18,6 +18,9 @@ from led import create_led, create_led_cutter
 from mech_design import ui_panel
 from powerbutton import create_powerbutton, create_powerbutton_cutter
 from screen import create_screen, create_screen_cutter
+from kicad_board import BoardModel
+from ui_board import create_kicad_ui_board, print_board_summary
+from ui_board import print_summary as print_board_geometry
 from scrollwheel_assembly import ScrollWheelAssembly, create_scrollwheel_assembly
 
 PANEL_COLOR = "#717171"
@@ -38,6 +41,8 @@ class UIPanel:
     screws: bd.Compound  # UI board screws + heat-set inserts
     leds: bd.Compound
     onoff_button: bd.Compound  # output on-off toggle
+    # the KiCad UI board: slab + the components that are not modelled above (connectors, expander, passives, ...)
+    board: BoardModel
 
     @property
     def shape(self) -> bd.Compound:
@@ -51,6 +56,7 @@ class UIPanel:
                 self.screws,
                 self.leds,
                 self.onoff_button,
+                self.board.shape,
             ],
         )
 
@@ -181,6 +187,7 @@ def create_ui_panel(data: UIPanelData = ui_panel, simple: bool = False) -> UIPan
         screws=bd.Compound(label="screws", children=screws),
         leds=bd.Compound(label="leds", children=leds),
         onoff_button=onoff_button,
+        board=create_kicad_ui_board(data),
     )
 
 
@@ -221,6 +228,7 @@ def print_summary(data: UIPanelData = ui_panel) -> None:
         f"{o.depth_behind_panel:.2f} behind the panel front face "
         f"({o.depth_behind_panel - d.board_depth - d.board_thickness:.2f} beyond the back of the UI board)"
     )
+    print_board_geometry(d)
 
 
 if __name__ == "__main__":
@@ -228,4 +236,5 @@ if __name__ == "__main__":
 
     print_summary()
     ui = create_ui_panel()
+    print_board_summary(ui.board)
     show(ui.shape)

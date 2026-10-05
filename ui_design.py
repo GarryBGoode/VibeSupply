@@ -1,12 +1,13 @@
 """
-USB-C PD bench supply — UI board (skidl). Connects to supply_control (J703) via the 2x10 1.27 mm ribbon (design/mcu.py UI_PINOUT).
+USB-C PD bench supply — UI board (skidl). Connects to supply_control (J703) via the 2x10 2.54 mm ribbon (design/mcu.py UI_PINOUT).
 
 Run:     .venv/Scripts/python ui_design.py
 Output:  out/supply_ui.net, out/supply_ui_bom.csv
 
-Contents: 1.9" ST7789 170x320 IPS SPI module header (8-pin GND/VCC/SCL/SDA/RES/DC/CS/BLK, backlight PWM from the MCU),
+Contents: 1.9" ST7789 170x320 IPS SPI module header (8-pin GND/VCC/SCL/SDA/RES/DC/CS/BLK, wired to the module, backlight
+PWM from the MCU),
 2x Alps EC10E mouse-style scroll wheels (left = voltage, right = current; A/B RC-debounced, direct to MCU timers) with a
-B3F-1060 tact switch under the free axle end as the wheel push (on the expander), 3 navigation buttons + CC / CV panel LEDs
+B3F-1020 tact switch under the free axle end as the wheel push (on the expander), 3 navigation buttons + CC / CV panel LEDs
 (3 mm THT, legs long enough to reach the panel) + FAULT LED on a TCA9535 (I2C 0x20), connector for the panel-mount latching OUTPUT button (E-Switch PV4, red ring LED driven by the expander),
 magnetic buzzer. Everything 0603/0805/THT: easy to rework. The POWER rocker is wired to supply_control (LMR38010 EN).
 """
@@ -25,10 +26,11 @@ from design.parts import PROJ_FP, C, LED, NMOS_small, R, _fields, schottky_1a, t
 
 OUT = Path(__file__).with_name("out")
 
-# Omron B3F-1060: 6x6 THT, 7.0 mm, 100 gf, 1M operations. Wheel pushes and nav buttons (printed caps) use the same part;
-# B3F-1062 (150 gf, 300k operations) fits the same footprint if 100 gf turns out too light.
-TACT_MPN = "B3F-1060"
-TACT_FP = "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x"
+# Omron B3F-1020: 6x6 THT, 5.0 mm, 100 gf, 1M operations. Wheel pushes and nav buttons (printed caps) use the same part;
+# B3F-1022 (150 gf, 300k operations) fits the same footprint if 100 gf turns out too light.
+# The height belongs to the front panel design: CAD_3D/geom_defs.py TactileSwitchB3FData.
+TACT_MPN = "B3F-1020"
+TACT_FP = "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x"
 
 
 def tact(name):
@@ -46,7 +48,7 @@ def debounced_input(src_pin_net, out_net, pull_to=None):
 
 
 def build():
-    # ---- ribbon
+    # ---- ribbon: the same right-angle header as on supply_control, it leaves the UI board sideways from its bottom side
     j = Part("Connector_Generic", "Conn_02x10_Odd_Even", ref="J1", value="to supply_control", footprint=UI_CONN_FP)
     for pin, net in UI_PINOUT.items():
         j[pin] += net
@@ -57,8 +59,10 @@ def build():
     # ---- display module: 1.9" IPS 170x320, ST7789 (HESTORE IPS-1.9-ST7789-SPI-M; 62 x 29 mm PCB, 4x d2.0 holes on
     # 25.8 x 57.9 mm, active area 22.7 x 42.72 mm). Header GND/VCC/SCL/SDA/RES/DC/CS/BLK, 2.54 mm; SCL = SCK, SDA = MOSI
     # (write-only SPI). VCC 3-5 V (on-module LDO); backlight 4 LEDs in parallel, ~80 mA at full brightness.
-    d = Part("Connector_Generic", "Conn_01x08", value="IPS 1.9in ST7789 SPI",
-             footprint="Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical")
+    # The module is screwed to the panel and WIRED: a short 8-way ribbon soldered into the module's header holes, with a
+    # 1x08 2.54 mm socket housing on this right-angle pin header (there is no room for a board-to-board socket stack).
+    d = Part("Connector_Generic", "Conn_01x08", value="IPS 1.9in ST7789 SPI (wired)",
+             footprint="Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal")
     bl = Net("LCD_BLK")
     for pin, net in zip(range(1, 9), (GND, P3V3, LCD_SCK, LCD_MOSI, LCD_RST, LCD_DC, LCD_CS, bl)):
         d[pin] += net
@@ -69,11 +73,11 @@ def build():
     c = C("10u", "0805")                         # local bulk for the backlight's PWM current steps
     c[1, 2] += P3V3, GND
 
-    # ---- scroll wheels: ENC1 = voltage (left), ENC2 = current (right). EC10E1220501: 24 detents / 12 PPR, shaft axis
-    # 9.0 mm above the board; printed wheel on a hex axle through the hollow shaft. The axle's free end rests on a tact
+    # ---- scroll wheels: ENC1 = voltage (left), ENC2 = current (right). EC10E1220505: 24 detents / 12 PPR, shaft axis
+    # 7.0 mm above the board; printed wheel on a hex axle through the hollow shaft. The axle's free end rests on a tact
     # switch (wheel push = unlock/lock), mouse style. Common C to GND.
     for a, b, s, name in ((ENC1_A, ENC1_B, ENC1_SW, "V"), (ENC2_A, ENC2_B, ENC2_SW, "I")):
-        enc = Part("Device", "RotaryEncoder", value="EC10E1220501",
+        enc = Part("Device", "RotaryEncoder", value="EC10E1220505",
                    footprint=f"{PROJ_FP}:RotaryEncoder_Alps_EC10E_Horizontal")
         enc["C"] += GND
         push = tact(f"{name} WHEEL PUSH")
@@ -112,10 +116,11 @@ def build():
         testpoint(f"EXP_{p}")[1] += ex[port0[p]]
     # LEDs (expander sinks, active low): P10 OUTPUT button ring LED (below), P12 CC, P13 CV, P14 FAULT.
     # CC / CV: 3 mm diffused THT, mounted standing off the board up to the panel (standard-efficiency red / green,
-    # Vf ~2 V -> ~4 mA with 330R; change R for brightness). FAULT stays an on-board 0805 (debug).
+    # Vf ~2 V -> ~4 mA with 330R; change R for brightness). The footprint is only the two pads: the body is ~10 mm above
+    # the board, so the courtyard doesn't claim board area. FAULT stays an on-board 0805 (debug).
     for pin, color, label in (("P12", "red", "CC"), ("P13", "green", "CV"), ("P14", "yellow", "FAULT")):
         if label in ("CC", "CV"):
-            led = Part("Device", "LED", value=f"{color} 3mm diffused {label}", footprint="LED_THT:LED_D3.0mm")
+            led = Part("Device", "LED", value=f"{color} 3mm diffused {label}", footprint=f"{PROJ_FP}:LED_D3.0mm_Standoff")
         else:
             led = LED(color)
         rl = R("330")
@@ -152,7 +157,9 @@ def build():
     df["A"] += bz_n
     df["K"] += P3V3
 
-    for _ in range(4):
+    # one per board screw of the front panel (CAD_3D/geom_defs.py UIPanelData.screw_placements, placed by
+    # tools/ui_board_setup.py)
+    for _ in range(3):
         Part("Mechanical", "MountingHole", value="M3", footprint="MountingHole:MountingHole_3.2mm_M3")
 
 

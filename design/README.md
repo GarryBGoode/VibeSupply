@@ -23,7 +23,7 @@ ERC runs every time; the last check (2026-10-01) was supply_power 251 parts, sup
 | `design/output.py` | output shunt + INA228, regen clamp (2× LMV331: Vout > Vset + margin, bus > 33 V → UCC27511 → FET → 2 Ω LTO100), VOM1271 + 100 V output switch, 15 A fuse, reverse diode, binding-post lugs; LTO100 on wires (J402) | 4xx |
 | `design/housekeeping.py` | control: `logic_supply` = isolated-USB leg of LOGIC_IN, LMR38010 3.3 V, +3V3A (50x). power: `logic_feed` = VBUS / DC-in legs of LOGIC_IN, local +3V3A (53x); `aux_supply` = LM5164 12 V aux (LTC7803 EXTVCC), LP2985 5 V analog (54x) | 5xx |
 | `design/usb_iso.py` | control: isolated USB-C device port: USBLC6, ADuM3160, B0505S | 6xx |
-| `design/mcu.py` | control: STM32G474RET6, SWD/UART headers, reset/boot, I2C pull-ups, UI ribbon (2×10 1.27 mm), 100 Ω + 1 nF on the analog inputs; **pin map in the docstring** | 7xx |
+| `design/mcu.py` | control: STM32G474RET6, SWD/UART headers, reset/boot, I2C pull-ups, UI ribbon (2×10 2.54 mm, right-angle), 100 Ω + 1 nF on the analog inputs; **pin map in the docstring** | 7xx |
 | `design/interconnect.py` | 2×20 2.54 mm B2B header, pinout table, mirroring of the control-side socket | J95x power, J97x control |
 | `power_design.py` `mechanical()` | M3 holes, H905 (GND screw) and H906 (LTO100 screw) as Würth WA-SMSI M3 SMT inserts | 9xx |
 | `design/board.py` | block → ref-number table (one for both boards, so refs are unique across the supply), ref lock, ERC, netlist, BOM | |

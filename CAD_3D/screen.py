@@ -11,12 +11,12 @@ def create_screen(input: ScreenData):
     pcb = bd.Box(input.width, input.height, input.pcb_thickness, align=pcb_align)
     hole_locs = bd.Locations(*input.hole_pattern)
     pinhole = bd.Cylinder(1.5 / 2, input.pcb_thickness, align=pcb_align)
-    pin_locs = bd.GridLocations(x_spacing=1, y_spacing=2.54, x_count=1, y_count=8)
+    pin_locs = bd.Locations(*input.pin_positions)
 
     pcb = pcb - hole_locs * bd.Cylinder(
         input.hole_diameter / 2, input.pcb_thickness, align=pcb_align
     )
-    pcb = pcb - bd.Pos(input.width / 2 - 2, 0, 0) * pin_locs * pinhole
+    pcb = pcb - pin_locs * pinhole
     pcb.label, pcb.color = "pcb", bd.Color("#2500cc")
 
     screen = bd.Box(

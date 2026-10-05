@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "control_design.py")
-    (date "10/01/2026 10:08 PM")
+    (date "10/05/2026 09:41 AM")
     (tool "SKiDL (2.3.0)")
     (sheet
       (number 1)
@@ -43,8 +43,8 @@
           (value ""))))
     (sheet
       (number 2)
-      (name "/b2b_control/")
-      (tstamps "/e4d1495c-bb35-5237-a620-f4fd01e091c9/")
+      (name "/")
+      (tstamps "/")
       (title_block
         (title)
         (company)
@@ -80,8 +80,8 @@
           (value ""))))
     (sheet
       (number 3)
-      (name "/")
-      (tstamps "/")
+      (name "/b2b_control/")
+      (tstamps "/e4d1495c-bb35-5237-a620-f4fd01e091c9/")
       (title_block
         (title)
         (company)
@@ -1213,7 +1213,7 @@
         (field
           (name "SKiDL Tag") "J701")
         (field
-          (name "SKiDL Line") "design\mcu.py:116"))
+          (name "SKiDL Line") "design\mcu.py:120"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_02x05_Odd_Even"))
@@ -1237,7 +1237,7 @@
         (field
           (name "SKiDL Tag") "J702")
         (field
-          (name "SKiDL Line") "design\mcu.py:127"))
+          (name "SKiDL Line") "design\mcu.py:131"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x04"))
@@ -1250,18 +1250,18 @@
       (ref "J703")
       (value "UI ribbon")
       (description "Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint "Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical")
+      (footprint "Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Horizontal")
       (fields
         (field
           (name "Description") "Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
         (field
-          (name "Footprint") "Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical")
+          (name "Footprint") "Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Horizontal")
         (field
           (name "Datasheet"))
         (field
           (name "SKiDL Tag") "J703")
         (field
-          (name "SKiDL Line") "design\mcu.py:138"))
+          (name "SKiDL Line") "design\mcu.py:142"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_02x10_Odd_Even"))
@@ -1967,7 +1967,7 @@
         (field
           (name "SKiDL Tag") "SW701")
         (field
-          (name "SKiDL Line") "design\mcu.py:110"))
+          (name "SKiDL Line") "design\mcu.py:114"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -1991,7 +1991,7 @@
         (field
           (name "SKiDL Tag") "SW702")
         (field
-          (name "SKiDL Line") "design\mcu.py:112"))
+          (name "SKiDL Line") "design\mcu.py:116"))
       (libsource
         (lib "Switch")
         (part "SW_Push"))
@@ -2145,7 +2145,7 @@
         (field
           (name "SKiDL Tag") "U701")
         (field
-          (name "SKiDL Line") "design\mcu.py:69"))
+          (name "SKiDL Line") "design\mcu.py:73"))
       (libsource
         (lib "MCU_ST_STM32G4")
         (part "STM32G474RETx"))

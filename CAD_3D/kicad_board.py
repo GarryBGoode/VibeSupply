@@ -1,6 +1,7 @@
 """
 KiCad board -> build123d: the board slab (Edge.Cuts outline, drilled holes) plus a simplified body per footprint
-(electronic_components.py), placed in the enclosure.
+(electronic_components.py), placed in the enclosure (power, control) or wherever the caller wants it (UI board:
+ui_board.py puts it behind the front panel).
 
 The board data comes from out/mech_<board>.json; it is re-exported with KiCad's Python (tools/export_mech.py)
 whenever it is older than the .kicad_pcb or the exporter. Only the SAVED board is seen.
@@ -29,11 +30,17 @@ class BoardModel:
     shape: bd.Compound  # slab + components, enclosure frame
     slab: bd.Part
     components: list[ComponentInfo]
-    origin: tuple[float, float, float]  # board frame origin (centre, bottom face) in the enclosure frame
+    origin: tuple[float, float, float]  # board frame origin (bottom face) in the frame the board was placed in
+
+
+def board_file(name: str) -> Path:
+    d = ROOT / f"kicad/supply_{name}"
+    pcb = d / f"supply_{name}.kicad_pcb"
+    return pcb if pcb.exists() else d / f"supply_{name}" / pcb.name  # supply_ui has its project one level down
 
 
 def load_board_data(name: str) -> dict:
-    pcb = ROOT / f"kicad/supply_{name}/supply_{name}.kicad_pcb"
+    pcb = board_file(name)
     out = ROOT / f"out/mech_{name}.json"
     if not out.exists() or out.stat().st_mtime < max(pcb.stat().st_mtime, EXPORTER.stat().st_mtime):
         # pcbnew needs KiCad's bin dir on PATH and no venv Python settings
@@ -76,14 +83,28 @@ def create_board(name: str, pcb: PCBSizeData, placement: PCBPlacement, enclosure
         print(f"WARNING {name}: KiCad outline {max(xs) - min(xs):.2f} x {max(ys) - min(ys):.2f} != mech_design "
               f"{pcb.length} x {pcb.width} (run tools/run_board_setup.ps1)")
 
-    origin = placement.origin(enclosure, pcb)
+    return place_board(name, data, pcb.thickness, placement.origin(enclosure, pcb))
+
+
+def place_board(
+    name: str,
+    data: dict,
+    thickness: float,
+    origin: tuple[float, float, float],
+    skip_groups: tuple[str, ...] = (),
+) -> BoardModel:
+    """Slab + component bodies with the board frame origin (KiCad drill/place origin, bottom face) at `origin`; the
+    board frame axes stay parallel to the target frame. Footprints in the KiCad groups `skip_groups` get no body
+    (their holes stay): for parts the caller models itself."""
     loc = bd.Pos(*origin)
-    slab = loc * create_board_slab(data, pcb.thickness)
+    slab = loc * create_board_slab(data, thickness)
     slab.label = "pcb"
     slab.color = bd.Color(BOARD_COLOR)
     components, children = [], [slab]
     for fp in data["footprints"]:
-        info = create_component(fp, pcb.thickness)
+        if fp.get("group") in skip_groups:
+            continue
+        info = create_component(fp, thickness)
         placed = []
         for s in info.shapes:
             moved = loc * s

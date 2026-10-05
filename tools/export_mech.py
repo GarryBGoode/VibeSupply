@@ -1,15 +1,15 @@
 """
 Mechanical export of a KiCad board for the 3D side (CAD_3D/kicad_board.py): board outline, thickness and, per footprint,
-reference, footprint id, value, side, position, rotation, F.Fab/B.Fab body outline, courtyard, 3D model entries and drilled
-pads -> out/mech_<board>.json.
+reference, footprint id, value, side, position, rotation, F.Fab/B.Fab body outline, courtyard, 3D model entries, drilled
+pads and the name of the group it is in -> out/mech_<board>.json.
 
 Normally run automatically by CAD_3D/kicad_board.py when the JSON is older than the .kicad_pcb. By hand:
-    "C:/Program Files/KiCad/10.0/bin/python.exe" tools/export_mech.py [power] [control]
+    "C:/Program Files/KiCad/10.0/bin/python.exe" tools/export_mech.py [power] [control] [ui]
 
 Read-only on the board file (KiCad may stay open; it exports what is saved).
 
 The JSON is raw KiCad data, no interpretation: mm, relative to the drill/place origin (= board centre, set by
-tools/board_setup.py), KiCad orientation (Y down, rotation in degrees counter-clockwise on screen). Outlines, arcs and
+tools/board_setup.py; on the UI board = the front panel's origin, set by tools/ui_board_setup.py), KiCad orientation (Y down, rotation in degrees counter-clockwise on screen). Outlines, arcs and
 circles are flattened to point lists. The conversion to the CAD frame lives in CAD_3D/kicad_board.py.
 """
 
@@ -21,7 +21,7 @@ from pathlib import Path
 import pcbnew
 
 ROOT = Path(__file__).resolve().parents[1]
-BOARDS = ("power", "control")
+BOARDS = ("power", "control", "ui")
 tomm = pcbnew.ToMM
 
 
@@ -54,8 +54,14 @@ def flatten_shape(shape, ox, oy):
     return []
 
 
+def board_path(name):
+    d = ROOT / f"kicad/supply_{name}"
+    path = d / f"supply_{name}.kicad_pcb"
+    return path if path.exists() else d / f"supply_{name}" / path.name  # supply_ui has its project one level down
+
+
 def export(name):
-    path = ROOT / f"kicad/supply_{name}/supply_{name}.kicad_pcb"
+    path = board_path(name)
     b = pcbnew.LoadBoard(str(path))
     ds = b.GetDesignSettings()
     origin = ds.GetAuxOrigin()
@@ -89,8 +95,10 @@ def export(name):
                 pads.append(dict(xy=rel(p.GetPosition()), drill=(round(tomm(d.x), 4), round(tomm(d.y), 4)),
                                  plated=attr == pcbnew.PAD_ATTRIB_PTH))
         attrs = fp.GetAttributes()
+        group = fp.GetParentGroup()
         fps.append(dict(
             ref=fp.GetReference(),
+            group=group.GetName() if group else "",
             fpid=fp.GetFPIDAsString(),
             value=fp.GetValue(),
             lcsc=next((f.GetText() for f in fp.GetFields() if f.GetName() == "LCSC"), ""),

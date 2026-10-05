@@ -149,7 +149,7 @@ Numbers: `calc/results.md`, `sim/results.md`; IC comparison: `calc/ic_reshop.md`
 | Logic rail | **LMR38010** → 3.3 V from a diode-OR of raw VBUS, DC input and the isolated USB 5 V; EN through the panel POWER rocker | Boots from any source when the rocker is on. Rocker off = MCU unpowered, every power-board enable falls back to its pull-down (2026-10-01) |
 | Aux 12 V | **LM5164** from VIN_PWR (on above ~8.3 V) | LTC7803 EXTVCC (≥ 7 V needed), clamp driver, +5VA (LP2985-5.0) |
 | Temp sensing | NTCs: buck FETs, inductor, output switch, clamp resistor, USB-C connector (AP33772S OTP) | Throttling + clamp budget |
-| Display / UI board | **1.9" IPS 170×320 ST7789 SPI module** (HESTORE IPS-1.9-ST7789-SPI-M, decided 2026-10-01), TCA9535 (wheel pushes, nav buttons, LEDs), 2× **Alps EC10E1220501** scroll-wheel encoders + **Omron B3F-1060** tact switches (wheel pushes and the 3 nav buttons), 2×10 1.27 mm ribbon (3.3 V digital only) | Display on top of the front add-on (2026-09-28). IPS chosen over the 2.42" 128×64 OLED (2026-10-01): ~3× finer pixels, colour (CV/CC at a glance), no burn-in with a static layout, wide viewing angle (you look down at it; the 1.8" TN TFT was rejected for that), smaller module (62 × 29) leaves room for the wheels and a bezel. Module: 4× Ø2.0 holes on 25.8 × 57.9 mm, active area 22.7 × 42.72 mm, 5.1 mm thick, 8-pin 2.54 mm header GND/VCC/SCL/SDA/RES/DC/CS/BLK, VCC 3–5 V, backlight 4 LEDs ≈ 80 mA → BLK driven by PWM (PB10 TIM2_CH3, ribbon pin 18, 100 Ω series). Speed: SPI2 at 21.25 MHz → full 16-bit frame in ≈ 41 ms (≈ 24 fps), the firmware redraws only changed regions. Firmware notes: no full framebuffer (109 KB of 128 KB RAM) → strip/partial buffers (LVGL partial mode) or an 8-bit palette buffer; 170-px panel = column offset 35 in the ST7789's 240×320 RAM; dim the backlight after idle Wheels (2026-10-01): EC10E = Alps quality, through-hole, chosen over Kailh/TTC mouse encoders (same 1.73 mm hex bore) and the edge-drive jog encoders (Panasonic EVQWK, Mitsumi SIQ: 15 detents, need a vertical board). Magnetic sensing (MT6701) rejected as scope creep. |
+| Display / UI board | **1.9" IPS 170×320 ST7789 SPI module** (HESTORE IPS-1.9-ST7789-SPI-M, decided 2026-10-01), TCA9535 (wheel pushes, nav buttons, LEDs), 2× **Alps EC10E1220505** scroll-wheel encoders + **Omron B3F-1020** tact switches (wheel pushes and the 3 nav buttons), 2×10 2.54 mm IDC ribbon (3.3 V digital only; right-angle pin headers on both boards, 1.27 mm headers until 2026-10-05) | Display on top of the front add-on (2026-09-28). IPS chosen over the 2.42" 128×64 OLED (2026-10-01): ~3× finer pixels, colour (CV/CC at a glance), no burn-in with a static layout, wide viewing angle (you look down at it; the 1.8" TN TFT was rejected for that), smaller module (62 × 29) leaves room for the wheels and a bezel. Module: 4× Ø2.0 holes on 25.8 × 57.9 mm, active area 22.7 × 42.72 mm, 5.1 mm thick, 8-pin 2.54 mm header GND/VCC/SCL/SDA/RES/DC/CS/BLK, VCC 3–5 V, backlight 4 LEDs ≈ 80 mA → BLK driven by PWM (PB10 TIM2_CH3, ribbon pin 18, 100 Ω series). Speed: SPI2 at 21.25 MHz → full 16-bit frame in ≈ 41 ms (≈ 24 fps), the firmware redraws only changed regions. Firmware notes: no full framebuffer (109 KB of 128 KB RAM) → strip/partial buffers (LVGL partial mode) or an 8-bit palette buffer; 170-px panel = column offset 35 in the ST7789's 240×320 RAM; dim the backlight after idle Wheels (2026-10-01): EC10E = Alps quality, through-hole, chosen over Kailh/TTC mouse encoders (same 1.73 mm hex bore) and the edge-drive jog encoders (Panasonic EVQWK, Mitsumi SIQ: 15 detents, need a vertical board). Magnetic sensing (MT6701) rejected as scope creep. |
 
 ---
 
@@ -219,20 +219,26 @@ Numbers: `calc/results.md`, `sim/results.md`; IC comparison: `calc/ic_reshop.md`
   Ø6 mm, reflow-soldered on the top side; KiCad `Mounting_Wuerth` footprint; alt. PEM SMTSO-M3-3ET or its Sinhoo clones). The
   screw comes up from the floor, so no nut has to be reached under the control board. Both rings are GND.
 - **UI board** (2-layer): display, 2 scroll wheels with push, 3 nav buttons, connector for the latching OUTPUT button, I/O
-  expander, buzzer. The POWER rocker is not on the UI board (see below). Only 3.3 V digital on the ribbon (SPI to the display ≤ ~21 MHz, alternate signal/ground wires; backlight PWM on pin 18, ≈ 80 mA extra on +3V3).
+  expander, buzzer. Layout from the front panel CAD (2026-10-04): outline, cutouts and everything that lines up with the
+  panel come from `CAD_3D/geom_defs.py` (`tools/ui_board_setup.py`); the top side faces the panel and carries the wheels,
+  switches and panel LEDs, the bottom side the expander, passives, buzzer and the right-angle ribbon header (J1, 2×10 2.54 mm, at the far
+  edge: body at the edge, pins and plug past it; the same part as J703 at the front edge of supply_control). The display module is wired: a short ribbon soldered into its header holes plugs onto a right-angle 1×08 pin header
+  (J3) on the top side under the module (9.7 mm of room there, too little for a socket stack). The POWER rocker is not on the UI board (see below). Only 3.3 V digital on the ribbon (SPI to the display ≤ ~21 MHz, alternate signal/ground wires; backlight PWM on pin 18, ≈ 80 mA extra on +3V3).
 - **Scroll wheels (decided 2026-10-01)**, mouse style. Numbers from the Alps EC10E catalog (Update2510) and the Omron B3F datasheet:
-  - Encoder **Alps EC10E1220501**: 24 detents / 12 PPR, 100k cycles, detent torque 5 ± 3 mN·m, through hole (footprint
-    `supply1:RotaryEncoder_Alps_EC10E_Horizontal`). The shaft axis runs parallel to the board, **9.0 mm above it** (variants
-    EC10E1220505 = 7 mm, EC10E1220503 = 11 mm, same footprint). The bore is a **1.73 mm hex** (Ø2.98 across the corners) with a 3°
-    entry flare, so the axle can tilt for the push. The body top sits ≈ 12.6 mm above the board. Pins A, B, C with
+  - Encoder **Alps EC10E1220505** (changed 2026-10-04 from the 9 mm EC10E1220501: the panel CAD is built around the 7 mm
+    one): 24 detents / 12 PPR, 100k cycles, detent torque 5 ± 3 mN·m, through hole (footprint
+    `supply1:RotaryEncoder_Alps_EC10E_Horizontal`). The shaft axis runs parallel to the board, **7.0 mm above it** (variants
+    EC10E1220501 = 9 mm, EC10E1220503 = 11 mm, same footprint). The bore is a **1.73 mm hex** (Ø2.98 across the corners) with a 3°
+    entry flare, so the axle can tilt for the push. The body top sits ≈ 10.6 mm above the board. Pins A, B, C with
     **C = common at the end** (EC11: in the middle).
-  - Push: the axle's free end (the far side of the wheel) rests on an **Omron B3F-1060** (6 × 6 THT, plunger top 7.0 mm,
-    100 gf, 1M operations, pretravel 0.25 +0.2/−0.1 mm). The axle centre is at 9.0 mm, so a Ø4 mm collar/bushing on the axle end
-    sits right on the plunger. Tilt = travel / L (L = distance from the encoder hub to the switch): with the worst-case 0.45 mm,
+  - Push: the axle's free end (the far side of the wheel) rests on an **Omron B3F-1020** (6 × 6 THT, plunger top 5.0 mm,
+    100 gf, 1M operations, pretravel 0.25 +0.2/−0.1 mm; changed 2026-10-04 from the 7.0 mm B3F-1060). The axle centre is at
+    7.0 mm, so a Ø3.5 mm axle end sits 0.25 mm above the plunger (`ScrollWheelAssemblyData`). Tilt = travel / L (L = distance from the encoder hub to the switch): with the worst-case 0.45 mm,
     L ≥ 9 mm stays inside the 3° flare; aim for 12–15 mm.
-    The same B3F-1060 with printed caps is used for Left / Right / Enter (B3F-1062 = 150 gf, same footprint, if 100 gf is too light).
+    The same B3F-1020 with printed caps is used for Left / Right / Enter (B3F-1022 = 150 gf, same footprint, if 100 gf is too light).
   - Click pitch on the rim = π·D / 24: Ø12 mm → 1.6 mm, Ø14 mm → 1.8 mm (a typical mouse: Ø20+ mm → 2.6 mm). The wheel top is at
-    9 + D/2 above the board (Ø14 → 16 mm), so the top surface of the add-on goes ≈ 2–3 mm below that.
+    7 + D/2 above the board (the CAD's Ø20 wheel → 17 mm, 2.6 mm per click), so the top surface of the add-on goes a few mm
+    below that (`UIPanelData.wheel_protrusion`).
   - Axle: metal rather than printed (the Alpakka's printed wheel feels flimsy), e.g. a printed wheel pressed onto a steel pin with
     a 1.73 mm hex end, or a spare mouse-wheel axle; to be worked out in the add-on CAD.
   - Firmware: the wheels change the selected digit, Left / Right move the digit cursor (and switch screens in the menu), Enter
@@ -258,7 +264,7 @@ Numbers: `calc/results.md`, `sim/results.md`; IC comparison: `calc/ic_reshop.md`
   off → DC path off, so a connected DC source only feeds the LOGIC_IN diode. Both inputs are now firmware-enabled: the MCU
   boots from LOGIC_IN and enables a path (USB after the PD contract). VIN_SNS sits after the paths, so the DC voltage can't be
   read before enabling; the path's own UVLO (~9 V) and OV lockout (~31 V) still guard it in hardware.
-- **CC / CV indicators (2026-10-01):** 3 mm diffused THT LEDs (D3 red = CC, D4 green = CV, `LED_THT:LED_D3.0mm`) on the UI board,
+- **CC / CV indicators (2026-10-01):** 3 mm diffused THT LEDs (D3 red = CC, D4 green = CV, `supply1:LED_D3.0mm_Standoff` = pads only, the body is ≈ 10 mm up) on the UI board,
   soldered standing off the board so they reach the panel (cut-to-length spacers or long legs); TCA9535 P12 / P13 via 330 Ω
   (~4 mA with standard-efficiency Vf ≈ 2 V parts; use a matching Vf for green). FAULT stays an on-board 0805.
 

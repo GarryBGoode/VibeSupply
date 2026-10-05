@@ -1,3 +1,4 @@
+import math
 from dataclasses import dataclass, field, replace
 from typing import Literal
 
@@ -348,6 +349,8 @@ class ScrollWheelAssemblyData:
     plunger_gap: float = 0.25
     # gap all round the drum in the cover plate opening (see generate_scrollwheel_cutter)
     cover_gap: float = 0.5
+    # gap all round the drum in the board cutout (see board_cutout)
+    board_gap: float = 0.5
 
     @property
     def shaft_diameter(self) -> float:
@@ -446,6 +449,22 @@ class ScrollWheelAssemblyData:
     def wheel_top_z(self) -> float:
         return self.encoder.mount_height + self.wheel_diameter / 2
 
+    @property
+    def board_cutout(self) -> tuple[float, float, float, float] | None:
+        """Board cutout for the drum, (x0, y0, x1, y1) in the assembly frame: the drum's section at the board top
+        surface (where it is widest) grown by `board_gap`. None if the drum stays above the board.
+        """
+        radius = self.wheel_diameter / 2 + self.board_gap
+        if radius <= self.encoder.mount_height:
+            return None
+        half = math.sqrt(radius**2 - self.encoder.mount_height**2)
+        return (
+            -half,
+            self.wheel_front_y - self.board_gap,
+            half,
+            self.wheel_rear_y + self.board_gap,
+        )
+
 
 @dataclass(frozen=True)
 class ScreenData:
@@ -454,6 +473,9 @@ class ScreenData:
 
     The pcb and screen X/Y sizes are known; values marked (est) are eyeballed from pictures, to be measured on the
     real module.
+
+    The module is wired: a short ribbon is soldered into its header holes (`pin_positions`) and plugs onto a
+    right-angle pin header on the UI board, so the header position does not have to match anything on the board.
     """
 
     width: float = 62
@@ -464,6 +486,10 @@ class ScreenData:
     screen_thickness: float = 2.3  # (est) above the pcb top surface
     hole_diameter: float = 3.0  # (est)
     hole_offset: float = 0.5  # (est) hole edge to pcb edge
+    # pin header: a row along Y near the +X edge of the pcb, centred on Y
+    pin_count: int = 8
+    pin_pitch: float = 2.54
+    pin_edge_offset: float = 2.0  # (est) row centre line to the pcb edge
     # panel opening: gap all round the screen, and a lead-in chamfer on the pcb side of the opening
     opening_clearance: float = 0.3
     opening_chamfer: float = 1.0
@@ -480,6 +506,13 @@ class ScreenData:
             (self.width - offset - center_x, self.height - offset - center_y),
             (offset - center_x, self.height - offset - center_y),
         ]
+
+    @property
+    def pin_positions(self) -> tuple[tuple[float, float], ...]:
+        """Pins 1..pin_count; pin 1 (GND) at the +Y end (est: to be checked on the real module)."""
+        x = self.width / 2 - self.pin_edge_offset
+        y1 = (self.pin_count - 1) * self.pin_pitch / 2
+        return tuple((x, y1 - i * self.pin_pitch) for i in range(self.pin_count))
 
 
 @dataclass(frozen=True)
@@ -560,6 +593,8 @@ class BoardScrewData:
     boss_diameter: float = 8.0
     # clearance hole in the board
     board_hole_diameter: float = 3.2
+    # no components on the board bottom side: screw head (5.6) + room for the driver
+    head_keepout_diameter: float = 7.0
     board_thickness: float = 1.6
     # boss length: board top surface up to the back of the panel plate
     boss_height: float = 12.0
@@ -570,6 +605,7 @@ class LedData:
     """3 mm round THT LED (T-1), standing off the board on its leads so that the dome reaches through the panel.
 
     Frame: origin on the board top surface midway between the two leads, leads along X, Z up.
+    Footprint supply1:LED_D3.0mm_Standoff in this frame: pad 1 (cathode) at -X, pad 2 at +X, see `pad_xy`.
     Values marked (est) are typical T-1 dimensions, to be measured on the real part.
     """
 
@@ -600,6 +636,11 @@ class LedData:
     @property
     def hole_diameter(self) -> float:
         return self.body_diameter + 2 * self.hole_clearance
+
+    @property
+    def pad_xy(self) -> tuple[tuple[float, float], tuple[float, float]]:
+        """Pads 1, 2; pad 1 is the footprint origin."""
+        return ((-self.pin_pitch / 2, 0.0), (self.pin_pitch / 2, 0.0))
 
 
 @dataclass(frozen=True)
@@ -729,6 +770,36 @@ class PanelPlacement:
     y: float = 0.0
     rotation: float = 0.0
 
+    def locate(self, x: float, y: float, rotation: float = 0.0) -> "PanelPlacement":
+        """A point (and orientation) given in the frame of the placed element -> panel frame."""
+        a = math.radians(self.rotation)
+        c, s = math.cos(a), math.sin(a)
+        return PanelPlacement(
+            self.x + c * x - s * y, self.y + s * x + c * y, self.rotation + rotation
+        )
+
+
+@dataclass(frozen=True)
+class BoardArea:
+    """Rounded rectangle on the UI board (outline, cutout or keep-out): `width` along its own X, `height` along its
+    own Y, centred on (x, y) in the panel frame, rotated about Z like a PanelPlacement. A circle when
+    width = height = 2 * corner_radius."""
+
+    x: float
+    y: float
+    width: float
+    height: float
+    corner_radius: float = 0.0
+    rotation: float = 0.0
+
+    @classmethod
+    def circle(cls, x: float, y: float, diameter: float) -> "BoardArea":
+        return cls(x, y, diameter, diameter, diameter / 2)
+
+    @property
+    def is_circle(self) -> bool:
+        return self.width == self.height == 2 * self.corner_radius
+
 
 @dataclass(frozen=True)
 class UIPanelData:
@@ -743,6 +814,11 @@ class UIPanelData:
     The UI board is held against bosses on the back of the panel by screws from behind (see BoardScrewData).
     The LEDs stand on the board and reach through holes in the plate (see LedData).
     The on-off button is clamped in the plate and is wired, it does not sit on the board (see PowerButtonData).
+
+    UI board: its top surface faces the panel, so seen from the front of the panel it reads like the KiCad top view
+    (KiCad x = panel x, KiCad y = -panel y, rotations counter-clockwise in both). Its outline, cutouts, keep-outs and
+    the footprints that have to line up with the panel are derived here (`board_*`); tools/ui_board_setup.py puts
+    them on the KiCad board.
     """
 
     width: float = 75.0
@@ -787,8 +863,8 @@ class UIPanelData:
     # LEDs: below the screen module, near the two sides; `standoff` of led_style is ignored, see `led`
     led_style: LedData = field(default_factory=LedData)
     led_placements: tuple[PanelPlacement, ...] = (
-        PanelPlacement(-25, -26.0),
-        PanelPlacement(25, -26.0),
+        PanelPlacement(-25, -27.0),
+        PanelPlacement(25, -27.0),
     )
     # height that the LED dome raises above the panel level
     led_protrusion: float = 2.3
@@ -799,6 +875,17 @@ class UIPanelData:
     onoff_button_placement: PanelPlacement = PanelPlacement(-25, 1)
 
     onoff_button_data: PowerButtonData = field(default_factory=PowerButtonData)
+
+    # UI board outline: centred on X like the panel
+    board_width: float = 70.0
+    board_height: float = 72.0
+    board_offset_y: float = 2.5
+    board_corner_radius: float = 2.0
+    # inside corners of the cutouts (milling)
+    board_cutout_radius: float = 1.0
+    # radial gap around the on-off button's thread (its widest part behind the nut) in its board cutout: the board
+    # goes over the mounted button, the nut does not pass
+    onoff_board_gap: float = 1.0
 
     @property
     def board_depth(self) -> float:
@@ -844,3 +931,108 @@ class UIPanelData:
     def screen_z(self) -> float:
         """Screen origin = top surface of the module pcb."""
         return -self.thickness
+
+    @property
+    def screen_gap(self) -> float:
+        """UI board top surface to the underside of the screen module pcb: the room for its wires, and for what
+        sits on the board under the screen."""
+        return self.board_depth - self.thickness - self.screen.pcb_thickness
+
+    # --- UI board ---
+
+    @property
+    def board_outline(self) -> BoardArea:
+        return BoardArea(
+            0.0,
+            self.board_offset_y,
+            self.board_width,
+            self.board_height,
+            self.board_corner_radius,
+        )
+
+    @property
+    def board_cutouts(self) -> dict[str, BoardArea]:
+        """Openings in the board: under the wheel drums, and around the on-off button."""
+        out = {}
+        cutout = self.scrollwheel.board_cutout
+        if cutout:
+            x0, y0, x1, y1 = cutout
+            for i, p in enumerate(self.scrollwheel_placements, start=1):
+                c = p.locate((x0 + x1) / 2, (y0 + y1) / 2)
+                out[f"wheel_{i}"] = BoardArea(
+                    c.x, c.y, x1 - x0, y1 - y0, self.board_cutout_radius, c.rotation
+                )
+        p = self.onoff_button_placement
+        diameter = self.onoff_button.thread_diameter + 2 * self.onoff_board_gap
+        out["onoff_button"] = BoardArea.circle(p.x, p.y, diameter)
+        return out
+
+    @property
+    def board_keepouts(self) -> dict[str, BoardArea]:
+        """No components on the board top side: where the screw bosses sit on the board."""
+        return {
+            f"boss_{i}": BoardArea.circle(p.x, p.y, self.screw.boss_diameter)
+            for i, p in enumerate(self.screw_placements, start=1)
+        }
+
+    @property
+    def board_keepouts_bottom(self) -> dict[str, BoardArea]:
+        """No components on the board bottom side: the screw heads."""
+        return {
+            f"screw_head_{i}": BoardArea.circle(
+                p.x, p.y, self.screw.head_keepout_diameter
+            )
+            for i, p in enumerate(self.screw_placements, start=1)
+        }
+
+    @property
+    def board_footprints(self) -> dict[str, PanelPlacement]:
+        """Footprint origins (and rotations) of the parts that have to line up with the panel. The footprint frames
+        are those of the component dataclasses: encoder, tact switch, LED (pad 1); the screws are plain mounting
+        holes."""
+        out = {}
+        for i, p in enumerate(self.scrollwheel_placements, start=1):
+            out[f"wheel_{i}.encoder"] = p
+            out[f"wheel_{i}.switch"] = p.locate(*self.scrollwheel.switch_origin[:2])
+        names = ("left", "center", "right")
+        for name, origin in zip(names, self.buttons.switch_origins):
+            out[f"button.{name}"] = self.button_placement.locate(*origin[:2])
+        for i, p in enumerate(self.screw_placements, start=1):
+            out[f"screw_{i}"] = p
+        for i, p in enumerate(self.led_placements, start=1):
+            out[f"led_{i}"] = p.locate(*self.led.pad_xy[0])
+        return out
+
+    @property
+    def board_pads(self) -> dict[str, dict[str, list[tuple[float, float]]]]:
+        """Where the pads of the board_footprints have to end up (panel frame), by pad number: lets the KiCad side
+        check that footprint and component model agree (pin order, mirroring, rotation).
+        """
+
+        def located(p: PanelPlacement, pads) -> dict[str, list[tuple[float, float]]]:
+            out: dict[str, list[tuple[float, float]]] = {}
+            for number, (x, y) in pads:
+                q = p.locate(x, y)
+                out.setdefault(number, []).append((q.x, q.y))
+            return out
+
+        def switch_pads(switch: TactileSwitchB3FData):
+            return list(zip(("1", "1", "2", "2"), switch.pin_xy))
+
+        out = {}
+        encoder = self.scrollwheel.encoder
+        encoder_pads = [(n, (x, 0.0)) for n, x in zip("ABC", encoder.pin_x)]
+        encoder_pads += [("MP", xy) for xy in encoder.bracket_xy]
+        for i, p in enumerate(self.scrollwheel_placements, start=1):
+            out[f"wheel_{i}.encoder"] = located(p, encoder_pads)
+            origin = p.locate(*self.scrollwheel.switch_origin[:2])
+            out[f"wheel_{i}.switch"] = located(
+                origin, switch_pads(self.scrollwheel.switch)
+            )
+        names = ("left", "center", "right")
+        for name, origin in zip(names, self.buttons.switch_origins):
+            q = self.button_placement.locate(*origin[:2])
+            out[f"button.{name}"] = located(q, switch_pads(self.button_switch))
+        for i, p in enumerate(self.led_placements, start=1):
+            out[f"led_{i}"] = located(p, zip(("1", "2"), self.led.pad_xy))
+        return out

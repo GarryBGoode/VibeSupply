@@ -47,6 +47,38 @@ Legend: **[you]** needs your decision or a download · **[me]** I'll do it · �
   report + height-zone DXF for KiCad
 - ☐ **[you]** UI board + add-on in build123d (front-panel positions in `mech_design.py` drive both)
 
+## UI ribbon: 2.54 mm headers (2026-10-05)
+- ☑ skidl: J703 (control) and J1 (UI) → `Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Horizontal` (`design/mcu.py`
+  `UI_CONN_FP`, used by both boards); pinout unchanged. J703 went from straight to right-angle: a straight 2.54 mm header is
+  8.5 mm before the plug goes on (ceiling 9.9 mm), lying down it is 5.1 mm
+- ☑ `tools/floorplan.py`: both headers with the body at the board edge, pins + plug past it (`RIBBON_OVERHANG`; the IDC
+  socket reaches ~0.5 mm below the board surface, so it can't sit over the board). J703 pins towards the front
+- ☐ **[you]** Close KiCad, then `.\tools\run_ui_board_setup.ps1 -Sync` + `.\tools\run_place.ps1 ui` and, for supply_control,
+  Update PCB from Netlist (or `.\tools\run_place.ps1 control`); both `run_place` calls re-place everything that is not locked
+- ☐ **[you]** Check in the add-on CAD: 6 mm of pins + the IDC plug (≈ 10 mm + cable bend) past the UI board's far edge and past
+  the control board's front edge. If that is too much: shrouded box header (`Connector_IDC:IDC-Header_2x10_P2.54mm_Horizontal`,
+  keyed, 9.1 mm tall, may sit fully on the board)
+
+## UI board from the panel design (2026-10-04)
+- ☑ `CAD_3D/geom_defs.py` `UIPanelData.board_*`: board outline, cutouts (wheel drums, on-off button), boss keep-outs and the
+  footprint positions of everything that lines up with the panel; `CAD_3D/ui_board.py` = the bare board in the panel assembly
+- ☑ `tools/ui_board_setup.py` (`.\tools\run_ui_board_setup.ps1`): puts that on `supply_ui.kicad_pcb`, locks the 12
+  panel-driven footprints (SW1–SW7, H1–H3, D3, D4), checks their pads against the component models; re-run after every panel
+  change. `-Sync` first brings the board in line with `out/supply_ui.net` (replaces KiCad's "Update PCB from netlist" for
+  this board); use it after every `ui_design.py` change
+- ☑ skidl: 4 → 3 mounting holes (H4 retired); **EC10E1220505** (7 mm) + **B3F-1020** (5.0 mm, footprint B3F-102x) to match the
+  CAD; CC / CV LEDs on `supply1:LED_D3.0mm_Standoff` (pads only, so the LEDs can sit next to the encoders as the CAD has them)
+- ☑ Display is wired (ribbon soldered into the module's header holes): J3 = right-angle 1×08 2.54 mm pin header on the top side
+  under the module; ribbon header J1 = right-angle 2×10 1.27 mm on the bottom side at the far edge
+- ☑ `tools/place.py` knows the UI board (`.\tools\run_place.ps1 ui`, floor plan in `tools/floorplan.py` `UI`) and bottom-side
+  clusters: expander, passives, buzzer, J1, J6 on the bottom under the display. `out/placement_ui.png` = snapshot
+- ☐ **[you]** Board outline 70 × 72 (X ±35, Y −33.5 … +38.5 in the panel frame) is a guess until the add-on walls exist; so is
+  the ribbon leaving over the far (+Y) edge, and the buzzer (9.5 mm) / J6 hanging under the board
+- ☐ **[you]** Review the UI placement, lock what you keep (re-running place moves everything that is not locked), route
+- ☑ KiCad UI board with its components in the panel assembly (`CAD_3D/ui_board.py` `create_kicad_ui_board`, shown by
+  `ui_front_panel.py`; the saved board is re-exported automatically, panel-driven parts keep their detailed models)
+- ☐ **[me]** Design rules / net classes for the UI board
+
 ## UI rework: scroll wheels (2026-10-01) — see PLAN §3.4 / §4
 - ☑ Concept: 2 scroll wheels with push on the add-on top next to the display (left = V, right = I; push = unlock, push again = lock),
   nav 5 → 3 buttons (Left / Right / Enter). Magnetic sensing (MT6701) rejected as scope creep; edge-drive jog encoders (EVQWK,
@@ -56,13 +88,13 @@ Legend: **[you]** needs your decision or a download · **[me]** I'll do it · �
 - ☑ skidl `ui_design.py`: EC10E ×2 (SW1 = V, SW2 = I), wheel pushes SW3/SW4 (ex-UP/DOWN refs), LEFT/RIGHT/ENTER on TCA9535
   P00–P02, P03/P04 spare → TP7/TP8, R13/R14 retired; still 69 parts, ERC clean. Ribbon pinout unchanged
 - ☑ Footprint `footprints/supply1.pretty/RotaryEncoder_Alps_EC10E_Horizontal.kicad_mod` (from the catalog's mounting-hole drawing)
-- ☐ **[you]** Buy samples (Farnell / DigiKey: EC10E1220501 ×3–4, B3F-1060 ×10; not found at LCSC → hand-solder, they're THT).
+- ☐ **[you]** Buy samples (Farnell / DigiKey: EC10E1220505 ×3–4, B3F-1020 ×10; not found at LCSC → hand-solder, they're THT).
   With an ohmmeter, check which **end** pin is C (common): the footprint assumes A, B, C from left to right as seen from the top
   with the bracket slots towards −Y, but I can't tell from the catalog whether that view is mirrored
 - ☐ **[you]** Wheel + axle + push in the add-on CAD: wheel Ø (12–14 mm → 1.6–1.8 mm per click), metal axle, collar on the B3F,
   switch 12–15 mm from the encoder hub (≥ 9 mm), top surface ≈ 2–3 mm below the wheel top. Then place SW1–SW4 to match
-- ☐ **[me]** CAD heights for the UI board: EC10E body ≈ 12.6 mm (estimate; the Alps STEP is in the catalog zip if needed),
-  B3F-1060 has a KiCad model
+- ☐ **[me]** CAD heights for the UI board: EC10E body ≈ 10.6 mm (7 mm variant; the Alps STEP is in the catalog zip if needed),
+  B3F-102x has a KiCad model
 
 ## Display: 1.9" IPS (2026-10-01) — see PLAN §3.4
 - ☑ 2.42" OLED → **1.9" IPS 170×320 ST7789** (HESTORE IPS-1.9-ST7789-SPI-M). UI J3 → 8-pin socket (GND/VCC/SCL/SDA/RES/DC/CS/BLK,
@@ -73,8 +105,8 @@ Legend: **[you]** needs your decision or a download · **[me]** I'll do it · �
 - ☐ **[you]** When the module arrives, check BLK with a meter: a pull-up to VCC (tens of kΩ) = transistor input, the PWM drives
   it as designed; ~0 Ω-ish diode path to the LEDs = direct anode → swap R29 for a high-side P-FET driver
 - ☐ **[you]** Add-on CAD: the module screws to the printed top (4× M2 on 25.8 × 57.9 mm) behind a window over the 22.7 × 42.72
-  active area; 5.1 mm total depth + header. Decide how J3 reaches it (socket stack vs short wires) — the UI board footprint
-  for J3 is a vertical 1×08 socket for now
+  active area; 5.1 mm total depth + header. J3 reaches it by short wires (decided 2026-10-04: ribbon soldered into the
+  module's header holes, right-angle 1×08 pin header on the UI board)
 - ☐ **[me]** Firmware notes (later): ST7789 column offset 35, partial-buffer rendering, backlight dim after idle
 
 ## OUTPUT button + POWER rocker (2026-10-01) — see PLAN §4
@@ -87,7 +119,7 @@ Legend: **[you]** needs your decision or a download · **[me]** I'll do it · �
   C509, TP502 new)
 - ☐ **[you]** Order: PV4 OUTPUT button (PV4F230SSG-311 = flat, solder, on-on, gold, red ring, bare LED; add -M01 for the power
   symbol; I built the code from the datasheet configurator, so confirm it exists and check the body depth behind the panel)
-  + a rocker (RA1113112R or a gold-contact one) — together with the EC10E / B3F-1060 samples above
+  + a rocker (RA1113112R or a gold-contact one) — together with the EC10E / B3F-1020 samples above
 - ☑ DC input path is firmware-enabled (DCIN_ON, PB4, B2B pin 22 ex-GND): Q163/Q164 2N7002, D162 BZT52C12, R165 1M, R166 100k,
   TP161 on supply_power. Rocker off → DC path off too
 - ☑ CC / CV LEDs → 3 mm THT (D3 red CC, D4 green CV), standing off the board up to the panel; FAULT stays 0805

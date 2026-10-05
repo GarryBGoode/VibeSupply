@@ -6,7 +6,7 @@ from skidl.pin import pin_types
 SKIDL_lib_version = '0.0.1'
 
 ui_design = SchLib(tool=SKIDL).add_parts(*[
-        Part(**{ 'name':'Conn_02x10_Odd_Even', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_02x10_Odd_Even'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_PinHeader_1.27mm:PinHeader_2x10_P1.27mm_Vertical', 'keywords':'connector', 'description':'Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[
+        Part(**{ 'name':'Conn_02x10_Odd_Even', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_02x10_Odd_Even'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Horizontal', 'keywords':'connector', 'description':'Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[
             Pin(num='1',name='Pin_1',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',name='Pin_2',func=pin_types.PASSIVE,unit=1),
             Pin(num='3',name='Pin_3',func=pin_types.PASSIVE,unit=1),
@@ -30,7 +30,7 @@ ui_design = SchLib(tool=SKIDL).add_parts(*[
         Part(**{ 'name':'C', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'C'}), 'ref_prefix':'C', 'fplist':[''], 'footprint':'Capacitor_SMD:C_0805_2012Metric', 'keywords':'cap capacitor', 'description':'Unpolarized capacitor', 'datasheet':'', 'pins':[
             Pin(num='1',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
-        Part(**{ 'name':'Conn_01x08', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_01x08'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical', 'keywords':'connector', 'description':'Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[
+        Part(**{ 'name':'Conn_01x08', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_01x08'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal', 'keywords':'connector', 'description':'Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[
             Pin(num='1',name='Pin_1',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',name='Pin_2',func=pin_types.PASSIVE,unit=1),
             Pin(num='3',name='Pin_3',func=pin_types.PASSIVE,unit=1),
@@ -46,7 +46,7 @@ ui_design = SchLib(tool=SKIDL).add_parts(*[
             Pin(num='A',name='A',func=pin_types.PASSIVE,unit=1),
             Pin(num='B',name='B',func=pin_types.PASSIVE,unit=1),
             Pin(num='C',name='C',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
-        Part(**{ 'name':'SW_Push', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'SW_Push'}), 'ref_prefix':'SW', 'fplist':[''], 'footprint':'Button_Switch_THT:SW_TH_Tactile_Omron_B3F-106x', 'keywords':'switch normally-open pushbutton push-button', 'description':'Push button switch, generic, two pins', 'datasheet':'', 'pins':[
+        Part(**{ 'name':'SW_Push', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'SW_Push'}), 'ref_prefix':'SW', 'fplist':[''], 'footprint':'Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x', 'keywords':'switch normally-open pushbutton push-button', 'description':'Push button switch, generic, two pins', 'datasheet':'', 'pins':[
             Pin(num='1',name='1',func=pin_types.PASSIVE),
             Pin(num='2',name='2',func=pin_types.PASSIVE)], 'unit_defs':[] }),
         Part(**{ 'name':'TCA9535PWR', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'TCA9535PWR'}), 'ref_prefix':'U', 'fplist':['Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm'], 'footprint':'Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm', 'keywords':'ti parallel port', 'description':'16-bit I/O expander, I2C and SMBus interface, interrupts, w/o pull-ups, TSSOP-24 package', 'datasheet':'http://www.ti.com/lit/ds/symlink/tca9535.pdf', 'pins':[
@@ -76,7 +76,7 @@ ui_design = SchLib(tool=SKIDL).add_parts(*[
             Pin(num='24',name='VCC',func=pin_types.PWRIN,unit=1)], 'unit_defs':[] }),
         Part(**{ 'name':'TestPoint', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'TestPoint'}), 'ref_prefix':'TP', 'fplist':[''], 'footprint':'TestPoint:TestPoint_Pad_D1.0mm', 'keywords':'test point tp', 'description':'test point', 'datasheet':'', 'pins':[
             Pin(num='1',name='1',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
-        Part(**{ 'name':'LED', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'LED'}), 'ref_prefix':'D', 'fplist':[''], 'footprint':'LED_THT:LED_D3.0mm', 'keywords':'LED diode', 'description':'Light emitting diode', 'datasheet':'', 'pins':[
+        Part(**{ 'name':'LED', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'LED'}), 'ref_prefix':'D', 'fplist':[''], 'footprint':'supply1:LED_D3.0mm_Standoff', 'keywords':'LED diode', 'description':'Light emitting diode', 'datasheet':'', 'pins':[
             Pin(num='1',name='K',func=pin_types.PASSIVE,unit=1),
             Pin(num='2',name='A',func=pin_types.PASSIVE,unit=1)], 'unit_defs':[] }),
         Part(**{ 'name':'Conn_01x04', 'dest':TEMPLATE, 'tool':SKIDL, 'aliases':Alias({'Conn_01x04'}), 'ref_prefix':'J', 'fplist':[''], 'footprint':'Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical', 'keywords':'connector', 'description':'Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)', 'datasheet':'', 'pins':[

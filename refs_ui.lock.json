@@ -201,14 +201,6 @@
    "nets": {}
   },
   {
-   "ref": "H4",
-   "block": "ui",
-   "prefix": "H",
-   "part": "MountingHole",
-   "value": "M3",
-   "nets": {}
-  },
-  {
    "ref": "J1",
    "block": "ui",
    "prefix": "J",
@@ -242,7 +234,7 @@
    "block": "ui",
    "prefix": "J",
    "part": "Conn_01x08",
-   "value": "IPS 1.9in ST7789 SPI",
+   "value": "IPS 1.9in ST7789 SPI (wired)",
    "nets": {
     "1": "GND",
     "2": "+3V3",
@@ -537,7 +529,7 @@
    "block": "ui",
    "prefix": "SW",
    "part": "RotaryEncoder",
-   "value": "EC10E1220501",
+   "value": "EC10E1220505",
    "nets": {
     "A": "ENC1_A_RAW",
     "B": "ENC1_B_RAW",
@@ -549,7 +541,7 @@
    "block": "ui",
    "prefix": "SW",
    "part": "RotaryEncoder",
-   "value": "EC10E1220501",
+   "value": "EC10E1220505",
    "nets": {
     "A": "ENC2_A_RAW",
     "B": "ENC2_B_RAW",
@@ -719,6 +711,7 @@
   "C11",
   "D1",
   "D2",
+  "H4",
   "J4",
   "J5",
   "R13",

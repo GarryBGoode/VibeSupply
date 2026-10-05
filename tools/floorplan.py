@@ -1,5 +1,5 @@
 """
-Floor plan + placement recipe for the two supply boards (layout steps 2 and 3). Pure data; tools/place.py executes it.
+Floor plan + placement recipe for the supply boards (layout steps 2 and 3). Pure data; tools/place.py executes it.
 
 Coordinates: mm, board frame = board centre (the grid/drill origin set by tools/board_setup.py), KiCad orientation:
 x to the right = towards the front, y DOWN. Left (-x) = rear end cap; both boards have their rear edge there.
@@ -11,10 +11,16 @@ Entries
 - FIXED: (ref, x, y, orient, side). (x, y) = courtyard-bbox centre. x may be "W" / "E" = flush with that board edge.
   orient = (padA, padB, dir) or a list of those: the vector padA -> padB points to dir (N/S/E/W); padA None = the
   courtyard centre. None = 0 deg. side "top" (default) / "bottom".
-- CLUSTERS: (name, area, anchor, [members], target). The anchor is an IC (or a FIXED part); members are placed next to
-  the anchor pin they connect to (decoupling caps spread over the supply pins), then the whole cluster is moved as
-  close to target (x, y) as its area allows. target None = the anchor is FIXED and stays.
+  y may be "N" / "S" likewise. ("E", 6.5) = the courtyard goes 6.5 mm past that edge (right-angle header).
+- CLUSTERS: (name, area, anchor, [members], target[, side]). The anchor is an IC (or a FIXED part); members are placed
+  next to the anchor pin they connect to (decoupling caps spread over the supply pins), then the whole cluster is moved
+  as close to target (x, y) as its area allows. target None = the anchor is FIXED and stays. side "top" (default) /
+  "bottom" = where the members go (and the anchor, unless it is FIXED).
   Parts in neither list get attached automatically to the cluster they share a net with (reported).
+
+UI board: same conventions, but its frame is the front panel's (CAD_3D/geom_defs.py UIPanelData) with y negated:
+x = panel x, y = -panel y, origin = panel centre. Board x -35..+35, y -38.5 (far edge, behind the display) ..+33.5.
+Everything that lines up with the panel is placed and locked by tools/ui_board_setup.py and is not listed here.
 """
 
 # ======================================================================================================== power board
@@ -154,6 +160,10 @@ POWER = dict(
 
 # ====================================================================================================== control board
 
+# UI ribbon headers (J703 here, J1 on the UI board): PinHeader_2x10_P2.54mm_Horizontal. Its courtyard goes this far past
+# the board edge: the plastic body ends at the edge, the 6 mm pins (+ 0.5 mm courtyard margin) and the plug are outside.
+RIBBON_OVERHANG = 6.5
+
 CONTROL = dict(
     areas={
         "ISO (PC side, GND_ISO)": [(-55, -34.25, -37.5, 34.25)],
@@ -173,7 +183,8 @@ CONTROL = dict(
         ("J601", "W", -20, (None, "A4", "E"), "top"),
         ("U602", -36, -18, ("1", "9", "E"), "top"),
         ("PS601", -36, 2, ("2", "3", "E"), "bottom"),
-        ("J703", "E", -12, ("1", "3", "S"), "top"),
+        # UI ribbon: right-angle header, pins towards the front (the add-on)
+        ("J703", ("E", RIBBON_OVERHANG), -12, ("1", "2", "E"), "top"),
     ],
     aligned=[],
     b2b=("J971", "J951"),  # J971 (bottom) follows J951 on the power board, pins mirrored (design/interconnect.py)
@@ -199,7 +210,52 @@ CONTROL = dict(
     ],
 )
 
-BOARDS = {"power": POWER, "control": CONTROL}
+# =========================================================================================================== UI board
+
+# The top side faces the panel: wheels, switches, LEDs (all locked, from the panel design) and, in the 9.7 mm under the
+# display module, the right-angle header for the display wires. Everything else goes on the bottom side, under the
+# display: that half of the board has nothing coming through from the top.
+_UI_LOGIC = "BOTTOM SIDE: connectors, expander, passives (under the display)"
+
+UI = dict(
+    default_side="bottom",
+    areas={
+        _UI_LOGIC: [(-34, -37.5, 34, -9.5)],
+    },
+    notes=[
+        (-33, -8.5, "top side: display module 9.7 mm above the board (y < -10.5), button sleeves and wheel"),
+        (-33, -7.0, "supports 5 mm above it elsewhere; bottom side: wheels reach 1.4 mm, the on-off button 10 mm below"),
+    ],
+    fixed=[
+        # ribbon to supply_control: right-angle header on the bottom, at the far edge (towards the enclosure), plug
+        # from outside the board
+        ("J1", 0, ("N", RIBBON_OVERHANG), ("1", "2", "N"), "bottom"),
+        # display wires: right-angle header on the top side under the module, plug from +x (the module's header holes
+        # are along its +x edge)
+        ("J3", 12.4, -19.5, [(None, "1", "W"), ("1", "8", "S")], "top"),
+        # OUTPUT (on-off) button wires: next to its cutout, the plug comes from below like the button's terminals
+        ("J6", -24, -13.5, ("1", "4", "E"), "bottom"),
+        ("BZ1", -26.5, -26, None, "bottom"),
+    ],
+    clusters=[
+        ("Ribbon decoupling", _UI_LOGIC, "J1", ["C1", "C2"], None, "bottom"),
+        ("Display backlight + bulk", _UI_LOGIC, "J3", ["R29", "C12"], None, "bottom"),
+        ("OUTPUT button", _UI_LOGIC, "J6", ["R23", "R24", "C10", "R27"], None, "bottom"),
+        ("Buzzer driver", _UI_LOGIC, "BZ1", ["Q1", "D6", "R28"], None, "bottom"),
+        ("TCA9535", _UI_LOGIC, "U1",
+         ["C9", "R15", "R16", "R17", "R18", "R19", "R20", "D5", "TP1", "TP2", "TP3", "TP4", "TP7", "TP8", "TP9"],
+         (21, -22), "bottom"),
+        # RC debounce: series R = anchor, pull-up + cap next to it; the wheel A/B ones near the ribbon header
+        ("V wheel A", _UI_LOGIC, "R2", ["R1", "C3"], (-12, -26), "bottom"),
+        ("V wheel B", _UI_LOGIC, "R4", ["R3", "C4"], (-12, -20), "bottom"),
+        ("I wheel A", _UI_LOGIC, "R8", ["R7", "C6"], (-3, -26), "bottom"),
+        ("I wheel B", _UI_LOGIC, "R10", ["R9", "C7"], (-3, -20), "bottom"),
+        ("V wheel push", _UI_LOGIC, "R6", ["R5", "C5"], (14, -34), "bottom"),
+        ("I wheel push", _UI_LOGIC, "R12", ["R11", "C8"], (22, -34), "bottom"),
+    ],
+)
+
+BOARDS = {"power": POWER, "control": CONTROL, "ui": UI}
 
 # Silkscreen: reference designators stay visible only where a human needs them; the rest stay on the Fab layer
 # (assembly drawing). Hidden: courtyard < SILK_MIN_AREA mm^2 unless the prefix is listed or the value is an LED.
